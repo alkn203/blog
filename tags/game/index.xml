@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Game on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/game/</link>
+    <description>Recent content in Game on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 12 Jun 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tags/game/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】シンプルなタイピングゲームを作ってみた</title>
+      <link>https://alkn203.github.io/blog/2019/06/12/keywordshot/</link>
+      <pubDate>Wed, 12 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/12/keywordshot/</guid>
+      <description>はじめに phina.jsでシンプルなタイピングゲームを作ってみました。 私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。
+ 別画面でプレイする
+ 画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。 大文字小文字は区別しません。  改定 2019/5/18 ライフ制導入
+カスタマイズ キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば 別言語のキーワードなどもイケると思います。
+// アセット var ASSETS = { // キーワード一覧 text: { &#39;keywords&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;, }, };  リファレンス キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。 JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet</description>
+    </item>
+    
+  </channel>
+</rss>

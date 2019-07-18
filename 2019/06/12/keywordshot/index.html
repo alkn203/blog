@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】シンプルなタイピングゲームを作ってみた | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】シンプルなタイピングゲームを作ってみた" />
+  <meta name="og:description" content="はじめに phina.jsでシンプルなタイピングゲームを作ってみました。 私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。
+ 別画面でプレイする
+ 画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。 大文字小文字は区別しません。  改定 2019/5/18 ライフ制導入
+カスタマイズ キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば 別言語のキーワードなどもイケると思います。
+// アセット var ASSETS = { // キーワード一覧 text: { &#39;keywords&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;, }, };  リファレンス キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。 JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet" />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/keywordshot.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/12/keywordshot/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/12/keywordshot/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】シンプルなタイピングゲームを作ってみた</h1>
+      <div class="meta">
+        Jun 12, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/game">game</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+<table>
+  <tr>
+    
+    <td>
+      <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/12/keywordshot/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://plus.google.com/share?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-google-plus-square fa-2x googleplus" aria-hidden="true"></i></a>
+    </td>
+  </tr>
+</table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#改定">改定</a></li>
+<li><a href="#カスタマイズ">カスタマイズ</a></li>
+<li><a href="#リファレンス">リファレンス</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<p><img src="https://alkn203.github.io/blog/images/keywordshot.gif" alt="keywordshot" /></p>
+
+<h3 id="はじめに">はじめに</h3>
+
+<p><strong>phina.js</strong>でシンプルなタイピングゲームを作ってみました。
+私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。</p>
+
+<div class='runstant'><iframe src='https://alkn203.github.io/phina-games/keyword-shot/' width='100%' height='380px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://alkn203.github.io/phina-games/keyword-shot/">別画面でプレイする</a></p>
+
+<ul>
+<li>画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。</li>
+<li>大文字小文字は区別しません。</li>
+</ul>
+
+<h3 id="改定">改定</h3>
+
+<p>2019/5/18 ライフ制導入</p>
+
+<h3 id="カスタマイズ">カスタマイズ</h3>
+
+<p>キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば
+別言語のキーワードなどもイケると思います。</p>
+
+<pre><code class="language-javascript">// アセット
+var ASSETS = {
+  // キーワード一覧
+  text: {
+    'keywords': 'https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords',
+  },
+};
+</code></pre>
+
+<h3 id="リファレンス">リファレンス</h3>
+
+<p>キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。
+<a href="http://blog.bornneet.com/Entry/262/">JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet</a></p>
+
+    </article>
+
+    
+      
+<center>
+<table>
+  <tr>
+    
+    <td>
+      <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/12/keywordshot/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+    </td>
+    
+    <td>
+      <a href="https://plus.google.com/share?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-google-plus-square fa-2x googleplus" aria-hidden="true"></i></a>
+    </td>
+  </tr>
+</table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>Sections</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
+    <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
+    <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(2)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/2019/06/11/about-phina/" rel="prev">phina.js事始め</a></span>
+    
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+

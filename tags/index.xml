@@ -6,15 +6,24 @@
     <description>Recent content in Tags on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 11 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Game</title>
+      <link>https://alkn203.github.io/blog/tags/game/</link>
+      <pubDate>Wed, 12 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/tags/game/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Phina.js</title>
       <link>https://alkn203.github.io/blog/tags/phina.js/</link>
-      <pubDate>Tue, 11 Jun 2019 20:55:06 +0900</pubDate>
+      <pubDate>Wed, 12 Jun 2019 20:55:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/tags/phina.js/</guid>
       <description></description>
