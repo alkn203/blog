@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/</link>
+    <description>Recent content in Tips on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 13 Jun 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】上方向だけすり抜ける床を作る</title>
+      <link>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</link>
+      <pubDate>Thu, 13 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</guid>
+      <description>上方向だけすり抜ける床  ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。 今回は基本的なジャンプ処理とともに、phina.jsを使って自分なりに実装してみました。  動作サンプル まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。
+ runstantで確認
+プレイヤーとブロックの作成 プレイヤーとブロックは、それぞれSpriteクラスを継承して作成しました。
+// プレイヤークラス phina.define(&#39;Player&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tomapiko&#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ this.anim = FrameAnimation(&#39;tomapiko_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない this.anim.fit = false; // 縦移動速度 this.vy = 0; // サイズ変更 this.setSize(CHARA_SIZE, CHARA_SIZE); },   デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&#39;Block&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tiles&#39;, SPRITE_SIZE, SPRITE_SIZE); // タイルセットの指定フレームを表示 this.</description>
+    </item>
+    
+  </channel>
+</rss>
