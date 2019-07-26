@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</loc>
+    <lastmod>2019-06-14T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</loc>
     <lastmod>2019-06-13T20:55:06+09:00</lastmod>
   </url>
@@ -30,7 +35,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/</loc>
-    <lastmod>2019-06-13T20:55:06+09:00</lastmod>
+    <lastmod>2019-06-14T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -42,7 +47,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/phina.js/</loc>
-    <lastmod>2019-06-13T20:55:06+09:00</lastmod>
+    <lastmod>2019-06-14T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -54,7 +59,13 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-06-13T20:55:06+09:00</lastmod>
+    <lastmod>2019-06-14T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/tags/tweener/</loc>
+    <lastmod>2019-06-14T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

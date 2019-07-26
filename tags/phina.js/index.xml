@@ -6,10 +6,22 @@
     <description>Recent content in Phina.js on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 13 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tags/phina.js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】パスに沿ったオブジェクト移動</title>
+      <link>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</link>
+      <pubDate>Fri, 14 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</guid>
+      <description> パスに沿ったオブジェクトの移動 ゲームを作成していると、動く床などのように一定のルートに従ってオブジェクトを移動させたい時があると思います。 phina.jsを使って、自分なりにその処理を実装してみました。
+動作サンプル まずは以下のサンプルをご覧下さい。線に沿ってオブジェクトが移動します。
+ runstantで確認
+ オブジェクトの移動には、非同期処理が行えるtweenerを利用します。 tweenerの内部処理で使われている_add関数で処理をスタックさせています。 tweenerは、基本的にスタックされた順に非同期処理されるので、次の移動先である各頂点の位置を順番に与えることで、結果としてパスに沿った移動が可能になります。  課題  今回のサンプルでは、移動速度が一定になるように各頂点の距離が同一になるように配置しています。 一定の時間で移動させるのがtweenerの処理ですので、距離が変わると移動速度も変わることになります。 各頂点の距離に応じてdurationを変えると速度を一定にすることが可能になると思われますが、その辺は次回の課題にしたいと思います。  </description>
+    </item>
     
     <item>
       <title>【phina.js】上方向だけすり抜ける床を作る</title>
