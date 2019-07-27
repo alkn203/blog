@@ -6,10 +6,26 @@
     <description>Recent content in Tips on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 14 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 15 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】色々なスクロールを試す</title>
+      <link>https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/</link>
+      <pubDate>Sat, 15 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/</guid>
+      <description>はじめに 横スクロールアクションゲームでは、画面のスクロール処理が欠かせませんが、スクロール１つでも結構奥が深いです。今回はphina.jsで主だったスクロール処理を実装してみました。
+プレイヤー固定スクロール まずは以下のサンプルを確認してみて下さい。 プレイヤーの位置は画面の中心固定で画面がスクロールします。画面タッチでプレイヤーがジャンプして、障害物に当たると反転移動します。 中心には分かりやすいようにラインを表示しています。
+ runstantで確認
+このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。
+// 画面スクロール moveX: function() { var self = this; this.objectGroup.children.each(function(obj) { obj.x += -self.player.vx; }); },  変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
+ runstantで確認
+このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。
+// 横方向の状態チェック checkHorizontalState: function() { var player = this.player; var state = this.player.horizontalState; // 左端のオブジェクト var first = this.objectGroup.children.first; // 右端のオブジェクト var last = this.objectGroup.children.last; // プレイヤーの状態で分ける switch (state) { // 左移動中 case &#39;MOVING_LEFT&#39;: // ヒットしたら反転 if (this.</description>
+    </item>
     
     <item>
       <title>【phina.js】パスに沿ったオブジェクト移動</title>
