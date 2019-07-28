@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】パスに沿ったオブジェクト移動 | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】パスに沿ったオブジェクト移動" />
+  <meta name="og:description" content=" パスに沿ったオブジェクトの移動 ゲームを作成していると、動く床などのように一定のルートに従ってオブジェクトを移動させたい時があると思います。 phina.jsを使って、自分なりにその処理を実装してみました。
+動作サンプル まずは以下のサンプルをご覧下さい。線に沿ってオブジェクトが移動します。
+ runstantで確認
+ オブジェクトの移動には、非同期処理が行えるtweenerを利用します。 tweenerの内部処理で使われている_add関数で処理をスタックさせています。 tweenerは、基本的にスタックされた順に非同期処理されるので、次の移動先である各頂点の位置を順番に与えることで、結果としてパスに沿った移動が可能になります。  課題  今回のサンプルでは、移動速度が一定になるように各頂点の距離が同一になるように配置しています。 一定の時間で移動させるのがtweenerの処理ですので、距離が変わると移動速度も変わることになります。 各頂点の距離に応じてdurationを変えると速度を一定にすることが可能になると思われますが、その辺は次回の課題にしたいと思います。  " />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/movealongpath.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-movealongpath/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/tips/phina-movealongpath/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】パスに沿ったオブジェクト移動</h1>
+      <div class="meta">
+        Jun 14, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/tweener">tweener</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%83%91%e3%82%b9%e3%81%ab%e6%b2%bf%e3%81%a3%e3%81%9f%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e7%a7%bb%e5%8b%95&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-movealongpath/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#パスに沿ったオブジェクトの移動">パスに沿ったオブジェクトの移動</a></li>
+<li><a href="#動作サンプル">動作サンプル</a></li>
+<li><a href="#課題">課題</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<p><img src="https://alkn203.github.io/blog/images/movealongpath.gif" alt="movealongpath.gif" /></p>
+
+<h3 id="パスに沿ったオブジェクトの移動">パスに沿ったオブジェクトの移動</h3>
+
+<p>ゲームを作成していると、動く床などのように一定のルートに従ってオブジェクトを移動させたい時があると思います。 <strong>phina.js</strong>を使って、自分なりにその処理を実装してみました。</p>
+
+<h3 id="動作サンプル">動作サンプル</h3>
+
+<p>まずは以下のサンプルをご覧下さい。線に沿ってオブジェクトが移動します。</p>
+
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/10bfc984/full' width='100%' height='320px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://runstant.com/alkn203/projects/10bfc984">runstantで確認</a></p>
+
+<ul>
+<li>オブジェクトの移動には、非同期処理が行える<strong>tweener</strong>を利用します。</li>
+<li><strong>tweener</strong>の内部処理で使われている<strong>_add</strong>関数で処理をスタックさせています。</li>
+<li><strong>tweener</strong>は、基本的にスタックされた順に非同期処理されるので、次の移動先である各頂点の位置を順番に与えることで、結果としてパスに沿った移動が可能になります。</li>
+</ul>
+
+<h3 id="課題">課題</h3>
+
+<ul>
+<li>今回のサンプルでは、移動速度が一定になるように各頂点の距離が同一になるように配置しています。</li>
+<li>一定の時間で移動させるのが<strong>tweener</strong>の処理ですので、距離が変わると移動速度も変わることになります。</li>
+<li>各頂点の距離に応じて<strong>duration</strong>を変えると速度を一定にすることが可能になると思われますが、その辺は次回の課題にしたいと思います。</li>
+</ul>
+
+    </article>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%83%91%e3%82%b9%e3%81%ab%e6%b2%bf%e3%81%a3%e3%81%9f%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e7%a7%bb%e5%8b%95&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-movealongpath/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-movealongpath%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(6)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/">
+          <div>アルゴリズム&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/tips/phina-up-direction/" rel="prev">【phina.js】上方向だけすり抜ける床を作る</a></span>
+    
+    
+      <span class="next"><a href="https://alkn203.github.io/blog/posts/tips/phina-various-scroll/" rel="next">【phina.js】色々なスクロールを試す</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+

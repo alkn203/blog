@@ -3,32 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/16/phina-bubblesort/</loc>
+    <loc>https://alkn203.github.io/blog/posts/others/phina-bubblesort/</loc>
     <lastmod>2019-06-16T20:55:06+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/</loc>
+    <loc>https://alkn203.github.io/blog/pages/about/</loc>
+    <lastmod>2019-06-16T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/posts/tips/phina-various-scroll/</loc>
     <lastmod>2019-06-15T20:55:06+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</loc>
+    <loc>https://alkn203.github.io/blog/posts/tips/phina-movealongpath/</loc>
     <lastmod>2019-06-14T20:55:06+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</loc>
+    <loc>https://alkn203.github.io/blog/posts/tips/phina-up-direction/</loc>
     <lastmod>2019-06-13T20:55:06+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/12/keywordshot/</loc>
+    <loc>https://alkn203.github.io/blog/posts/works/keywordshot/</loc>
     <lastmod>2019-06-12T20:55:06+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/2019/06/11/about-phina/</loc>
+    <loc>https://alkn203.github.io/blog/posts/others/about-phina/</loc>
     <lastmod>2019-06-11T20:55:06+09:00</lastmod>
   </url>
   
@@ -56,13 +61,19 @@
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/others/</loc>
+    <loc>https://alkn203.github.io/blog/pages/</loc>
     <lastmod>2019-06-16T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/phina.js/</loc>
+    <lastmod>2019-06-16T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/posts/</loc>
     <lastmod>2019-06-16T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -80,20 +91,8 @@
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-06-15T20:55:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://alkn203.github.io/blog/tags/tweener/</loc>
     <lastmod>2019-06-14T20:55:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://alkn203.github.io/blog/works/</loc>
-    <lastmod>2019-06-12T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

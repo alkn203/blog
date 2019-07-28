@@ -13,10 +13,10 @@
     
     <item>
       <title>【phina.js】パスに沿ったオブジェクト移動</title>
-      <link>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</link>
+      <link>https://alkn203.github.io/blog/posts/tips/phina-movealongpath/</link>
       <pubDate>Fri, 14 Jun 2019 20:55:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</guid>
+      <guid>https://alkn203.github.io/blog/posts/tips/phina-movealongpath/</guid>
       <description> パスに沿ったオブジェクトの移動 ゲームを作成していると、動く床などのように一定のルートに従ってオブジェクトを移動させたい時があると思います。 phina.jsを使って、自分なりにその処理を実装してみました。
 動作サンプル まずは以下のサンプルをご覧下さい。線に沿ってオブジェクトが移動します。
  runstantで確認

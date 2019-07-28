@@ -13,10 +13,10 @@
     
     <item>
       <title>【phina.js】シンプルなタイピングゲームを作ってみた</title>
-      <link>https://alkn203.github.io/blog/2019/06/12/keywordshot/</link>
+      <link>https://alkn203.github.io/blog/posts/works/keywordshot/</link>
       <pubDate>Wed, 12 Jun 2019 20:55:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/2019/06/12/keywordshot/</guid>
+      <guid>https://alkn203.github.io/blog/posts/works/keywordshot/</guid>
       <description>はじめに phina.jsでシンプルなタイピングゲームを作ってみました。 私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。
  別画面でプレイする
  画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。 大文字小文字は区別しません。  改定 2019/5/18 ライフ制導入

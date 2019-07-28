@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】上方向だけすり抜ける床を作る | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】上方向だけすり抜ける床を作る" />
+  <meta name="og:description" content="上方向だけすり抜ける床  ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。 今回は基本的なジャンプ処理とともに、phina.jsを使って自分なりに実装してみました。  動作サンプル まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。
+ runstantで確認
+プレイヤーとブロックの作成 プレイヤーとブロックは、それぞれSpriteクラスを継承して作成しました。
+// プレイヤークラス phina.define(&#39;Player&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tomapiko&#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ this.anim = FrameAnimation(&#39;tomapiko_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない this.anim.fit = false; // 縦移動速度 this.vy = 0; // サイズ変更 this.setSize(CHARA_SIZE, CHARA_SIZE); },   デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&#39;Block&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tiles&#39;, SPRITE_SIZE, SPRITE_SIZE); // タイルセットの指定フレームを表示 this." />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/onlyup.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-up-direction/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/tips/phina-up-direction/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】上方向だけすり抜ける床を作る</h1>
+      <div class="meta">
+        Jun 13, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e4%b8%8a%e6%96%b9%e5%90%91%e3%81%a0%e3%81%91%e3%81%99%e3%82%8a%e6%8a%9c%e3%81%91%e3%82%8b%e5%ba%8a%e3%82%92%e4%bd%9c%e3%82%8b&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-up-direction/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#上方向だけすり抜ける床">上方向だけすり抜ける床</a></li>
+<li><a href="#動作サンプル">動作サンプル</a></li>
+<li><a href="#プレイヤーとブロックの作成">プレイヤーとブロックの作成</a></li>
+<li><a href="#プレイヤーとブロックの配置">プレイヤーとブロックの配置</a></li>
+<li><a href="#プレイヤーの状態毎に処理を分ける">プレイヤーの状態毎に処理を分ける</a></li>
+<li><a href="#当たり判定">当たり判定</a></li>
+<li><a href="#まとめ">まとめ</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<p><img src="https://alkn203.github.io/blog/images/onlyup.gif" alt="onlyup.gif" /></p>
+
+<h3 id="上方向だけすり抜ける床">上方向だけすり抜ける床</h3>
+
+<ul>
+<li>ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。</li>
+<li>今回は基本的なジャンプ処理とともに、<strong>phina.js</strong>を使って自分なりに実装してみました。</li>
+</ul>
+
+<h3 id="動作サンプル">動作サンプル</h3>
+
+<p>まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。</p>
+
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/61d44965/full' width='100%' height='320px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://runstant.com/alkn203/projects/61d44965">runstantで確認</a></p>
+
+<h3 id="プレイヤーとブロックの作成">プレイヤーとブロックの作成</h3>
+
+<p>プレイヤーとブロックは、それぞれ<strong>Sprite</strong>クラスを継承して作成しました。</p>
+
+<pre><code class="language-javascript">// プレイヤークラス
+phina.define('Player', {
+  superClass: 'Sprite',
+  // コンストラクタ
+  init: function() {
+    // 親クラス初期化
+    this.superInit('tomapiko', SPRITE_SIZE, SPRITE_SIZE);
+    // フレームアニメーションをアタッチ
+    this.anim = FrameAnimation('tomapiko_ss').attachTo(this);
+    // スプライトシートのサイズにフィットさせない
+    this.anim.fit = false;
+    // 縦移動速度
+    this.vy = 0;
+    // サイズ変更
+    this.setSize(CHARA_SIZE, CHARA_SIZE);
+  }, 
+</code></pre>
+
+<ul>
+<li>デフォルトのスプライトサイズから半分のサイズにしています。</li>
+<li><strong>FrameAnimation</strong>クラスのプロパティ<strong>fit</strong>を<strong>false</strong>にしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。</li>
+</ul>
+
+<pre><code class="language-javascript">// ブロッククラス
+phina.define('Block', {
+  superClass: 'Sprite',
+  // コンストラクタ
+  init: function() {
+    // 親クラス初期化
+    this.superInit('tiles', SPRITE_SIZE, SPRITE_SIZE);
+    // タイルセットの指定フレームを表示   
+    this.setFrameIndex(4);
+    // サイズ変更
+    this.setSize(CHARA_SIZE, CHARA_SIZE);
+  },
+});
+</code></pre>
+
+<p>アセットで読み込んだタイルセットからブロックの画像のインデックスをsetFrameIndexで指定しています。</p>
+
+<h3 id="プレイヤーとブロックの配置">プレイヤーとブロックの配置</h3>
+
+<pre><code class="language-javascript">    // グループ
+    var blockGroup = DisplayElement().addChildTo(this);
+    
+    var gx = this.gridX;
+    var gy = this.gridY;
+    // プレイヤー
+    var player = Player().addChildTo(this);
+    player.setPosition(gx.center(), gy.span(12.5));
+    player.state = 'FALLING';
+    // ブロック
+    [5, 10, 15].each(function(i) {
+      var block = Block().addChildTo(blockGroup);
+      block.setPosition(gx.center(), gy.span(i));
+    });
+</code></pre>
+
+<ul>
+<li>プレイヤーとブロックの配置には、<strong>Grid</strong>を利用しています。</li>
+<li>今回はプレイヤーの状態毎に処理を分けるようにしており、管理用の変数<strong>state</strong>を用意しました。</li>
+</ul>
+
+<h3 id="プレイヤーの状態毎に処理を分ける">プレイヤーの状態毎に処理を分ける</h3>
+
+<p>毎フレーム更新される<strong>update</strong>関数内でプレイヤーの状態毎に処置を分けるアプローチをとり、プレイヤーの状態を以下の３つに分類しました。</p>
+
+<ul>
+<li>ブロックの上にいる<strong>ON_BLOCK</strong></li>
+<li>ジャンプ中である<strong>JUMPING</strong></li>
+<li>落下中である<strong>FALLING</strong></li>
+</ul>
+
+<p>当たり判定の場合、上方向にはすり抜けるので<strong>JUMPING</strong>の時は当たり判定を行わず、残りの状態で当たり判定を行えばよいということになります。</p>
+
+<pre><code class="language-javascript">// 毎フレーム更新処理
+  update: function(app) {
+    var player = this.player;
+    var state = this.player.state;
+    var p = app.pointer;
+    // プレイヤーの状態で分ける
+    switch (state) {
+      // ブロックの上
+      case 'ON_BLOCK':
+        // タッチ開始
+        if (p.getPointingStart()) {
+          player.vy = -JUMP_POWER;
+          player.state = 'JUMPING';
+          // アニメーション変更
+          player.anim.gotoAndPlay('fly');
+        }
+        // 縦あたり判定
+        this.collisionY();
+        break;
+      // 上にジャンプ中
+      case 'JUMPING':
+        player.moveY();
+        // 下に落下開始
+        if (player.vy &gt; 0) {
+          player.state = 'FALLING';
+        }
+        break;
+      // 下に落下中  
+      case 'FALLING':
+        player.moveY();
+        this.collisionY();
+        break;
+    }
+</code></pre>
+
+<ul>
+<li><strong>update</strong>関数の引数<strong>app</strong>のプロパティ<strong>pointer</strong>から、タッチの状態を取得します。</li>
+<li>ブロックに乗っている時はジャンプできるので、タッチされた場合、上方向へ移動量を設定してプレイヤーの状態を<strong>JUMPING</strong>に変更します。併せて、当たり判定を行います。</li>
+<li>ジャンプ中の時は、縦方向移動処理を行い、縦方向の移動の向きが下になった場合プレイヤーの状態を<strong>FALLING</strong>に変更します。</li>
+<li>落下中の時は、縦方向移動処理と当たり判定を行っています。</li>
+</ul>
+
+<h3 id="当たり判定">当たり判定</h3>
+
+<p>当たり判定を行う<strong>collisionY</strong>という関数を用意しました。</p>
+
+<pre><code class="language-javascript">// 縦方向の当たり判定
+  collisionY: function() {
+    var player = this.player;
+    // 床に乗っている場合は強引に当た(り判定を作る
+    var vy = player.vy === 0 ? 4: player.vy;
+    // 当たり判定用の矩形
+    var rect = Rect(player.left, player.top + vy, player.width, player.height);
+    var result = false;
+    // ブロックグループをループ
+    this.blockGroup.children.some(function(block) {
+      // ブロックとのあたり判定
+      if (Collision.testRectRect(rect, block)) {
+        // 移動量
+        player.vy = 0;
+        // 位置調整
+        player.bottom = block.top;
+        //
+        player.state = 'ON_BLOCK';
+        // アニメーション変更
+        player.anim.gotoAndPlay('stand');
+        
+        result = true;
+        return true;
+      }
+    });
+    // 当たり判定なし
+    if (!true) player.state = 'FALLING';
+  },
+</code></pre>
+
+<ul>
+<li>最初にプレイヤーの縦方向の速度を調べます。0の時にも無理やり速度を与えているのは、ブロックの上に乗っている時でも当たり判定を生じさせることで、位置調整した時にキャラが宙に浮いて上下にブレるのを防ぐためです。</li>
+<li>次に、当たり判定用の矩形を作成しています。プレイヤーの位置から速度分ずらした位置で当たり判定を行うことで、着地時にプレイヤーがブロックにめり込むのを防ぐことができます。</li>
+<li>ブロックをループして当たり判定を行い、ヒットしたらプレイヤーの状態を<strong>ON_BLOCK</strong>に変更してループを抜けます。ループには<strong>some</strong>を使っていますが、もちろん通常の<strong>for</strong>ループでも構いません。</li>
+<li>当たり判定がなければ落下中ということになるので、プレイヤーの状態を<strong>FALLING</strong>とします。</li>
+</ul>
+
+<h3 id="まとめ">まとめ</h3>
+
+<p>今回のアプローチはあくまでも自己流です。他に効率的な処理があるかもしれませんが、今回のコードをベースにすれば簡単なジャンプゲームが作れるのではないかと思います。</p>
+
+    </article>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e4%b8%8a%e6%96%b9%e5%90%91%e3%81%a0%e3%81%91%e3%81%99%e3%82%8a%e6%8a%9c%e3%81%91%e3%82%8b%e5%ba%8a%e3%82%92%e4%bd%9c%e3%82%8b&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-up-direction/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-up-direction%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(6)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/">
+          <div>アルゴリズム&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/works/keywordshot/" rel="prev">【phina.js】シンプルなタイピングゲームを作ってみた</a></span>
+    
+    
+      <span class="next"><a href="https://alkn203.github.io/blog/posts/tips/phina-movealongpath/" rel="next">【phina.js】パスに沿ったオブジェクト移動</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+

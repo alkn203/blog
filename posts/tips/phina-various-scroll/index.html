@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】色々なスクロールを試す | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】色々なスクロールを試す" />
+  <meta name="og:description" content="はじめに 横スクロールアクションゲームでは、画面のスクロール処理が欠かせませんが、スクロール１つでも結構奥が深いです。今回はphina.jsで主だったスクロール処理を実装してみました。
+プレイヤー固定スクロール まずは以下のサンプルを確認してみて下さい。 プレイヤーの位置は画面の中心固定で画面がスクロールします。画面タッチでプレイヤーがジャンプして、障害物に当たると反転移動します。 中心には分かりやすいようにラインを表示しています。
+ runstantで確認
+このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。
+// 画面スクロール moveX: function() { var self = this; this.objectGroup.children.each(function(obj) { obj.x &#43;= -self.player.vx; }); },  変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
+ runstantで確認
+このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。
+// 横方向の状態チェック checkHorizontalState: function() { var player = this.player; var state = this.player.horizontalState; // 左端のオブジェクト var first = this.objectGroup.children.first; // 右端のオブジェクト var last = this.objectGroup.children.last; // プレイヤーの状態で分ける switch (state) { // 左移動中 case &#39;MOVING_LEFT&#39;: // ヒットしたら反転 if (this." />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/variousscroll.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-various-scroll/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/tips/phina-various-scroll/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】色々なスクロールを試す</h1>
+      <div class="meta">
+        Jun 15, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/scroll">scroll</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/flow">flow</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e8%89%b2%e3%80%85%e3%81%aa%e3%82%b9%e3%82%af%e3%83%ad%e3%83%bc%e3%83%ab%e3%82%92%e8%a9%a6%e3%81%99&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-various-scroll/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#プレイヤー固定スクロール">プレイヤー固定スクロール</a></li>
+<li><a href="#変則スクロール">変則スクロール</a></li>
+<li><a href="#スライドスクロール">スライドスクロール</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<p><img src="https://alkn203.github.io/blog/images/variousscroll.png" alt="variousscroll.png" /></p>
+
+<h3 id="はじめに">はじめに</h3>
+
+<p>横スクロールアクションゲームでは、画面のスクロール処理が欠かせませんが、スクロール１つでも結構奥が深いです。今回は<strong>phina.js</strong>で主だったスクロール処理を実装してみました。</p>
+
+<h3 id="プレイヤー固定スクロール">プレイヤー固定スクロール</h3>
+
+<p>まずは以下のサンプルを確認してみて下さい。 プレイヤーの位置は画面の中心固定で画面がスクロールします。画面タッチでプレイヤーがジャンプして、障害物に当たると反転移動します。 中心には分かりやすいようにラインを表示しています。</p>
+
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/3811749d/full' width='100%' height='640px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://runstant.com/alkn203/projects/3811749d">runstantで確認</a></p>
+
+<p>このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。</p>
+
+<pre><code class="language-javascript">
+// 画面スクロール
+moveX: function() {
+  var self = this;
+  this.objectGroup.children.each(function(obj) {
+    obj.x += -self.player.vx;    
+  });
+},
+</code></pre>
+
+<h3 id="変則スクロール">変則スクロール</h3>
+
+<p>始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。</p>
+
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/b8219436/full' width='100%' height='640px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://runstant.com/alkn203/projects/b8219436">runstantで確認</a></p>
+
+<p>このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。</p>
+
+<pre><code class="language-javascript">// 横方向の状態チェック
+ checkHorizontalState: function() {
+   var player = this.player;
+   var state = this.player.horizontalState;
+   // 左端のオブジェクト
+   var first = this.objectGroup.children.first;
+   // 右端のオブジェクト
+   var last = this.objectGroup.children.last;
+   // プレイヤーの状態で分ける
+   switch (state) {
+     // 左移動中
+     case 'MOVING_LEFT':
+       // ヒットしたら反転
+       if (this.collisionX()) {
+         player.reflectX();
+         player.horizontalState = 'MOVING_RIGHT';
+       }
+       else {
+         // 左端のオブジェクトが見えたらプレイヤーのみ動かす
+         if (first.x &gt; 0) {
+           player.horizontalState = 'MOVING_LEFT_SELF';
+         }
+         else {
+           this.moveX();
+         }
+       }
+       break;
+</code></pre>
+
+<p>-横方向の状態で、<strong>MOVING_LEFT</strong>はプレイヤーを固定して背景を動かす場合、<strong>MOVING_LEFT_SELF</strong>は背景を固定してプレイヤーを動かす場合としました。
+- <strong>this.objectGroup.children.first</strong>で一番最初（左端）のオブジェクトが参照できますので、それをfirstという変数に代入して位置の比較を行い、画面左端に現れたらプレイヤーのみの移動に切り替えています。</p>
+
+<pre><code class="language-javascript">// 左移動中（プレイヤーのみ）
+case 'MOVING_LEFT_SELF':
+  if (this.collisionX()) {
+    player.reflectX();
+    player.horizontalState = 'MOVING_RIGHT_SELF';
+  }
+  else {
+    // 右端のオブジェクトが画面から消えてプレイヤーが中央を超えたら
+    if (last.x &lt; SCREEN_WIDTH &amp;&amp; player.x &lt; this.gx.center()) {
+      player.x = this.gx.center();
+      // 通常スクロールへ
+      player.horizontalState = 'MOVING_LEFT';
+    }
+    else {
+      player.moveX();
+    }
+  }
+  break;
+</code></pre>
+
+<ul>
+<li>左向きのプレイヤーのみの移動からスクロールへの切り替えは、右端のオブジェクトが画面から見えなくなって、かつプレイヤーが画面中央を超えた時で判定しています。</li>
+<li>これらの判定を右方向の移動に対しては、逆に行えば良いということになります。</li>
+</ul>
+
+<h3 id="スライドスクロール">スライドスクロール</h3>
+
+<p>初期のゼルダの伝説に代表されるように、プレイヤーが画面の端に到達すると画面がスライドしてスクロールするタイプです。</p>
+
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/534d0cda/full' width='100%' height='640px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+
+<p><a href="https://runstant.com/alkn203/pojects/534d0cda">runstantで確認</a></p>
+
+<p>このパターンのスクロールは、基本プレイヤーのみを動かしますが、画面をスライドする時には背景オブジェクトとプレイヤーをまとめて動かす必要があります。</p>
+
+<pre><code class="language-javascript">// 右移動中
+case 'MOVING_RIGHT':
+  if (this.collisionX()) {
+    player.reflectX();
+    player.horizontalState = 'MOVING_LEFT';
+  }
+  else {
+    if (player.x &gt; SCREEN_WIDTH) {
+      player.horizontalState = 'STOP';
+      player.verticalState = 'STOP';
+      player.vy = 0;
+      this.scrollX();
+    }
+    else {
+      player.moveX();
+    }
+  }
+  break;
+// 停止中
+case 'STOP':
+  break;
+</code></pre>
+
+<ul>
+<li>プレイヤーが画面端に達したらプレイヤーの動きを止めて、<strong>STOP</strong>という新しい状態に遷移させます。</li>
+<li><strong>STOP</strong>では、その名の通り何も処理も行いません。</li>
+<li>新たに作った<strong>scrollX</strong>という関数を呼んで画面をスライドさせます。</li>
+</ul>
+
+<pre><code class="language-javascript">// 画面スクロール
+  scrollX: function() {
+    var player = this.player;
+    var flows = [];
+    // スクロール方向を決める
+    var dir = player.vx &gt; 0 ? -1 : 1;
+    // 背景オブジェクトの移動
+    this.objectGroup.children.each(function(obj) {
+      var flow = Flow(function(resolve) {
+        obj.tweener.by({x: dir * SCREEN_WIDTH}, 1000)
+                   .call(function() {
+                     resolve();
+                   }).play();
+      });
+      // flow配列に追加
+      flows.push(flow);
+    });
+    // プレイヤー
+    var flow = Flow(function(resolve) {
+      player.tweener.by({x: dir * SCREEN_WIDTH}, 1000)
+                    .call(function() {
+                      resolve();
+                    }).play();
+    });
+    
+    flows.push(flow);
+    // 非同期処理
+    Flow.all(flows).then(function() {
+      // プレイヤー移動再開
+      player.horizontalState = player.vx &gt; 0 ? 'MOVING_RIGHT': 'MOVING_LEFT';
+      player.verticalState = 'FALLING';
+    });
+  },
+</code></pre>
+
+<ul>
+<li>スライドスクロールは、<strong>tweener</strong>と非同期処理を行うFlowで実装しています。</li>
+<li>プレイヤーの移動方向とは逆に、オブジェクトとプレイヤーを１画面分まとめて動かしています。</li>
+<li><strong>Flow</strong>はオブジェクトとプレイヤーの分を作成して配列に追加して、<strong>Flow.all</strong>で全ての移動終了を検知した後に、プレイヤーを動かす状態に遷移させています。</li>
+<li><strong>Flow</strong>については、以下を参考にして下さい。</li>
+</ul>
+
+<p><a href="https://qiita.com/alkn203/items/b39dc684d066b8a54ff2">Flowで非同期処理を行う</a></p>
+
+    </article>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e8%89%b2%e3%80%85%e3%81%aa%e3%82%b9%e3%82%af%e3%83%ad%e3%83%bc%e3%83%ab%e3%82%92%e8%a9%a6%e3%81%99&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-various-scroll/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-various-scroll%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(6)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/">
+          <div>アルゴリズム&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/tips/phina-movealongpath/" rel="prev">【phina.js】パスに沿ったオブジェクト移動</a></span>
+    
+    
+      <span class="next"><a href="https://alkn203.github.io/blog/pages/about/" rel="next">このブログについて</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+
