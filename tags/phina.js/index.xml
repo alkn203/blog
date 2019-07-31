@@ -6,13 +6,30 @@
     <description>Recent content in Phina.js on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 19 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tags/phina.js/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>【phina.js】2Dシューティングチュートリアル =プログラミングの準備=</title>
+      <title>【phina.js】2Dシューティングチュートリアル =第2回 スプライトとフレームアニメーション=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-02/</link>
+      <pubDate>Thu, 20 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-02/</guid>
+      <description>はじめに 前回は、phina.jsにおけるコーディングの準備までを書きました。今回から具体的にチュートリアルを進めていきます。
+テクスチャからスプライトを作成する Unityでは内臓のスプライトエディタで作成しますが、phina.jsではアセットとして別に用意した画像ファイルを読み込みます。
+用意した画像 プレイヤーと敵
+プレイヤーと敵の弾
+爆発
+ これらの画像は、一般的にスプライトシートと呼ばれており同じサイズの画像を複数枚タイル状に並べたものです。 一枚当たりのサイズを指定して切り出すことで、好きなコマ画像を表示したり、フレームアニメーションと言われるコマ送りの動画を表現することができます。  自機と敵のアニメーション 以下ようなアニメーションを作成します。
+フレームアニメーション定義ファイルの作成  フレームアニメーションは、少ないコマ数であればコード中でフレームインデックスを指定して表現することもできますが、アニメーションの種類が増えると複雑になりがちです phina.jsではフレームアニメーション定義ファイルを作成してアセットとして読み込むことで、簡単にアニメーションを行うことができます。  自機と敵の定義ファイル { &amp;quot;frame&amp;quot;: { &amp;quot;width&amp;quot;: 64, &amp;quot;height&amp;quot;: 64, &amp;quot;cols&amp;quot;: 4, &amp;quot;rows&amp;quot;: 4 }, &amp;quot;animations&amp;quot; : { &amp;quot;player&amp;quot;: { &amp;quot;frames&amp;quot;: [0,1,2,3,2,1], &amp;quot;next&amp;quot;: &amp;quot;player&amp;quot;, &amp;quot;frequency&amp;quot;: 1 }, &amp;quot;enemy&amp;quot;: { &amp;quot;frames&amp;quot;: [4,5,6,7,6,5], &amp;quot;next&amp;quot;: &amp;quot;enemy&amp;quot;, &amp;quot;frequency&amp;quot;: 1 } } }  定義ファイルはjson形式で作成します。
+ frameのwidthとheightは、１コマ毎に画像を切り出すサイズで、今回は64x64としています。 colsは横、rowは縦の画像のコマ数で、4x4の合計16コマであることが分かります。 animationsで個別のアニメーションを定義します。 playerはアニメーション名で、任意の名前を設定することができます。 framesで何番目のコマを使うかを配列形式で指定します。自機の画像は4コマ目までなので、今回は0→1→2→3→2→1と順番に切り替えてアニメーションさせます。敵の画像は5から8コマ目なので、同様に指定しています。配列なのでインデックスは0から始まります。 nextで次のアニメーションを指定します。同じアニメーション名を指定すると、ループします。 frequencyはアニメーションの間隔で、小さければ速くなり、大きければ遅くなります。  爆発アニメーションの定義ファイル 以下のようなアニメーションを作成します。
+{ &amp;quot;frame&amp;quot;: { &amp;quot;width&amp;quot;: 64, &amp;quot;height&amp;quot;: 64, &amp;quot;cols&amp;quot;: 10, &amp;quot;rows&amp;quot;: 1 }, &amp;quot;animations&amp;quot; : { &amp;quot;explosion&amp;quot;: { &amp;quot;frames&amp;quot;: [0,1,2,3,4,5,6,7,8,9], &amp;quot;frequency&amp;quot;: 1 } } }  自機と敵の場合と違う点は、animationsのnextを指定していないところです。理由は、爆発アニメーションは1回限りで良いからです。</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第1回 プログラミングの準備=</title>
       <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-01/</link>
       <pubDate>Wed, 19 Jun 2019 20:55:06 +0900</pubDate>
       
