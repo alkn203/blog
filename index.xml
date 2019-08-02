@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 22 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 23 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第5回 敵を作成する=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-05/</link>
+      <pubDate>Sun, 23 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-05/</guid>
+      <description>はじめに 前回は、プレイヤーから弾が発射できるようにしました。今回は、敵を作成します。
+共通部分のクラス化 前回作ったプレイヤークラスと今回作成する敵クラスでは、共通化できる部分があります。その部分をSpaceShipクラスとして別クラスで作成し、使い回しが出来るようにします。
+SpaceShipクラス /* * スペースシップクラス */ phina.define(&amp;quot;SpaceShip&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;, // 初期化 init: function(param) { // 親クラス初期化 this.superInit(&#39;spaceship&#39;, 64, 64); // フレームアニメーションをアタッチ this.anim = FrameAnimation(&#39;spaceship&#39;).attachTo(this); // 移動スピード this.speed = param.speed; }, // 機体の移動 move: function(direction) { this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });   プレイヤークラスと敵クラスがこのクラスを継承できるようにします。 スプライトとフレームアニメーションは、同じファイルを使っていますので共通化できます。 移動スピードは、外から指定出来るようにしています。 移動処理も関数に方向を代入することで処理ができるようにしています。  プレイヤークラスから継承する 設計変更で、プレイヤークラスのコンストラクは以下のようになります。
+/* * プレイヤークラス */ phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;SpaceShip&#39;, // 初期化 init: function() { // 親クラス初期化 this.</description>
+    </item>
     
     <item>
       <title>【phina.js】2Dシューティングチュートリアル =第4回 プレイヤーから弾を撃つ=</title>
