@@ -6,10 +6,26 @@
     <description>Recent content in Posts on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 21 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第4回 プレイヤーから弾を撃つ=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/</link>
+      <pubDate>Sat, 22 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/</guid>
+      <description>はじめに 前回は、プレイヤーをキーボードで移動させるところまで出来ました。 今回は、プレイヤーが自動で弾を連射するようにします。
+親子関係  Unityでは、オブジェクトの「親子関係」という言葉を使いますが、phina.jsでも同じような関係を持たせることができます。 親子関係になると、親が移動・回転を行えば、追従して子も同じように移動・回転します。  子要素として追加する方法 例えば、obj1をobj2の子要素として追加したい場合、以下のように書きます。
+obj1.addChildTo(obj2);  プレイヤーの弾を作成する プレイヤーの弾を表示するだけなら、以下のようにスプライトとしてシーンに追加すればOKです。
+// プレイヤーの弾 Sprite(&#39;bullet&#39;, 64, 64).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());  ここまでの実行サンプル プレイヤーの弾表示(runstant)
+プレイヤーの弾を動かす ゲームを実行したら勝手に上に飛んで行く弾を作成します。
+親となるPlayerBulletの作成 Unityのチュートリアルでは空のゲームオブジェクトを作成していますが、phina.jsではDisplayElementというクラスにその役割をさせることができます。
+PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承した以下のクラスを作成しました。
+/* * プレイヤーの弾クラス */ phina.define(&amp;quot;PlayerBullet&amp;quot;, { // 継 superClass: &#39;DisplayElement&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // スピード var speed = 10; var self = this; // 左右の弾 [-10, 10].each(function(dx) { Sprite(&#39;bullet&#39;, 64, 64).addChildTo(self).setPosition(self.x + dx, self.y); }); // 上向き速度を与える this.</description>
+    </item>
     
     <item>
       <title>【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動=</title>
