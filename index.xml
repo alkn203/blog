@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 20 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-03/</link>
+      <pubDate>Fri, 21 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-03/</guid>
+      <description>はじめに 前回は、ゲームで使うアセットの読み込みまで行いました。今回は、プレイヤーをキーボードで操作できるようにします。
+プレイヤーの移動 Unityでは、コードを実行する場合、ゲームオブジェクトにスクリプトをアタッチする方法をとりますが、phina.jsでは、オブジェクト専用のクラスを作成する方法が一般的です。
+プレイヤークラス 今回は、プレイヤークラスを以下のとおり実装しました。
+/* * プレイヤークラス */ phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;spaceship&#39;, 64, 64); // フレームアニメーションをアタッチ FrameAnimation(&#39;spaceship&#39;).attachTo(this).gotoAndPlay(&#39;player&#39;); // 移動スピード this.speed = 5; }, // 毎フレーム更新処理 update: function(app) { // 移動する向きを求める var direction = app.keyboard.getKeyDirection(); // 移動する向きとスピードを代入する this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });  クラス宣言 phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;,   クラス宣言は、defineで行います。次の文字列はクラス名です。 superClassで継承元の親クラスを指定します。自機はスプライト画像を使うので、親クラスにSpriteクラスを指定しています。  init関数 一般的にコンストラクと呼ばれるもので、UnityにおけるStartと同じ役割です。</description>
+    </item>
     
     <item>
       <title>【phina.js】2Dシューティングチュートリアル =第2回 スプライトとフレームアニメーション=</title>
