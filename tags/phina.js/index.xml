@@ -6,10 +6,23 @@
     <description>Recent content in Phina.js on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 23 Jun 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jun 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tags/phina.js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-06/</link>
+      <pubDate>Mon, 24 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-06/</guid>
+      <description>はじめに 前回は、敵を追加して敵が弾を発射するようにしました。今回は、当たり判定を作成します。
+Colliderクラスを作成する Unityでは、コライダーという当たり判定を行うためのコンポーネントが用意されていますが、phina.jsにはありません。そこで、それに似た機能を持たせたColliderというクラスを作りました。
+/* * コライダークラス */ phina.define(&amp;quot;Collider&amp;quot;, { // 継承 superClass: &#39;RectangleShape&#39;, // 初期化 init: function(param) { // 親クラス初期化 this.superInit({ width: param.width, height: param.height, fill: null, stroke: &#39;red&#39;, }); }, // コライダーの絶対座標の矩形 getAbsoluteRect: function() { var x = this.left + this.parent.x; var y = this.top + this.parent.y; return Rect(x, y, this.width, this.height); }, });   今回は簡易な矩形での当たり判定を行うので、RentangleShapeクラスを継承しています。 コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。  仕様変更 これまでプレイヤーと敵の弾は、空のクラスに一旦追加する形にしていましたが、当たり判定における親子関係を出来るだけシンプルにするために、shot関数の中で直接生成する形に変更しました。
+当たり判定を付ける プレイヤー プレイヤークラスでコライダーを以下のように追加します。
+/* * プレイヤークラス */ phina.</description>
+    </item>
     
     <item>
       <title>【phina.js】2Dシューティングチュートリアル =第5回 敵を作成する=</title>
