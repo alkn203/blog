@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】2Dシューティングチュートリアル =第10回 プレイヤーの移動制限= | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第10回 プレイヤーの移動制限=" />
+  <meta name="og:description" content="はじめに 前回は、敵の波状攻撃を実装しました。今回は、ゲームにサウンドをつけます。
+サウンド素材の読み込み 画像と同じようにアセットとして読み込みます。
+// サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&#39;, &#39;shot&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&#39;, &#39;explosion&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&#39;, },   サウンド素材は魔王魂から拝借しました。
+ BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生 SoundManager.playMusic(&#39;bgm&#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&quot;PlayerBullet&quot;, { // 継 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;bullet&#39;, 64, 64); // スピード var speed = 10; // 当たり判定用のコライダー this.collider = Collider({ width: 10, height: 30, })." />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/10-movelimit.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-10/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-10/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】2Dシューティングチュートリアル =第10回 プレイヤーの移動制限=</h1>
+      <div class="meta">
+        Jun 27, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/tutorials">tutorials</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/shooting">shooting</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%912D%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%81%e3%83%a5%e3%83%bc%e3%83%88%e3%83%aa%e3%82%a2%e3%83%ab%20%3d%e7%ac%ac10%e5%9b%9e%20%e3%83%97%e3%83%ac%e3%82%a4%e3%83%a4%e3%83%bc%e3%81%ae%e7%a7%bb%e5%8b%95%e5%88%b6%e9%99%90%3d&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tutorials/phina-shooting-10/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#サウンド素材の読み込み">サウンド素材の読み込み</a></li>
+<li><a href="#bgmをつける">BGMをつける</a></li>
+<li><a href="#プレイヤーにショット音をつける">プレイヤーにショット音をつける</a></li>
+<li><a href="#爆発音をつける">爆発音をつける</a></li>
+<li><a href="#実行サンプル">実行サンプル</a></li>
+<li><a href="#参考記事">参考記事</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<p><img src="https://alkn203.github.io/blog/images/10-movelimit.gif" alt="08-wave.gif" /></p>
+
+<h3 id="はじめに">はじめに</h3>
+
+<p><a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-09/">前回</a>は、敵の波状攻撃を実装しました。今回は、ゲームにサウンドをつけます。</p>
+
+<h3 id="サウンド素材の読み込み">サウンド素材の読み込み</h3>
+
+<p>画像と同じようにアセットとして読み込みます。</p>
+
+<pre><code class="language-javascript">// サウンド
+  sound: {
+    'bgm': 'https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3',
+    'shot': 'https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3',
+    'explosion': 'https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3',
+  },
+</code></pre>
+
+<blockquote>
+<p>サウンド素材は<a href="[https://maoudamashii.jokersounds.com/](https://maoudamashii.jokersounds.com/)">魔王魂</a>から拝借しました。</p>
+</blockquote>
+
+<h3 id="bgmをつける">BGMをつける</h3>
+
+<ul>
+<li><strong>phina.js</strong>でサウンドを扱うには、<strong>SoundManager</strong>クラスを使用します。</li>
+<li>BGMのようにループするサウンドの場合は、<strong>playMusic</strong>メソッドを使います。</li>
+<li>デフォルトでは、ループする設定になってます。</li>
+<li>メインシーンのコンストラクタなど好きな場所に追加して下さい。</li>
+</ul>
+
+<pre><code class="language-javascript">    // BGM再生
+    SoundManager.playMusic('bgm');
+</code></pre>
+
+<h3 id="プレイヤーにショット音をつける">プレイヤーにショット音をつける</h3>
+
+<ul>
+<li>ショット音は一回毎に再生する必要がありますので、<strong>play</strong>メソッドを使います。</li>
+<li>弾生成と同時に音を再生するように<strong>PlayerBullet</strong>クラスのコンストラクに処理を追加しています。</li>
+</ul>
+
+<pre><code class="language-javascript">/*
+ * プレイヤーの弾クラス
+ */
+phina.define(&quot;PlayerBullet&quot;, {
+  // 継
+  superClass: 'Sprite',
+  // 初期化
+  init: function() {
+    // 親クラス初期化
+    this.superInit('bullet', 64, 64);
+    // スピード
+    var speed = 10;
+    // 当たり判定用のコライダー
+    this.collider = Collider({
+      width: 10,
+      height: 30,
+    }).addChildTo(this);
+    // 上向き速度を与える
+    this.physical.velocity.y = -speed;
+    // ショット音再生
+    SoundManager.play('shot');
+  },
+</code></pre>
+
+<h3 id="爆発音をつける">爆発音をつける</h3>
+
+<p>爆発音もショット音と同じように実装します。</p>
+
+<pre><code class="language-javascript">/*
+ * 爆発クラス
+ */
+phina.define(&quot;Explosion&quot;, {
+  // 継承
+  superClass: 'Sprite',
+  // 初期化
+  init: function(param) {
+    // 親クラス初期化
+    this.superInit('explosion', 64, 64);
+    // フレームアニメーションをアタッチ
+    this.anim = FrameAnimation('explosion').attachTo(this).gotoAndPlay('explosion');
+    // 爆発音再生
+    SoundManager.play('explosion');
+  },
+</code></pre>
+
+<h3 id="実行サンプル">実行サンプル</h3>
+
+<p><a href="https://runstant.com/alkn203/projects/5bef2d2c">実行サンプル(runstant)</a></p>
+
+<h3 id="参考記事">参考記事</h3>
+
+<p>PCでは特に設定なしに音が出ると思いますが、スマホでの音の再生や他のメソッドの説明など、<strong>phina.js</strong>のサウンドのTipsは、以下の記事が参考になると思いますので、是非チェックしてみて下さい。</p>
+
+<ul>
+<li><a href="https://qiita.com/pentamania/items/399d133e5440c9424bde">phina.jsで音ゲーを作ってみる【前編】</a> by [pentamaNia](<a href="https://twitter.com/ptmnia">https://twitter.com/ptmnia</a>さん</li>
+<li><a href="https://horohorori.com/memo_phina_js/about_soundmanager/">[phina.js] サウンドの操作について</a> by [ほろほろり](<a href="https://twitter.com/_horo_horori">https://twitter.com/_horo_horori</a>さん</li>
+</ul>
+
+    </article>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%912D%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%81%e3%83%a5%e3%83%bc%e3%83%88%e3%83%aa%e3%82%a2%e3%83%ab%20%3d%e7%ac%ac10%e5%9b%9e%20%e3%83%97%e3%83%ac%e3%82%a4%e3%83%a4%e3%83%bc%e3%81%ae%e7%a7%bb%e5%8b%95%e5%88%b6%e9%99%90%3d&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tutorials/phina-shooting-10/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftutorials%2fphina-shooting-10%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(16)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(10)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tips/">
+          <div>tips&nbsp;(3)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tutorials/">
+          <div>tutorials&nbsp;(10)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-09/" rel="prev">【phina.js】2Dシューティングチュートリアル =第9回 音をつける=</a></span>
+    
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+
