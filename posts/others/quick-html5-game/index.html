@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する" />
+  <meta name="og:description" content="はじめに ゲームを作っている人なら、自分の作ったゲームを誰かに遊んでもらいたい気持ちは皆持っていると思います。今では、スマホアプリを作ってプラットフォームで公開する方法がメジャーですが、初心者にとってはそう簡単にはいかないものです。
+中には、アプリ化まではいかないけど何かゲームを作って公開してみたいと思っている人もいるでしょう。そのようなときは、javascriptでhtml5ゲームを作って、Webで公開することをおすすめします。（もちろんhtml5ゲームをアプリ化する方法もあります）
+Webブラウザだけでゲームを作成して公開する 今回は、特別な環境構築をせずに、Webブラウザだけを使ってhtml5ゲームを公開する方法を紹介します。大まかな流れは以下のとおりです。
+ runstantでコーティングする runstantプロジェクトをhtmlファイルとしてダウンロードする GitHubにゲーム公開用のリポジトリを作る htmlファイルをGitHubのリポジトリにアップロードする GitHubのリポジトリの設定でGitHub Pagesを有効にする  それでは、順番に説明していきます。
+runstantでコーティングする runstantは、phina.jsの生みの親であるphiさんが開発したWebブラウザ上で動くオンラインエディタで、ユーザー登録すれば誰でも利用することができます。 phina.jsの公式エディタでもあり、実際に様々なプログラムが作られて公開されています。
+phina.jsのひな形からゲームを作成 これまでも触れていますが、普段私が使っているphina.jsのひな形から作ることで、簡単に始められます。
+今回作ったゲーム サンプルとして、制限時間内にどれだけ円をタッチできるかを競う単純なゲームを作りました。
+Touch The Circle(runstant)
+runstantプロジェクトをhtmlファイルとしてダウンロードする ゲームを作ったら、Webに公開するファイルの準備をする必要がありますが、runstantの便利な機能として、プロジェクトのダウンロードがあります。 ダウンロードされたファイルはhtml形式でjavascriptのコード部分もパッケージ化されているので、このファイル１つあればゲームとして動作します。
+プロジェクトのダウンロード方法  runstantの画面下部にあるボタンをクリックすると、プロジェクトのダウンロードができます。ダウンロード先は任意の場所にして、ファイル名をindex.htmlに変更して下さい。  GitHubにゲーム公開用のリポジトリを作る GitHubは、プログラマなら誰もが知るようになりつつある、主にソースコードのバージョン管理を目的としたサービスです。 今回は、このGitHubをゲームの公開用サーバとして利用します。
+ユーザー登録を行ったら、ゲーム公開用のリポジトリを作成します。
+ ユーザーホーム画面で「New」ボタンをクリックします。   作成画面でリポジトリ名を入力します。 公開範囲が「Public」になっているのを確認します。 「リポジトリをREAD ME で初期化」にチェックを入れます。 「Create repository」ボタンをクリックします。  htmlファイルをGitHubのリポジトリにアップロードする リポジトリの用意が出来たら、runstantからダウンロードしたhtmlファイルをリポジトリにアップロードします。GitHubは、ローカル環境からgitのコマンドを駆使して使うイメージがありますが、GitHub上のGUI操作でもファイルのアップロード程度はできます。
+ 「Upload files」ボタンをクリックします。   上の領域にダウンロードしたhtmlファイルをドラッグするか、ファイル選択ダイアログでファイルを選択します。 「Commit Changes」ボタンをクリックします。   ファイルがアップロードされたのを確認します。  GitHubのリポジトリの設定でGitHub Pagesを有効にする  上部メニューから「Setting」をクリックします。   「github pages」を有効にします。以前は、git でgh-pages名でブランチを切って、pushする必要がありましたが、現在は不要になっています。   上部に表示される アドレスが公開先のアドレスになります。 反映されるまでには、少し時間がかかる場合もあるようです。  公開先 Touch The Circle" />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/bubble.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/others/quick-html5-game/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/others/quick-html5-game/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する</h1>
+      <div class="meta">
+        Jun 29, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/html5">html5</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/runstant">runstant</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/github">Github</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%20%e3%80%91Web%e3%83%96%e3%83%a9%e3%82%a6%e3%82%b6%e3%81%a0%e3%81%91%e3%81%a7html5%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e6%88%90%e3%81%97%e3%81%a6%e5%85%ac%e9%96%8b%e3%81%99%e3%82%8b&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/others/quick-html5-game/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#webブラウザだけでゲームを作成して公開する">Webブラウザだけでゲームを作成して公開する</a></li>
+<li><a href="#runstantでコーティングする">runstantでコーティングする</a>
+<ul>
+<li><a href="#phina-jsのひな形からゲームを作成">phina.jsのひな形からゲームを作成</a></li>
+<li><a href="#今回作ったゲーム">今回作ったゲーム</a></li>
+</ul></li>
+<li><a href="#runstantプロジェクトをhtmlファイルとしてダウンロードする">runstantプロジェクトをhtmlファイルとしてダウンロードする</a>
+<ul>
+<li><a href="#プロジェクトのダウンロード方法">プロジェクトのダウンロード方法</a></li>
+</ul></li>
+<li><a href="#githubにゲーム公開用のリポジトリを作る">GitHubにゲーム公開用のリポジトリを作る</a></li>
+<li><a href="#htmlファイルをgithubのリポジトリにアップロードする">htmlファイルをGitHubのリポジトリにアップロードする</a></li>
+<li><a href="#githubのリポジトリの設定でgithub-pagesを有効にする">GitHubのリポジトリの設定でGitHub Pagesを有効にする</a></li>
+<li><a href="#公開先">公開先</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<h3 id="はじめに">はじめに</h3>
+
+<p>ゲームを作っている人なら、自分の作ったゲームを誰かに遊んでもらいたい気持ちは皆持っていると思います。今では、スマホアプリを作ってプラットフォームで公開する方法がメジャーですが、初心者にとってはそう簡単にはいかないものです。<br />
+中には、<strong>アプリ化まではいかないけど何かゲームを作って公開してみたい</strong>と思っている人もいるでしょう。そのようなときは、<strong>javascript</strong>で<strong>html5</strong>ゲームを作って、Webで公開することをおすすめします。（もちろんhtml5ゲームをアプリ化する方法もあります）</p>
+
+<h3 id="webブラウザだけでゲームを作成して公開する">Webブラウザだけでゲームを作成して公開する</h3>
+
+<p>今回は、特別な環境構築をせずに、Webブラウザだけを使って<strong>html5</strong>ゲームを公開する方法を紹介します。大まかな流れは以下のとおりです。</p>
+
+<ol>
+<li><strong>runstant</strong>でコーティングする</li>
+<li><strong>runstant</strong>プロジェクトを<strong>html</strong>ファイルとしてダウンロードする</li>
+<li><strong>GitHub</strong>にゲーム公開用のリポジトリを作る</li>
+<li><strong>html</strong>ファイルを<strong>GitHub</strong>のリポジトリにアップロードする</li>
+<li><strong>GitHub</strong>のリポジトリの設定で<strong>GitHub Pages</strong>を有効にする</li>
+</ol>
+
+<p>それでは、順番に説明していきます。</p>
+
+<h3 id="runstantでコーティングする">runstantでコーティングする</h3>
+
+<p><a href="https://runstant.com/">runstant</a>は、<strong>phina.js</strong>の生みの親である<a href="https://twitter.com/phi_jp">phi</a>さんが開発したWebブラウザ上で動くオンラインエディタで、ユーザー登録すれば誰でも利用することができます。 <strong>phina.js</strong>の公式エディタでもあり、実際に様々なプログラムが作られて公開されています。</p>
+
+<h4 id="phina-jsのひな形からゲームを作成">phina.jsのひな形からゲームを作成</h4>
+
+<p>これまでも触れていますが、普段私が使っている<a href="https://runstant.com/alkn203/projects/8f0388a4">phina.jsのひな形</a>から作ることで、簡単に始められます。</p>
+
+<h4 id="今回作ったゲーム">今回作ったゲーム</h4>
+
+<p>サンプルとして、制限時間内にどれだけ円をタッチできるかを競う単純なゲームを作りました。</p>
+
+<p><a href="https://runstant.com/alkn203/projects/21370e4b">Touch The Circle(runstant)</a></p>
+
+<h3 id="runstantプロジェクトをhtmlファイルとしてダウンロードする">runstantプロジェクトをhtmlファイルとしてダウンロードする</h3>
+
+<p>ゲームを作ったら、Webに公開するファイルの準備をする必要がありますが、<strong>runstant</strong>の便利な機能として、プロジェクトのダウンロードがあります。
+ダウンロードされたファイルは<strong>html</strong>形式で<strong>javascript</strong>のコード部分もパッケージ化されているので、このファイル１つあればゲームとして動作します。</p>
+
+<h4 id="プロジェクトのダウンロード方法">プロジェクトのダウンロード方法</h4>
+
+<p><img src="https://alkn203.github.io/blog/images/runstantdownload.gif" alt="runstantdownload.gif" /></p>
+
+<ul>
+<li><strong>runstant</strong>の画面下部にあるボタンをクリックすると、プロジェクトのダウンロードができます。ダウンロード先は任意の場所にして、ファイル名を<strong>index.html</strong>に変更して下さい。</li>
+</ul>
+
+<h3 id="githubにゲーム公開用のリポジトリを作る">GitHubにゲーム公開用のリポジトリを作る</h3>
+
+<p><a href="https://github.co.jp/">GitHub</a>は、プログラマなら誰もが知るようになりつつある、主にソースコードのバージョン管理を目的としたサービスです。
+今回は、この<strong>GitHub</strong>をゲームの公開用サーバとして利用します。</p>
+
+<p>ユーザー登録を行ったら、ゲーム公開用のリポジトリを作成します。</p>
+
+<ul>
+<li>ユーザーホーム画面で「New」ボタンをクリックします。</li>
+</ul>
+
+<p><img src="https://alkn203.github.io/blog/images/newrepository.gif" alt="newrepository.gif" /></p>
+
+<ol>
+<li>作成画面でリポジトリ名を入力します。</li>
+<li>公開範囲が「Public」になっているのを確認します。</li>
+<li>「リポジトリをREAD ME で初期化」にチェックを入れます。</li>
+<li>「Create repository」ボタンをクリックします。</li>
+</ol>
+
+<h3 id="htmlファイルをgithubのリポジトリにアップロードする">htmlファイルをGitHubのリポジトリにアップロードする</h3>
+
+<p>リポジトリの用意が出来たら、<strong>runstant</strong>からダウンロードした<strong>html</strong>ファイルをリポジトリにアップロードします。<strong>GitHub</strong>は、ローカル環境から<strong>git</strong>のコマンドを駆使して使うイメージがありますが、<strong>GitHub</strong>上のGUI操作でもファイルのアップロード程度はできます。</p>
+
+<p><img src="https://alkn203.github.io/blog/images/uploadfile.gif" alt="uploadfile.gif" /></p>
+
+<ul>
+<li>「Upload files」ボタンをクリックします。</li>
+</ul>
+
+<p><img src="https://alkn203.github.io/blog/images/uploadfile2.gif" alt="uploadfile2.gif" /></p>
+
+<ol>
+<li>上の領域にダウンロードした<strong>html</strong>ファイルをドラッグするか、ファイル選択ダイアログでファイルを選択します。</li>
+<li>「Commit Changes」ボタンをクリックします。</li>
+</ol>
+
+<p><img src="https://alkn203.github.io/blog/images/uploaded.gif" alt="uploaded.gif" /></p>
+
+<ul>
+<li>ファイルがアップロードされたのを確認します。</li>
+</ul>
+
+<h3 id="githubのリポジトリの設定でgithub-pagesを有効にする">GitHubのリポジトリの設定でGitHub Pagesを有効にする</h3>
+
+<p><img src="https://alkn203.github.io/blog/images/setting.gif" alt="setting.gif" /></p>
+
+<ul>
+<li>上部メニューから「Setting」をクリックします。</li>
+</ul>
+
+<p><img src="https://alkn203.github.io/blog/images/ghpages.gif" alt="ghpages.gif" /></p>
+
+<ul>
+<li>「github pages」を有効にします。以前は、<strong>git</strong> で<strong>gh-pages</strong>名でブランチを切って、<strong>push</strong>する必要がありましたが、現在は不要になっています。</li>
+</ul>
+
+<p><img src="https://alkn203.github.io/blog/images/ghpagescheck.gif" alt="ghpagescheck.gif" /></p>
+
+<ul>
+<li>上部に表示される アドレスが公開先のアドレスになります。</li>
+<li>反映されるまでには、少し時間がかかる場合もあるようです。</li>
+</ul>
+
+<h3 id="公開先">公開先</h3>
+
+<p><a href="https://alkn203.github.io/touchthecircle/">Touch The Circle</a></p>
+
+    </article>
+
+    
+      
+<center>
+  <table>
+    <tr>
+      
+      <td>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%20%e3%80%91Web%e3%83%96%e3%83%a9%e3%82%a6%e3%82%b6%e3%81%a0%e3%81%91%e3%81%a7html5%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e6%88%90%e3%81%97%e3%81%a6%e5%85%ac%e9%96%8b%e3%81%99%e3%82%8b&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+      </td>
+      
+      <td>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/others/quick-html5-game/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+      </td>
+      
+      <td>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2fothers%2fquick-html5-game%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
+</center>
+    
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+    <div id="social">
+      <table>
+        <tr>
+          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
+          
+          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(18)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(11)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tips/">
+          <div>tips&nbsp;(3)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tutorials/">
+          <div>tutorials&nbsp;(11)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-11/" rel="prev">【phina.js】2Dシューティングチュートリアル =第11回 タイトルをつける=</a></span>
+    
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
+</body>
+</html>
+
