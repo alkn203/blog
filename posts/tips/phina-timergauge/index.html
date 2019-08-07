@@ -4,23 +4,22 @@
   
   <meta charset="UTF-8">
   <title>
-    このブログについて | Keep On Coding
+    【phina.js】タイマーゲージを作ってみた | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="このブログについて" />
-  <meta name="og:description" content="このブログについて 当ブログは、趣味でプログラミングをしている管理人がjavascriptのゲームライブラリphina.jsに関するTipsなどを通して、ゲームプログラミングの楽しさを伝えることを目的としています。
-掲載されているコードについて 当ブログの記事に掲載されているコードはの取り扱いについては、個別に記述がない限り、特に使用制限はありません。記事中にリンクしているrunstantプロジェクトについても同様です。 当ブログに掲載されているコードをご自身のブログなどで引用された場合は、当ブログへリンクをして頂ければ嬉しいです。
-免責事項 当ブログに掲載された内容および当ブログからのリンク先への移動によって発生した損害等の一切の責任は、当ブログでは負いかねますので、ご了承ください。
-改訂履歴 2019年6月18日　作成" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/pages/about/" />
+  <meta name="og:title" content="【phina.js】タイマーゲージを作ってみた" />
+  <meta name="og:description" content="はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
+実行サンプル   runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
+// タイマーゲージ var gauge = phina.ui.TimerGauge({ limitTime: 30, }).addChildTo(this); gauge.setPosition(this.gridX.center(), this.gridY.center());  プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina." />
+  <meta name="og:image" content="https://alkn203.github.io/blog//images/timergauge.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-timergauge/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/pages/about/"/>
+  <link rel="canonical" href="https://alkn203.github.io/blog/posts/tips/phina-timergauge/"/>
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
@@ -50,9 +49,15 @@
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
-      <h1>このブログについて</h1>
+      <h1>【phina.js】タイマーゲージを作ってみた</h1>
       <div class="meta">
-        Jun 16, 2019 &nbsp;
+        Jul 1, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/extentions">extentions</a>&nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/tips">tips</a>&nbsp;
         
       </div>
     </div>
@@ -64,19 +69,19 @@
     <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=%e3%81%93%e3%81%ae%e3%83%96%e3%83%ad%e3%82%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&url=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%bf%e3%82%a4%e3%83%9e%e3%83%bc%e3%82%b2%e3%83%bc%e3%82%b8%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
       </td>
       
       <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/pages/about/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-timergauge/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
       </td>
       
       <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
       </td>
     </tr>
   </table>
@@ -93,10 +98,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#このブログについて">このブログについて</a></li>
-<li><a href="#掲載されているコードについて">掲載されているコードについて</a></li>
-<li><a href="#免責事項">免責事項</a></li>
-<li><a href="#改訂履歴">改訂履歴</a></li>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#実行サンプル">実行サンプル</a></li>
+<li><a href="#timergaugeクラスの仕様">TimerGaugeクラスの仕様</a>
+<ul>
+<li><a href="#プロパティ-メソッド-イベント">プロパティ・メソッド・イベント</a></li>
+</ul></li>
+<li><a href="#使用方法">使用方法</a></li>
+<li><a href="#ソースコード">ソースコード</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -104,22 +113,112 @@
       
       
 
-<h3 id="このブログについて">このブログについて</h3>
+<p><img src="https://alkn203.github.io/blog/images/timergauge.gif" alt="timergauge.gif" /></p>
 
-<p>当ブログは、趣味でプログラミングをしている管理人がjavascriptのゲームライブラリphina.jsに関するTipsなどを通して、ゲームプログラミングの楽しさを伝えることを目的としています。</p>
+<h3 id="はじめに">はじめに</h3>
 
-<h3 id="掲載されているコードについて">掲載されているコードについて</h3>
+<p><strong>phina.js</strong>には、体力ゲージの実装に使える<strong>Gauge</strong>という便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。</p>
 
-<p>当ブログの記事に掲載されているコードはの取り扱いについては、個別に記述がない限り、特に使用制限はありません。記事中にリンクしているrunstantプロジェクトについても同様です。
-当ブログに掲載されているコードをご自身のブログなどで引用された場合は、当ブログへリンクをして頂ければ嬉しいです。</p>
+<h3 id="実行サンプル">実行サンプル</h3>
 
-<h3 id="免責事項">免責事項</h3>
+<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/7eab89e2/full' width='100%' height='640px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
 
-<p>当ブログに掲載された内容および当ブログからのリンク先への移動によって発生した損害等の一切の責任は、当ブログでは負いかねますので、ご了承ください。</p>
+<ul>
+<li>runボタンを押すとゲージが経過時間で減っていきます。</li>
+<li>pauseボタンで一時停止。recoverボタンで全回復します。</li>
+</ul>
 
-<h3 id="改訂履歴">改訂履歴</h3>
+<h3 id="timergaugeクラスの仕様">TimerGaugeクラスの仕様</h3>
 
-<p>2019年6月18日　作成</p>
+<p>以下のように、シーンに追加します。</p>
+
+<pre><code class="language-javascript">    // タイマーゲージ
+    var gauge = phina.ui.TimerGauge({
+      limitTime: 30,
+    }).addChildTo(this);
+    gauge.setPosition(this.gridX.center(), this.gridY.center());
+</code></pre>
+
+<h4 id="プロパティ-メソッド-イベント">プロパティ・メソッド・イベント</h4>
+
+<table>
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>説明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>limitTime</td>
+<td>制限時間(秒） デフォルト値60</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>説明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>run</td>
+<td>タイマー作動</td>
+</tr>
+
+<tr>
+<td>pause</td>
+<td>一時停止</td>
+</tr>
+
+<tr>
+<td>recover</td>
+<td>ゲージを満タンにする</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>イベント</th>
+<th>説明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>onfull</td>
+<td>ゲージが満タンになった時</td>
+</tr>
+
+<tr>
+<td>onempty</td>
+<td>ゲージが空になった時</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>その他のプロパティは、継承元の<a href="https://github.com/phinajs/phina.js/blob/develop/src/ui/gauge.js"><strong>phina.ui.Gauge</strong></a>クラスを参照して下さい。</p>
+</blockquote>
+
+<h3 id="使用方法">使用方法</h3>
+
+<p><strong>html</strong>ファイルで以下のように読み込みます。</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;https://cdn.jsdelivr.net/gh/phi-jp/phina.js@v0.2.3/build/phina.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/alkn203/phina-extensions@master/ui/timergauge.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="ソースコード">ソースコード</h3>
+
+<p><a href="https://github.com/alkn203/phina-extensions/blob/master/ui/timergauge.js">Timer Gauge</a></p>
 
     </article>
 
@@ -130,19 +229,19 @@
     <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=%e3%81%93%e3%81%ae%e3%83%96%e3%83%ad%e3%82%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&url=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%bf%e3%82%a4%e3%83%9e%e3%83%bc%e3%82%b2%e3%83%bc%e3%82%b8%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
       </td>
       
       <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/pages/about/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
+        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/posts/tips/phina-timergauge/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
       </td>
       
       <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fpages%2fabout%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
+        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2fposts%2ftips%2fphina-timergauge%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
       </td>
     </tr>
   </table>
@@ -280,10 +379,8 @@
 
   <nav class="pagination-single" class="col span_3">>
     
-      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/tips/phina-various-scroll/" rel="prev">【phina.js】色々なスクロールを試す</a></span>
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/posts/others/quick-html5-game/" rel="prev">【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する</a></span>
     
-    
-      <span class="next"><a href="https://alkn203.github.io/blog/posts/others/phina-bubblesort/" rel="next">【phina.js】バブルソートを視覚化してみた</a> &rarr;</span>
     
   </nav>
 
