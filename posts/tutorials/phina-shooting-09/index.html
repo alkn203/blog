@@ -15,7 +15,7 @@
 サウンド素材の読み込み 画像と同じようにアセットとして読み込みます。
 // サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&#39;, &#39;shot&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&#39;, &#39;explosion&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&#39;, },   サウンド素材は魔王魂から拝借しました。
  BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生 SoundManager.playMusic(&#39;bgm&#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&quot;PlayerBullet&quot;, { // 継 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;bullet&#39;, 64, 64); // スピード var speed = 10; // 当たり判定用のコライダー this.collider = Collider({ width: 10, height: 30, })." />
-  <meta name="og:image" content="https://alkn203.github.io/blog//images/08-wave.gif" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/08-wave.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-09/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -113,7 +113,7 @@
       
       
 
-<p><img src="https://alkn203.github.io/blog/images/08-wave.gif" alt="08-wave.gif" /></p>
+<p><img src="08-wave.gif" alt="08-wave.gif" /></p>
 
 <h3 id="はじめに">はじめに</h3>
 

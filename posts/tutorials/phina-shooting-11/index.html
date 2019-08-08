@@ -14,7 +14,7 @@
   <meta name="og:description" content="はじめに 前回は、プレイヤーが画面外に出ないように移動に制限をかけました。今回は、タイトル画面を追加します。
 独自のタイトル画面の作成 Unityのチュートリアルでは、タイトル文字を非表示にすることでタイトル画面とゲーム画面の区別を行っています。これも一つの手法ですが、今回は、phina.jsで元々用意されているタイトル画面を上書きする方法にします。
 TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で新たにクラスを作ることで、元々のシーンが上書きされます。 コード的にはダブりもありますが、シーン毎に切り離して管理できるのがメリットです。  /* * タイトルシーン */ phina.define(&quot;TitleScene&quot;, { // 継承 superClass: &#39;DisplayScene&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // グループ this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this); // グリッド var gx = this.gridX; var gy = this.gridY; // 背景 this.createBackground(); // タイトルラベル var title = Label({ text: &#39;Shooting Game&#39;, fill: &#39;white&#39;, stroke: &#39;yellow&#39;, fontSize: 72, }).addChildTo(this).setPosition(gx.center(), gy.center(-2)); // スタートキーラベル var startKey = Label({ text: &#39;Press X&#39;, fill: &#39;white&#39;, stroke: &#39;yellow&#39;, fontSize: 64, })." />
-  <meta name="og:image" content="https://alkn203.github.io/blog//images/11-title.gif" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/11-title.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-11/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -111,7 +111,7 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
       
       
 
-<p><img src="https://alkn203.github.io/blog/images/11-title.gif" alt="11-title.gif" /></p>
+<p><img src="11-title.gif" alt="11-title.gif" /></p>
 
 <h3 id="はじめに">はじめに</h3>
 
