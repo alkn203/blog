@@ -14,7 +14,7 @@
   <meta name="og:description" content="はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
 実行サンプル   runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
 // タイマーゲージ var gauge = phina.ui.TimerGauge({ limitTime: 30, }).addChildTo(this); gauge.setPosition(this.gridX.center(), this.gridY.center());  プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/timergauge.gif" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/posts/tips/phina-timergauge/timergauge.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-timergauge/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -45,6 +45,7 @@
       </div>
     </div>
   </header>
+
 
   
   <main id="single" role="main" class="col span_9">
@@ -290,6 +291,16 @@
   
   <div class="article-header light-gray"><h1>About this Site</h1></div>
   <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
   
   
   <div class="article-header light-gray"><h1>Tags</h1></div>

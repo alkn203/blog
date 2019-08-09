@@ -13,7 +13,7 @@
   <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第7回 背景を追加する=" />
   <meta name="og:description" content="はじめに 前回は、当たり判定を追加しました。今回は、背景を作成します。
 背景画像を追加する 下の背景 上の背景（中間は透過処理）  背景画像をスプライトとして追加します。画像は2種類にしてスクロール速度を変えて奥行き感を表現します。 背景をループしてスクロールできるように、それぞれ同じ画像を2つ縦に繋げて並べます。画像はグループに追加して管理します。 背景画像は、画面の縦サイズより少し大きめにすることで、スクロールさせる時の画像の移動をより自然に見せることができます。  // グループ this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this);  // 背景作成 createBackground: function() { var bgGroup = this.bgGroup; var bg2Group = this.bg2Group; (2).times(function(i) { // 一番下の背景 var bg = Sprite(&#39;bg&#39;).addChildTo(bgGroup); bg.setPosition(this.gridX.center(), this.gridY.center()); // 上の背景 var bg2 = Sprite(&#39;bg2&#39;).addChildTo(bg2Group); bg2.setPosition(this.gridX.center(), this.gridY.center()); // スクロールスピード bg.physical.velocity.y = 2; bg2.physical.velocity.y = 4; }, this); // それぞれ2つの背景を縦に繋げる bgGroup.children.last.bottom = bgGroup.children.first.top; bg2Group.children.last.bottom = bg2Group.children.first.top; },  背景をループしてスクロールさせる 背景のスクロール管理は、update内で行います。" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/07-background.gif" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-07/07-background.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-07/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -44,6 +44,7 @@
       </div>
     </div>
   </header>
+
 
   
   <main id="single" role="main" class="col span_9">
@@ -265,6 +266,16 @@
   
   <div class="article-header light-gray"><h1>About this Site</h1></div>
   <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
   
   
   <div class="article-header light-gray"><h1>Tags</h1></div>

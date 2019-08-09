@@ -19,7 +19,7 @@ obj1.addChildTo(obj2);  プレイヤーの弾を作成する プレイヤーの�
 親となるPlayerBulletの作成 Unityのチュートリアルでは空のゲームオブジェクトを作成していますが、phina.jsではDisplayElementというクラスにその役割をさせることができます。
 PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承した以下のクラスを作成しました。
 /* * プレイヤーの弾クラス */ phina.define(&quot;PlayerBullet&quot;, { // 継 superClass: &#39;DisplayElement&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // スピード var speed = 10; var self = this; // 左右の弾 [-10, 10].each(function(dx) { Sprite(&#39;bullet&#39;, 64, 64).addChildTo(self).setPosition(self.x &#43; dx, self.y); }); // 上向き速度を与える this." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/04-playershot.gif" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/04-playershot.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -50,6 +50,7 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
       </div>
     </div>
   </header>
+
 
   
   <main id="single" role="main" class="col span_9">
@@ -399,6 +400,16 @@ phina.define(&quot;MainScene&quot;, {
   
   <div class="article-header light-gray"><h1>About this Site</h1></div>
   <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
+  
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
   
   
   <div class="article-header light-gray"><h1>Tags</h1></div>
