@@ -18,7 +18,7 @@ obj1.addChildTo(obj2);  プレイヤーの弾を作成する プレイヤーの�
 プレイヤーの弾を動かす ゲームを実行したら勝手に上に飛んで行く弾を作成します。
 親となるPlayerBulletの作成 Unityのチュートリアルでは空のゲームオブジェクトを作成していますが、phina.jsではDisplayElementというクラスにその役割をさせることができます。
 PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承した以下のクラスを作成しました。
-/* * プレイヤーの弾クラス */ phina.define(&quot;PlayerBullet&quot;, { // 継 superClass: &#39;DisplayElement&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // スピード var speed = 10; var self = this; // 左右の弾 [-10, 10].each(function(dx) { Sprite(&#39;bullet&#39;, 64, 64).addChildTo(self).setPosition(self.x &#43; dx, self.y); }); // 上向き速度を与える this." />
+/* * プレイヤーの弾クラス */ phina.define(&#34;PlayerBullet&#34;, { // 継  superClass: &#39;DisplayElement&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // スピード  var speed = 10; var self = this; // 左右の弾  [-10, 10].each(function(dx) { Sprite(&#39;bullet&#39;, 64, 64)." />
   <meta name="og:image" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/04-playershot.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-04/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -28,10 +28,9 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
-  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
   
   <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
   <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
@@ -144,18 +143,14 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
 <h3 id="子要素として追加する方法">子要素として追加する方法</h3>
 
 <p>例えば、<strong>obj1</strong>を<strong>obj2</strong>の子要素として追加したい場合、以下のように書きます。</p>
-
-<pre><code class="language-javascript">obj1.addChildTo(obj2);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">obj1</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="プレイヤーの弾を作成する">プレイヤーの弾を作成する</h3>
 
 <p>プレイヤーの弾を表示するだけなら、以下のようにスプライトとしてシーンに追加すればOKです。</p>
-
-<pre><code class="language-javascript">// プレイヤーの弾
-Sprite('bullet', 64, 64).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// プレイヤーの弾
+</span><span class="c1"></span><span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
+</code></pre></div>
 <h3 id="ここまでの実行サンプル">ここまでの実行サンプル</h3>
 
 <p><a href="http://runstant.com/alkn203/projects/98cae238">プレイヤーの弾表示(runstant)</a></p>
@@ -171,41 +166,37 @@ Sprite('bullet', 64, 64).addChildTo(this).setPosition(this.gridX.center(), this.
 <h3 id="playerbulletクラス">PlayerBulletクラス</h3>
 
 <p>プレイヤーの弾として、<strong>DisplayElement</strong>を継承した以下のクラスを作成しました。</p>
-
-<pre><code class="language-javascript"> /*
- * プレイヤーの弾クラス
- */
-phina.define(&quot;PlayerBullet&quot;, {
-  // 継
-  superClass: 'DisplayElement',
-  // 初期化
-  init: function() {
-    // 親クラス初期化
-    this.superInit();
-    // スピード
-    var speed = 10;
-    var self = this;
-    // 左右の弾
-    [-10, 10].each(function(dx) {
-      Sprite('bullet', 64, 64).addChildTo(self).setPosition(self.x + dx, self.y);
-    });
-    // 上向き速度を与える
-    this.physical.velocity.y = -speed;
-  },
-});
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"> <span class="cm">/*
+</span><span class="cm"> * プレイヤーの弾クラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;PlayerBullet&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayElement&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// スピード
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="c1">// 左右の弾
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="c1">// 上向き速度を与える
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">-</span><span class="nx">speed</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
 <h3 id="弾の配置">弾の配置</h3>
 
 <p>以下が弾の作成部分です。</p>
-
-<pre><code class="language-javascript">   var self = this;
-    // 左右の弾
-    [-10, 10].each(function(dx) {
-      Sprite('bullet', 64, 64).addChildTo(self).setPosition(self.x + dx, self.y);
-    });
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="c1">// 左右の弾
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
 <ul>
 <li><strong>each</strong>関数の引数<strong>dx</strong>に配列の各要素が入ってきますので、真ん中から左右に10ずれた位置に弾が作成されます。</li>
 <li>関数の中でそのまま<strong>this</strong>を使うと、関数そのものを差し参照エラーになるので、<strong>this</strong>を<strong>self</strong>に代入して<strong>PlayerBullet</strong>の<strong>this</strong>として正しく参照できるようにしています。</li>
@@ -214,11 +205,9 @@ phina.define(&quot;PlayerBullet&quot;, {
 <h3 id="弾を動かす">弾を動かす</h3>
 
 <p>以下が弾を動かす処理です。</p>
-
-<pre><code class="language-javascript">    // 上向き速度を与える
-    this.physical.velocity.y = -speed;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// 上向き速度を与える
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">-</span><span class="nx">speed</span><span class="p">;</span>
+</code></pre></div>
 <ul>
 <li>移動には、<strong>Physical</strong>クラスを使っています。一度速度を与えると、あとは内部で移動処理を行ってくれるので便利です。</li>
 <li>弾をまとめて動かすためには、個別の<strong>Sprite</strong>ではなく、<strong>this</strong>で<strong>PlayerBullet</strong>に速度を設定する必要があります。</li>
@@ -227,11 +216,9 @@ phina.define(&quot;PlayerBullet&quot;, {
 <h3 id="弾をシーンに追加する">弾をシーンに追加する</h3>
 
 <p>シーンには、以下のように追加します。</p>
-
-<pre><code class="language-javascript">    // プレイヤーの弾作成
-    PlayerBullet().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// プレイヤーの弾作成
+</span><span class="c1"></span>    <span class="nx">PlayerBullet</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
+</code></pre></div>
 <h3 id="ここまでの実行サンプル-1">ここまでの実行サンプル</h3>
 
 <p><a href="https://runstant.com/alkn203/projects/53897c29">プレイヤーの弾発射(runstant)</a></p>
@@ -241,53 +228,49 @@ phina.define(&quot;PlayerBullet&quot;, {
 <p><strong>Unity</strong>のチュートリアルでは、コルーチンを使って実現していますが、<strong>phina.js</strong>では<strong>Tweener</strong>という機能がありますので、これを活用します。</p>
 
 <p>プレイヤークラスを以下のように変更します。</p>
-
-<pre><code class="language-javascript">/*
- * プレイヤークラス
- */
-phina.define(&quot;Player&quot;, {
-  // 継承
-  superClass: 'Sprite',
-  // 初期化
-  init: function() {
-    // 親クラス初期化
-    this.superInit('spaceship', 64, 64);
-    // フレームアニメーションをアタッチ
-    FrameAnimation('spaceship').attachTo(this).gotoAndPlay('player');
-    // 移動スピード
-    this.speed = 5;
-    // 一定間隔で弾を発射
-    this.tweener.clear()
-                .call(function() {
-                  this.shot();
-                }, this)
-                .wait(1000)
-                .setLoop(true); 
-  },
-  // 弾を発射
-  shot: function() {
-    PlayerBullet().addChildTo(playerBulletGroup).setPosition(this.x, this.y);
-  },
-  // 毎フレーム更新処理
-  update: function(app) {
-    // 移動する向きを求める
-    var direction = app.keyboard.getKeyDirection();
-    // 移動する向きとスピードを代入する
-    this.moveBy(direction.x * this.speed, direction.y * this.speed);
-  },
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * プレイヤークラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Player&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
+    <span class="c1">// フレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">);</span>
+    <span class="c1">// 移動スピード
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="c1">// 一定間隔で弾を発射
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
+  <span class="p">},</span>
+  <span class="c1">// 弾を発射
+</span><span class="c1"></span>  <span class="nx">shot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">PlayerBullet</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">playerBulletGroup</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="c1">// 毎フレーム更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 移動する向きを求める
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">();</span>
+    <span class="c1">// 移動する向きとスピードを代入する
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+  <span class="p">},</span>
+</code></pre></div>
 <h3 id="tweenerの設定">Tweenerの設定</h3>
-
-<pre><code class="language-javascript">    //一定間隔で弾を発射
-    this.tweener.clear()
-                .call(function() {
-                  this.shot();
-                }, this)
-                .wait(1000)
-                .setLoop(true); 
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">//一定間隔で弾を発射
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
+</code></pre></div>
 <ul>
 <li><strong>tweener</strong>で処理をチェインメソッドの形でつなげると、順番に実行することができます。</li>
 <li><strong>call</strong>では任意の処理を記述できるので、<strong>shot</strong>という関数を呼び出しています。</li>
@@ -297,35 +280,30 @@ phina.define(&quot;Player&quot;, {
 <h3 id="弾の生成">弾の生成</h3>
 
 <p>弾の生成は、<strong>shot</strong>という関数の中で行うようにしました。</p>
-
-<pre><code class="language-javascrpt">  // 弾を発射
+<div class="highlight"><pre class="chroma"><code class="language-javascrpt" data-lang="javascrpt">  // 弾を発射
   shot: function() {
     PlayerBullet().addChildTo(playerBulletGroup).setPosition(this.x, this.y);
-  }
-</code></pre>
-
+  }</code></pre></div>
 <h3 id="弾をグループに追加する">弾をグループに追加する</h3>
 
 <p>弾は後々の利便性を考えて、グローバル変数で定義したグループに追加します。</p>
-
-<pre><code class="language-javascript">// グローバル変数
-var playerBulletGroup = null;
-/*
- * メインシーン
- */
-phina.define(&quot;MainScene&quot;, {
-  // 継承
-  superClass: 'DisplayScene',
-  // 初期化
-  init: function() {
-    // 親クラス初期化
-    this.superInit();
-    // 背景色
-    this.backgroundColor = 'black';
-    // グループ
-    playerBulletGroup = DisplayElement().addChildTo(this);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// グローバル変数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">playerBulletGroup</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+    <span class="c1">// グループ
+</span><span class="c1"></span>    <span class="nx">playerBulletGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="実行サンプル">実行サンプル</h3>
 
 <p><a href="https://runstant.com/alkn203/projects/cc372378">プレイヤーの弾を一定間隔で発射(runatant)</a></p>
@@ -388,19 +366,17 @@ phina.define(&quot;MainScene&quot;, {
     <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
   </div>
   
-    <div id="social">
-      <table>
-        <tr>
-          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
-          
-          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
-        </tr>
-      </table>
-    </div>
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita</a></li>
+  </ul>
   
   <div class="article-header light-gray"><h1>About this Site</h1></div>
-  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
-  
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
   
   <div class="article-header light-gray"><h1>Links</h1></div>
   <ul class="none-ul">
@@ -410,8 +386,7 @@ phina.define(&quot;MainScene&quot;, {
         </a>
       </li>
   </ul>
-  
-  
+    
   <div class="article-header light-gray"><h1>Tags</h1></div>
     <ul class="none-ul">
       
@@ -506,7 +481,6 @@ phina.define(&quot;MainScene&quot;, {
     
   </nav>
 
-
   
   <footer role="contentinfo" class="col span_9">
     <div style="text-align:center;">
@@ -514,9 +488,6 @@ phina.define(&quot;MainScene&quot;, {
     </div>
   </footer>
 </div>
-
-<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -541,10 +512,6 @@ phina.define(&quot;MainScene&quot;, {
 <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 
 <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-
-<script src="https://apis.google.com/js/platform.js" async defer>
-  {lang: 'ja'}
-</script>
 </body>
 </html>
 

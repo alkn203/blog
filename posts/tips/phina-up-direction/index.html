@@ -14,7 +14,7 @@
   <meta name="og:description" content="上方向だけすり抜ける床  ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。 今回は基本的なジャンプ処理とともに、phina.jsを使って自分なりに実装してみました。  動作サンプル まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。
  runstantで確認
 プレイヤーとブロックの作成 プレイヤーとブロックは、それぞれSpriteクラスを継承して作成しました。
-// プレイヤークラス phina.define(&#39;Player&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tomapiko&#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ this.anim = FrameAnimation(&#39;tomapiko_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない this.anim.fit = false; // 縦移動速度 this.vy = 0; // サイズ変更 this.setSize(CHARA_SIZE, CHARA_SIZE); },   デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&#39;Block&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(&#39;tiles&#39;, SPRITE_SIZE, SPRITE_SIZE); // タイルセットの指定フレームを表示 this." />
+// プレイヤークラス phina.define(&#39;Player&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(&#39;tomapiko&#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ  this.anim = FrameAnimation(&#39;tomapiko_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない  this.anim.fit = false; // 縦移動速度  this.vy = 0; // サイズ変更  this.setSize(CHARA_SIZE, CHARA_SIZE); },   デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&#39;Block&#39;, { superClass: &#39;Sprite&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this." />
   <meta name="og:image" content="https://alkn203.github.io/blog/posts/tips/phina-up-direction/onlyup.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/posts/tips/phina-up-direction/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -24,10 +24,9 @@
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
-  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
   
   <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
   <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
@@ -132,65 +131,59 @@
 <h3 id="プレイヤーとブロックの作成">プレイヤーとブロックの作成</h3>
 
 <p>プレイヤーとブロックは、それぞれ<strong>Sprite</strong>クラスを継承して作成しました。</p>
-
-<pre><code class="language-javascript">// プレイヤークラス
-phina.define('Player', {
-  superClass: 'Sprite',
-  // コンストラクタ
-  init: function() {
-    // 親クラス初期化
-    this.superInit('tomapiko', SPRITE_SIZE, SPRITE_SIZE);
-    // フレームアニメーションをアタッチ
-    this.anim = FrameAnimation('tomapiko_ss').attachTo(this);
-    // スプライトシートのサイズにフィットさせない
-    this.anim.fit = false;
-    // 縦移動速度
-    this.vy = 0;
-    // サイズ変更
-    this.setSize(CHARA_SIZE, CHARA_SIZE);
-  }, 
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// プレイヤークラス
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Player&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">,</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="nx">SPRITE_SIZE</span><span class="p">);</span>
+    <span class="c1">// フレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;tomapiko_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="c1">// スプライトシートのサイズにフィットさせない
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">fit</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">// 縦移動速度
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// サイズ変更
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">CHARA_SIZE</span><span class="p">,</span> <span class="nx">CHARA_SIZE</span><span class="p">);</span>
+  <span class="p">},</span> 
+</code></pre></div>
 <ul>
 <li>デフォルトのスプライトサイズから半分のサイズにしています。</li>
 <li><strong>FrameAnimation</strong>クラスのプロパティ<strong>fit</strong>を<strong>false</strong>にしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。</li>
 </ul>
-
-<pre><code class="language-javascript">// ブロッククラス
-phina.define('Block', {
-  superClass: 'Sprite',
-  // コンストラクタ
-  init: function() {
-    // 親クラス初期化
-    this.superInit('tiles', SPRITE_SIZE, SPRITE_SIZE);
-    // タイルセットの指定フレームを表示   
-    this.setFrameIndex(4);
-    // サイズ変更
-    this.setSize(CHARA_SIZE, CHARA_SIZE);
-  },
-});
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// ブロッククラス
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Block&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;tiles&#39;</span><span class="p">,</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="nx">SPRITE_SIZE</span><span class="p">);</span>
+    <span class="c1">// タイルセットの指定フレームを表示   
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+    <span class="c1">// サイズ変更
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">CHARA_SIZE</span><span class="p">,</span> <span class="nx">CHARA_SIZE</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
 <p>アセットで読み込んだタイルセットからブロックの画像のインデックスをsetFrameIndexで指定しています。</p>
 
 <h3 id="プレイヤーとブロックの配置">プレイヤーとブロックの配置</h3>
-
-<pre><code class="language-javascript">    // グループ
-    var blockGroup = DisplayElement().addChildTo(this);
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// グループ
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">blockGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     
-    var gx = this.gridX;
-    var gy = this.gridY;
-    // プレイヤー
-    var player = Player().addChildTo(this);
-    player.setPosition(gx.center(), gy.span(12.5));
-    player.state = 'FALLING';
-    // ブロック
-    [5, 10, 15].each(function(i) {
-      var block = Block().addChildTo(blockGroup);
-      block.setPosition(gx.center(), gy.span(i));
-    });
-</code></pre>
-
+    <span class="kd">var</span> <span class="nx">gx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">gy</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">;</span>
+    <span class="c1">// プレイヤー
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">Player</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mf">12.5</span><span class="p">));</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;FALLING&#39;</span><span class="p">;</span>
+    <span class="c1">// ブロック
+</span><span class="c1"></span>    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">block</span> <span class="o">=</span> <span class="nx">Block</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">blockGroup</span><span class="p">);</span>
+      <span class="nx">block</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+    <span class="p">});</span>
+</code></pre></div>
 <ul>
 <li>プレイヤーとブロックの配置には、<strong>Grid</strong>を利用しています。</li>
 <li>今回はプレイヤーの状態毎に処理を分けるようにしており、管理用の変数<strong>state</strong>を用意しました。</li>
@@ -207,42 +200,40 @@ phina.define('Block', {
 </ul>
 
 <p>当たり判定の場合、上方向にはすり抜けるので<strong>JUMPING</strong>の時は当たり判定を行わず、残りの状態で当たり判定を行えばよいということになります。</p>
-
-<pre><code class="language-javascript">// 毎フレーム更新処理
-  update: function(app) {
-    var player = this.player;
-    var state = this.player.state;
-    var p = app.pointer;
-    // プレイヤーの状態で分ける
-    switch (state) {
-      // ブロックの上
-      case 'ON_BLOCK':
-        // タッチ開始
-        if (p.getPointingStart()) {
-          player.vy = -JUMP_POWER;
-          player.state = 'JUMPING';
-          // アニメーション変更
-          player.anim.gotoAndPlay('fly');
-        }
-        // 縦あたり判定
-        this.collisionY();
-        break;
-      // 上にジャンプ中
-      case 'JUMPING':
-        player.moveY();
-        // 下に落下開始
-        if (player.vy &gt; 0) {
-          player.state = 'FALLING';
-        }
-        break;
-      // 下に落下中  
-      case 'FALLING':
-        player.moveY();
-        this.collisionY();
-        break;
-    }
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 毎フレーム更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">pointer</span><span class="p">;</span>
+    <span class="c1">// プレイヤーの状態で分ける
+</span><span class="c1"></span>    <span class="k">switch</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// ブロックの上
+</span><span class="c1"></span>      <span class="k">case</span> <span class="s1">&#39;ON_BLOCK&#39;</span><span class="o">:</span>
+        <span class="c1">// タッチ開始
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getPointingStart</span><span class="p">())</span> <span class="p">{</span>
+          <span class="nx">player</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="o">-</span><span class="nx">JUMP_POWER</span><span class="p">;</span>
+          <span class="nx">player</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;JUMPING&#39;</span><span class="p">;</span>
+          <span class="c1">// アニメーション変更
+</span><span class="c1"></span>          <span class="nx">player</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;fly&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// 縦あたり判定
+</span><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">collisionY</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="c1">// 上にジャンプ中
+</span><span class="c1"></span>      <span class="k">case</span> <span class="s1">&#39;JUMPING&#39;</span><span class="o">:</span>
+        <span class="nx">player</span><span class="p">.</span><span class="nx">moveY</span><span class="p">();</span>
+        <span class="c1">// 下に落下開始
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">vy</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">player</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;FALLING&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="c1">// 下に落下中  
+</span><span class="c1"></span>      <span class="k">case</span> <span class="s1">&#39;FALLING&#39;</span><span class="o">:</span>
+        <span class="nx">player</span><span class="p">.</span><span class="nx">moveY</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">collisionY</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>update</strong>関数の引数<strong>app</strong>のプロパティ<strong>pointer</strong>から、タッチの状態を取得します。</li>
 <li>ブロックに乗っている時はジャンプできるので、タッチされた場合、上方向へ移動量を設定してプレイヤーの状態を<strong>JUMPING</strong>に変更します。併せて、当たり判定を行います。</li>
@@ -253,37 +244,35 @@ phina.define('Block', {
 <h3 id="当たり判定">当たり判定</h3>
 
 <p>当たり判定を行う<strong>collisionY</strong>という関数を用意しました。</p>
-
-<pre><code class="language-javascript">// 縦方向の当たり判定
-  collisionY: function() {
-    var player = this.player;
-    // 床に乗っている場合は強引に当た(り判定を作る
-    var vy = player.vy === 0 ? 4: player.vy;
-    // 当たり判定用の矩形
-    var rect = Rect(player.left, player.top + vy, player.width, player.height);
-    var result = false;
-    // ブロックグループをループ
-    this.blockGroup.children.some(function(block) {
-      // ブロックとのあたり判定
-      if (Collision.testRectRect(rect, block)) {
-        // 移動量
-        player.vy = 0;
-        // 位置調整
-        player.bottom = block.top;
-        //
-        player.state = 'ON_BLOCK';
-        // アニメーション変更
-        player.anim.gotoAndPlay('stand');
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 縦方向の当たり判定
+</span><span class="c1"></span>  <span class="nx">collisionY</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">;</span>
+    <span class="c1">// 床に乗っている場合は強引に当た(り判定を作る
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">vy</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">vy</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">4</span><span class="o">:</span> <span class="nx">player</span><span class="p">.</span><span class="nx">vy</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用の矩形
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">vy</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">// ブロックグループをループ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">blockGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// ブロックとのあたり判定
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">block</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// 移動量
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// 位置調整
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">block</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+        <span class="c1">//
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;ON_BLOCK&#39;</span><span class="p">;</span>
+        <span class="c1">// アニメーション変更
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;stand&#39;</span><span class="p">);</span>
         
-        result = true;
-        return true;
-      }
-    });
-    // 当たり判定なし
-    if (!true) player.state = 'FALLING';
-  },
-</code></pre>
-
+        <span class="nx">result</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="c1">// 当たり判定なし
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="kc">true</span><span class="p">)</span> <span class="nx">player</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;FALLING&#39;</span><span class="p">;</span>
+  <span class="p">},</span>
+</code></pre></div>
 <ul>
 <li>最初にプレイヤーの縦方向の速度を調べます。0の時にも無理やり速度を与えているのは、ブロックの上に乗っている時でも当たり判定を生じさせることで、位置調整した時にキャラが宙に浮いて上下にブレるのを防ぐためです。</li>
 <li>次に、当たり判定用の矩形を作成しています。プレイヤーの位置から速度分ずらした位置で当たり判定を行うことで、着地時にプレイヤーがブロックにめり込むのを防ぐことができます。</li>
@@ -353,19 +342,17 @@ phina.define('Block', {
     <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
   </div>
   
-    <div id="social">
-      <table>
-        <tr>
-          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
-          
-          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
-        </tr>
-      </table>
-    </div>
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita</a></li>
+  </ul>
   
   <div class="article-header light-gray"><h1>About this Site</h1></div>
-  <a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a>
-  
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
   
   <div class="article-header light-gray"><h1>Links</h1></div>
   <ul class="none-ul">
@@ -375,8 +362,7 @@ phina.define('Block', {
         </a>
       </li>
   </ul>
-  
-  
+    
   <div class="article-header light-gray"><h1>Tags</h1></div>
     <ul class="none-ul">
       
@@ -471,7 +457,6 @@ phina.define('Block', {
     
   </nav>
 
-
   
   <footer role="contentinfo" class="col span_9">
     <div style="text-align:center;">
@@ -479,9 +464,6 @@ phina.define('Block', {
     </div>
   </footer>
 </div>
-
-<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -506,10 +488,6 @@ phina.define('Block', {
 <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 
 <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-
-<script src="https://apis.google.com/js/platform.js" async defer>
-  {lang: 'ja'}
-</script>
 </body>
 </html>
 

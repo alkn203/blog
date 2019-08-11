@@ -19,7 +19,7 @@
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-11/</guid>
       <description>はじめに 前回は、プレイヤーが画面外に出ないように移動に制限をかけました。今回は、タイトル画面を追加します。
 独自のタイトル画面の作成 Unityのチュートリアルでは、タイトル文字を非表示にすることでタイトル画面とゲーム画面の区別を行っています。これも一つの手法ですが、今回は、phina.jsで元々用意されているタイトル画面を上書きする方法にします。
-TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で新たにクラスを作ることで、元々のシーンが上書きされます。 コード的にはダブりもありますが、シーン毎に切り離して管理できるのがメリットです。  /* * タイトルシーン */ phina.define(&amp;quot;TitleScene&amp;quot;, { // 継承 superClass: &#39;DisplayScene&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // グループ this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this); // グリッド var gx = this.gridX; var gy = this.gridY; // 背景 this.createBackground(); // タイトルラベル var title = Label({ text: &#39;Shooting Game&#39;, fill: &#39;white&#39;, stroke: &#39;yellow&#39;, fontSize: 72, }).addChildTo(this).setPosition(gx.center(), gy.center(-2)); // スタートキーラベル var startKey = Label({ text: &#39;Press X&#39;, fill: &#39;white&#39;, stroke: &#39;yellow&#39;, fontSize: 64, }).</description>
+TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で新たにクラスを作ることで、元々のシーンが上書きされます。 コード的にはダブりもありますが、シーン毎に切り離して管理できるのがメリットです。  /* * タイトルシーン */ phina.define(&amp;#34;TitleScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // グループ  this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this); // グリッド  var gx = this.gridX; var gy = this.gridY; // 背景  this.createBackground(); // タイトルラベル  var title = Label({ text: &amp;#39;Shooting Game&amp;#39;, fill: &amp;#39;white&amp;#39;, stroke: &amp;#39;yellow&amp;#39;, fontSize: 72, }).</description>
     </item>
     
     <item>
@@ -30,8 +30,8 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-10/</guid>
       <description>はじめに 前回は、敵の波状攻撃を実装しました。今回は、ゲームにサウンドをつけます。
 サウンド素材の読み込み 画像と同じようにアセットとして読み込みます。
-// サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&#39;, &#39;shot&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&#39;, &#39;explosion&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&#39;, },   サウンド素材は魔王魂から拝借しました。
- BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生 SoundManager.playMusic(&#39;bgm&#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&amp;quot;PlayerBullet&amp;quot;, { // 継 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;bullet&#39;, 64, 64); // スピード var speed = 10; // 当たり判定用のコライダー this.collider = Collider({ width: 10, height: 30, }).</description>
+// サウンド  sound: { &amp;#39;bgm&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&amp;#39;, &amp;#39;shot&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&amp;#39;, &amp;#39;explosion&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&amp;#39;, },   サウンド素材は魔王魂から拝借しました。
+ BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生  SoundManager.playMusic(&amp;#39;bgm&amp;#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&amp;#34;PlayerBullet&amp;#34;, { // 継  superClass: &amp;#39;Sprite&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(&amp;#39;bullet&amp;#39;, 64, 64); // スピード  var speed = 10; // 当たり判定用のコライダー  this.</description>
     </item>
     
     <item>
@@ -42,8 +42,8 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-09/</guid>
       <description>はじめに 前回は、敵の波状攻撃を実装しました。今回は、ゲームにサウンドをつけます。
 サウンド素材の読み込み 画像と同じようにアセットとして読み込みます。
-// サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&#39;, &#39;shot&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&#39;, &#39;explosion&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&#39;, },   サウンド素材は魔王魂から拝借しました。
- BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生 SoundManager.playMusic(&#39;bgm&#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&amp;quot;PlayerBullet&amp;quot;, { // 継 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;bullet&#39;, 64, 64); // スピード var speed = 10; // 当たり判定用のコライダー this.collider = Collider({ width: 10, height: 30, }).</description>
+// サウンド  sound: { &amp;#39;bgm&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/game_maoudamashii_4_vehicle03.mp3&amp;#39;, &amp;#39;shot&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_battle_gun05.mp3&amp;#39;, &amp;#39;explosion&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/phina-shooting-tutorial@master/work/assets/se_maoudamashii_explosion06.mp3&amp;#39;, },   サウンド素材は魔王魂から拝借しました。
+ BGMをつける  phina.jsでサウンドを扱うには、SoundManagerクラスを使用します。 BGMのようにループするサウンドの場合は、playMusicメソッドを使います。 デフォルトでは、ループする設定になってます。 メインシーンのコンストラクタなど好きな場所に追加して下さい。  // BGM再生  SoundManager.playMusic(&amp;#39;bgm&amp;#39;);  プレイヤーにショット音をつける  ショット音は一回毎に再生する必要がありますので、playメソッドを使います。 弾生成と同時に音を再生するようにPlayerBulletクラスのコンストラクに処理を追加しています。  /* * プレイヤーの弾クラス */ phina.define(&amp;#34;PlayerBullet&amp;#34;, { // 継  superClass: &amp;#39;Sprite&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(&amp;#39;bullet&amp;#39;, 64, 64); // スピード  var speed = 10; // 当たり判定用のコライダー  this.</description>
     </item>
     
     <item>
@@ -56,8 +56,8 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
 WaveとEmitter UnityのチュートリアルにあるWave型とEmitterという仕組み自体は、phina.jsにはありませんので、似せた処理を作ります。
 Wave機能の実現 UnityのWave型を参考にして、以下の仕様にします。
  敵をフォーメーションで出現させる。 敵が全て倒されるか、画面外に出たら1に戻る。  クラスにしても良いのですが、親子関係の複雑化を避けるために、今回は関数を作ります。
-createWave関数 // Wave作成 createWave: function() { // 敵3機フォーメーション [[0, -2], [-2, -4], [2, -4]].each(function(arr) { var enemy = Enemy().addChildTo(this.waveGroup); enemy.setPosition(this.gridX.center(arr[0]), this.gridY.span(arr[1])); }, this); },   これまで敵はenemyGroupに追加してきましたが、新たにwaveGroupに追加します。 敵のフォーメーション情報を配列に入れて、ループでアクセスして敵を配置しています。  checkWave関数 // Waveの状態チェック checkWave: function() { // 敵がいなくなったら出現させる if (this.waveGroup.children.length === 0) { this.createWave(); } },   updateでこの関数を呼び出し、敵の状態をチェックします。 全ての敵が画面外に出るか、プレイヤーに倒されたらcreateWaveを呼び出して敵を出現させます。  敵が画面外で弾を撃たないようにする 敵の波状攻撃は実装できましたが、このままだと画面外にいる時から弾を発射できてしまいますので、画面に現れてから弾の発射を開始するように調整します。
-// 一定間隔で弾を発射 this.tweener.clear() .call(function() { this.shot(); }, this) .</description>
+createWave関数 // Wave作成  createWave: function() { // 敵3機フォーメーション  [[0, -2], [-2, -4], [2, -4]].each(function(arr) { var enemy = Enemy().addChildTo(this.waveGroup); enemy.setPosition(this.gridX.center(arr[0]), this.gridY.span(arr[1])); }, this); },   これまで敵はenemyGroupに追加してきましたが、新たにwaveGroupに追加します。 敵のフォーメーション情報を配列に入れて、ループでアクセスして敵を配置しています。  checkWave関数 // Waveの状態チェック  checkWave: function() { // 敵がいなくなったら出現させる  if (this.waveGroup.children.length === 0) { this.createWave(); } },   updateでこの関数を呼び出し、敵の状態をチェックします。 全ての敵が画面外に出るか、プレイヤーに倒されたらcreateWaveを呼び出して敵を出現させます。  敵が画面外で弾を撃たないようにする 敵の波状攻撃は実装できましたが、このままだと画面外にいる時から弾を発射できてしまいますので、画面に現れてから弾の発射を開始するように調整します。
+// 一定間隔で弾を発射  this.</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@ createWave関数 // Wave作成 createWave: function() { // 敵3機フォーメ�
       
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-07/</guid>
       <description>はじめに 前回は、当たり判定を追加しました。今回は、背景を作成します。
-背景画像を追加する 下の背景 上の背景（中間は透過処理）  背景画像をスプライトとして追加します。画像は2種類にしてスクロール速度を変えて奥行き感を表現します。 背景をループしてスクロールできるように、それぞれ同じ画像を2つ縦に繋げて並べます。画像はグループに追加して管理します。 背景画像は、画面の縦サイズより少し大きめにすることで、スクロールさせる時の画像の移動をより自然に見せることができます。  // グループ this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this);  // 背景作成 createBackground: function() { var bgGroup = this.bgGroup; var bg2Group = this.bg2Group; (2).times(function(i) { // 一番下の背景 var bg = Sprite(&#39;bg&#39;).addChildTo(bgGroup); bg.setPosition(this.gridX.center(), this.gridY.center()); // 上の背景 var bg2 = Sprite(&#39;bg2&#39;).addChildTo(bg2Group); bg2.setPosition(this.gridX.center(), this.gridY.center()); // スクロールスピード bg.physical.velocity.y = 2; bg2.physical.velocity.y = 4; }, this); // それぞれ2つの背景を縦に繋げる bgGroup.children.last.bottom = bgGroup.children.first.top; bg2Group.children.last.bottom = bg2Group.children.first.top; },  背景をループしてスクロールさせる 背景のスクロール管理は、update内で行います。</description>
+背景画像を追加する 下の背景 上の背景（中間は透過処理）  背景画像をスプライトとして追加します。画像は2種類にしてスクロール速度を変えて奥行き感を表現します。 背景をループしてスクロールできるように、それぞれ同じ画像を2つ縦に繋げて並べます。画像はグループに追加して管理します。 背景画像は、画面の縦サイズより少し大きめにすることで、スクロールさせる時の画像の移動をより自然に見せることができます。  // グループ  this.bgGroup = DisplayElement().addChildTo(this); this.bg2Group = DisplayElement().addChildTo(this); // 背景作成  createBackground: function() { var bgGroup = this.bgGroup; var bg2Group = this.bg2Group; (2).times(function(i) { // 一番下の背景  var bg = Sprite(&amp;#39;bg&amp;#39;).addChildTo(bgGroup); bg.setPosition(this.gridX.center(), this.gridY.center()); // 上の背景  var bg2 = Sprite(&amp;#39;bg2&amp;#39;).addChildTo(bg2Group); bg2.setPosition(this.gridX.center(), this.gridY.center()); // スクロールスピード  bg.physical.velocity.y = 2; bg2.physical.velocity.y = 4; }, this); // それぞれ2つの背景を縦に繋げる  bgGroup.children.last.bottom = bgGroup.</description>
     </item>
     
     <item>
@@ -78,9 +78,8 @@ createWave関数 // Wave作成 createWave: function() { // 敵3機フォーメ�
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-06/</guid>
       <description>はじめに 前回は、敵を追加して敵が弾を発射するようにしました。今回は、当たり判定を作成します。
 Colliderクラスを作成する Unityでは、コライダーという当たり判定を行うためのコンポーネントが用意されていますが、phina.jsにはありません。そこで、それに似た機能を持たせたColliderというクラスを作りました。
-/* * コライダークラス */ phina.define(&amp;quot;Collider&amp;quot;, { // 継承 superClass: &#39;RectangleShape&#39;, // 初期化 init: function(param) { // 親クラス初期化 this.superInit({ width: param.width, height: param.height, fill: null, stroke: &#39;red&#39;, }); }, // コライダーの絶対座標の矩形 getAbsoluteRect: function() { var x = this.left + this.parent.x; var y = this.top + this.parent.y; return Rect(x, y, this.width, this.height); }, });   今回は簡易な矩形での当たり判定を行うので、RentangleShapeクラスを継承しています。 コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。  仕様変更 これまでプレイヤーと敵の弾は、空のクラスに一旦追加する形にしていましたが、当たり判定における親子関係を出来るだけシンプルにするために、shot関数の中で直接生成する形に変更しました。
-当たり判定を付ける プレイヤー プレイヤークラスでコライダーを以下のように追加します。
-/* * プレイヤークラス */ phina.</description>
+/* * コライダークラス */ phina.define(&amp;#34;Collider&amp;#34;, { // 継承  superClass: &amp;#39;RectangleShape&amp;#39;, // 初期化  init: function(param) { // 親クラス初期化  this.superInit({ width: param.width, height: param.height, fill: null, stroke: &amp;#39;red&amp;#39;, }); }, // コライダーの絶対座標の矩形  getAbsoluteRect: function() { var x = this.left + this.parent.x; var y = this.top + this.parent.y; return Rect(x, y, this.width, this.height); }, });   今回は簡易な矩形での当たり判定を行うので、RentangleShapeクラスを継承しています。 コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。  仕様変更 これまでプレイヤーと敵の弾は、空のクラスに一旦追加する形にしていましたが、当たり判定における親子関係を出来るだけシンプルにするために、shot関数の中で直接生成する形に変更しました。
+当たり判定を付ける プレイヤー プレイヤークラスでコライダーを以下のように追加します。</description>
     </item>
     
     <item>
@@ -91,8 +90,8 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-05/</guid>
       <description>はじめに 前回は、プレイヤーから弾が発射できるようにしました。今回は、敵を作成します。
 共通部分のクラス化 前回作ったプレイヤークラスと今回作成する敵クラスでは、共通化できる部分があります。その部分をSpaceShipクラスとして別クラスで作成し、使い回しが出来るようにします。
-SpaceShipクラス /* * スペースシップクラス */ phina.define(&amp;quot;SpaceShip&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;, // 初期化 init: function(param) { // 親クラス初期化 this.superInit(&#39;spaceship&#39;, 64, 64); // フレームアニメーションをアタッチ this.anim = FrameAnimation(&#39;spaceship&#39;).attachTo(this); // 移動スピード this.speed = param.speed; }, // 機体の移動 move: function(direction) { this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });   プレイヤークラスと敵クラスがこのクラスを継承できるようにします。 スプライトとフレームアニメーションは、同じファイルを使っていますので共通化できます。 移動スピードは、外から指定出来るようにしています。 移動処理も関数に方向を代入することで処理ができるようにしています。  プレイヤークラスから継承する 設計変更で、プレイヤークラスのコンストラクは以下のようになります。
-/* * プレイヤークラス */ phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;SpaceShip&#39;, // 初期化 init: function() { // 親クラス初期化 this.</description>
+SpaceShipクラス /* * スペースシップクラス */ phina.define(&amp;#34;SpaceShip&amp;#34;, { // 継承  superClass: &amp;#39;Sprite&amp;#39;, // 初期化  init: function(param) { // 親クラス初期化  this.superInit(&amp;#39;spaceship&amp;#39;, 64, 64); // フレームアニメーションをアタッチ  this.anim = FrameAnimation(&amp;#39;spaceship&amp;#39;).attachTo(this); // 移動スピード  this.speed = param.speed; }, // 機体の移動  move: function(direction) { this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });   プレイヤークラスと敵クラスがこのクラスを継承できるようにします。 スプライトとフレームアニメーションは、同じファイルを使っていますので共通化できます。 移動スピードは、外から指定出来るようにしています。 移動処理も関数に方向を代入することで処理ができるようにしています。  プレイヤークラスから継承する 設計変更で、プレイヤークラスのコンストラクは以下のようになります。
+/* * プレイヤークラス */ phina.define(&amp;#34;Player&amp;#34;, { // 継承  superClass: &amp;#39;SpaceShip&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
     </item>
     
     <item>
@@ -104,11 +103,11 @@ SpaceShipクラス /* * スペースシップクラス */ phina.define(&amp;quot
       <description>はじめに 前回は、プレイヤーをキーボードで移動させるところまで出来ました。 今回は、プレイヤーが自動で弾を連射するようにします。
 親子関係  Unityでは、オブジェクトの「親子関係」という言葉を使いますが、phina.jsでも同じような関係を持たせることができます。 親子関係になると、親が移動・回転を行えば、追従して子も同じように移動・回転します。  子要素として追加する方法 例えば、obj1をobj2の子要素として追加したい場合、以下のように書きます。
 obj1.addChildTo(obj2);  プレイヤーの弾を作成する プレイヤーの弾を表示するだけなら、以下のようにスプライトとしてシーンに追加すればOKです。
-// プレイヤーの弾 Sprite(&#39;bullet&#39;, 64, 64).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());  ここまでの実行サンプル プレイヤーの弾表示(runstant)
+// プレイヤーの弾 Sprite(&amp;#39;bullet&amp;#39;, 64, 64).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());  ここまでの実行サンプル プレイヤーの弾表示(runstant)
 プレイヤーの弾を動かす ゲームを実行したら勝手に上に飛んで行く弾を作成します。
 親となるPlayerBulletの作成 Unityのチュートリアルでは空のゲームオブジェクトを作成していますが、phina.jsではDisplayElementというクラスにその役割をさせることができます。
 PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承した以下のクラスを作成しました。
-/* * プレイヤーの弾クラス */ phina.define(&amp;quot;PlayerBullet&amp;quot;, { // 継 superClass: &#39;DisplayElement&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // スピード var speed = 10; var self = this; // 左右の弾 [-10, 10].each(function(dx) { Sprite(&#39;bullet&#39;, 64, 64).addChildTo(self).setPosition(self.x + dx, self.y); }); // 上向き速度を与える this.</description>
+/* * プレイヤーの弾クラス */ phina.define(&amp;#34;PlayerBullet&amp;#34;, { // 継  superClass: &amp;#39;DisplayElement&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // スピード  var speed = 10; var self = this; // 左右の弾  [-10, 10].each(function(dx) { Sprite(&amp;#39;bullet&amp;#39;, 64, 64).</description>
     </item>
     
     <item>
@@ -120,7 +119,7 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
       <description>はじめに 前回は、ゲームで使うアセットの読み込みまで行いました。今回は、プレイヤーをキーボードで操作できるようにします。
 プレイヤーの移動 Unityでは、コードを実行する場合、ゲームオブジェクトにスクリプトをアタッチする方法をとりますが、phina.jsでは、オブジェクト専用のクラスを作成する方法が一般的です。
 プレイヤークラス 今回は、プレイヤークラスを以下のとおり実装しました。
-/* * プレイヤークラス */ phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(&#39;spaceship&#39;, 64, 64); // フレームアニメーションをアタッチ FrameAnimation(&#39;spaceship&#39;).attachTo(this).gotoAndPlay(&#39;player&#39;); // 移動スピード this.speed = 5; }, // 毎フレーム更新処理 update: function(app) { // 移動する向きを求める var direction = app.keyboard.getKeyDirection(); // 移動する向きとスピードを代入する this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });  クラス宣言 phina.define(&amp;quot;Player&amp;quot;, { // 継承 superClass: &#39;Sprite&#39;,   クラス宣言は、defineで行います。次の文字列はクラス名です。 superClassで継承元の親クラスを指定します。自機はスプライト画像を使うので、親クラスにSpriteクラスを指定しています。  init関数 一般的にコンストラクと呼ばれるもので、UnityにおけるStartと同じ役割です。</description>
+/* * プレイヤークラス */ phina.define(&amp;#34;Player&amp;#34;, { // 継承  superClass: &amp;#39;Sprite&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(&amp;#39;spaceship&amp;#39;, 64, 64); // フレームアニメーションをアタッチ  FrameAnimation(&amp;#39;spaceship&amp;#39;).attachTo(this).gotoAndPlay(&amp;#39;player&amp;#39;); // 移動スピード  this.speed = 5; }, // 毎フレーム更新処理  update: function(app) { // 移動する向きを求める  var direction = app.keyboard.getKeyDirection(); // 移動する向きとスピードを代入する  this.moveBy(direction.x * this.speed, direction.y * this.speed); }, });  クラス宣言 phina.define(&amp;#34;Player&amp;#34;, { // 継承  superClass: &amp;#39;Sprite&amp;#39;,   クラス宣言は、defineで行います。次の文字列はクラス名です。 superClassで継承元の親クラスを指定します。自機はスプライト画像を使うので、親クラスにSpriteクラスを指定しています。  init関数 一般的にコンストラクと呼ばれるもので、UnityにおけるStartと同じ役割です。</description>
     </item>
     
     <item>
@@ -135,9 +134,9 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
 プレイヤーと敵の弾
 爆発
  これらの画像は、一般的にスプライトシートと呼ばれており同じサイズの画像を複数枚タイル状に並べたものです。 一枚当たりのサイズを指定して切り出すことで、好きなコマ画像を表示したり、フレームアニメーションと言われるコマ送りの動画を表現することができます。  自機と敵のアニメーション 以下ようなアニメーションを作成します。
-フレームアニメーション定義ファイルの作成  フレームアニメーションは、少ないコマ数であればコード中でフレームインデックスを指定して表現することもできますが、アニメーションの種類が増えると複雑になりがちです phina.jsではフレームアニメーション定義ファイルを作成してアセットとして読み込むことで、簡単にアニメーションを行うことができます。  自機と敵の定義ファイル { &amp;quot;frame&amp;quot;: { &amp;quot;width&amp;quot;: 64, &amp;quot;height&amp;quot;: 64, &amp;quot;cols&amp;quot;: 4, &amp;quot;rows&amp;quot;: 4 }, &amp;quot;animations&amp;quot; : { &amp;quot;player&amp;quot;: { &amp;quot;frames&amp;quot;: [0,1,2,3,2,1], &amp;quot;next&amp;quot;: &amp;quot;player&amp;quot;, &amp;quot;frequency&amp;quot;: 1 }, &amp;quot;enemy&amp;quot;: { &amp;quot;frames&amp;quot;: [4,5,6,7,6,5], &amp;quot;next&amp;quot;: &amp;quot;enemy&amp;quot;, &amp;quot;frequency&amp;quot;: 1 } } }  定義ファイルはjson形式で作成します。
+フレームアニメーション定義ファイルの作成  フレームアニメーションは、少ないコマ数であればコード中でフレームインデックスを指定して表現することもできますが、アニメーションの種類が増えると複雑になりがちです phina.jsではフレームアニメーション定義ファイルを作成してアセットとして読み込むことで、簡単にアニメーションを行うことができます。  自機と敵の定義ファイル { &amp;#34;frame&amp;#34;: { &amp;#34;width&amp;#34;: 64, &amp;#34;height&amp;#34;: 64, &amp;#34;cols&amp;#34;: 4, &amp;#34;rows&amp;#34;: 4 }, &amp;#34;animations&amp;#34; : { &amp;#34;player&amp;#34;: { &amp;#34;frames&amp;#34;: [0,1,2,3,2,1], &amp;#34;next&amp;#34;: &amp;#34;player&amp;#34;, &amp;#34;frequency&amp;#34;: 1 }, &amp;#34;enemy&amp;#34;: { &amp;#34;frames&amp;#34;: [4,5,6,7,6,5], &amp;#34;next&amp;#34;: &amp;#34;enemy&amp;#34;, &amp;#34;frequency&amp;#34;: 1 } } }  定義ファイルはjson形式で作成します。
  frameのwidthとheightは、１コマ毎に画像を切り出すサイズで、今回は64x64としています。 colsは横、rowは縦の画像のコマ数で、4x4の合計16コマであることが分かります。 animationsで個別のアニメーションを定義します。 playerはアニメーション名で、任意の名前を設定することができます。 framesで何番目のコマを使うかを配列形式で指定します。自機の画像は4コマ目までなので、今回は0→1→2→3→2→1と順番に切り替えてアニメーションさせます。敵の画像は5から8コマ目なので、同様に指定しています。配列なのでインデックスは0から始まります。 nextで次のアニメーションを指定します。同じアニメーション名を指定すると、ループします。 frequencyはアニメーションの間隔で、小さければ速くなり、大きければ遅くなります。  爆発アニメーションの定義ファイル 以下のようなアニメーションを作成します。
-{ &amp;quot;frame&amp;quot;: { &amp;quot;width&amp;quot;: 64, &amp;quot;height&amp;quot;: 64, &amp;quot;cols&amp;quot;: 10, &amp;quot;rows&amp;quot;: 1 }, &amp;quot;animations&amp;quot; : { &amp;quot;explosion&amp;quot;: { &amp;quot;frames&amp;quot;: [0,1,2,3,4,5,6,7,8,9], &amp;quot;frequency&amp;quot;: 1 } } }  自機と敵の場合と違う点は、animationsのnextを指定していないところです。理由は、爆発アニメーションは1回限りで良いからです。</description>
+{ &amp;#34;frame&amp;#34;: { &amp;#34;width&amp;#34;: 64, &amp;#34;height&amp;#34;: 64, &amp;#34;cols&amp;#34;: 10, &amp;#34;rows&amp;#34;: 1 }, &amp;#34;animations&amp;#34; : { &amp;#34;explosion&amp;#34;: { &amp;#34;frames&amp;#34;: [0,1,2,3,4,5,6,7,8,9], &amp;#34;frequency&amp;#34;: 1 } } }  自機と敵の場合と違う点は、animationsのnextを指定していないところです。理由は、爆発アニメーションは1回限りで良いからです。</description>
     </item>
     
     <item>
@@ -146,9 +145,9 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
       <pubDate>Wed, 19 Jun 2019 20:55:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-01/</guid>
-      <description> プログラミングの準備 今回のチュートリアルでは、phina.jsの公式オンラインエディタの位置付けであるRunstantを使用します。
+      <description>プログラミングの準備 今回のチュートリアルでは、phina.jsの公式オンラインエディタの位置付けであるRunstantを使用します。
 ひな形 私が普段使っている以下のひな形から作成します。
-// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;quot;MainScene&amp;quot;, { // 継承 superClass: &#39;DisplayScene&#39;, // 初期化 init: function() { // 親クラス初期化 this.superInit(); // 背景色 this.backgroundColor = &#39;black&#39;; // 以下にコードを書いていく }, // 毎フレーム更新処理 update: function() { // 以下にコードを書いていく }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成 var app = GameApp({ // MainScene から開始 startLabel: &#39;main&#39;, }); // fps表示 //app.enableStats(); // 実行 app.run(); });  </description>
+// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 以下にコードを書いていく  }, // 毎フレーム更新処理  update: function() { // 以下にコードを書いていく  }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &amp;#39;main&amp;#39;, }); // fps表示  //app.</description>
     </item>
     
   </channel>

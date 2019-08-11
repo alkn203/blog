@@ -24,7 +24,7 @@
 // 画面スクロール moveX: function() { var self = this; this.objectGroup.children.each(function(obj) { obj.x += -self.player.vx; }); },  変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
  runstantで確認
 このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。
-// 横方向の状態チェック checkHorizontalState: function() { var player = this.player; var state = this.player.horizontalState; // 左端のオブジェクト var first = this.objectGroup.children.first; // 右端のオブジェクト var last = this.objectGroup.children.last; // プレイヤーの状態で分ける switch (state) { // 左移動中 case &#39;MOVING_LEFT&#39;: // ヒットしたら反転 if (this.</description>
+// 横方向の状態チェック  checkHorizontalState: function() { var player = this.player; var state = this.player.horizontalState; // 左端のオブジェクト  var first = this.objectGroup.children.first; // 右端のオブジェクト  var last = this.objectGroup.children.last; // プレイヤーの状態で分ける  switch (state) { // 左移動中  case &amp;#39;MOVING_LEFT&amp;#39;: // ヒットしたら反転  if (this.</description>
     </item>
     
   </channel>
