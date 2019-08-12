@@ -25,6 +25,17 @@
   font-size: 14px;
 }
 
+.summary table {
+  border: 0;
+  margin: 5px;
+}
+
+.summary td {
+  border: 0;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
 footer {
   margin: 0;
 }
@@ -49,32 +60,4 @@ aside table {
 
 .none-ul li {
   list-style: none;
-}
-
-.twitter {
-  color: #55acee;
-}
-
-.facebook {
-  color: #315096;
-}
-
-/* Font Awesome hatena bookmark */
-.fa-hatena:before {
-    content: "B!";
-    font-family: Verdana;
-    font-weight: bold
-}
-
-.hatena {
-  font-family: Verdana;
-  color: white;
-  font-weight: bold;
-  background-color: #008fde;
-  padding: 6px 4px;
-  border-radius: 5px;
-}
-
-.pocket {
-  color: #ef4158;
 }
