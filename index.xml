@@ -6,10 +6,23 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 02 Jul 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】2Dシューティングチュートリアル =第12回 エネミーのHP、弾の攻撃力、アニメーションの追加=</title>
+      <link>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-12/</link>
+      <pubDate>Wed, 03 Jul 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tutorials/phina-shooting-12/</guid>
+      <description>はじめに 前回は、ゲームのタイトルを作って、ゲーム開始と終了を実装しました。今回は、ゲームを面白くする要素として「敵のヒットポイント」と「弾の攻撃力」そして「敵ががダメージを受けた時のエフェクト」と「プレイヤーの無敵エフェクト」を実装します。
+敵のHPとプレイヤーの攻撃力の実装 Enemyクラスに敵のHPを実装します。
+/* * 敵クラス */ phina.define(&amp;#34;Enemy&amp;#34;, { // 継承  superClass: &amp;#39;SpaceShip&amp;#39;, // 初期化  init: function(param) { // 親クラス初期化  this.superInit({ speed: 3 }); // フレームアニメーション指定  this.anim.gotoAndPlay(&amp;#39;enemy&amp;#39;); // 当たり判定用矩形  this.collider = Collider({ width: 40, height: 40, }).addChildTo(this); // ヒットポイント  this.hp = (param &amp;amp;&amp;amp; param.hp !== undefined) ? param.hp : 1;  敵のHPはコンストラクタからパラメータで指定できるようにします。
+次に、PlayerBulletクラスに弾の攻撃力を実装します。
+phina.define(&amp;#34;PlayerBullet&amp;#34;, { // 継  superClass: &amp;#39;Sprite&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
     
     <item>
       <title>【phina.js】Tweenerとupdateを使ってShapeの色を変化させる</title>
