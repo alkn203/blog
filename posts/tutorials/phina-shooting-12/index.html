@@ -146,7 +146,7 @@ phina.define(&#34;PlayerBullet&#34;, { // 継  superClass: &#39;Sprite&#39;, // 
 
 <ul>
 <li>プレイヤーの弾と敵の当たり判定処理で、敵のヒットポイントを減らす処理を追加します。</li>
-<li>ヒットポイントが0になったら<strong>Explotion</strong>を生成します。</li>
+<li>ヒットポイントが0になったら<strong>Explosion</strong>を生成します。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// プレイヤーの弾と敵の当たり判定
 </span><span class="c1"></span><span class="nx">hitTestBulletToEnemy</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -267,7 +267,7 @@ phina.define(&#34;PlayerBullet&#34;, { // 継  superClass: &#39;Sprite&#39;, // 
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">tween</span> <span class="o">&amp;&amp;</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
 </code></pre></div>
-<p>敵の弾とプレイヤーの当たり判定処理の中で<strong>blinkTween</strong>を参照して、<strong>tweener</strong>が動いている間は、当たり判定をスキップしています。</p>
+<p>敵の弾とプレイヤーの当たり判定処理の中で<strong>blinkTween</strong>を参照して、<strong>tweener</strong>が動いている間は、無敵状態として扱い当たり判定をスキップしています。</p>
 
 <h3 id="実行サンプル">実行サンプル</h3>
 
