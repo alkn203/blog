@@ -41,8 +41,12 @@
 
 .summary td {
   border: 0;
-  padding-left: 5px;
-  margin-left: 5px;
+  padding: 5px;
+}
+
+.summary img {
+  width: 64px;
+  height: auto;
 }
 
 footer {
