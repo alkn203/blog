@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 17 Aug 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 23 Aug 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】マップデータの読み込みにおける工夫</title>
+      <link>https://alkn203.github.io/blog/posts/tips/phina-mapdata/</link>
+      <pubDate>Fri, 23 Aug 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/posts/tips/phina-mapdata/</guid>
+      <description>はじめに ゲーム作りにおいてステージを作成する時、オブジェクトが少ない場合は１つ１つ位置を指定して追加していくこともできるでしょう。 でも、最終的には2次元配列でマップデータを作成して、プログラム内から読み込む方法などに落ち着くかと思います。
+サンプルコード(runstant)
+2次元配列のマップデータ 通常は、以下のようなデータを作成します。
+// ステージデータ var STAGE = [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;]];   配列ですので、それぞれの要素をシングルクオーテーションで囲む必要があり、データの修正などが結構面倒です。  マップデータを簡素化する  少し簡略化した以下の形式で読め込めるようにします。 1次元の配列になっており、コピーアンドペーストも楽です。  // ステージデータ var STAGE = [&amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;];  マップデータ読み込み処理  マップデータを読み込んでオブジェクトを配置する処理は、以下のとおりです。  // マップ作成 setStage: function(stage) { var half = GRID_SIZE / 2; var self = this; // マップデータをループ  stage.each(function(arr, j) { // 文字列を配列に変換  arr.toArray().each(function(id, i) { var x = self.</description>
+    </item>
     
     <item>
       <title>【phina.js】当たり判定について考える</title>
