@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/</loc>
+    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/2019/08/23/phina-mapdata/</loc>
     <lastmod>2019-08-23T20:55:06+09:00</lastmod>
   </url>
@@ -171,13 +176,19 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/</loc>
-    <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/map/</loc>
     <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/tags/origin/</loc>
+    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -225,7 +236,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

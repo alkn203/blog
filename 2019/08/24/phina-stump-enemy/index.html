@@ -4,22 +4,22 @@
   
   <meta charset="UTF-8">
   <title>
-    【phina.js】タイマーゲージを作ってみた | Keep On Coding
+    【phina.js】マリオのような敵を踏みつぶすエフェクト | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="【phina.js】タイマーゲージを作ってみた" />
-  <meta name="og:description" content="はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
-実行サンプル   runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
-// タイマーゲージ  var gauge = phina.ui.TimerGauge({ limitTime: 30, }).addChildTo(this); gauge.setPosition(this.gridX.center(), this.gridY.center());  プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2019/07/01/phina-timergauge/timergauge.gif" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/07/01/phina-timergauge/" />
+  <meta name="og:title" content="【phina.js】マリオのような敵を踏みつぶすエフェクト" />
+  <meta name="og:description" content="はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
+サンプルコード(runstant)
+オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは(0.5, 0.5）でオブジェクトの中心になっています。   敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);   期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを(0.5, 1.0)に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y &#43;= bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/stump.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2019/07/01/phina-timergauge/"/>
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/"/>
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
@@ -51,15 +51,11 @@
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
-      <h1>【phina.js】タイマーゲージを作ってみた</h1>
+      <h1>【phina.js】マリオのような敵を踏みつぶすエフェクト</h1>
       <div class="meta">
-        Jul 1, 2019 &nbsp;
+        Aug 24, 2019 &nbsp;
         
-          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
-        
-          #<a href="https://alkn203.github.io/blog/tags/extentions">extentions</a>&nbsp;
-        
-          #<a href="https://alkn203.github.io/blog/tags/tips">tips</a>&nbsp;
+          #<a href="https://alkn203.github.io/blog/tags/origin">origin</a>&nbsp;
         
       </div>
     </div>
@@ -72,7 +68,7 @@
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】タイマーゲージを作ってみた" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】マリオのような敵を踏みつぶすエフェクト" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -100,13 +96,10 @@
 <li>
 <ul>
 <li><a href="#はじめに">はじめに</a></li>
-<li><a href="#実行サンプル">実行サンプル</a></li>
-<li><a href="#timergaugeクラスの仕様">TimerGaugeクラスの仕様</a>
-<ul>
-<li><a href="#プロパティ-メソッド-イベント">プロパティ・メソッド・イベント</a></li>
-</ul></li>
-<li><a href="#使用方法">使用方法</a></li>
-<li><a href="#ソースコード">ソースコード</a></li>
+<li><a href="#オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</a></li>
+<li><a href="#敵が潰れるエフェクト">敵が潰れるエフェクト</a></li>
+<li><a href="#originの変更と位置の調整">originの変更と位置の調整</a></li>
+<li><a href="#おわりに">おわりに</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -114,108 +107,56 @@
       
       
 
-<p><img src="timergauge.gif" alt="timergauge.gif" /></p>
-
 <h3 id="はじめに">はじめに</h3>
 
-<p><strong>phina.js</strong>には、体力ゲージの実装に使える<strong>Gauge</strong>という便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。</p>
+<p>マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。
+今回は、敵が潰れるエフェクトを<strong>phina.js</strong>で表現してみます。</p>
 
-<h3 id="実行サンプル">実行サンプル</h3>
+<p><img src="stump.gif" alt="stump.gif" /></p>
 
-<div class='runstant'><iframe src='https://runstant.com/alkn203/projects/7eab89e2/full' width='100%' height='640px' style='border:0px;box-shadow:0px 0px 2px 0px #aaa'></iframe></div>
+<p><a href="https://runstant.com/alkn203/projects/9ed08533">サンプルコード(runstant)</a></p>
+
+<h3 id="オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</h3>
 
 <ul>
-<li>runボタンを押すとゲージが経過時間で減っていきます。</li>
-<li>pauseボタンで一時停止。recoverボタンで全回復します。</li>
+<li>今回の目的を実現するためには、オブジェクトの<strong>origin</strong>の変更を行う必要があります。</li>
+<li><strong>phina.js</strong>のオブジェクトには<strong>origin</strong>というプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。</li>
+<li><strong>Vector2</strong>クラス形式となっており、デフォルトは<strong>(0.5, 0.5）</strong>でオブジェクトの中心になっています。
+<br /></li>
 </ul>
 
-<h3 id="timergaugeクラスの仕様">TimerGaugeクラスの仕様</h3>
+<p><img src="origin.gif" alt="origin.gif" /></p>
 
-<p>以下のように、シーンに追加します。</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// タイマーゲージ
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">gauge</span> <span class="o">=</span> <span class="nx">phina</span><span class="p">.</span><span class="nx">ui</span><span class="p">.</span><span class="nx">TimerGauge</span><span class="p">({</span>
-      <span class="nx">limitTime</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="nx">gauge</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
+<h3 id="敵が潰れるエフェクト">敵が潰れるエフェクト</h3>
+
+<ul>
+<li>敵が潰れるアニメーションは、<strong>tweener</strong>を用います。</li>
+<li><strong>ScaleY</strong>の値を変化させて縦に縮小させます。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 縦方向に縮小
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="プロパティ-メソッド-イベント">プロパティ・メソッド・イベント</h4>
+<ul>
+<li>期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。</li>
+<li>これは<strong>origin</strong>がオブジェクトの中心になっているのが原因です。</li>
+</ul>
 
-<table>
-<thead>
-<tr>
-<th>プロパティ</th>
-<th>説明</th>
-</tr>
-</thead>
+<h3 id="originの変更と位置の調整">originの変更と位置の調整</h3>
 
-<tbody>
-<tr>
-<td>limitTime</td>
-<td>制限時間(秒） デフォルト値60</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
-<th>メソッド</th>
-<th>説明</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>run</td>
-<td>タイマー作動</td>
-</tr>
-
-<tr>
-<td>pause</td>
-<td>一時停止</td>
-</tr>
-
-<tr>
-<td>recover</td>
-<td>ゲージを満タンにする</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
-<th>イベント</th>
-<th>説明</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>onfull</td>
-<td>ゲージが満タンになった時</td>
-</tr>
-
-<tr>
-<td>onempty</td>
-<td>ゲージが空になった時</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>その他のプロパティは、継承元の<a href="https://github.com/phinajs/phina.js/blob/develop/src/ui/gauge.js"><strong>phina.ui.Gauge</strong></a>クラスを参照して下さい。</p>
-</blockquote>
-
-<h3 id="使用方法">使用方法</h3>
-
-<p><strong>html</strong>ファイルで以下のように読み込みます。</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/phi-jp/phina.js@v0.2.3/build/phina.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/alkn203/phina-extensions@master/ui/timergauge.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<ul>
+<li>下に縮小するようにするためには、<strong>origin</strong>を<strong>(0.5, 1.0)</strong>に変更します。</li>
+<li>変更した<strong>origin</strong>がオブジェクトの位置の基準となるため、変更した<strong>origin</strong>の分だけ上にずらして位置調整します。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// origin変更
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="c1">// 位置調整
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">bugbow</span><span class="p">.</span><span class="nx">height</span> <span class="err">/ 2;</span>
+<span class="c1">// 縦方向に縮小
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="ソースコード">ソースコード</h3>
+<h3 id="おわりに">おわりに</h3>
 
-<p><a href="https://github.com/alkn203/phina-extensions/blob/master/ui/timergauge.js">Timer Gauge</a></p>
+<p>実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</p>
 
     </article>
 
@@ -227,7 +168,7 @@
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】タイマーゲージを作ってみた" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】マリオのような敵を踏みつぶすエフェクト" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -246,21 +187,6 @@
     
     
 
-
-<h3>関連記事</h3>
-<ul>
-	
-	<li><a href="https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/">【phina.js】色々なスクロールを試す</a></li>
-	
-	<li><a href="https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/">【phina.js】パスに沿ったオブジェクト移動</a></li>
-	
-	<li><a href="https://alkn203.github.io/blog/2019/06/13/phina-up-direction/">【phina.js】上方向だけすり抜ける床を作る</a></li>
-	
-	<li><a href="https://alkn203.github.io/blog/2019/06/29/quick-html5-game/">【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する</a></li>
-	
-	<li><a href="https://alkn203.github.io/blog/2019/06/28/phina-shooting-11/">【phina.js】2Dシューティングチュートリアル =第11回 タイトルをつける=</a></li>
-	
-</ul>
 
 
     
@@ -426,10 +352,8 @@
 
   <nav class="pagination-single" class="col span_3">>
     
-      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/2019/06/29/quick-html5-game/" rel="prev">【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する</a></span>
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/2019/08/23/phina-mapdata/" rel="prev">【phina.js】マップデータの読み込みにおける工夫</a></span>
     
-    
-      <span class="next"><a href="https://alkn203.github.io/blog/2019/07/02/phina-tweener-color/" rel="next">【phina.js】Tweenerとupdateを使ってShapeの色を変化させる</a> &rarr;</span>
     
   </nav>
 
