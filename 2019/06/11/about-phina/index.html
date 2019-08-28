@@ -17,7 +17,7 @@ phina.jsについて 私が日々楽しんで使っているjavascriptのゲー�
  同じ処理でもコード量が少なく済みます。全てのゲームライブラリと比較したわけではありませんが、phina.jsで書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。 ソースが読みやすいです。ソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。 実行確認までのステップが短いです。Web上でコーディングできるrunstantを使うことで、環境構築の手間をかけずに自分のプログラムが確認できます。 他に、配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実しているなどが挙げられます。  とにかく使ってみたい方へ  Githubのリポジトリに導入方法が記載されていますが、開発者向けの内容に近いので、私も含めて不慣れな方には少し敷居が高いかと思います。 一番簡単なのは、runstantへのユーザー登録が必要ですが、runstantに用意されたテンプレートをForkする方法です。  質問など phina.jsの魅力の一つに、親切なサポート体制があります。 Twitterで#phina_jsタグをつけて質問したり、slack(gitterから移行）に参加して質問すれば、作者の phiさんを始め、他のメンバーが優しく真剣に答えてくれます。些細なことでも良いので、構えずに質問してみて下さい。
 Tipsなど どんなものか少しでも知ってもらうために、phina.js Tips集をよろしければご覧ください。
 おわりに ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、恵まれたことにphina.jsは、比較的簡単にトライすることができます。 javascriptでのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/11/about-phina/logo.png" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/11/about-phina/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -26,10 +26,11 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
-  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
   
   <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
   <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
@@ -49,6 +50,7 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
     </div>
   </header>
 
+
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
@@ -63,28 +65,27 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
 
     
       
-<center>
-  <table>
-    <tr>
+<div id="share">
+  <center>
+    <table>
+      <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=phina.js%e4%ba%8b%e5%a7%8b%e3%82%81&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="phina.js事始め" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
       </td>
-      
-      <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/11/about-phina/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
-      </td>
-      
-      <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
-      </td>
-    </tr>
-  </table>
-</center>
+      </tr>
+    </table>
+  </center>
+</div>
     
 
     <article>
@@ -110,7 +111,7 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
       
       
 
-<p><img src="https://raw.githubusercontent.com/phinajs/phina.js/develop/logo.png" alt="logo" />
+<p><img src="logo.png" alt="logo.png" />
 （ロゴはphinajs.comから借用）</p>
 
 <h3 id="phina-jsについて">phina.jsについて</h3>
@@ -161,29 +162,32 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
 
     
       
-<center>
-  <table>
-    <tr>
+<div id="share">
+  <center>
+    <table>
+      <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=phina.js%e4%ba%8b%e5%a7%8b%e3%82%81&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="phina.js事始め" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
       </td>
-      
-      <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/11/about-phina/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
-      </td>
-      
-      <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f11%2fabout-phina%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
-      </td>
-    </tr>
-  </table>
-</center>
+      </tr>
+    </table>
+  </center>
+</div>
     
+    
+    
+
+
 
     
  <aside><div id="disqus_thread"></div></aside>
@@ -210,31 +214,59 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
   
   <div class="article-header light-gray"><h1>About Me</h1></div>
   <div id="profile" style="text-align: center;">
-    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div><img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2"></div>
     <div>alkn203</div>
     <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
   </div>
   
-    <div id="social">
-      <table>
-        <tr>
-          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
-          
-          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
-        </tr>
-      </table>
-    </div>
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter(alkn203)</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github(alkn203)</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita(alkn203)</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
   
   <div class="article-header light-gray"><h1>Sections</h1></div>
   <ul class="none-ul">
     <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
     <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
     <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
-    <li><a href="https://alkn203.github.io/blog/others/">Others</a></li>
   </ul>
   
   <div class="article-header light-gray"><h1>Tags</h1></div>
     <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/collision/">
+          <div>collision&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extentions/">
+          <div>extentions&nbsp;(1)</div>
+          </a>
+        </li>
       
         <li>
           <a href="https://alkn203.github.io/blog//tags/flow/">
@@ -249,8 +281,32 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
         </li>
       
         <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/map/">
+          <div>map&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
           <a href="https://alkn203.github.io/blog//tags/phina.js/">
-          <div>phina.js&nbsp;(6)</div>
+          <div>phina.js&nbsp;(23)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
           </a>
         </li>
       
@@ -261,14 +317,26 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
         </li>
       
         <li>
-          <a href="https://alkn203.github.io/blog//tags/tweener/">
-          <div>tweener&nbsp;(1)</div>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(12)</div>
           </a>
         </li>
       
         <li>
-          <a href="https://alkn203.github.io/blog//tags/%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/">
-          <div>アルゴリズム&nbsp;(1)</div>
+          <a href="https://alkn203.github.io/blog//tags/tips/">
+          <div>tips&nbsp;(7)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tutorials/">
+          <div>tutorials&nbsp;(12)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(2)</div>
           </a>
         </li>
       
@@ -283,7 +351,6 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
     
   </nav>
 
-
   
   <footer role="contentinfo" class="col span_9">
     <div style="text-align:center;">
@@ -292,28 +359,15 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
   </footer>
 </div>
 
-<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-
 <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
-<script src="https://apis.google.com/js/platform.js" async defer>
-  {lang: 'ja'}
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-145323973-1', 'auto');
+	ga('send', 'pageview');
 </script>
 </body>
 </html>

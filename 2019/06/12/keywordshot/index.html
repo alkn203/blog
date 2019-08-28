@@ -15,8 +15,8 @@
  別画面でプレイする
  画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。 大文字小文字は区別しません。  改定 2019/5/18 ライフ制導入
 カスタマイズ キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば 別言語のキーワードなどもイケると思います。
-// アセット var ASSETS = { // キーワード一覧 text: { &#39;keywords&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;, }, };  リファレンス キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。 JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet" />
-  <meta name="og:image" content="https://alkn203.github.io/blog//images/keywordshot.gif" />
+// アセット var ASSETS = { // キーワード一覧  text: { &#39;keywords&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;, }, };  リファレンス キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。 JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/12/keywordshot/keywordshot.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/12/keywordshot/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
@@ -25,10 +25,11 @@
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
-  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/highlight_monokai.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
   
   <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
   <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
@@ -48,6 +49,7 @@
     </div>
   </header>
 
+
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
@@ -64,28 +66,27 @@
 
     
       
-<center>
-  <table>
-    <tr>
+<div id="share">
+  <center>
+    <table>
+      <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】シンプルなタイピングゲームを作ってみた" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
       </td>
-      
-      <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/12/keywordshot/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
-      </td>
-      
-      <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
-      </td>
-    </tr>
-  </table>
-</center>
+      </tr>
+    </table>
+  </center>
+</div>
     
 
     <article>
@@ -109,7 +110,7 @@
       
       
 
-<p><img src="https://alkn203.github.io/blog/images/keywordshot.gif" alt="keywordshot" /></p>
+<p><img src="keywordshot.gif" alt="keywordshot" /></p>
 
 <h3 id="はじめに">はじめに</h3>
 
@@ -133,16 +134,14 @@
 
 <p>キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば
 別言語のキーワードなどもイケると思います。</p>
-
-<pre><code class="language-javascript">// アセット
-var ASSETS = {
-  // キーワード一覧
-  text: {
-    'keywords': 'https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords',
-  },
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// キーワード一覧
+</span><span class="c1"></span>  <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;keywords&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="リファレンス">リファレンス</h3>
 
 <p>キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。
@@ -152,29 +151,39 @@ var ASSETS = {
 
     
       
-<center>
-  <table>
-    <tr>
+<div id="share">
+  <center>
+    <table>
+      <tr>
       
       <td>
-        <a href="http://twitter.com/intent/tweet?text=%e3%80%90phina.js%e3%80%91%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f&url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-twitter-square fa-2x twitter" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】シンプルなタイピングゲームを作ってみた" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
       </td>
       
       <td>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-facebook-square fa-2x facebook" aria-hidden="true"></i></a>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
       </td>
-      
-      <td>
-        <a href="http://b.hatena.ne.jp/entry/https://alkn203.github.io/blog/2019/06/12/keywordshot/" target="_blank"><i class="fa fa-hatena hatena"></i></a>
-      </td>
-      
-      <td>
-        <a href="https://getpocket.com/edit?url=https%3a%2f%2falkn203.github.io%2fblog%2f2019%2f06%2f12%2fkeywordshot%2f" target="_blank"><i class="fa fa-get-pocket fa-2x pocket" aria-hidden="true"></i></a>
-      </td>
-    </tr>
-  </table>
-</center>
+      </tr>
+    </table>
+  </center>
+</div>
     
+    
+    
+
+
+<h3>関連記事</h3>
+<ul>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/11/about-phina/">phina.js事始め</a></li>
+	
+</ul>
+
 
     
  <aside><div id="disqus_thread"></div></aside>
@@ -201,31 +210,59 @@ var ASSETS = {
   
   <div class="article-header light-gray"><h1>About Me</h1></div>
   <div id="profile" style="text-align: center;">
-    <div><img src="https://alkn203.github.io/blog/images/alkn203.png" width="64" height="64"></div>
+    <div><img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2"></div>
     <div>alkn203</div>
     <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
   </div>
   
-    <div id="social">
-      <table>
-        <tr>
-          <td><a href="https://twitter.com/alkn203" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></td>
-          
-          <td><a href="https://github.com/alkn203" target="_blank"><i class="fa fa-github fa-2x"></i></a></td>
-        </tr>
-      </table>
-    </div>
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter(alkn203)</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github(alkn203)</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita(alkn203)</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
   
   <div class="article-header light-gray"><h1>Sections</h1></div>
   <ul class="none-ul">
     <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
     <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
     <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
-    <li><a href="https://alkn203.github.io/blog/others/">Others</a></li>
   </ul>
   
   <div class="article-header light-gray"><h1>Tags</h1></div>
     <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/collision/">
+          <div>collision&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extentions/">
+          <div>extentions&nbsp;(1)</div>
+          </a>
+        </li>
       
         <li>
           <a href="https://alkn203.github.io/blog//tags/flow/">
@@ -240,8 +277,32 @@ var ASSETS = {
         </li>
       
         <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/map/">
+          <div>map&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
           <a href="https://alkn203.github.io/blog//tags/phina.js/">
-          <div>phina.js&nbsp;(6)</div>
+          <div>phina.js&nbsp;(23)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
           </a>
         </li>
       
@@ -252,14 +313,26 @@ var ASSETS = {
         </li>
       
         <li>
-          <a href="https://alkn203.github.io/blog//tags/tweener/">
-          <div>tweener&nbsp;(1)</div>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(12)</div>
           </a>
         </li>
       
         <li>
-          <a href="https://alkn203.github.io/blog//tags/%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/">
-          <div>アルゴリズム&nbsp;(1)</div>
+          <a href="https://alkn203.github.io/blog//tags/tips/">
+          <div>tips&nbsp;(7)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tutorials/">
+          <div>tutorials&nbsp;(12)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(2)</div>
           </a>
         </li>
       
@@ -276,7 +349,6 @@ var ASSETS = {
     
   </nav>
 
-
   
   <footer role="contentinfo" class="col span_9">
     <div style="text-align:center;">
@@ -285,28 +357,15 @@ var ASSETS = {
   </footer>
 </div>
 
-<script src="https://alkn203.github.io/blog/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-
 <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
-<script src="https://apis.google.com/js/platform.js" async defer>
-  {lang: 'ja'}
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-145323973-1', 'auto');
+	ga('send', 'pageview');
 </script>
 </body>
 </html>

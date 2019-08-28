@@ -13,10 +13,10 @@
     
     <item>
       <title>【phina.js】当たり判定について考える</title>
-      <link>https://alkn203.github.io/blog/posts/tips/phina-collision/</link>
+      <link>https://alkn203.github.io/blog/2019/08/17/phina-collision/</link>
       <pubDate>Sat, 17 Aug 2019 20:55:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/posts/tips/phina-collision/</guid>
+      <guid>https://alkn203.github.io/blog/2019/08/17/phina-collision/</guid>
       <description>はじめに ゲーム作りにおいて、当たり判定ほど奥深く悩まされるものはないと言ってよいでしょう。
 今回は、phina.jsにおける当たり判定のアプローチについての自分なりの考察です。
 hitTestElementを使う  phina.app.Object2dを継承したクラスであれば、hitTestElementを使えば手軽に当たり判定ができます。 矩形同士での判定になりますので、一番手軽です。一方で、グラフィックが矩形より小さいと大雑把な判定になってしまうという欠点があります。   参考記事

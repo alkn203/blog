@@ -13,10 +13,10 @@
     
     <item>
       <title>【phina.js 】Webブラウザだけでhtml5ゲームを作成して公開する</title>
-      <link>https://alkn203.github.io/blog/posts/others/quick-html5-game/</link>
+      <link>https://alkn203.github.io/blog/2019/06/29/quick-html5-game/</link>
       <pubDate>Sat, 29 Jun 2019 20:55:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/posts/others/quick-html5-game/</guid>
+      <guid>https://alkn203.github.io/blog/2019/06/29/quick-html5-game/</guid>
       <description>はじめに ゲームを作っている人なら、自分の作ったゲームを誰かに遊んでもらいたい気持ちは皆持っていると思います。今では、スマホアプリを作ってプラットフォームで公開する方法がメジャーですが、初心者にとってはそう簡単にはいかないものです。
 中には、アプリ化まではいかないけど何かゲームを作って公開してみたいと思っている人もいるでしょう。そのようなときは、javascriptでhtml5ゲームを作って、Webで公開することをおすすめします。（もちろんhtml5ゲームをアプリ化する方法もあります）
 Webブラウザだけでゲームを作成して公開する 今回は、特別な環境構築をせずに、Webブラウザだけを使ってhtml5ゲームを公開する方法を紹介します。大まかな流れは以下のとおりです。
