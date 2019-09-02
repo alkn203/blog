@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</loc>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/</loc>
     <lastmod>2019-08-24T20:55:06+09:00</lastmod>
   </url>
@@ -140,7 +145,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/collision/</loc>
-    <lastmod>2019-08-17T20:55:06+09:00</lastmod>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -163,6 +168,12 @@
   </url>
   
   <url>
+    <loc>https://alkn203.github.io/blog/tags/gauge/</loc>
+    <lastmod>2019-07-01T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/tags/github/</loc>
     <lastmod>2019-06-29T20:55:06+09:00</lastmod>
     <priority>0</priority>
@@ -176,7 +187,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/</loc>
-    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -206,7 +217,13 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/phina.js/</loc>
-    <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <lastmod>2019-06-29T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/tags/reflect/</loc>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -219,6 +236,12 @@
   <url>
     <loc>https://alkn203.github.io/blog/tags/scroll/</loc>
     <lastmod>2019-06-15T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alkn203.github.io/blog/tags/shape/</loc>
+    <lastmod>2019-07-02T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -236,13 +259,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-08-24T20:55:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://alkn203.github.io/blog/tags/tips/</loc>
-    <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -253,14 +270,14 @@
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/tags/tutorials/</loc>
-    <lastmod>2019-07-03T20:55:06+09:00</lastmod>
+    <loc>https://alkn203.github.io/blog/tags/tweener/</loc>
+    <lastmod>2019-07-02T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://alkn203.github.io/blog/tags/tweener/</loc>
-    <lastmod>2019-07-02T20:55:06+09:00</lastmod>
+    <loc>https://alkn203.github.io/blog/tags/vecter2/</loc>
+    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
