@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://alkn203.github.io/blog/2019/09/18/phina-break-object/</loc>
+    <lastmod>2019-09-18T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</loc>
     <lastmod>2019-09-01T20:55:06+09:00</lastmod>
   </url>
@@ -139,6 +144,12 @@
   </url>
   
   <url>
+    <loc>https://alkn203.github.io/blog/tags/canvas/</loc>
+    <lastmod>2019-09-18T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/categories/</loc>
     <priority>0</priority>
   </url>
@@ -187,7 +198,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/</loc>
-    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
+    <lastmod>2019-09-18T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -259,7 +270,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-09-01T20:55:06+09:00</lastmod>
+    <lastmod>2019-09-18T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,23 @@
     <description>Recent content in Tips on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 01 Sep 2019 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Sep 2019 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】マリオのようなブロック破壊処理</title>
+      <link>https://alkn203.github.io/blog/2019/09/18/phina-break-object/</link>
+      <pubDate>Wed, 18 Sep 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/09/18/phina-break-object/</guid>
+      <description>はじめに 子供の頃始めてスーパーマリオブラザーズをプレイした時、ブロックが壊せることが斬新で、必要のないところまで壊しまくったりしたものです。今回は、phina.jsでその再現を試みてみました。
+サンプルコード(runstant)
+ブロックの動きを観察する マリオのブロックの壊れ方を自分なりに観察してみましたが、大まかには以下のように捉えることができると思います。 - 4つのかけらに分かれる - かけらのグラフィックは斜めになっている - 上のかけらと下のかけらは違う角度で飛んでいる
+スプライトを4つのかけらに分ける この表現に対しては、元のスプライトを部分的に描画した4つの新たなスプライトを作ることにしました。
+_marioLike: function(sprite) { // 縦横の分割数  var divX = 2; var divY = 2; var image = sprite.image.domElement; // 分割サイズ  var sizeX = sprite.width / divX; var sizeY = sprite.height / divY; // グリッド  var grid = phina.util.Grid(sprite.width, divX); var srcRect = sprite.srcRect; // 分割スプライト作成  (divX * divY).times(function(i) { // インデックス位置設定  var xIndex = i % divX; var yIndex = (i / divX).</description>
+    </item>
     
     <item>
       <title>【phina.js】反射ベクトルを使った反射処理</title>
