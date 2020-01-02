@@ -4,25 +4,23 @@
   
   <meta charset="UTF-8">
   <title>
-    phina.js事始め | Keep On Coding
+    【phina.js】Arrayクラスのeach関数を拡張する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="phina.js事始め" />
-  <meta name="og:description" content="（ロゴはphinajs.comから借用）
-phina.jsについて 私が日々楽しんで使っているjavascriptのゲームライブラリで、tmlib.jsの後継のライブラリになります。現在開発はphina.jsの方にシフトしています。 とりあえずどのようなものか知るためには、以下の紹介記事辺りが参考になるかと思います。
- 本日 JavaScript ゲームライブラリ『phina.js』をリリースしました! by @phi さん phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ by @simiraaaa さん phina.jsの簡単さから基礎知識まで by @axion014 さん はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！ by 株式会社LIG さん  気に入っているところ 以下は主観的ですが、他のユーザーも感じているのではないかと思います。
- 同じ処理でもコード量が少なく済みます。全てのゲームライブラリと比較したわけではありませんが、phina.jsで書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。 ソースが読みやすいです。ソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。 実行確認までのステップが短いです。Web上でコーディングできるrunstantを使うことで、環境構築の手間をかけずに自分のプログラムが確認できます。 他に、配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実しているなどが挙げられます。  とにかく使ってみたい方へ  Githubのリポジトリに導入方法が記載されていますが、開発者向けの内容に近いので、私も含めて不慣れな方には少し敷居が高いかと思います。 一番簡単なのは、runstantへのユーザー登録が必要ですが、runstantに用意されたテンプレートをForkする方法です。  質問など phina.jsの魅力の一つに、親切なサポート体制があります。 Twitterで#phina_jsタグをつけて質問したり、slack(gitterから移行）に参加して質問すれば、作者の phiさんを始め、他のメンバーが優しく真剣に答えてくれます。些細なことでも良いので、構えずに質問してみて下さい。
-Tipsなど どんなものか少しでも知ってもらうために、phina.js Tips集をよろしければご覧ください。
-おわりに ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、恵まれたことにphina.jsは、比較的簡単にトライすることができます。 javascriptでのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/11/about-phina/logo.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/11/about-phina/" />
+  <meta name="og:title" content="【phina.js】Arrayクラスのeach関数を拡張する" />
+  <meta name="og:description" content="はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&#39;hello&#39;); });   コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count &#43;= i; }, this);  Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x &#43;= 1; });  eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&#34;each&#34;, function(fn, self) { self = self || this; for (var i=0; i&lt;this.length; &#43;&#43;i) { fn.call(self, this[i], i, this); } return this; });  サンプルコード(runstant)" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/12/31/phina-each-extension/each.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/12/31/phina-each-extension/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/11/about-phina/"/>
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/12/31/phina-each-extension/"/>
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
@@ -54,11 +52,11 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
-      <h1>phina.js事始め</h1>
+      <h1>【phina.js】Arrayクラスのeach関数を拡張する</h1>
       <div class="meta">
-        Jun 11, 2019 &nbsp;
+        Dec 31, 2019 &nbsp;
         
-          #<a href="https://alkn203.github.io/blog/tags/phina.js">phina.js</a>&nbsp;
+          #<a href="https://alkn203.github.io/blog/tags/array">array</a>&nbsp;
         
       </div>
     </div>
@@ -71,7 +69,7 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="phina.js事始め" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -98,12 +96,11 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
 <ul>
 <li>
 <ul>
-<li><a href="#phina-jsについて">phina.jsについて</a></li>
-<li><a href="#気に入っているところ">気に入っているところ</a></li>
-<li><a href="#とにかく使ってみたい方へ">とにかく使ってみたい方へ</a></li>
-<li><a href="#質問など">質問など</a></li>
-<li><a href="#tipsなど">Tipsなど</a></li>
-<li><a href="#おわりに">おわりに</a></li>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#コールバック関数内でthisを使う">コールバック関数内でthisを使う</a></li>
+<li><a href="#arrayクラスのメソッドeach">Arrayクラスのメソッドeach</a></li>
+<li><a href="#eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</a></li>
+<li><a href="#まとめ">まとめ</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -111,52 +108,56 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
       
       
 
-<p><img src="logo.png" alt="logo.png" />
-（ロゴはphinajs.comから借用）</p>
+<h3 id="はじめに">はじめに</h3>
 
-<h3 id="phina-jsについて">phina.jsについて</h3>
-
-<p>私が日々楽しんで使っている<strong>javascript</strong>のゲームライブラリで、<strong>tmlib.js</strong>の後継のライブラリになります。現在開発は<strong>phina.js</strong>の方にシフトしています。
-とりあえずどのようなものか知るためには、以下の紹介記事辺りが参考になるかと思います。</p>
-
+<p><strong>phina.js</strong>には、通常の<strong>for</strong>文の代替で使える便利なメソッドがあります。
+<strong>Number</strong>の拡張クラスのメソッド<strong>times</strong>が代表的な例です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div>
 <ul>
-<li><a href="http://phiary.me/phinajs-release/">本日 JavaScript ゲームライブラリ『phina.js』をリリースしました!</a> by @phi さん</li>
-<li><a href="http://qiita.com/simiraaaa/items/7431734994c9e94dacfd">phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ</a> by @simiraaaa さん</li>
-<li><a href="https://qiita.com/axion014/items/1094487f88cc056da1f2">phina.jsの簡単さから基礎知識まで</a> by @axion014 さん</li>
-<li><a href="https://liginc.co.jp/306739">はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！</a> by <a href="https://liginc.co.jp/">株式会社LIG</a> さん</li>
+<li>コールバック関数内に書かれた処理を10回繰り返します。</li>
+<li>結果は hello が10回表示されます。</li>
 </ul>
 
-<h3 id="気に入っているところ">気に入っているところ</h3>
+<h3 id="コールバック関数内でthisを使う">コールバック関数内でthisを使う</h3>
 
-<p>以下は主観的ですが、他のユーザーも感じているのではないかと思います。</p>
+<p>コールバック関数内で<strong>this</strong>を使った場合、この<strong>this</strong>はコールバック関数自身を指すので、第2引数に明示的に<strong>this</strong>が指定できるようになっています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  
+  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="arrayクラスのメソッドeach">Arrayクラスのメソッドeach</h3>
+
+<p><strong>phina.js</strong>の<strong>Array</strong>クラスには、<strong>each</strong>というメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体は<strong>forEach</strong>です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">spriteGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="c1">// 各スプライトの移動
+</span><span class="c1"></span><span class="nx">spriteGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</h3>
 
 <ul>
-<li><strong>同じ処理でもコード量が少なく</strong>済みます。全てのゲームライブラリと比較したわけではありませんが、<strong>phina.js</strong>で書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。</li>
-<li><strong>ソースが読みやすい</strong>です。ソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。</li>
-<li><strong>実行確認までのステップが短い</strong>です。Web上でコーディングできる<a href="http://runstant.com/">runstant</a>を使うことで、環境構築の手間をかけずに自分のプログラムが確認できます。</li>
-<li>他に、<strong>配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している</strong>などが挙げられます。</li>
+<li>便利な<strong>each</strong>メソッドですが、現在の仕様では上で触れた<strong>times</strong>メソッドのように第２引数に<strong>this</strong>を代入することができません。</li>
+<li><strong>each</strong>メソッドを以下のように拡張して、<strong>this</strong>が指定できるようにしてみました。</li>
 </ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$method</span><span class="p">(</span><span class="s2">&#34;each&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">self</span> <span class="o">=</span> <span class="nx">self</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><a href="https://runstant.com/alkn203/projects/da45048c">サンプルコード(runstant)</a></p>
 
-<h3 id="とにかく使ってみたい方へ">とにかく使ってみたい方へ</h3>
+<h3 id="まとめ">まとめ</h3>
 
-<ul>
-<li><a href="https://github.com/phi-jp/phina.js">Githubのリポジトリ</a>に導入方法が記載されていますが、開発者向けの内容に近いので、私も含めて不慣れな方には少し敷居が高いかと思います。</li>
-<li>一番簡単なのは、runstantへのユーザー登録が必要ですが、<a href="http://runstant.com/phi/projects/phinajs_template">runstantに用意されたテンプレート</a>をForkする方法です。</li>
-</ul>
-
-<h3 id="質問など">質問など</h3>
-
-<p><strong>phina.js</strong>の魅力の一つに、親切なサポート体制があります。
-<strong>Twitter</strong>で#phina_jsタグをつけて質問したり、<a href="https://phinajs-slackin.herokuapp.com/">slack</a>(<a href="https://gitter.im/phi-jp/phina.js">gitter</a>から移行）に参加して質問すれば、作者の <a href="https//twitter.com/phi-jp">phi</a>さんを始め、他のメンバーが優しく真剣に答えてくれます。些細なことでも良いので、構えずに質問してみて下さい。</p>
-
-<h3 id="tipsなど">Tipsなど</h3>
-
-<p>どんなものか少しでも知ってもらうために、<a href="http://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips集</a>をよろしければご覧ください。</p>
-
-<h3 id="おわりに">おわりに</h3>
-
-<p>ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、恵まれたことに<strong>phina.js</strong>は、比較的簡単にトライすることができます。
-<strong>javascript</strong>でのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。</p>
+<p>今回の拡張は、新しい<strong>javascript</strong>にあるアロー関数を使えば解決できることではありますが、参考までにこのような方法もあると知ってもらえば幸いです。</p>
 
     </article>
 
@@ -168,7 +169,7 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="phina.js事始め" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -376,8 +377,8 @@ Tipsなど どんなものか少しでも知ってもらうために、phina.js 
 
   <nav class="pagination-single" class="col span_3">>
     
+      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/2019/09/18/phina-break-object/" rel="prev">【phina.js】マリオのようなブロック破壊処理</a></span>
     
-      <span class="next"><a href="https://alkn203.github.io/blog/2019/06/12/keywordshot/" rel="next">【phina.js】シンプルなタイピングゲームを作ってみた</a> &rarr;</span>
     
   </nav>
 
