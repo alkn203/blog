@@ -139,5 +139,17 @@ Shapeの色変化アニメーション Shapeの色を一定時間で変化させ
 // プレイヤークラス phina.define(&amp;#39;Player&amp;#39;, { superClass: &amp;#39;Sprite&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(&amp;#39;tomapiko&amp;#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ  this.anim = FrameAnimation(&amp;#39;tomapiko_ss&amp;#39;).attachTo(this); // スプライトシートのサイズにフィットさせない  this.anim.fit = false; // 縦移動速度  this.vy = 0; // サイズ変更  this.setSize(CHARA_SIZE, CHARA_SIZE); },   デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&amp;#39;Block&amp;#39;, { superClass: &amp;#39;Sprite&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.</description>
     </item>
     
+    <item>
+      <title>【phina.js】Arrayクラスのeach関数を拡張する</title>
+      <link>https://alkn203.github.io/blog/1/01/01/phina-each-extension/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/1/01/01/phina-each-extension/</guid>
+      <description>はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&amp;#39;hello&amp;#39;); });   コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count += i; }, this);  Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x += 1; });  eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&amp;#34;each&amp;#34;, function(fn, self) { self = self || this; for (var i=0; i&amp;lt;this.length; ++i) { fn.call(self, this[i], i, this); } return this; });  サンプルコード(runstant)</description>
+    </item>
+    
   </channel>
 </rss>

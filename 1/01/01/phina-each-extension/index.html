@@ -4,22 +4,23 @@
   
   <meta charset="UTF-8">
   <title>
-    【phina.js】マリオのような敵を踏みつぶすエフェクト | Keep On Coding
+    【phina.js】Arrayクラスのeach関数を拡張する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="【phina.js】マリオのような敵を踏みつぶすエフェクト" />
-  <meta name="og:description" content="はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
-サンプルコード(runstant)
-オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは(0.5, 0.5）でオブジェクトの中心になっています。   敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);   期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを(0.5, 1.0)に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y &#43;= bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/stump.gif" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/" />
+  <meta name="og:title" content="【phina.js】Arrayクラスのeach関数を拡張する" />
+  <meta name="og:description" content="はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&#39;hello&#39;); });   コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count &#43;= i; }, this);  Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x &#43;= 1; });  eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&#34;each&#34;, function(fn, self) { self = self || this; for (var i=0; i&lt;this.length; &#43;&#43;i) { fn.call(self, this[i], i, this); } return this; });  サンプルコード(runstant)" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/1/01/01/phina-each-extension/each.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/1/01/01/phina-each-extension/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" /> 
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/"/>
+  <link rel="canonical" href="https://alkn203.github.io/blog/1/01/01/phina-each-extension/"/>
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
@@ -51,11 +52,11 @@
   
   <main id="single" role="main" class="col span_9">
     <div class="article-header">
-      <h1>【phina.js】マリオのような敵を踏みつぶすエフェクト</h1>
+      <h1>【phina.js】Arrayクラスのeach関数を拡張する</h1>
       <div class="meta">
-        Aug 24, 2019 &nbsp;
+        Jan 1, 0001 &nbsp;
         
-          #<a href="https://alkn203.github.io/blog/tags/origin">origin</a>&nbsp;
+          #<a href="https://alkn203.github.io/blog/tags/array">array</a>&nbsp;
         
       </div>
     </div>
@@ -68,7 +69,7 @@
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】マリオのような敵を踏みつぶすエフェクト" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -96,10 +97,10 @@
 <li>
 <ul>
 <li><a href="#はじめに">はじめに</a></li>
-<li><a href="#オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</a></li>
-<li><a href="#敵が潰れるエフェクト">敵が潰れるエフェクト</a></li>
-<li><a href="#originの変更と位置の調整">originの変更と位置の調整</a></li>
-<li><a href="#おわりに">おわりに</a></li>
+<li><a href="#コールバック関数内でthisを使う">コールバック関数内でthisを使う</a></li>
+<li><a href="#arrayクラスのメソッドeach">Arrayクラスのメソッドeach</a></li>
+<li><a href="#eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</a></li>
+<li><a href="#まとめ">まとめ</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -109,54 +110,54 @@
 
 <h3 id="はじめに">はじめに</h3>
 
-<p>マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。
-今回は、敵が潰れるエフェクトを<strong>phina.js</strong>で表現してみます。</p>
-
-<p><img src="stump.gif" alt="stump.gif" /></p>
-
-<p><a href="https://runstant.com/alkn203/projects/b748b651">サンプルコード(runstant)</a></p>
-
-<h3 id="オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</h3>
-
-<ul>
-<li>今回の目的を実現するためには、オブジェクトの<strong>origin</strong>の変更を行う必要があります。</li>
-<li><strong>phina.js</strong>のオブジェクトには<strong>origin</strong>というプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。</li>
-<li><strong>Vector2</strong>クラス形式となっており、デフォルトは<strong>(0.5, 0.5）</strong>でオブジェクトの中心になっています。
-<br /></li>
-</ul>
-
-<p><img src="origin.gif" alt="origin.gif" /></p>
-
-<h3 id="敵が潰れるエフェクト">敵が潰れるエフェクト</h3>
-
-<ul>
-<li>敵が潰れるアニメーションは、<strong>tweener</strong>を用います。</li>
-<li><strong>ScaleY</strong>の値を変化させて縦に縮小させます。</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 縦方向に縮小
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
+<p><strong>phina.js</strong>には、通常の<strong>for</strong>文の代替で使える便利なメソッドがあります。
+<strong>Number</strong>の拡張クラスのメソッド<strong>times</strong>が代表的な例です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li>期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。</li>
-<li>これは<strong>origin</strong>がオブジェクトの中心になっているのが原因です。</li>
+<li>コールバック関数内に書かれた処理を10回繰り返します。</li>
+<li>結果は hello が10回表示されます。</li>
 </ul>
 
-<h3 id="originの変更と位置の調整">originの変更と位置の調整</h3>
+<h3 id="コールバック関数内でthisを使う">コールバック関数内でthisを使う</h3>
+
+<p>コールバック関数内で<strong>this</strong>を使った場合、この<strong>this</strong>はコールバック関数自身を指すので、第2引数に明示的に<strong>this</strong>が指定できるようになっています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  
+  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="arrayクラスのメソッドeach">Arrayクラスのメソッドeach</h3>
+
+<p><strong>phina.js</strong>の<strong>Array</strong>クラスには、<strong>each</strong>というメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体は<strong>forEach</strong>です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">spriteGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="c1">// 各スプライトの移動
+</span><span class="c1"></span><span class="nx">spriteGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</h3>
 
 <ul>
-<li>下に縮小するようにするためには、<strong>origin</strong>を<strong>(0.5, 1.0)</strong>に変更します。</li>
-<li>変更した<strong>origin</strong>がオブジェクトの位置の基準となるため、変更した<strong>origin</strong>の分だけ上にずらして位置調整します。</li>
+<li>便利な<strong>each</strong>メソッドですが、現在の仕様では上で触れた<strong>times</strong>メソッドのように第２引数に<strong>this</strong>を代入することができません。</li>
+<li><strong>each</strong>メソッドを以下のように拡張して、<strong>this</strong>が指定できるようにしてみました。</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// origin変更
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
-<span class="c1">// 位置調整
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">bugbow</span><span class="p">.</span><span class="nx">height</span> <span class="err">/ 2;</span>
-<span class="c1">// 縦方向に縮小
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$method</span><span class="p">(</span><span class="s2">&#34;each&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">self</span> <span class="o">=</span> <span class="nx">self</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">});</span>
 </code></pre></div>
-<h3 id="おわりに">おわりに</h3>
+<p><a href="https://runstant.com/alkn203/projects/da45048c">サンプルコード(runstant)</a></p>
 
-<p>実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</p>
+<h3 id="まとめ">まとめ</h3>
+
+<p>今回の拡張は、新しい<strong>javascript</strong>にあるアロー関数を使えば解決できることではありますが、参考までにこのような方法もあると知ってもらえば幸いです。</p>
 
     </article>
 
@@ -168,7 +169,7 @@
       <tr>
       
       <td>
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】マリオのような敵を踏みつぶすエフェクト" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </td>
       
       
@@ -376,10 +377,8 @@
 
   <nav class="pagination-single" class="col span_3">>
     
-      <span class="previous">&larr; <a href="https://alkn203.github.io/blog/2019/08/23/phina-mapdata/" rel="prev">【phina.js】マップデータの読み込みにおける工夫</a></span>
     
-    
-      <span class="next"><a href="https://alkn203.github.io/blog/2019/09/01/phina-reflect/" rel="next">【phina.js】反射ベクトルを使った反射処理</a> &rarr;</span>
+      <span class="next"><a href="https://alkn203.github.io/blog/2019/06/11/about-phina/" rel="next">phina.js事始め</a> &rarr;</span>
     
   </nav>
 
