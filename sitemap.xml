@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://alkn203.github.io/blog/2020/01/03/phina-map-class/</loc>
+    <lastmod>2020-01-03T20:55:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/2019/12/31/phina-each-extension/</loc>
     <lastmod>2019-12-31T20:55:06+09:00</lastmod>
   </url>
@@ -172,6 +177,12 @@
   </url>
   
   <url>
+    <loc>https://alkn203.github.io/blog/tags/extension/</loc>
+    <lastmod>2020-01-03T20:55:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://alkn203.github.io/blog/tags/extentions/</loc>
     <lastmod>2019-07-01T20:55:06+09:00</lastmod>
     <priority>0</priority>
@@ -209,13 +220,13 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/</loc>
-    <lastmod>2019-12-31T20:55:06+09:00</lastmod>
+    <lastmod>2020-01-03T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://alkn203.github.io/blog/tags/map/</loc>
-    <lastmod>2019-08-23T20:55:06+09:00</lastmod>
+    <lastmod>2020-01-03T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -281,7 +292,7 @@
   
   <url>
     <loc>https://alkn203.github.io/blog/tips/</loc>
-    <lastmod>2019-12-31T20:55:06+09:00</lastmod>
+    <lastmod>2020-01-03T20:55:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】Arrayクラスのeach関数を拡張する | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】Arrayクラスのeach関数を拡張する" />
+  <meta name="og:description" content="はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&#39;hello&#39;); });   コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count &#43;= i; }, this);  Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x &#43;= 1; });  eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&#34;each&#34;, function(fn, self) { self = self || this; for (var i=0; i&lt;this.length; &#43;&#43;i) { fn.call(self, this[i], i, this); } return this; });  サンプルコード(runstant)" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/1/01/01/phina-each-extension/each.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/1/01/01/phina-each-extension/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/1/01/01/phina-each-extension/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>javascriptのゲームライブラリphina.js、ゲーム制作、プログラミングなどについて</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        <a href="https://alkn203.github.io/blog/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp;rss</a>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】Arrayクラスのeach関数を拡張する</h1>
+      <div class="meta">
+        Jan 1, 0001 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/array">array</a>&nbsp;
+        
+      </div>
+    </div>
+
+    
+      
+<div id="share">
+  <center>
+    <table>
+      <tr>
+      
+      <td>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      </td>
+      
+      <td>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+      </td>
+      </tr>
+    </table>
+  </center>
+</div>
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#コールバック関数内でthisを使う">コールバック関数内でthisを使う</a></li>
+<li><a href="#arrayクラスのメソッドeach">Arrayクラスのメソッドeach</a></li>
+<li><a href="#eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</a></li>
+<li><a href="#まとめ">まとめ</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      
+      
+
+<h3 id="はじめに">はじめに</h3>
+
+<p><strong>phina.js</strong>には、通常の<strong>for</strong>文の代替で使える便利なメソッドがあります。
+<strong>Number</strong>の拡張クラスのメソッド<strong>times</strong>が代表的な例です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div>
+<ul>
+<li>コールバック関数内に書かれた処理を10回繰り返します。</li>
+<li>結果は hello が10回表示されます。</li>
+</ul>
+
+<h3 id="コールバック関数内でthisを使う">コールバック関数内でthisを使う</h3>
+
+<p>コールバック関数内で<strong>this</strong>を使った場合、この<strong>this</strong>はコールバック関数自身を指すので、第2引数に明示的に<strong>this</strong>が指定できるようになっています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  
+  <span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="arrayクラスのメソッドeach">Arrayクラスのメソッドeach</h3>
+
+<p><strong>phina.js</strong>の<strong>Array</strong>クラスには、<strong>each</strong>というメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体は<strong>forEach</strong>です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">spriteGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="c1">// 各スプライトの移動
+</span><span class="c1"></span><span class="nx">spriteGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">sprite</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sprite</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="eachを拡張してthisが指定できるようにする">eachを拡張してthisが指定できるようにする</h3>
+
+<ul>
+<li>便利な<strong>each</strong>メソッドですが、現在の仕様では上で触れた<strong>times</strong>メソッドのように第２引数に<strong>this</strong>を代入することができません。</li>
+<li><strong>each</strong>メソッドを以下のように拡張して、<strong>this</strong>が指定できるようにしてみました。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$method</span><span class="p">(</span><span class="s2">&#34;each&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">self</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">self</span> <span class="o">=</span> <span class="nx">self</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><a href="https://runstant.com/alkn203/projects/da45048c">サンプルコード(runstant)</a></p>
+
+<h3 id="まとめ">まとめ</h3>
+
+<p>今回の拡張は、新しい<strong>javascript</strong>にあるアロー関数を使えば解決できることではありますが、参考までにこのような方法もあると知ってもらえば幸いです。</p>
+
+    </article>
+
+    
+      
+<div id="share">
+  <center>
+    <table>
+      <tr>
+      
+      <td>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【phina.js】Arrayクラスのeach関数を拡張する" data-hashtags="phina_js,javascript,html5,gamedev" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </td>
+      
+      
+      <td>
+        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      </td>
+      
+      <td>
+        <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+      </td>
+      </tr>
+    </table>
+  </center>
+</div>
+    
+    
+    
+
+
+
+    
+ <aside><div id="disqus_thread"></div></aside>
+
+<script type="text/javascript">
+     
+    var disqus_shortname = 'alkn203githubio';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+  </main>
+  
+  
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2"></div>
+    <div>alkn203</div>
+    <div id="profile-text">javascript製のゲームライブラリphina.jsを愛用している趣味プログラマ。ファミコン世代。</div>
+  </div>
+  
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter(alkn203)</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github(alkn203)</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita(alkn203)</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Sections</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
+    <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
+    <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/array/">
+          <div>array&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/canvas/">
+          <div>canvas&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/collision/">
+          <div>collision&nbsp;(3)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extentions/">
+          <div>extentions&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/gauge/">
+          <div>gauge&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/map/">
+          <div>map&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/origin/">
+          <div>origin&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(4)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/reflect/">
+          <div>reflect&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shape/">
+          <div>shape&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(12)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(2)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/vecter2/">
+          <div>vecter2&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+  <nav class="pagination-single" class="col span_3">>
+    
+    
+      <span class="next"><a href="https://alkn203.github.io/blog/2019/06/11/about-phina/" rel="next">phina.js事始め</a> &rarr;</span>
+    
+  </nav>
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2019&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-145323973-1', 'auto');
+	ga('send', 'pageview');
+</script>
+</body>
+</html>
+
