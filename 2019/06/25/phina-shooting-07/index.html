@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】2Dシューティングチュートリアル =第7回 背景を追加する= | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第7回 背景を追加する=" />
+  <meta name="og:description" content="はじめに 前回は、当たり判定を追加しました。今回は、背景を作成します。
+背景画像を追加する  背景画像をスプライトとして追加します。画像は2種類にしてスクロール速度を変えて奥行き感を表現します。 背景をループしてスクロールできるように、それぞれ同じ画像を2つ縦に繋げて並べます。画像はグループに追加して管理します。 背景画像は、画面の縦サイズより少し大きめにすることで、スクロールさせる時の画像の移動をより自然に見せることができます。  // グループ this.bgGroup = DisplayElement().addChildTo(this);this.bg2Group = DisplayElement().addChildTo(this);// 背景作成 createBackground: function() {var bgGroup = this.bgGroup;var bg2Group = this.bg2Group;(2).times(function(i) {// 一番下の背景 var bg = Sprite(&#39;bg&#39;).addChildTo(bgGroup);bg.setPosition(this.gridX.center(), this.gridY.center());// 上の背景 var bg2 = Sprite(&#39;bg2&#39;).addChildTo(bg2Group);bg2.setPosition(this.gridX.center(), this.gridY.center());// スクロールスピード bg.physical.velocity.y = 2;bg2.physical.velocity.y = 4;}, this);// それぞれ2つの背景を縦に繋げる bgGroup.children.last.bottom = bgGroup.children.first.top;bg2Group.children.last.bottom = bg2Group." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/25/phina-shooting-07/07-background.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/25/phina-shooting-07/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/25/phina-shooting-07/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>Tips and tutorials about phina.js</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        
+      </div>
+    </div>
+  </header>
+
+
+
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】2Dシューティングチュートリアル =第7回 背景を追加する=</h1>
+      <div class="meta">
+        Jun 25, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/shooting">shooting</a>&nbsp;
+        
+      </div>
+    </div>
+    
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#背景画像を追加する">背景画像を追加する</a></li>
+    <li><a href="#背景をループしてスクロールさせる">背景をループしてスクロールさせる</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+  </ul>
+</nav>
+      
+      <p><img src="07-background.gif" alt="07-background.gif"></p>
+<h2 id="はじめに">はじめに</h2>
+<p><a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-06/">前回</a>は、当たり判定を追加しました。今回は、背景を作成します。</p>
+<h2 id="背景画像を追加する">背景画像を追加する</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>背景画像をスプライトとして追加します。画像は2種類にしてスクロール速度を変えて奥行き感を表現します。</li>
+<li>背景をループしてスクロールできるように、それぞれ同じ画像を2つ縦に繋げて並べます。画像はグループに追加して管理します。</li>
+<li>背景画像は、画面の縦サイズより少し大きめにすることで、スクロールさせる時の画像の移動をより自然に見せることができます。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// グループ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 背景作成
+</span><span class="c1"></span>  <span class="nx">createBackground</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">bgGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">bg2Group</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span><span class="p">;</span>
+    
+    <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">.</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 一番下の背景
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">bg</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+      <span class="c1">// 上の背景
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg2</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg2&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">bg2</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+      <span class="c1">// スクロールスピード
+</span><span class="c1"></span>      <span class="nx">bg</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+      <span class="nx">bg2</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// それぞれ2つの背景を縦に繋げる
+</span><span class="c1"></span>    <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+    <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><h2 id="背景をループしてスクロールさせる">背景をループしてスクロールさせる</h2>
+<p>背景のスクロール管理は、<strong>update</strong>内で行います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 背景の移動管理
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 当たり判定
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestEnemyToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBuleetToEnemy</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="c1">// 背景の移動管理
+</span><span class="c1"></span>  <span class="nx">scrollBackgrounds</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">bgGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">bg2Group</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span><span class="p">;</span>
+    <span class="c1">// 一番下の背景位置入れ替え
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 上の背景位置入れ替え
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><ul>
+<li>縦に並べた2つの同じ画像のうち、上位置の画像が一定の位置まで移動したら、下の位置をグループに追加し直して、縦に繋がるように位置を調整します。</li>
+<li>配列に追加し直すことで、<strong>first</strong>で下の位置の画像、<strong>last</strong>で上の位置の画像を常に参照することができます。</li>
+<li>上記の処理を繰り返すと、ループで画面をスクロールさせることができます。</li>
+</ul>
+<h2 id="実行サンプル">実行サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/def29ed8">実行サンプル(runstant)</a></p>
+
+    </article>
+
+    
+    
+    
+
+
+<h3>関連記事</h3>
+<ul>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/24/phina-shooting-06/">【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=</a></li>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/23/phina-shooting-05/">【phina.js】2Dシューティングチュートリアル =第5回 敵を作成する=</a></li>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/22/phina-shooting-04/">【phina.js】2Dシューティングチュートリアル =第4回 プレイヤーから弾を撃つ=</a></li>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/21/phina-shooting-03/">【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動=</a></li>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/20/phina-shooting-02/">【phina.js】2Dシューティングチュートリアル =第2回 スプライトとフレームアニメーション=</a></li>
+	
+</ul>
+
+
+    
+
+
+  </main>
+
+
+
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2"></div>
+    <div>alkn203</div>
+    
+  </div>
+  
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter(alkn203)</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github(alkn203)</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita(alkn203)</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Sections</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
+    <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
+    <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/array/">
+          <div>array&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/canvas/">
+          <div>canvas&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/collision/">
+          <div>collision&nbsp;(3)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extension/">
+          <div>extension&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extentions/">
+          <div>extentions&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/gauge/">
+          <div>gauge&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/map/">
+          <div>map&nbsp;(2)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/origin/">
+          <div>origin&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(4)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/reflect/">
+          <div>reflect&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shape/">
+          <div>shape&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(12)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(2)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/vecter2/">
+          <div>vecter2&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2020&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-145323973-1', 'auto');
+	ga('send', 'pageview');
+</script>
+</body>
+</html>

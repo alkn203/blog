@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】当たり判定について考える | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】当たり判定について考える" />
+  <meta name="og:description" content="はじめに ゲーム作りにおいて、当たり判定ほど奥深く悩まされるものはないと言ってよいでしょう。
+今回は、phina.jsにおける当たり判定のアプローチについての自分なりの考察です。
+hitTestElementを使う  phina.app.Object2dを継承したクラスであれば、hitTestElementを使えば手軽に当たり判定ができます。 矩形同士での判定になりますので、一番手軽です。一方で、グラフィックが矩形より小さいと大雑把な判定になってしまうという欠点があります。   参考記事
+[phina.js-Tips-41] 当たり判定を行う（矩形判定）
+ Collisionを自前で用意する  【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=で自前で作ったようなCollisionクラスを使う方法です。 任意の位置やサイズに設定することができるので柔軟性があります。一方で、絶対座標と相対座標の関係に気を付けないと、正しい当たり判定ができないという欠点があります。   参考記事
+[phina.js]Colliderアクセサリを作ってみた話
+ 当たり判定用のShapeを親にしてスプライトなどを子として追加する  RectangleShapeやCircleShapeを当たり判定の対象として、スプライトをその子要素として追加する方法です。 絶対座標で当たり判定ができるというメリットがあります。 Shapeをhideメソッドで隠すと子要素まで隠れてしまいますので、Shapeのコンストラクタでfillとstrokeを透明にすると見えないようにすることができます。  サンプルコード 当たり判定を行う（当たり判定用矩形にスプライト追加）(runstant)
+// グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/08/17/phina-collision/mycollision.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/08/17/phina-collision/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" /> 
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/08/17/phina-collision/"/>
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/sanitize.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/responsive.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  
+  
+  <link href="https://alkn203.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Keep On Coding" />
+  <link href="https://alkn203.github.io/blog/index.xml" rel="feed" type="application/rss+xml" title="Keep On Coding" />
+</head>
+<body>
+<div class="container">
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_9">
+        <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+        <h2>Tips and tutorials about phina.js</h2>
+      </div>
+      <div id="link" class="col span_3" style="text-align: right;">
+        
+      </div>
+    </div>
+  </header>
+
+
+
+  <main id="single" role="main" class="col span_9">
+    <div class="article-header">
+      <h1>【phina.js】当たり判定について考える</h1>
+      <div class="meta">
+        Aug 17, 2019 &nbsp;
+        
+          #<a href="https://alkn203.github.io/blog/tags/collision">collision</a>&nbsp;
+        
+      </div>
+    </div>
+    
+    
+
+    <article>
+      
+      
+        <h2>Table of contents</h2>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#hittestelementを使う">hitTestElementを使う</a></li>
+    <li><a href="#collisionを自前で用意する">Collisionを自前で用意する</a></li>
+    <li><a href="#当たり判定用のshapeを親にしてスプライトなどを子として追加する">当たり判定用のShapeを親にしてスプライトなどを子として追加する</a></li>
+    <li><a href="#サンプルコード">サンプルコード</a></li>
+  </ul>
+</nav>
+      
+      <p><img src="mycollision.gif" alt="mycollision.gif"></p>
+<h2 id="はじめに">はじめに</h2>
+<p>ゲーム作りにおいて、当たり判定ほど奥深く悩まされるものはないと言ってよいでしょう。<br>
+今回は、<strong>phina.js</strong>における当たり判定のアプローチについての自分なりの考察です。</p>
+<h2 id="hittestelementを使う">hitTestElementを使う</h2>
+<ul>
+<li><strong>phina.app.Object2d</strong>を継承したクラスであれば、<strong>hitTestElement</strong>を使えば手軽に当たり判定ができます。</li>
+<li>矩形同士での判定になりますので、一番手軽です。一方で、グラフィックが矩形より小さいと大雑把な判定になってしまうという欠点があります。</li>
+</ul>
+<blockquote>
+<p>参考記事<br>
+<a href="https://qiita.com/alkn203/items/2e567ee47a4a1a8b8ee4">[phina.js-Tips-41] 当たり判定を行う（矩形判定）</a></p>
+</blockquote>
+<h2 id="collisionを自前で用意する">Collisionを自前で用意する</h2>
+<ul>
+<li><a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-06/">	【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=</a>で自前で作ったような<strong>Collision</strong>クラスを使う方法です。</li>
+<li>任意の位置やサイズに設定することができるので柔軟性があります。一方で、絶対座標と相対座標の関係に気を付けないと、正しい当たり判定ができないという欠点があります。</li>
+</ul>
+<blockquote>
+<p>参考記事<br>
+<a href="https://qiita.com/alkn203/items/8c24d433e9eb8ea0f4bc">[phina.js]Colliderアクセサリを作ってみた話</a></p>
+</blockquote>
+<h2 id="当たり判定用のshapeを親にしてスプライトなどを子として追加する">当たり判定用のShapeを親にしてスプライトなどを子として追加する</h2>
+<ul>
+<li><strong>RectangleShape</strong>や<strong>CircleShape</strong>を当たり判定の対象として、スプライトをその子要素として追加する方法です。</li>
+<li>絶対座標で当たり判定ができるというメリットがあります。</li>
+<li><strong>Shape</strong>を<strong>hide</strong>メソッドで隠すと子要素まで隠れてしまいますので、<strong>Shape</strong>のコンストラクタで<strong>fill</strong>と<strong>stroke</strong>を透明にすると見えないようにすることができます。</li>
+</ul>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p><a href="https://runstant.com/alkn203/projects/e0239f85">当たり判定を行う（当たり判定用矩形にスプライト追加）(runstant)</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">
+<span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 画像
+</span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;tomapiko&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&#39;</span><span class="p">,</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 背景
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">;</span>
+    <span class="c1">// 判定対象
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+      <span class="nx">x</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+      <span class="nx">y</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用の矩形
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">RectangleShape</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">54</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+
+    <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// スプライトを子要素として追加
+</span><span class="c1"></span>    <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">rect</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// タッチイベント
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointmove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// スプライトをタッチ位置に
+</span><span class="c1"></span>      <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">;</span>
+    <span class="c1">// 更新処理
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 矩形判定
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">hitTestElement</span><span class="p">(</span><span class="nx">shape</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">(</span><span class="p">{</span>
+    <span class="c1">// MainScene から開始
+</span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+    <span class="c1">// アセット読み込み
+</span><span class="c1"></span>    <span class="nx">assets</span><span class="o">:</span> <span class="nx">ASSETS</span><span class="p">,</span>
+  <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="c1">// fps表示
+</span><span class="c1"></span>  <span class="c1">//app.enableStats();
+</span><span class="c1"></span>  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+
+</code></pre></div>
+    </article>
+
+    
+    
+    
+
+
+<h3>関連記事</h3>
+<ul>
+	
+	<li><a href="https://alkn203.github.io/blog/2019/06/13/phina-up-direction/">【phina.js】上方向だけすり抜ける床を作る</a></li>
+	
+</ul>
+
+
+    
+
+
+  </main>
+
+
+
+<aside role="complementary" class="col span_3">
+  
+  <div class="article-header light-gray"><h1>About Me</h1></div>
+  <div id="profile" style="text-align: center;">
+    <div><img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2"></div>
+    <div>alkn203</div>
+    
+  </div>
+  
+  <div class="article-header light-gray"><h1>Social Accounts</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://twitter.com/alkn203" target="_blank">Twitter(alkn203)</a></li>
+    <li><a href="https://github.com/alkn203" target="_blank">Github(alkn203)</a></li>
+    <li><a href="https://qiita.com/alkn203" target="_blank">Qiita(alkn203)</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>About this Site</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/pages/about/">このブログについて</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Links</h1></div>
+  <ul class="none-ul">
+      <li>
+        <a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">
+        <div>phina.js Tips集</div>
+        </a>
+      </li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Sections</h1></div>
+  <ul class="none-ul">
+    <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a></li>
+    <li><a href="https://alkn203.github.io/blog/tips/">Tips</a></li>
+    <li><a href="https://alkn203.github.io/blog/works/">Works</a></li>
+  </ul>
+  
+  <div class="article-header light-gray"><h1>Tags</h1></div>
+    <ul class="none-ul">
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/algorithm/">
+          <div>algorithm&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/array/">
+          <div>array&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/canvas/">
+          <div>canvas&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/collision/">
+          <div>collision&nbsp;(3)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extension/">
+          <div>extension&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/extentions/">
+          <div>extentions&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/flow/">
+          <div>flow&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/game/">
+          <div>game&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/gauge/">
+          <div>gauge&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/github/">
+          <div>github&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/html5/">
+          <div>html5&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/map/">
+          <div>map&nbsp;(2)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/origin/">
+          <div>origin&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/phina.js/">
+          <div>phina.js&nbsp;(4)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/reflect/">
+          <div>reflect&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/runstant/">
+          <div>runstant&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/scroll/">
+          <div>scroll&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shape/">
+          <div>shape&nbsp;(1)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/shooting/">
+          <div>shooting&nbsp;(12)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/tweener/">
+          <div>tweener&nbsp;(2)</div>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://alkn203.github.io/blog//tags/vecter2/">
+          <div>vecter2&nbsp;(1)</div>
+          </a>
+        </li>
+      
+    </ul>
+</aside>
+
+
+
+
+
+  
+  <footer role="contentinfo" class="col span_9">
+    <div style="text-align:center;">
+      ©&nbsp2020&nbspalkn203
+    </div>
+  </footer>
+</div>
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-145323973-1', 'auto');
+	ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/pages/</link>
+    <description>Recent content in Pages on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 16 Jun 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>このブログについて</title>
+      <link>https://alkn203.github.io/blog/pages/about/</link>
+      <pubDate>Sun, 16 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/pages/about/</guid>
+      <description>このブログについて 当ブログは、趣味でプログラミングをしている管理人がjavascriptのゲームライブラリphina.jsに関するTipsなどを通して、ゲームプログラミングの楽しさを伝えることを目的としています。
+掲載されているコードについて 当ブログの記事に掲載されているコードはの取り扱いについては、個別に記述がない限り、特に使用制限はありません。記事中にリンクしているrunstantプロジェクトについても同様です。 当ブログに掲載されているコードをご自身のブログなどで引用された場合は、当ブログへリンクをして頂ければ嬉しいです。
+免責事項 当ブログに掲載された内容および当ブログからのリンク先への移動によって発生した損害等の一切の責任は、当ブログでは負いかねますので、ご了承ください。
+改訂履歴 2019年6月18日　作成</description>
+    </item>
+    
+  </channel>
+</rss>

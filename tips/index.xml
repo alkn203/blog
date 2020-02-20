@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/</link>
+    <description>Recent content in Tips on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 03 Jan 2020 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】Mapクラスを作ってみた</title>
+      <link>https://alkn203.github.io/blog/2020/01/03/phina-map-class/</link>
+      <pubDate>Fri, 03 Jan 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/01/03/phina-map-class/</guid>
+      <description>はじめに RPGなどで固定マップで単純な当たり判定を行いたい時は、Mapデータと当たり判定データを読み込んで行う方法が便利です。 今回は、enchant.jsにあったMapクラスを参考にphina.js版を作ってみました。
+コンストラクタ var map = phina.util.Map({ tileWidth: 64, tileHeight: 64, imageName: &amp;#39;tile&amp;#39;, mapData: data, collisionData: collision, }).addChildTo(this);    プロパティ 説明     tileWidth タイルの幅   tileHeight タイルの高さ   imageName タイルセット画像の名前   mapData マップデータの2次元配列   collisionData タイル衝突判定用の2次元配列    メンバ関数    関数 説明     hitTest マップとの衝突判定を行う   checkTile タイルが何か調べる    おわりに 本格的なマップ作成には、タイルマップエディタが必要になってくると思いますが、簡単なゲームであれば、この程度の機能でも使えるのではないでしょうか。</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】Arrayクラスのeach関数を拡張する</title>
+      <link>https://alkn203.github.io/blog/2019/12/31/phina-each-extension/</link>
+      <pubDate>Tue, 31 Dec 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/12/31/phina-each-extension/</guid>
+      <description>はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&amp;#39;hello&amp;#39;); });  コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count += i; }, this); Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x += 1; }); eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&amp;#34;each&amp;#34;, function(fn, self) { self = self || this; for (var i=0; i&amp;lt;this.length; ++i) { fn.call(self, this[i], i, this); } return this; }); サンプルコード(runstant)
+まとめ 今回の拡張は、新しいjavascriptにあるアロー関数を使えば解決できることではありますが、参考までにこのような方法もあると知ってもらえば幸いです。</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】マリオのようなブロック破壊処理</title>
+      <link>https://alkn203.github.io/blog/2019/09/18/phina-break-object/</link>
+      <pubDate>Wed, 18 Sep 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/09/18/phina-break-object/</guid>
+      <description>はじめに 子供の頃始めてスーパーマリオブラザーズをプレイした時、ブロックが壊せることが斬新で、必要のないところまで壊しまくったりしたものです。今回は、phina.jsでその再現を試みてみました。
+サンプルコード(runstant)
+ブロックの動きを観察する マリオのブロックの壊れ方を自分なりに観察してみましたが、大まかには以下のように捉えることができると思います。
+ 4つのかけらに分かれる かけらのグラフィックは斜めになっている 上のかけらと下のかけらは違う角度で飛んでいる  スプライトを4つのかけらに分ける この表現に対しては、元のスプライトを部分的に描画した4つの新たなスプライトを作ることにしました。
+_marioLike: function(sprite) { // 縦横の分割数  var divX = 2; var divY = 2; var image = sprite.image.domElement; // 分割サイズ  var sizeX = sprite.width / divX; var sizeY = sprite.height / divY; // グリッド  var grid = phina.util.Grid(sprite.width, divX); var srcRect = sprite.srcRect; // 分割スプライト作成  (divX * divY).times(function(i) { // インデックス位置設定  var xIndex = i % divX; var yIndex = (i / divX).</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】反射ベクトルを使った反射処理</title>
+      <link>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</link>
+      <pubDate>Sun, 01 Sep 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</guid>
+      <description>はじめに 反射処理の代表的なものといえば、ブロック崩しですが、ブロック崩しの場合、縦方向あるいは横方向の速度の向きを反転させるだけなので、比較的簡単です。
+しかし、角度がついた壁に対して正確に反射させるにはそう単純にはいきません。この場合は、反射ベクトルというテクニックを使う必要があります。
+実行サンプル(runstant)
+Vecter2クラスのreflectメソッド  phina.jsのVector2クラスには、反射ベクトルを求めるreflectというメソッドが用意されています。 reflectメソッドは、入射ベクトルと壁の向きの法線ベクトルから反射ベクトルを求めて返します。  // 線分の法線ベクトル（正規化） var n = Vector2.normal(p1, p2).normalize(); // 反射ベクトル適用 var r = Vector2.reflect(this.circle.physical.velocity, n); サンプルコード phina.globalize(); // メインシーン phina.define(&amp;#39;MainScene&amp;#39;, { superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;#444&amp;#39;; // canvas要素描画用  var elem = PlainElement({ width: this.gridX.width, height: this.gridY.width, }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center()); // canvasパラメータ指定  elem.canvas.context.strokeStyle = &amp;#39;white&amp;#39;; elem.canvas.context.lineWidth = 4; // 線分配列  this.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】マリオのような敵を踏みつぶすエフェクト</title>
+      <link>https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/</link>
+      <pubDate>Sat, 24 Aug 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/</guid>
+      <description>はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
+サンプルコード(runstant)
+オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを**(0.5, 1.0)**に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y += bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】マップデータの読み込みにおける工夫</title>
+      <link>https://alkn203.github.io/blog/2019/08/23/phina-mapdata/</link>
+      <pubDate>Fri, 23 Aug 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/08/23/phina-mapdata/</guid>
+      <description>はじめに ゲーム作りにおいてステージを作成する時、オブジェクトが少ない場合は１つ１つ位置を指定して追加していくこともできるでしょう。 でも、最終的には2次元配列でマップデータを作成して、プログラム内から読み込む方法などに落ち着くかと思います。
+サンプルコード(runstant)
+2次元配列のマップデータ 通常は、以下のようなデータを作成します。
+// ステージデータ var STAGE = [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;], [&amp;#39;4&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;]];  配列ですので、それぞれの要素をシングルクオーテーションで囲む必要があり、データの修正などが結構面倒です。  マップデータを簡素化する  少し簡略化した以下の形式で読め込めるようにします。 1次元の配列になっており、コピーアンドペーストも楽です。  // ステージデータ var STAGE = [&amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;, &amp;#39;4000000000&amp;#39;]; マップデータ読み込み処理  マップデータを読み込んでオブジェクトを配置する処理は、以下のとおりです。  // マップ作成 setStage: function(stage) { var half = GRID_SIZE / 2; var self = this; // マップデータをループ  stage.each(function(arr, j) { // 文字列を配列に変換  arr.toArray().each(function(id, i) { var x = self.gx.span(i) + half; var y = self.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】当たり判定について考える</title>
+      <link>https://alkn203.github.io/blog/2019/08/17/phina-collision/</link>
+      <pubDate>Sat, 17 Aug 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/08/17/phina-collision/</guid>
+      <description>はじめに ゲーム作りにおいて、当たり判定ほど奥深く悩まされるものはないと言ってよいでしょう。
+今回は、phina.jsにおける当たり判定のアプローチについての自分なりの考察です。
+hitTestElementを使う  phina.app.Object2dを継承したクラスであれば、hitTestElementを使えば手軽に当たり判定ができます。 矩形同士での判定になりますので、一番手軽です。一方で、グラフィックが矩形より小さいと大雑把な判定になってしまうという欠点があります。   参考記事
+[phina.js-Tips-41] 当たり判定を行う（矩形判定）
+ Collisionを自前で用意する  【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=で自前で作ったようなCollisionクラスを使う方法です。 任意の位置やサイズに設定することができるので柔軟性があります。一方で、絶対座標と相対座標の関係に気を付けないと、正しい当たり判定ができないという欠点があります。   参考記事
+[phina.js]Colliderアクセサリを作ってみた話
+ 当たり判定用のShapeを親にしてスプライトなどを子として追加する  RectangleShapeやCircleShapeを当たり判定の対象として、スプライトをその子要素として追加する方法です。 絶対座標で当たり判定ができるというメリットがあります。 Shapeをhideメソッドで隠すと子要素まで隠れてしまいますので、Shapeのコンストラクタでfillとstrokeを透明にすると見えないようにすることができます。  サンプルコード 当たり判定を行う（当たり判定用矩形にスプライト追加）(runstant)
+// グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】Tweenerとupdateを使ってShapeの色を変化させる</title>
+      <link>https://alkn203.github.io/blog/2019/07/02/phina-tweener-color/</link>
+      <pubDate>Tue, 02 Jul 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/07/02/phina-tweener-color/</guid>
+      <description>はじめに phina.jsのTweenerはキャラクターの動きをコントロールする場合などに使えるとても勉強な機能です。今回は、Tweenerとupdateを併用したTipsを紹介します。
+Shapeの色変化アニメーション Shapeの色を一定時間で変化させるアニメーションを作ります。方法は以下のとおりです。
+ Shapeにrgbの3つのプロパティを追加する。 Shapeのtweenerでプロパティの値を変化させる。 Shapeのupdateでプロパティの値を使って色を変化させる。  プロパティを追加する javascriptは、後から好きな時にプロパティを追加できる柔軟さを持ってますので、これを利用します。
+// shapevar shape = StarShape().addChildTo(this);shape.setPosition(this.gridX.center(), this.gridY.center());shape.radius = 128;// プロパティ追加shape.r = 0;shape.g = 0;shape.b = 0;プロパティ値を変化させる 追加したプロパティ値をtweenerで変化させます。
+// プロパティ値変化shape.tweener.to({r: 10, g: 100, b: 200}, 2000).to({r: 200, g: 200, b: 10}, 2000).setLoop(true).play();色を変化させる  updateでShapeの塗りつぶし色であるfillにプロパティ値を代入します。 rgbは文字列指定する必要があるため、formatメソッドの引数から渡しています。  // 毎フレーム処理shape.update = function() {// 色指定 shape.fill = &amp;#39;rgb({0}, {1}, {2})&amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】タイマーゲージを作ってみた</title>
+      <link>https://alkn203.github.io/blog/2019/07/01/phina-timergauge/</link>
+      <pubDate>Mon, 01 Jul 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/07/01/phina-timergauge/</guid>
+      <description>はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
+実行サンプル  runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
+// タイマーゲージ var gauge = phina.ui.TimerGauge({limitTime: 30,}).addChildTo(this);gauge.setPosition(this.gridX.center(), this.gridY.center());プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】色々なスクロールを試す</title>
+      <link>https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/</link>
+      <pubDate>Sat, 15 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/15/phina-various-scroll/</guid>
+      <description>はじめに 横スクロールアクションゲームでは、画面のスクロール処理が欠かせませんが、スクロール１つでも結構奥が深いです。今回はphina.jsで主だったスクロール処理を実装してみました。
+プレイヤー固定スクロール まずは以下のサンプルを確認してみて下さい。 プレイヤーの位置は画面の中心固定で画面がスクロールします。画面タッチでプレイヤーがジャンプして、障害物に当たると反転移動します。 中心には分かりやすいようにラインを表示しています。
+runstantで確認
+このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。
+// 画面スクロールmoveX: function() {var self = this;this.objectGroup.children.each(function(obj) {obj.x += -self.player.vx; });},変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
+runstantで確認
+このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。
+// 横方向の状態チェック checkHorizontalState: function() {var player = this.player;var state = this.player.horizontalState;// 左端のオブジェクト var first = this.objectGroup.children.first;// 右端のオブジェクト var last = this.objectGroup.children.last;// プレイヤーの状態で分ける switch (state) {// 左移動中 case &amp;#39;MOVING_LEFT&amp;#39;:// ヒットしたら反転 if (this.</description>
+    </item>
+    
+    <item>
+      <title>【phina.js】パスに沿ったオブジェクト移動</title>
+      <link>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</link>
+      <pubDate>Fri, 14 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/14/phina-movealongpath/</guid>
+      <description>パスに沿ったオブジェクトの移動 ゲームを作成していると、動く床などのように一定のルートに従ってオブジェクトを移動させたい時があると思います。 phina.jsを使って、自分なりにその処理を実装してみました。
+動作サンプル まずは以下のサンプルをご覧下さい。線に沿ってオブジェクトが移動します。
+runstantで確認
+ オブジェクトの移動には、非同期処理が行えるtweenerを利用します。 tweenerの内部処理で使われている**_add**関数で処理をスタックさせています。 tweenerは、基本的にスタックされた順に非同期処理されるので、次の移動先である各頂点の位置を順番に与えることで、結果としてパスに沿った移動が可能になります。  課題  今回のサンプルでは、移動速度が一定になるように各頂点の距離が同一になるように配置しています。 一定の時間で移動させるのがtweenerの処理ですので、距離が変わると移動速度も変わることになります。 各頂点の距離に応じてdurationを変えると速度を一定にすることが可能になると思われますが、その辺は次回の課題にしたいと思います。  </description>
+    </item>
+    
+    <item>
+      <title>【phina.js】上方向だけすり抜ける床を作る</title>
+      <link>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</link>
+      <pubDate>Thu, 13 Jun 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/06/13/phina-up-direction/</guid>
+      <description>上方向だけすり抜ける床  ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。 今回は基本的なジャンプ処理とともに、phina.jsを使って自分なりに実装してみました。  動作サンプル まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。
+runstantで確認
+プレイヤーとブロックの作成 プレイヤーとブロックは、それぞれSpriteクラスを継承して作成しました。
+// プレイヤークラスphina.define(&amp;#39;Player&amp;#39;, {superClass: &amp;#39;Sprite&amp;#39;,// コンストラクタ init: function() {// 親クラス初期化 this.superInit(&amp;#39;tomapiko&amp;#39;, SPRITE_SIZE, SPRITE_SIZE);// フレームアニメーションをアタッチ this.anim = FrameAnimation(&amp;#39;tomapiko_ss&amp;#39;).attachTo(this);// スプライトシートのサイズにフィットさせない this.anim.fit = false;// 縦移動速度 this.vy = 0;// サイズ変更 this.setSize(CHARA_SIZE, CHARA_SIZE);},  デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラスphina.define(&amp;#39;Block&amp;#39;, {superClass: &amp;#39;Sprite&amp;#39;,// コンストラクタ init: function() {// 親クラス初期化 this.</description>
+    </item>
+    
+  </channel>
+</rss>
