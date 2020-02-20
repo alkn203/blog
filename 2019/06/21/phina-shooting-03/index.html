@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動= | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動=" />
+  <meta name="og:description" content="はじめに 前回は、ゲームで使うアセットの読み込みまで行いました。今回は、プレイヤーをキーボードで操作できるようにします。
+プレイヤーの移動 Unityでは、コードを実行する場合、ゲームオブジェクトにスクリプトをアタッチする方法をとりますが、phina.jsでは、オブジェクト専用のクラスを作成する方法が一般的です。
+プレイヤークラス 今回は、プレイヤークラスを以下のとおり実装しました。
+/** プレイヤークラス*/phina.define(&#34;Player&#34;, {// 継承 superClass: &#39;Sprite&#39;,// 初期化 init: function() {// 親クラス初期化 this.superInit(&#39;spaceship&#39;, 64, 64);// フレームアニメーションをアタッチ FrameAnimation(&#39;spaceship&#39;).attachTo(this).gotoAndPlay(&#39;player&#39;);// 移動スピード this.speed = 5;},// 毎フレーム更新処理 update: function(app) {// 移動する向きを求める var direction = app.keyboard.getKeyDirection();// 移動する向きとスピードを代入する this.moveBy(direction.x * this.speed, direction.y * this.speed);},});クラス宣言 phina.define(&#34;Player&#34;, {// 継承 superClass: &#39;Sprite&#39;, クラス宣言は、defineで行います。次の文字列はクラス名です。 superClassで継承元の親クラスを指定します。自機はスプライト画像を使うので、親クラスにSpriteクラスを指定しています。  init関数 一般的にコンストラクと呼ばれるもので、UnityにおけるStartと同じ役割です。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/21/phina-shooting-03/03-moveplayer.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/21/phina-shooting-03/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/21/phina-shooting-03/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>【phina.js】2Dシューティングチュートリアル =第3回 プレイヤーの移動=</h1>
+    </div>
+    <div class="single-modified">
+      June 21, 2019  
+    </div>
+    <div class="single-content">
+      
+      <p><img src="03-moveplayer.gif" alt="03-moveplayer.gif"></p>
+<h2 id="はじめに">はじめに</h2>
+<p><a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-02/">前回</a>は、ゲームで使うアセットの読み込みまで行いました。今回は、プレイヤーをキーボードで操作できるようにします。</p>
+<h2 id="プレイヤーの移動">プレイヤーの移動</h2>
+<p><strong>Unity</strong>では、コードを実行する場合、ゲームオブジェクトにスクリプトをアタッチする方法をとりますが、<strong>phina.js</strong>では、オブジェクト専用のクラスを作成する方法が一般的です。</p>
+<h2 id="プレイヤークラス">プレイヤークラス</h2>
+<p>今回は、プレイヤークラスを以下のとおり実装しました。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * プレイヤークラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Player&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// フレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 移動スピード
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="c1">// 毎フレーム更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 移動する向きを求める
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 移動する向きとスピードを代入する
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><h2 id="クラス宣言">クラス宣言</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Player&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+</code></pre></div><ul>
+<li>クラス宣言は、<strong>define</strong>で行います。次の文字列はクラス名です。</li>
+<li><strong>superClass</strong>で継承元の親クラスを指定します。自機はスプライト画像を使うので、親クラスに<strong>Sprite</strong>クラスを指定しています。</li>
+</ul>
+<h2 id="init関数">init関数</h2>
+<p>一般的にコンストラクと呼ばれるもので、<strong>Unity</strong>における<strong>Start</strong>と同じ役割です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// フレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 移動スピード
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><ul>
+<li><strong>superInit</strong>で親クラスの<strong>Sprite</strong>を初期化しています。第一引数はスプライト画像のアセット名で、第二、第三引数にスプライト画像の切り出しサイズを指定しています。</li>
+<li><strong>FrameAnimation</strong>を作成し、<strong>this</strong>(Player)にアタッチしています。この辺りは、<strong>Unity</strong>のコンポーネントに近いです。</li>
+<li><strong>gotoAndPlay</strong>で、先に定義したアニメーションを再生しています。</li>
+</ul>
+<h2 id="update関数">Update関数</h2>
+<p>毎フレーム呼ばれるもので、<strong>Unity</strong>における<strong>Update</strong>と同じです。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 移動する向きを求める
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 移動する向きとスピードを代入する
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>引数の<strong>app</strong>経由で色々な情報にアクセスできますが、今回使用する<strong>keyboard</strong>もその１つです。</li>
+<li><strong>getKeyDirection</strong>で、現在押されている方向キーの方向を以下の<strong>Vector2</strong>クラスの形式で得ることができます。キーが同時に押されていると、正規化された値が返ってきます。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">方向キー</th>
+<th align="left">値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">上</td>
+<td align="left">Vector2(0, -1)</td>
+</tr>
+<tr>
+<td align="left">下</td>
+<td align="left">Vector2(0, 1)</td>
+</tr>
+<tr>
+<td align="left">左</td>
+<td align="left">Vector2(-1, 0)</td>
+</tr>
+<tr>
+<td align="left">右</td>
+<td align="left">Vector2(1, 0)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>変数<strong>direction</strong>に上記のいずれかが入ってきますので、<strong>direction.x</strong>と<strong>direction.y</strong>でそれぞれの方向に分けてスピードを乗じて、移動量を求めます。</li>
+<li>最後に<strong>moveBy</strong>関数に移動量を与えて、プレイヤーの位置を更新しています。</li>
+</ul>
+<h2 id="シーンにプレイヤーを追加する">シーンにプレイヤーを追加する</h2>
+<p>プレイヤークラスを実装しましたので、プレイヤーをシーンに追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// プレイヤー
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">Player</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>プレイヤーの位置指定には、<strong>Grid</strong>を使っています。<strong>Grid</strong>については、<a href="https://qiita.com/alkn203/items/d176a10d4e38d15e4062">【phina.js】Gridクラスを使いこなそう</a>を参考にして下さい。</p>
+<h2 id="実行サンプル">実行サンプル</h2>
+<p>左側の実行画面で方向キーでプレイヤーが操作できます。</p>
+<p><a href="https://runstant.com/alkn203/projects/11b5a132">実行サンプル(runstant)</a></p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+    <div class="prev-arrow"></div>
+    <div class="prev-text"><a href="https://alkn203.github.io/blog/2019/06/20/phina-shooting-02/">【phina.js】2Dシューティングチュートリアル =第2回 スプライトとフレームアニメーション=</a></div>
+  
+  
+    <div class="next-text"><a href="https://alkn203.github.io/blog/2019/06/22/phina-shooting-04/">【phina.js】2Dシューティングチュートリアル =第4回 プレイヤーから弾を撃つ=</a></div>
+    <div class="next-arrow"></div>
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#プレイヤーの移動">プレイヤーの移動</a></li>
+    <li><a href="#プレイヤークラス">プレイヤークラス</a></li>
+    <li><a href="#クラス宣言">クラス宣言</a></li>
+    <li><a href="#init関数">init関数</a></li>
+    <li><a href="#update関数">Update関数</a></li>
+    <li><a href="#シーンにプレイヤーを追加する">シーンにプレイヤーを追加する</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

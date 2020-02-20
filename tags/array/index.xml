@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>array on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/array/</link>
+    <description>Recent content in array on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 31 Dec 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tags/array/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】Arrayクラスのeach関数を拡張する</title>
+      <link>https://alkn203.github.io/blog/2019/12/31/phina-each-extension/</link>
+      <pubDate>Tue, 31 Dec 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/12/31/phina-each-extension/</guid>
+      <description>はじめに phina.jsには、通常のfor文の代替で使える便利なメソッドがあります。 Numberの拡張クラスのメソッドtimesが代表的な例です。
+(10).times(function(i) { console.log(&amp;#39;hello&amp;#39;); });  コールバック関数内に書かれた処理を10回繰り返します。 結果は hello が10回表示されます。  コールバック関数内でthisを使う コールバック関数内でthisを使った場合、このthisはコールバック関数自身を指すので、第2引数に明示的にthisが指定できるようになっています。
+this.count = 0; (10).times(function(i) { this.count += i; }, this); Arrayクラスのメソッドeach phina.jsのArrayクラスには、eachというメソッドがあり、配列の各要素に対して共通の処理を行うことができます。実体はforEachです。
+var spriteGroup = DisplayElement.addChildTo(this); // 各スプライトの移動 spriteGroup.children.each(function(sprite) { sprite.x += 1; }); eachを拡張してthisが指定できるようにする  便利なeachメソッドですが、現在の仕様では上で触れたtimesメソッドのように第２引数にthisを代入することができません。 eachメソッドを以下のように拡張して、thisが指定できるようにしてみました。  Array.prototype.$method(&amp;#34;each&amp;#34;, function(fn, self) { self = self || this; for (var i=0; i&amp;lt;this.length; ++i) { fn.call(self, this[i], i, this); } return this; }); サンプルコード(runstant)
+まとめ 今回の拡張は、新しいjavascriptにあるアロー関数を使えば解決できることではありますが、参考までにこのような方法もあると知ってもらえば幸いです。</description>
+    </item>
+    
+  </channel>
+</rss>

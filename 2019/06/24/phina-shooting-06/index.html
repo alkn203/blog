@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ= | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=" />
+  <meta name="og:description" content="はじめに 前回は、敵を追加して敵が弾を発射するようにしました。今回は、当たり判定を作成します。
+Colliderクラスを作成する Unityでは、コライダーという当たり判定を行うためのコンポーネントが用意されていますが、phina.jsにはありません。そこで、それに似た機能を持たせたColliderというクラスを作りました。
+/** コライダークラス*/phina.define(&#34;Collider&#34;, {// 継承 superClass: &#39;RectangleShape&#39;,// 初期化 init: function(param) {// 親クラス初期化 this.superInit({width: param.width,height: param.height,fill: null,stroke: &#39;red&#39;,});},// コライダーの絶対座標の矩形 getAbsoluteRect: function() {var x = this.left &#43; this.parent.x;var y = this.top &#43; this.parent.y;return Rect(x, y, this.width, this.height);},}); 今回は簡易な矩形での当たり判定を行うので、RentangleShapeクラスを継承しています。 コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。  仕様変更 これまでプレイヤーと敵の弾は、空のクラスに一旦追加する形にしていましたが、当たり判定における親子関係を出来るだけシンプルにするために、shot関数の中で直接生成する形に変更しました。
+当たり判定を付ける プレイヤー プレイヤークラスでコライダーを以下のように追加します。
+/** プレイヤークラス*/phina." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/24/phina-shooting-06/06-hittest.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/24/phina-shooting-06/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/24/phina-shooting-06/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>【phina.js】2Dシューティングチュートリアル =第6回 当たり判定とアニメーションイベントとグループ=</h1>
+    </div>
+    <div class="single-modified">
+      June 24, 2019  
+    </div>
+    <div class="single-content">
+      
+      <p><img src="06-hittest.gif" alt="06-hittest.gif"></p>
+<h2 id="はじめに">はじめに</h2>
+<p><a href="https://alkn203.github.io/blog/posts/tutorials/phina-shooting-05/">前回</a>は、敵を追加して敵が弾を発射するようにしました。今回は、当たり判定を作成します。</p>
+<h2 id="colliderクラスを作成する">Colliderクラスを作成する</h2>
+<p><strong>Unity</strong>では、コライダーという当たり判定を行うためのコンポーネントが用意されていますが、<strong>phina.js</strong>にはありません。そこで、それに似た機能を持たせた<strong>Collider</strong>というクラスを作りました。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * コライダークラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Collider&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="c1">// コライダーの絶対座標の矩形
+</span><span class="c1"></span>  <span class="nx">getAbsoluteRect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>今回は簡易な矩形での当たり判定を行うので、<strong>RentangleShape</strong>クラスを継承しています。</li>
+<li>コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。</li>
+</ul>
+<h2 id="仕様変更">仕様変更</h2>
+<p>これまでプレイヤーと敵の弾は、空のクラスに一旦追加する形にしていましたが、当たり判定における親子関係を出来るだけシンプルにするために、<strong>shot</strong>関数の中で直接生成する形に変更しました。</p>
+<h2 id="当たり判定を付ける">当たり判定を付ける</h2>
+<h2 id="プレイヤー">プレイヤー</h2>
+<p>プレイヤークラスでコライダーを以下のように追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * プレイヤークラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Player&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;SpaceShip&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mi">5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// フレームアニメーション指定
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用矩形
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>プレイヤーの当たり判定 <br>
+<img src="playercollider.jpg" alt="playercollider.jpg"></p>
+<h2 id="敵">敵</h2>
+<p>敵クラスでコライダーを以下のように追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * 敵クラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Enemy&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;SpaceShip&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// フレームアニメーション指定
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用矩形
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>敵の当たり判定 <br>
+<img src="enemycollider.jpg" alt="enemycollider.jpg"></p>
+<h2 id="プレイヤーの弾">プレイヤーの弾</h2>
+<p>プレイヤーの弾クラスでコライダーを以下のように追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * プレイヤーの弾クラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;PlayerBullet&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// スピード
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用のコライダー
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>プレイヤーの弾の当たり判定 <br>
+<img src="shotcollider.jpg" alt="shotcollider.jpg"></p>
+<h2 id="敵の弾">敵の弾</h2>
+<p>敵の弾クラスでコライダーを以下のように追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * 敵の弾クラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;EnemyBullet&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// スピード
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="c1">// 当たり判定用のコライダー
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>敵の弾の当たり判定 <br>
+<img src="bulletcollider.jpg" alt="bulletcollider.jpg"></p>
+<h2 id="当たり判定">当たり判定</h2>
+<p>各種当たり判定は、シーンの<strong>Update</strong>関数内で行います。<strong>Unity</strong>では、<strong>OnCollisionEnter</strong>のようにイベント駆動型の当たり判定処理になっていますが、<strong>phina.js</strong>は現時点でこのような仕様にはなっていません。</p>
+<h2 id="プレイヤーと敵の弾の当たり判定">プレイヤーと敵の弾の当たり判定</h2>
+<ul>
+<li>プレイヤーと敵の弾の当たり判定用に<strong>hitTestBulletToPlayer</strong>という関数を用意して、<strong>Update</strong>から呼び出します。</li>
+<li>オブジェクトをグループ毎に管理することで、当たり判定処理を切り分けて行うことができます。このグループに、<strong>Unity</strong>のレイヤーの役割をさせます。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 当たり判定
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestEnemyToP</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="c1">// 敵の弾とプレイヤーの当たり判定
+</span><span class="c1"></span>  <span class="nx">hitTestBulletToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="nx">enemyBulletGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bullet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">playerGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 当たり判定用の矩形
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="c1">// ヒットなら
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 弾削除
+</span><span class="c1"></span>        <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="c1">// 爆発表示
+</span><span class="c1"></span>        <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+        <span class="c1">// プレイヤー削除
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><ul>
+<li>当たり判定はコライダー同士でおこないます。</li>
+<li>コライダーの<strong>getAbsoluteRect</strong>関数で絶対座標値の矩形が返ってきますので、<strong>Collision.testRectRect</strong>メソッドで矩形の当たり判定を行います。</li>
+<li>ヒットしたらプレイヤーの位置に爆発を表示して、プレイヤーを削除しています。</li>
+<li>プレイヤーをシーンに直接ではなく、グループに追加するように変更してますが、これは削除処理を確実に行うためです。</li>
+</ul>
+<h2 id="爆発アニメーションクラス">爆発アニメーションクラス</h2>
+<p>爆発アニメーションのクラスは以下のようになっています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * 爆発クラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Explosion&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// フレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><h2 id="ここまでのサンプル">ここまでのサンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/8b70e935">実行サンプル(runstant)</a></p>
+<h2 id="爆発アニメーション終了後にオブジェクトを削除する">爆発アニメーション終了後にオブジェクトを削除する</h2>
+<p>上のサンプルでは、爆発アニメーション後にそのまま最後のコマが残ってしまっています。
+これを解決するために、フレームアニメーションの終了を検知して、自身を消去する処理をクラスの<strong>Update</strong>に追加します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// フレームアニメーションが終了したら自身を削除
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">finished</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div><h2 id="敵と弾が画面外に出たら削除する">敵と弾が画面外に出たら削除する</h2>
+<p>現状だと、敵と敵やプレイヤーの弾は画面外に出てもそのまま存在し続けます。放っておくと処理に負荷がかかる可能性があるので、画面外に出たら削除するようにします。
+今回は、座標関係情報だけを持った画面の矩形を作って判定する方法にします。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 定数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">SCREEN_RECT</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 画面の矩形
+</span></code></pre></div><p>画面外の判定処理は、それぞれのクラスの<strong>Update</strong>に追加します。以下は、敵の例です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム更新処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 機体の移動
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 画面下に出たら削除
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">&gt;</span> <span class="nx">SCREEN_RECT</span><span class="p">.</span><span class="nx">bottom</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><p>上のように、数値でなくプロパティで判定できるので便利です。</p>
+<h2 id="プレイヤーと敵の当たり判定">プレイヤーと敵の当たり判定</h2>
+<p>プレイヤーと敵の弾の場合と同じように関数を用意して、判定を行います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 敵とプレイヤーの当たり判定
+</span><span class="c1"></span>  <span class="nx">hitTestEnemyToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">enemyGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">enemy</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">playerGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 当たり判定用の矩形
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="c1">// ヒットなら
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 爆発表示
+</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+          <span class="c1">// プレイヤー削除
+</span><span class="c1"></span>          <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><h2 id="プレイヤーの弾と敵の当たり判定">プレイヤーの弾と敵の当たり判定</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// プレイヤーの弾と敵の当たり判定
+</span><span class="c1"></span>  <span class="nx">hitTestBulletToEnemy</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="nx">playerBulletGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bullet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">enemyGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">enemy</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 当たり判定用の矩形
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="c1">// ヒットなら
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 弾削除
+</span><span class="c1"></span>          <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+          <span class="c1">// 爆発表示
+</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+          <span class="c1">// 敵削除
+</span><span class="c1"></span>          <span class="nx">enemy</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span> 
+</code></pre></div><h2 id="ここまでのサンプル-1">ここまでのサンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/3387cbcd">実行サンプル(runstant)</a></p>
+<h2 id="コライダーを非表示にする">コライダーを非表示にする</h2>
+<p>当たり判定は確認できたので、最後にコライダーを非表示にします。<strong>phina.js</strong>のオブジェクトは、<strong>hide</strong>メソッドで非表示にすることができますので、<strong>Collider</strong>クラスのコンストラクで以下のように追加します</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="cm">/*
+</span><span class="cm"> * コライダークラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;Collider&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// 非表示
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+</code></pre></div><h2 id="サンプル">サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/14f69fd8">実行サンプル(runstant)</a></p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+    <div class="prev-arrow"></div>
+    <div class="prev-text"><a href="https://alkn203.github.io/blog/2019/06/23/phina-shooting-05/">【phina.js】2Dシューティングチュートリアル =第5回 敵を作成する=</a></div>
+  
+  
+    <div class="next-text"><a href="https://alkn203.github.io/blog/2019/06/25/phina-shooting-07/">【phina.js】2Dシューティングチュートリアル =第7回 背景を追加する=</a></div>
+    <div class="next-arrow"></div>
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#colliderクラスを作成する">Colliderクラスを作成する</a></li>
+    <li><a href="#仕様変更">仕様変更</a></li>
+    <li><a href="#当たり判定を付ける">当たり判定を付ける</a></li>
+    <li><a href="#プレイヤー">プレイヤー</a></li>
+    <li><a href="#敵">敵</a></li>
+    <li><a href="#プレイヤーの弾">プレイヤーの弾</a></li>
+    <li><a href="#敵の弾">敵の弾</a></li>
+    <li><a href="#当たり判定">当たり判定</a></li>
+    <li><a href="#プレイヤーと敵の弾の当たり判定">プレイヤーと敵の弾の当たり判定</a></li>
+    <li><a href="#爆発アニメーションクラス">爆発アニメーションクラス</a></li>
+    <li><a href="#ここまでのサンプル">ここまでのサンプル</a></li>
+    <li><a href="#爆発アニメーション終了後にオブジェクトを削除する">爆発アニメーション終了後にオブジェクトを削除する</a></li>
+    <li><a href="#敵と弾が画面外に出たら削除する">敵と弾が画面外に出たら削除する</a></li>
+    <li><a href="#プレイヤーと敵の当たり判定">プレイヤーと敵の当たり判定</a></li>
+    <li><a href="#プレイヤーの弾と敵の当たり判定">プレイヤーの弾と敵の当たり判定</a></li>
+    <li><a href="#ここまでのサンプル-1">ここまでのサンプル</a></li>
+    <li><a href="#コライダーを非表示にする">コライダーを非表示にする</a></li>
+    <li><a href="#サンプル">サンプル</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

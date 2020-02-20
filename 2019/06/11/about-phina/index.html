@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.js事始め | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.js事始め" />
+  <meta name="og:description" content="（ロゴはphinajs.comから借用）
+phina.jsについて 私が日々楽しんで使っているjavascriptのゲームライブラリで、tmlib.jsの後継のライブラリになります。現在開発はphina.jsの方にシフトしています。 とりあえずどのようなものか知るためには、以下の紹介記事辺りが参考になるかと思います。
+ 本日 JavaScript ゲームライブラリ『phina.js』をリリースしました! by @phi さん phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ by @simiraaaa さん phina.jsの簡単さから基礎知識まで by @axion014 さん はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！ by 株式会社LIG さん  気に入っているところ 以下は主観的ですが、他のユーザーも感じているのではないかと思います。
+ 同じ処理でもコード量が少なく済みます。全てのゲームライブラリと比較したわけではありませんが、phina.jsで書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。 ソースが読みやすいです。ソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。 実行確認までのステップが短いです。Web上でコーディングできるrunstantを使うことで、環境構築の手間をかけずに自分のプログラムが確認できます。 他に、配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実しているなどが挙げられます。  とにかく使ってみたい方へ  Githubのリポジトリに導入方法が記載されていますが、開発者向けの内容に近いので、私も含めて不慣れな方には少し敷居が高いかと思います。 一番簡単なのは、runstantへのユーザー登録が必要ですが、runstantに用意されたテンプレートをForkする方法です。  質問など phina.jsの魅力の一つに、親切なサポート体制があります。 Twitterで#phina_jsタグをつけて質問したり、slack(gitterから移行）に参加して質問すれば、作者の phiさんを始め、他のメンバーが優しく真剣に答えてくれます。些細なことでも良いので、構えずに質問してみて下さい。
+Tipsなど どんなものか少しでも知ってもらうために、phina.js Tips集をよろしければご覧ください。
+おわりに ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、恵まれたことにphina.jsは、比較的簡単にトライすることができます。 javascriptでのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/11/about-phina/logo.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/11/about-phina/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/11/about-phina/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>phina.js事始め</h1>
+    </div>
+    <div class="single-modified">
+      June 11, 2019  
+    </div>
+    <div class="single-content">
+      
+      <p><img src="logo.png" alt="logo.png">
+（ロゴはphinajs.comから借用）</p>
+<h2 id="phinajsについて">phina.jsについて</h2>
+<p>私が日々楽しんで使っている<strong>javascript</strong>のゲームライブラリで、<strong>tmlib.js</strong>の後継のライブラリになります。現在開発は<strong>phina.js</strong>の方にシフトしています。
+とりあえずどのようなものか知るためには、以下の紹介記事辺りが参考になるかと思います。</p>
+<ul>
+<li><a href="http://phiary.me/phinajs-release/">本日 JavaScript ゲームライブラリ『phina.js』をリリースしました!</a> by @phi さん</li>
+<li><a href="http://qiita.com/simiraaaa/items/7431734994c9e94dacfd">phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ</a> by @simiraaaa さん</li>
+<li><a href="https://qiita.com/axion014/items/1094487f88cc056da1f2">phina.jsの簡単さから基礎知識まで</a> by @axion014 さん</li>
+<li><a href="https://liginc.co.jp/306739">はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！</a> by <a href="https://liginc.co.jp/">株式会社LIG</a> さん</li>
+</ul>
+<h2 id="気に入っているところ">気に入っているところ</h2>
+<p>以下は主観的ですが、他のユーザーも感じているのではないかと思います。</p>
+<ul>
+<li><strong>同じ処理でもコード量が少なく</strong>済みます。全てのゲームライブラリと比較したわけではありませんが、<strong>phina.js</strong>で書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。</li>
+<li><strong>ソースが読みやすい</strong>です。ソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。</li>
+<li><strong>実行確認までのステップが短い</strong>です。Web上でコーディングできる<a href="http://runstant.com/">runstant</a>を使うことで、環境構築の手間をかけずに自分のプログラムが確認できます。</li>
+<li>他に、<strong>配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している</strong>などが挙げられます。</li>
+</ul>
+<h2 id="とにかく使ってみたい方へ">とにかく使ってみたい方へ</h2>
+<ul>
+<li><a href="https://github.com/phi-jp/phina.js">Githubのリポジトリ</a>に導入方法が記載されていますが、開発者向けの内容に近いので、私も含めて不慣れな方には少し敷居が高いかと思います。</li>
+<li>一番簡単なのは、runstantへのユーザー登録が必要ですが、<a href="http://runstant.com/phi/projects/phinajs_template">runstantに用意されたテンプレート</a>をForkする方法です。</li>
+</ul>
+<h2 id="質問など">質問など</h2>
+<p><strong>phina.js</strong>の魅力の一つに、親切なサポート体制があります。
+<strong>Twitter</strong>で#phina_jsタグをつけて質問したり、<a href="https://phinajs-slackin.herokuapp.com/">slack</a>(<a href="https://gitter.im/phi-jp/phina.js">gitter</a>から移行）に参加して質問すれば、作者の <a href="https//twitter.com/phi-jp">phi</a>さんを始め、他のメンバーが優しく真剣に答えてくれます。些細なことでも良いので、構えずに質問してみて下さい。</p>
+<h2 id="tipsなど">Tipsなど</h2>
+<p>どんなものか少しでも知ってもらうために、<a href="http://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips集</a>をよろしければご覧ください。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、恵まれたことに<strong>phina.js</strong>は、比較的簡単にトライすることができます。
+<strong>javascript</strong>でのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。</p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+  
+    <div class="next-text"><a href="https://alkn203.github.io/blog/2019/06/16/phina-bubblesort/">【phina.js】バブルソートを視覚化してみた</a></div>
+    <div class="next-arrow"></div>
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#phinajsについて">phina.jsについて</a></li>
+    <li><a href="#気に入っているところ">気に入っているところ</a></li>
+    <li><a href="#とにかく使ってみたい方へ">とにかく使ってみたい方へ</a></li>
+    <li><a href="#質問など">質問など</a></li>
+    <li><a href="#tipsなど">Tipsなど</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

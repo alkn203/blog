@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】マリオのような敵を踏みつぶすエフェクト | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】マリオのような敵を踏みつぶすエフェクト" />
+  <meta name="og:description" content="はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
+サンプルコード(runstant)
+オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを**(0.5, 1.0)**に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y &#43;= bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/stump.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/custom.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>【phina.js】マリオのような敵を踏みつぶすエフェクト</h1>
+    </div>
+    <div class="single-modified">
+      August 24, 2019  
+    </div>
+    <div class="single-content">
+      
+      <h2 id="はじめに">はじめに</h2>
+<p>マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。
+今回は、敵が潰れるエフェクトを<strong>phina.js</strong>で表現してみます。</p>
+<p><img src="stump.gif" alt="stump.gif"></p>
+<p><a href="https://runstant.com/alkn203/projects/b748b651">サンプルコード(runstant)</a></p>
+<h2 id="オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</h2>
+<ul>
+<li>今回の目的を実現するためには、オブジェクトの<strong>origin</strong>の変更を行う必要があります。</li>
+<li><strong>phina.js</strong>のオブジェクトには<strong>origin</strong>というプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。</li>
+<li><strong>Vector2</strong>クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。</li>
+</ul>
+<p><img src="origin.gif" alt="origin.gif"></p>
+<h2 id="敵が潰れるエフェクト">敵が潰れるエフェクト</h2>
+<ul>
+<li>敵が潰れるアニメーションは、<strong>tweener</strong>を用います。</li>
+<li><strong>ScaleY</strong>の値を変化させて縦に縮小させます。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 縦方向に縮小
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="p">{</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">}</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。</li>
+<li>これは<strong>origin</strong>がオブジェクトの中心になっているのが原因です。</li>
+</ul>
+<h2 id="originの変更と位置の調整">originの変更と位置の調整</h2>
+<ul>
+<li>下に縮小するようにするためには、<strong>origin</strong>を**(0.5, 1.0)**に変更します。</li>
+<li>変更した<strong>origin</strong>がオブジェクトの位置の基準となるため、変更した<strong>origin</strong>の分だけ上にずらして位置調整します。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// origin変更
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 位置調整
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">bugbow</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// 縦方向に縮小
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="p">{</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">}</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><h2 id="おわりに">おわりに</h2>
+<p>実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+    <div class="prev-arrow"></div>
+    <div class="prev-text"><a href="https://alkn203.github.io/blog/2019/08/23/phina-mapdata/">【phina.js】マップデータの読み込みにおける工夫</a></div>
+  
+  
+    <div class="next-text"><a href="https://alkn203.github.io/blog/2019/09/01/phina-reflect/">【phina.js】反射ベクトルを使った反射処理</a></div>
+    <div class="next-arrow"></div>
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#オブジェクトのoriginを理解する">オブジェクトのoriginを理解する</a></li>
+    <li><a href="#敵が潰れるエフェクト">敵が潰れるエフェクト</a></li>
+    <li><a href="#originの変更と位置の調整">originの変更と位置の調整</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
