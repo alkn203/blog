@@ -193,7 +193,7 @@ h2, h3, h4, h5, h6 {
 
 /* Pagenator Sction */
 .page {
-  grid-column: 4 / 11;
+  grid-column: 3 / 11;
   grid-row: 3 / 4;
 }
 
