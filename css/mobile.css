@@ -49,24 +49,16 @@ h2, h3, h4, h5, h6 {
 /* Grid Layout */
 .container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 1fr 40px 40px;
   grid-gap: 20px;
 }
 
 /* Header Section */
 .header {
-  grid-column: 1 / 13;
-  grid-row: 1 / 2;
   /* Header Grid Layout */
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .header-title {
-  grid-column: 1 / 13;
-  grid-row: 1 / 2;
   text-align: center;
 }
 
@@ -77,14 +69,10 @@ h2, h3, h4, h5, h6 {
 }
 
 .header-subtitle {
-  grid-column: 1 / 13;
-  grid-row: 2 / 3;
   text-align: center;
 }
 
 .header-menu {
-  grid-column: 1 / 13;
-  grid-row: 3 / 4;
   font-size: 18px;
   text-align: center;
 }
@@ -118,25 +106,20 @@ h2, h3, h4, h5, h6 {
 
 /* Main Section */
 .main {
-  grid-column: 1 / 13;
   grid-row: 2 / 3;
 }
 
 /* Single Section */
 .single-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 30px 20px 1fr;
   grid-gap: 10px;
 }
 
 .single-title {
-  grid-column: 1 / 13;
   grid-row: 1 / 2;
 }
 
 .single-modified {
-  grid-column: 10 / 13;
   grid-row: 2 / 3;
 }
 
@@ -145,7 +128,6 @@ h2, h3, h4, h5, h6 {
 }
 
 .single-content {
-  grid-column: 1 / 13;
   grid-row: 3 / 4;
   line-height: 1.6em;
 }
@@ -156,7 +138,6 @@ h2, h3, h4, h5, h6 {
 
 /* Pagenator Sction */
 .page {
-  grid-column: 1 / 13;
   grid-row: 3 / 4;
 }
 
@@ -239,16 +220,11 @@ nav.pagination-single a {
 }
 
 .footer {
-  grid-column: 1 / 13;
   grid-row: 4 / 5;
   /* Footer Sub Grid */
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 10px;
 }
 
 .copyright {
-  grid-column: 7 / 8;
 }
 
 .summary-container {
