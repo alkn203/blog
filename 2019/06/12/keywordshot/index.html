@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】シンプルなタイピングゲームを作ってみた | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】シンプルなタイピングゲームを作ってみた" />
+  <meta name="og:description" content="はじめに phina.jsでシンプルなタイピングゲームを作ってみました。 私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。
+別画面でプレイする
+ 画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。 大文字小文字は区別しません。  改定 2019/5/18 ライフ制導入
+カスタマイズ キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば 別言語のキーワードなどもイケると思います。
+// アセットvar ASSETS = {// キーワード一覧 text: {&#39;keywords&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;,},};リファレンス キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。 JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/12/keywordshot/keywordshot.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/12/keywordshot/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2019/06/12/keywordshot/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips(Qiita)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>【phina.js】シンプルなタイピングゲームを作ってみた</h1>
+    </div>
+    <div class="single-modified">
+      2019-6-12  
+    </div>
+    <div class="single-content">
+      
+      <p><img src="keywordshot.gif" alt="keywordshot"></p>
+<h2 id="はじめに">はじめに</h2>
+<p><strong>phina.js</strong>でシンプルなタイピングゲームを作ってみました。
+私はあまりタイピングは得意な方ではないので、自分で作っておきながら途中でゲームオーバーになりますが、皆さんはいかがでしょうか。</p>
+<!-- raw HTML omitted -->
+<p><a href="https://alkn203.github.io/phina-games/keyword-shot/">別画面でプレイする</a></p>
+<ul>
+<li>画面左から飛んでくるhtmlやjavascriptに関するキーワードをタイプするだけのゲームです。</li>
+<li>大文字小文字は区別しません。</li>
+</ul>
+<h2 id="改定">改定</h2>
+<p>2019/5/18 ライフ制導入</p>
+<h2 id="カスタマイズ">カスタマイズ</h2>
+<p>キーワード一覧は、以下のように改行区切りのテキストファイルからアセットとして読み込んでいますので、中身を変えれば
+別言語のキーワードなどもイケると思います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// キーワード一覧
+</span><span class="c1"></span>  <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;keywords&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/alkn203/phina-games@master/keyword-shot/assets/keywords&#39;</span><span class="p">,</span>
+  <span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div><h2 id="リファレンス">リファレンス</h2>
+<p>キーワード一覧は、以下のサイトから引用させて頂きました。ありがとうございます。
+<a href="http://blog.bornneet.com/Entry/262/">JavaScriptのキーワードとか予約語をかき集めてみた - Born Neet</a></p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#改定">改定</a></li>
+    <li><a href="#カスタマイズ">カスタマイズ</a></li>
+    <li><a href="#リファレンス">リファレンス</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

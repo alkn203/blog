@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reflect on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/reflect/</link>
+    <description>Recent content in reflect on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 01 Sep 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tags/reflect/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】反射ベクトルを使った反射処理</title>
+      <link>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</link>
+      <pubDate>Sun, 01 Sep 2019 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2019/09/01/phina-reflect/</guid>
+      <description>はじめに 反射処理の代表的なものといえば、ブロック崩しですが、ブロック崩しの場合、縦方向あるいは横方向の速度の向きを反転させるだけなので、比較的簡単です。
+しかし、角度がついた壁に対して正確に反射させるにはそう単純にはいきません。この場合は、反射ベクトルというテクニックを使う必要があります。
+実行サンプル(runstant)
+Vecter2クラスのreflectメソッド  phina.jsのVector2クラスには、反射ベクトルを求めるreflectというメソッドが用意されています。 reflectメソッドは、入射ベクトルと壁の向きの法線ベクトルから反射ベクトルを求めて返します。  // 線分の法線ベクトル（正規化） var n = Vector2.normal(p1, p2).normalize(); // 反射ベクトル適用 var r = Vector2.reflect(this.circle.physical.velocity, n); サンプルコード phina.globalize(); // メインシーン phina.define(&amp;#39;MainScene&amp;#39;, { superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;#444&amp;#39;; // canvas要素描画用  var elem = PlainElement({ width: this.gridX.width, height: this.gridY.width, }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center()); // canvasパラメータ指定  elem.canvas.context.strokeStyle = &amp;#39;white&amp;#39;; elem.canvas.context.lineWidth = 4; // 線分配列  this.</description>
+    </item>
+    
+  </channel>
+</rss>
