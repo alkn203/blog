@@ -46,6 +46,20 @@ h2, h3, h4, h5, h6 {
   border-left: solid 5px #29abe2;
 }
 
+table {
+  border-collapse: collapse;
+  /* margin: 0 auto; */
+}
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+th {
+  background: #EFEFEF;
+}
+
 /* Grid Layout */
 .container {
   display: grid;
