@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="og:title" content="【phina.js】Mapクラスを作ってみた" />
   <meta name="og:description" content="はじめに RPGなどで固定マップで単純な当たり判定を行いたい時は、Mapデータと当たり判定データを読み込んで行う方法が便利です。 今回は、enchant.jsにあったMapクラスを参考にphina.js版を作ってみました。
-コンストラクタ var map = phina.util.Map({ tileWidth: 64, tileHeight: 64, imageName: &#39;tile&#39;, mapData: data, collisionData: collision, }).addChildTo(this);    プロパティ 説明     tileWidth タイルの幅   tileHeight タイルの高さ   imageName タイルセット画像の名前   mapData マップデータの2次元配列   collisionData タイル衝突判定用の2次元配列    メンバ関数    関数 説明     hitTest マップとの衝突判定を行う   checkTile タイルが何か調べる    おわりに 本格的なマップ作成には、タイルマップエディタが必要になってくると思いますが、簡単なゲームであれば、この程度の機能でも使えるのではないでしょうか。" />
+コンストラクタ var map = phina.util.Map({ tileWidth: 64, tileHeight: 64, imageName: &#39;tile&#39;, mapData: data, collisionData: collision, }).addChildTo(this); プロパティ    プロパティ 説明     tileWidth タイルの幅   tileHeight タイルの高さ   imageName タイルセット画像の名前   mapData マップデータの2次元配列   collisionData タイル衝突判定用の2次元配列    メンバ関数    関数 説明     hitTest マップとの衝突判定を行う(座標から)   hitTestByIndex マップとの衝突判定を行う(インデックスから)   checkTile タイルが何か調べる(座標から)   checkTileByIndex タイルが何か調べる(インデックスから)   setTile タイルを更新する   getChild 子要素を得る（座標から）   getChildByIndex 子要素を得る（インデックスから）    おわりに 本格的なマップ作成には、タイルマップエディタが必要になってくると思いますが、簡単なゲームであれば、この程度の機能でも使えるのではないでしょうか。" />
   <meta name="og:image" content="https://alkn203.github.io/blog/2020/01/03/phina-map-class/map.png" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2020/01/03/phina-map-class/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -91,7 +91,7 @@
       <h1>【phina.js】Mapクラスを作ってみた</h1>
     </div>
     <div class="single-modified">
-      2020-2-20  
+      2020-2-23  
     </div>
     <div class="single-content">
       
@@ -107,7 +107,8 @@
   <span class="nx">mapData</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
   <span class="nx">collisionData</span><span class="o">:</span> <span class="nx">collision</span><span class="p">,</span>
 <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
-</code></pre></div><table>
+</code></pre></div><h2 id="プロパティ">プロパティ</h2>
+<table>
 <thead>
 <tr>
 <th align="left">プロパティ</th>
@@ -148,11 +149,31 @@
 <tbody>
 <tr>
 <td align="left">hitTest</td>
-<td align="left">マップとの衝突判定を行う</td>
+<td align="left">マップとの衝突判定を行う(座標から)</td>
+</tr>
+<tr>
+<td align="left">hitTestByIndex</td>
+<td align="left">マップとの衝突判定を行う(インデックスから)</td>
 </tr>
 <tr>
 <td align="left">checkTile</td>
-<td align="left">タイルが何か調べる</td>
+<td align="left">タイルが何か調べる(座標から)</td>
+</tr>
+<tr>
+<td align="left">checkTileByIndex</td>
+<td align="left">タイルが何か調べる(インデックスから)</td>
+</tr>
+<tr>
+<td align="left">setTile</td>
+<td align="left">タイルを更新する</td>
+</tr>
+<tr>
+<td align="left">getChild</td>
+<td align="left">子要素を得る（座標から）</td>
+</tr>
+<tr>
+<td align="left">getChildByIndex</td>
+<td align="left">子要素を得る（インデックスから）</td>
 </tr>
 </tbody>
 </table>
@@ -189,6 +210,7 @@
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#コンストラクタ">コンストラクタ</a></li>
+    <li><a href="#プロパティ">プロパティ</a></li>
     <li><a href="#メンバ関数">メンバ関数</a></li>
     <li><a href="#おわりに">おわりに</a></li>
   </ul>
