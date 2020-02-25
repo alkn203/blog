@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 03 Jan 2020 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 25 Feb 2020 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】塗りつぶしアルゴリズムとtweenerを組み合わせた表現</title>
+      <link>https://alkn203.github.io/blog/2020/02/25/phina-fill/</link>
+      <pubDate>Tue, 25 Feb 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/02/25/phina-fill/</guid>
+      <description>はじめに ふと思い立って、単純な塗りつぶしアルゴリズムとtweenerを組み合わせて、塗りつぶしが進む様子を可視化してみました。
+上手く使うとゲームで室内が水で埋まっていく表現とかに使えそうです。
+runstantで実行
+コーディングにおけるポイント  塗りつぶしアルゴリズムは一番単純なもので、塗りつぶし開始地点から上下左右のタイルで塗りつぶし可能なものを調べて、それを再帰的に調べて処理していくというものです。 探査の途中で時間差で水を表示するとタイムラグが生じるため、一旦水を配置したら非表示にしています。 tweenerのwaitを使って、時間差で水を再表示していくようにしています。  ソースコード // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tile&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/tomapiko_run@master/assets/tile.png&amp;#39;, &amp;#39;tile_sea&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/pipo-map001_at-umi.png&amp;#39;, }, }; // 定数 var UNIT = 64; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); var data = [ [2,2,2,2,2,2,2,2,2,2], [2,1,1,1,1,1,1,1,1,2], [2,2,2,2,2,2,2,1,1,2], [2,1,1,1,1,1,2,1,1,2], [2,1,1,1,1,1,2,1,1,2], [2,1,1,2,1,1,2,1,1,2], [2,1,1,2,1,1,1,1,1,2], [2,1,1,2,1,1,1,1,1,2], [2,1,1,2,1,1,1,1,1,2], [2,1,1,2,1,1,1,2,2,2], [2,1,1,1,1,1,1,1,1,2], [2,1,1,1,1,2,1,1,1,2], [2,1,2,2,2,2,2,1,1,2], [2,1,1,1,1,1,1,1,1,2], [2,2,2,2,2,2,2,2,2,2] ]; var col = [ [1,1,1,1,1,1,1,1,1,1], [1,0,0,0,0,0,0,0,0,1], [1,1,1,1,1,1,1,0,0,1], [1,0,0,0,0,0,1,0,0,1], [1,0,0,0,0,0,1,0,0,1], [1,0,0,1,0,0,1,0,0,1], [1,0,0,1,0,0,0,0,0,1], [1,0,0,1,0,0,0,0,0,1], [1,0,0,1,0,0,0,0,0,1], [1,0,0,1,0,0,0,1,1,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,1,0,0,0,1], [1,0,1,1,1,1,1,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,1,1,1,1,1,1,1,1,1] ]; this.</description>
+    </item>
     
     <item>
       <title>【phina.js】Mapクラスを作ってみた</title>
