@@ -114,7 +114,7 @@
 <li><strong>ScaleY</strong>の値を変化させて縦に縮小させます。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 縦方向に縮小
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="p">{</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">}</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。</li>
 <li>これは<strong>origin</strong>がオブジェクトの中心になっているのが原因です。</li>
@@ -125,11 +125,11 @@
 <li>変更した<strong>origin</strong>がオブジェクトの位置の基準となるため、変更した<strong>origin</strong>の分だけ上にずらして位置調整します。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// origin変更
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
 <span class="c1">// 位置調整
 </span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">bugbow</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
 <span class="c1">// 縦方向に縮小
-</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="p">{</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">}</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">bugbow</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">to</span><span class="p">({</span><span class="nx">scaleY</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="mi">200</span><span class="p">);</span>
 </code></pre></div><h2 id="おわりに">おわりに</h2>
 <p>実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</p>
 

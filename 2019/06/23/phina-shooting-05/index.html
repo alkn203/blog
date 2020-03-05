@@ -112,17 +112,17 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
     <span class="c1">// フレームアニメーションをアタッチ
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="c1">// 移動スピード
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="nx">param</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
   <span class="c1">// 機体の移動
 </span><span class="c1"></span>  <span class="nx">move</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">direction</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><ul>
 <li>プレイヤークラスと敵クラスがこのクラスを継承できるようにします。</li>
 <li>スプライトとフレームアニメーションは、同じファイルを使っていますので共通化できます。</li>
@@ -138,21 +138,21 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;SpaceShip&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mi">5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span> <span class="nx">speed</span><span class="o">:</span> <span class="mi">5</span> <span class="p">});</span>
     <span class="c1">// フレームアニメーション指定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">);</span>
     <span class="c1">// 弾の発射間隔
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shotDelay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
     <span class="c1">// 一定間隔で弾を発射
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="nx">shotDelay</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span> 
-  <span class="p">}</span><span class="p">,</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
+  <span class="p">},</span>
 </code></pre></div><h2 id="ここまでの実行サンプル">ここまでの実行サンプル</h2>
 <p><a href="http://runstant.com/alkn203/projects/98cae238">実行サンプル(runstant)</a></p>
 <h2 id="敵を追加する">敵を追加する</h2>
@@ -164,39 +164,39 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;SpaceShip&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">});</span>
     <span class="c1">// フレームアニメーション指定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">);</span>
     <span class="c1">//
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shotDelay</span> <span class="o">=</span> <span class="mi">6000</span><span class="p">;</span>
     <span class="c1">//
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="nx">shotDelay</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">},</span>
   <span class="c1">// 弾発射
-</span><span class="c1"></span>  <span class="nx">shot</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">EnemyBullet</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">rotation</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">enemyBulletGroup</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>  <span class="nx">shot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">EnemyBullet</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">rotation</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">enemyBulletGroup</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+  <span class="p">},</span>
   <span class="c1">// 毎フレーム更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 機体の移動
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><h2 id="敵の移動">敵の移動</h2>
 <p>敵は一定速度で画面下に移動させます。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 毎フレーム更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 機体の移動
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><ul>
 <li><strong>Enemy</strong>クラスに<strong>move</strong>関数は定義されていないので、この場合、親クラスである<strong>l0</strong>クラスの<strong>move</strong>が呼ばれます。</li>
 <li>下方向に移動ですので、下向きの方向ベクトル定数である<strong>Vector2.DOWN</strong>を代入しています。</li>
@@ -212,28 +212,28 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rotation</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// スピード
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
     <span class="c1">// 弾
-</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">degree</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">degree</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// 弾作成
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bullet</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bullet</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
       <span class="c1">// 発射方向を決める
 </span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">rotation</span> <span class="o">+</span> <span class="nx">degree</span> <span class="o">+</span> <span class="mi">90</span><span class="p">;</span>
       <span class="c1">// 角度と大きさからベクトル作成
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Vector2</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">fromDegree</span><span class="p">(</span><span class="nx">deg</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Vector2</span><span class="p">().</span><span class="nx">fromDegree</span><span class="p">(</span><span class="nx">deg</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
       <span class="c1">// ベクトルを代入
 </span><span class="c1"></span>      <span class="nx">bullet</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span> <span class="o">=</span> <span class="nx">vec</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><h2 id="弾の生成">弾の生成</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// 弾
-</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">degree</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">degree</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// 弾作成
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bullet</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bullet</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>弾は20度ずつ角度をずらして、3つ作成します。</li>
 <li>敵の弾の画像は、スプライトの２番めですのでフレームインデックスを指定しています。</li>
@@ -242,7 +242,7 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">      <span class="c1">// 発射方向を決める
 </span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">rotation</span> <span class="o">+</span> <span class="nx">degree</span> <span class="o">+</span> <span class="mi">90</span><span class="p">;</span>
       <span class="c1">// 角度と大きさからベクトル作成
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Vector2</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">fromDegree</span><span class="p">(</span><span class="nx">deg</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Vector2</span><span class="p">().</span><span class="nx">fromDegree</span><span class="p">(</span><span class="nx">deg</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
       <span class="c1">// ベクトルを代入
 </span><span class="c1"></span>      <span class="nx">bullet</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span> <span class="o">=</span> <span class="nx">vec</span><span class="p">;</span>
 </code></pre></div><ul>
@@ -266,9 +266,9 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">});</span>
     <span class="c1">// フレームアニメーション指定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">);</span>
     <span class="c1">// 弾を発射できるか
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">canShot</span> <span class="o">=</span> <span class="p">(</span><span class="nx">param</span> <span class="o">&amp;&amp;</span> <span class="nx">param</span><span class="p">.</span><span class="nx">canShot</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">param</span><span class="p">.</span><span class="nx">canShot</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">canShot</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
@@ -277,11 +277,11 @@ SpaceShipクラス /** スペースシップクラス*/phina.define(&#34;Spac
 <li>敵はデフォルトでは弾を撃ち、フラグが明示的に指定された場合ば弾を撃たないようにします。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// 敵
-</span><span class="c1"></span>    <span class="nx">Enemy</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">Enemy</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">));</span>
     <span class="c1">// 弾を発射できない敵
-</span><span class="c1"></span>    <span class="nx">Enemy</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="nx">Enemy</span><span class="p">({</span>
       <span class="nx">canShot</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">));</span>
 </code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/68f172b3">弾を撃たない敵(runstant)</a></p>
 

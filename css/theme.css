@@ -334,4 +334,6 @@ nav.pagination-single a {
 /* Code Block */
 .chroma {
   padding: 15px;
+  width: 800px;
+  overflow-x: scroll;
 }

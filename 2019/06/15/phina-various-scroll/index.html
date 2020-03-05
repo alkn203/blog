@@ -111,19 +111,19 @@ runstantで確認
 <p>このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">
 <span class="c1">// 画面スクロール
-</span><span class="c1"></span><span class="nx">moveX</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span><span class="nx">moveX</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">objectGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="o">-</span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">vx</span><span class="p">;</span>    
-  <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">,</span>
+  <span class="p">});</span>
+<span class="p">},</span>
 </code></pre></div><h2 id="変則スクロール">変則スクロール</h2>
 <p>始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。</p>
 <!-- raw HTML omitted -->
 <p><a href="https://runstant.com/alkn203/projects/b8219436">runstantで確認</a></p>
 <p>このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 横方向の状態チェック
-</span><span class="c1"></span> <span class="nx">checkHorizontalState</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span> <span class="nx">checkHorizontalState</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
    <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">;</span>
    <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span><span class="p">;</span>
    <span class="c1">// 左端のオブジェクト
@@ -135,8 +135,8 @@ runstantで確認
      <span class="c1">// 左移動中
 </span><span class="c1"></span>     <span class="k">case</span> <span class="s1">&#39;MOVING_LEFT&#39;</span><span class="o">:</span>
        <span class="c1">// ヒットしたら反転
-</span><span class="c1"></span>       <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>       <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">())</span> <span class="p">{</span>
+         <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">();</span>
          <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;MOVING_RIGHT&#39;</span><span class="p">;</span>
        <span class="p">}</span>
        <span class="k">else</span> <span class="p">{</span>
@@ -145,7 +145,7 @@ runstantで確認
            <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;MOVING_LEFT_SELF&#39;</span><span class="p">;</span>
          <span class="p">}</span>
          <span class="k">else</span> <span class="p">{</span>
-           <span class="k">this</span><span class="p">.</span><span class="nx">moveX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+           <span class="k">this</span><span class="p">.</span><span class="nx">moveX</span><span class="p">();</span>
          <span class="p">}</span>
        <span class="p">}</span>
        <span class="k">break</span><span class="p">;</span>
@@ -155,19 +155,19 @@ runstantで確認
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 左移動中（プレイヤーのみ）
 </span><span class="c1"></span><span class="k">case</span> <span class="s1">&#39;MOVING_LEFT_SELF&#39;</span><span class="o">:</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">();</span>
     <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;MOVING_RIGHT_SELF&#39;</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// 右端のオブジェクトが画面から消えてプレイヤーが中央を超えたら
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">SCREEN_WIDTH</span> <span class="o">&amp;&amp;</span> <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">SCREEN_WIDTH</span> <span class="o">&amp;&amp;</span> <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">player</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">();</span>
       <span class="c1">// 通常スクロールへ
 </span><span class="c1"></span>      <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;MOVING_LEFT&#39;</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="p">{</span>
-      <span class="nx">player</span><span class="p">.</span><span class="nx">moveX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">player</span><span class="p">.</span><span class="nx">moveX</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
   <span class="k">break</span><span class="p">;</span>
@@ -182,8 +182,8 @@ runstantで確認
 <p>このパターンのスクロールは、基本プレイヤーのみを動かしますが、画面をスライドする時には背景オブジェクトとプレイヤーをまとめて動かす必要があります。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 右移動中
 </span><span class="c1"></span><span class="k">case</span> <span class="s1">&#39;MOVING_RIGHT&#39;</span><span class="o">:</span>
-  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collisionX</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">reflectX</span><span class="p">();</span>
     <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;MOVING_LEFT&#39;</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="k">else</span> <span class="p">{</span>
@@ -191,10 +191,10 @@ runstantで確認
       <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="s1">&#39;STOP&#39;</span><span class="p">;</span>
       <span class="nx">player</span><span class="p">.</span><span class="nx">verticalState</span> <span class="o">=</span> <span class="s1">&#39;STOP&#39;</span><span class="p">;</span>
       <span class="nx">player</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">scrollX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">scrollX</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="p">{</span>
-      <span class="nx">player</span><span class="p">.</span><span class="nx">moveX</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">player</span><span class="p">.</span><span class="nx">moveX</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
   <span class="k">break</span><span class="p">;</span>
@@ -207,38 +207,38 @@ runstantで確認
 <li>新たに作った<strong>scrollX</strong>という関数を呼んで画面をスライドさせます。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 画面スクロール
-</span><span class="c1"></span>  <span class="nx">scrollX</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">scrollX</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">flows</span> <span class="o">=</span> <span class="p">[</span><span class="p">]</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">flows</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="c1">// スクロール方向を決める
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">vx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
     <span class="c1">// 背景オブジェクトの移動
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">objectGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">flow</span> <span class="o">=</span> <span class="nx">Flow</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">dir</span> <span class="o">*</span> <span class="nx">SCREEN_WIDTH</span><span class="p">}</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-                   <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                     <span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                   <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">by</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">dir</span> <span class="o">*</span> <span class="nx">SCREEN_WIDTH</span><span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+                   <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                     <span class="nx">resolve</span><span class="p">();</span>
+                   <span class="p">}).</span><span class="nx">play</span><span class="p">();</span>
+      <span class="p">});</span>
       <span class="c1">// flow配列に追加
-</span><span class="c1"></span>      <span class="nx">flows</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">flow</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="nx">flows</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">flow</span><span class="p">);</span>
+    <span class="p">});</span>
     <span class="c1">// プレイヤー
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">flow</span> <span class="o">=</span> <span class="nx">Flow</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">player</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">dir</span> <span class="o">*</span> <span class="nx">SCREEN_WIDTH</span><span class="p">}</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-                    <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                      <span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+      <span class="nx">player</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">by</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">dir</span> <span class="o">*</span> <span class="nx">SCREEN_WIDTH</span><span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                      <span class="nx">resolve</span><span class="p">();</span>
+                    <span class="p">}).</span><span class="nx">play</span><span class="p">();</span>
+    <span class="p">});</span>
     
-    <span class="nx">flows</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">flow</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">flows</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">flow</span><span class="p">);</span>
     <span class="c1">// 非同期処理
-</span><span class="c1"></span>    <span class="nx">Flow</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">flows</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="nx">Flow</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">flows</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="c1">// プレイヤー移動再開
 </span><span class="c1"></span>      <span class="nx">player</span><span class="p">.</span><span class="nx">horizontalState</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">vx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="s1">&#39;MOVING_RIGHT&#39;</span><span class="o">:</span> <span class="s1">&#39;MOVING_LEFT&#39;</span><span class="p">;</span>
       <span class="nx">player</span><span class="p">.</span><span class="nx">verticalState</span> <span class="o">=</span> <span class="s1">&#39;FALLING&#39;</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li>スライドスクロールは、<strong>tweener</strong>と非同期処理を行うFlowで実装しています。</li>
 <li>プレイヤーの移動方向とは逆に、オブジェクトとプレイヤーを１画面分まとめて動かしています。</li>

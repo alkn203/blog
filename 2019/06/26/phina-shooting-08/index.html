@@ -113,25 +113,25 @@ createWave関数 // Wave作成 createWave: function() {// 敵3機フォーメ�
 <p>クラスにしても良いのですが、親子関係の複雑化を避けるために、今回は関数を作ります。</p>
 <h2 id="createwave関数">createWave関数</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Wave作成
-</span><span class="c1"></span>  <span class="nx">createWave</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">createWave</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 敵3機フォーメーション
-</span><span class="c1"></span>    <span class="p">[</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="p">]</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">enemy</span> <span class="o">=</span> <span class="nx">Enemy</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">waveGroup</span><span class="p">)</span><span class="p">;</span>
-      <span class="nx">enemy</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">enemy</span> <span class="o">=</span> <span class="nx">Enemy</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">waveGroup</span><span class="p">);</span>
+      <span class="nx">enemy</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li>これまで敵は<strong>enemyGroup</strong>に追加してきましたが、新たに<strong>waveGroup</strong>に追加します。</li>
 <li>敵のフォーメーション情報を配列に入れて、ループでアクセスして敵を配置しています。</li>
 </ul>
 <h2 id="checkwave関数">checkWave関数</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Waveの状態チェック
-</span><span class="c1"></span>  <span class="nx">checkWave</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">checkWave</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 敵がいなくなったら出現させる
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">waveGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">createWave</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">createWave</span><span class="p">();</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li><strong>update</strong>でこの関数を呼び出し、敵の状態をチェックします。</li>
 <li>全ての敵が画面外に出るか、プレイヤーに倒されたら<strong>createWave</strong>を呼び出して敵を出現させます。</li>
@@ -139,22 +139,22 @@ createWave関数 // Wave作成 createWave: function() {// 敵3機フォーメ�
 <h2 id="敵が画面外で弾を撃たないようにする">敵が画面外で弾を撃たないようにする</h2>
 <p>敵の波状攻撃は実装できましたが、このままだと画面外にいる時から弾を発射できてしまいますので、画面に現れてから弾の発射を開始するように調整します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 一定間隔で弾を発射
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="nx">shotDelay</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
     <span class="c1">// tweenerを一旦ポーズ　            
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">pause</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div><ul>
 <li><strong>pause</strong>関数で、<strong>tweener</strong>の再生を一時停止します。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 毎フレーム更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 画面に現れてから弾を発射するようにする
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">&gt;</span> <span class="nx">SCREEN_RECT</span><span class="p">.</span><span class="nx">top</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">playing</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
     <span class="p">}</span>
 </code></pre></div><ul>
 <li>画面に現れて、かつ<strong>tweener</strong>が再生中でなければ再生します。</li>

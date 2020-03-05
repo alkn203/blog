@@ -102,7 +102,7 @@
 <h2 id="ひな形">ひな形</h2>
 <p>私が普段使っている以下の<a href="https://qiita.com/alkn203/items/09274a38a0f31ee0c1d5">ひな形</a>から作成します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// グローバルに展開
-</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
 <span class="cm">/*
 </span><span class="cm"> * メインシーン
 </span><span class="cm"> */</span>
@@ -110,32 +110,32 @@
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// 背景色
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
     <span class="c1">// 以下にコードを書いていく
-</span><span class="c1"></span>  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>  <span class="p">},</span>
   <span class="c1">// 毎フレーム更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 以下にコードを書いていく  
-</span><span class="c1"></span>  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="p">},</span>
+<span class="p">});</span>
 <span class="cm">/*
 </span><span class="cm"> * メイン処理
 </span><span class="cm"> */</span>
-<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// アプリケーションを生成
-</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
     <span class="c1">// MainScene から開始
 </span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
-  <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">});</span>
   <span class="c1">// fps表示
 </span><span class="c1"></span>  <span class="c1">//app.enableStats();
 </span><span class="c1"></span>  <span class="c1">// 実行
-</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
 </code></pre></div>
     </div>
   </div>

@@ -111,11 +111,11 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
 </ul>
 <h2 id="子要素として追加する方法">子要素として追加する方法</h2>
 <p>例えば、<strong>obj1</strong>を<strong>obj2</strong>の子要素として追加したい場合、以下のように書きます。</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">obj1</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span><span class="p">;</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">obj1</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span>
 </code></pre></div><h2 id="プレイヤーの弾を作成する">プレイヤーの弾を作成する</h2>
 <p>プレイヤーの弾を表示するだけなら、以下のようにスプライトとしてシーンに追加すればOKです。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// プレイヤーの弾
-</span><span class="c1"></span><span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
 </code></pre></div><h2 id="ここまでの実行サンプル">ここまでの実行サンプル</h2>
 <p><a href="http://runstant.com/alkn203/projects/98cae238">プレイヤーの弾表示(runstant)</a></p>
 <h2 id="プレイヤーの弾を動かす">プレイヤーの弾を動かす</h2>
@@ -131,27 +131,27 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
   <span class="c1">// 継
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayElement&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// スピード
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
     <span class="c1">// 左右の弾
-</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">});</span>
     <span class="c1">// 上向き速度を与える
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="o">-</span><span class="nx">speed</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><h2 id="弾の配置">弾の配置</h2>
 <p>以下が弾の作成部分です。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">   <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
     <span class="c1">// 左右の弾
-</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div><ul>
 <li><strong>each</strong>関数の引数<strong>dx</strong>に配列の各要素が入ってきますので、真ん中から左右に10ずれた位置に弾が作成されます。</li>
 <li>関数の中でそのまま<strong>this</strong>を使うと、関数そのものを差し参照エラーになるので、<strong>this</strong>を<strong>self</strong>に代入して<strong>PlayerBullet</strong>の<strong>this</strong>として正しく参照できるようにしています。</li>
@@ -167,7 +167,7 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
 <h2 id="弾をシーンに追加する">弾をシーンに追加する</h2>
 <p>シーンには、以下のように追加します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">// プレイヤーの弾作成
-</span><span class="c1"></span>    <span class="nx">PlayerBullet</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">PlayerBullet</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
 </code></pre></div><h2 id="ここまでの実行サンプル-1">ここまでの実行サンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/53897c29">プレイヤーの弾発射(runstant)</a></p>
 <h2 id="弾を連続して発射させる">弾を連続して発射させる</h2>
@@ -180,40 +180,40 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
     <span class="c1">// フレームアニメーションをアタッチ
-</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;spaceship&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">);</span>
     <span class="c1">// 移動スピード
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
     <span class="c1">// 一定間隔で弾を発射
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span> 
-  <span class="p">}</span><span class="p">,</span>
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
+  <span class="p">},</span>
   <span class="c1">// 弾を発射
-</span><span class="c1"></span>  <span class="nx">shot</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">PlayerBullet</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">playerBulletGroup</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>  <span class="nx">shot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">PlayerBullet</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">playerBulletGroup</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+  <span class="p">},</span>
   <span class="c1">// 毎フレーム更新処理
 </span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 移動する向きを求める
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">();</span>
     <span class="c1">// 移動する向きとスピードを代入する
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">moveBy</span><span class="p">(</span><span class="nx">direction</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+  <span class="p">},</span>
 </code></pre></div><h2 id="tweenerの設定">Tweenerの設定</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">    <span class="c1">//一定間隔で弾を発射
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-                <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                  <span class="k">this</span><span class="p">.</span><span class="nx">shot</span><span class="p">();</span>
+                <span class="p">},</span> <span class="k">this</span><span class="p">)</span>
                 <span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="p">;</span> 
+                <span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> 
 </code></pre></div><ul>
 <li><strong>tweener</strong>で処理をチェインメソッドの形でつなげると、順番に実行することができます。</li>
 <li><strong>call</strong>では任意の処理を記述できるので、<strong>shot</strong>という関数を呼び出しています。</li>
@@ -236,13 +236,13 @@ PlayerBulletクラス プレイヤーの弾として、DisplayElementを継承�
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// 背景色
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
     <span class="c1">// グループ
-</span><span class="c1"></span>    <span class="nx">playerBulletGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">playerBulletGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/cc372378">プレイヤーの弾を一定間隔で発射(runatant)</a></p>
 

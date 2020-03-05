@@ -113,78 +113,78 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// グループ
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="c1">// グリッド
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">gx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">gy</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">;</span>
     <span class="c1">// 背景
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">createBackground</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">createBackground</span><span class="p">();</span>
     <span class="c1">// タイトルラベル
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
       <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Shooting Game&#39;</span><span class="p">,</span>
       <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
       <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
       <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">72</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">));</span>
     <span class="c1">// スタートキーラベル
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">startKey</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">startKey</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
       <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Press X&#39;</span><span class="p">,</span>
       <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
       <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
       <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">gx</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">gy</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+  <span class="p">},</span>
   <span class="c1">// 背景作成
-</span><span class="c1"></span>  <span class="nx">createBackground</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">createBackground</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">bgGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">bg2Group</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span><span class="p">;</span>
     
-    <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">.</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// 一番下の背景
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">)</span><span class="p">;</span>
-      <span class="nx">bg</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">);</span>
+      <span class="nx">bg</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
       <span class="c1">// 上の背景
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg2</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg2&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">)</span><span class="p">;</span>
-      <span class="nx">bg2</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">bg2</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;bg2&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">);</span>
+      <span class="nx">bg2</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">());</span>
       <span class="c1">// スクロールスピード
 </span><span class="c1"></span>      <span class="nx">bg</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
       <span class="nx">bg2</span><span class="p">.</span><span class="nx">physical</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
     <span class="c1">// それぞれ2つの背景を縦に繋げる
 </span><span class="c1"></span>    <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
     <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
   <span class="c1">// 毎フレーム処理
 </span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">;</span>
     <span class="c1">// xキーでゲームスタート
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="c1">// 背景の移動管理
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">();</span>
+  <span class="p">},</span>
   <span class="c1">// 背景の移動管理
-</span><span class="c1"></span>  <span class="nx">scrollBackgrounds</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">scrollBackgrounds</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">bgGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bgGroup</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">bg2Group</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">bg2Group</span><span class="p">;</span>
     <span class="c1">// 一番下の背景位置入れ替え
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bgGroup</span><span class="p">);</span>
       <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bgGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="c1">// 上の背景位置入れ替え
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">bg2Group</span><span class="p">);</span>
       <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">last</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bg2Group</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">first</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><ul>
 <li>背景処理のコードは、<strong>MainScene</strong>からそのまま流用します。</li>
 <li><strong>Label</strong>を使ってタイトルなどの文字を追加します。</li>
@@ -195,12 +195,12 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
 </span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">;</span>
     <span class="c1">// xキーでゲームスタート
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="c1">// 背景の移動管理
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">();</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li>キー入力情報は、<strong>update</strong>の引数<strong>app</strong>経由で得ることができます。</li>
 <li><strong>getKeyDown</strong>で<strong>x</strong>キーが押されているかを判定し、<strong>exit</strong>で現在のシーンを抜けてメインにシーンに移行します。</li>
@@ -208,23 +208,23 @@ TitleSceneの上書き  MainSceneを流用して、TitleSceneと同じ名前で�
 <h2 id="プレイヤーがやられたらタイトルシーンに切り替える">プレイヤーがやられたらタイトルシーンに切り替える</h2>
 <p>プレイヤーが敵や敵の弾に当たったら、タイトル画面に戻るようにします。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 背景の移動管理
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">scrollBackgrounds</span><span class="p">();</span>
     <span class="c1">// 敵管理
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">checkWave</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">checkWave</span><span class="p">();</span>
     <span class="c1">// 当たり判定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestEnemyToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToEnemy</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestEnemyToPlayer</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToEnemy</span><span class="p">();</span>
     <span class="c1">// プレイヤーが削除されたらタイトル画面へ
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">playerGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">tweener</span><span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="p">;</span>
-      <span class="p">}</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span><span class="p">;</span>
+      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+      <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li><strong>update</strong>で、プレイヤーが削除されているかで判定します。</li>
 <li><strong>exit</strong>でシーンを抜ける時、引数にシーンのラベル名を指定すると、そのシーンに遷移できます。</li>

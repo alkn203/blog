@@ -133,14 +133,14 @@ hitTestElementを使う  phina.app.Object2dを継承したクラスであれば�
 <p><a href="https://runstant.com/alkn203/projects/e0239f85">当たり判定を行う（当たり判定用矩形にスプライト追加）(runstant)</a></p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">
 <span class="c1">// グローバルに展開
-</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
 <span class="c1">// アセット
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
   <span class="c1">// 画像
 </span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
     <span class="s1">&#39;tomapiko&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&#39;</span><span class="p">,</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">};</span>
 <span class="cm">/*
 </span><span class="cm"> * メインシーン
 </span><span class="cm"> */</span>
@@ -148,65 +148,65 @@ hitTestElementを使う  phina.app.Object2dを継承したクラスであれば�
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
   <span class="c1">// コンストラクタ
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// 背景
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">;</span>
     <span class="c1">// 判定対象
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">({</span>
       <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-      <span class="nx">x</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-      <span class="nx">y</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+      <span class="nx">x</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span>
+      <span class="nx">y</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="c1">// 当たり判定用の矩形
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">RectangleShape</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">RectangleShape</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">54</span><span class="p">,</span>
       <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
       <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 
-    <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
-    <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="c1">// スプライトを子要素として追加
-</span><span class="c1"></span>    <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">rect</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
     <span class="c1">// タッチイベント
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointmove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// スプライトをタッチ位置に
 </span><span class="c1"></span>      <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
       <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">;</span>
+    <span class="p">};</span>
     <span class="c1">// 更新処理
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="c1">// 矩形判定
-</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">hitTestElement</span><span class="p">(</span><span class="nx">shape</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">hitTestElement</span><span class="p">(</span><span class="nx">shape</span><span class="p">))</span> <span class="p">{</span>
         <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="k">else</span> <span class="p">{</span>
         <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">;</span>
       <span class="p">}</span>
-    <span class="p">}</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 <span class="cm">/*
 </span><span class="cm"> * メイン処理
 </span><span class="cm"> */</span>
-<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// アプリケーションを生成
-</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
     <span class="c1">// MainScene から開始
 </span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
     <span class="c1">// アセット読み込み
 </span><span class="c1"></span>    <span class="nx">assets</span><span class="o">:</span> <span class="nx">ASSETS</span><span class="p">,</span>
-  <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">});</span>
   <span class="c1">// fps表示
 </span><span class="c1"></span>  <span class="c1">//app.enableStats();
 </span><span class="c1"></span>  <span class="c1">// 実行
-</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
 
 </code></pre></div>
     </div>

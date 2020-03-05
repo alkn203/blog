@@ -112,20 +112,20 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
       <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
       <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
   <span class="c1">// コライダーの絶対座標の矩形
-</span><span class="c1"></span>  <span class="nx">getAbsoluteRect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">getAbsoluteRect</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><ul>
 <li>今回は簡易な矩形での当たり判定を行うので、<strong>RentangleShape</strong>クラスを継承しています。</li>
 <li>コライダーは子要素として追加するため、コライダー自体の座標は相対座標値になることから、親の座標を元に絶対座標値の矩形を計算して返す関数を用意します。</li>
@@ -142,16 +142,16 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;SpaceShip&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mi">5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span> <span class="nx">speed</span><span class="o">:</span> <span class="mi">5</span> <span class="p">});</span>
     <span class="c1">// フレームアニメーション指定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;player&#39;</span><span class="p">);</span>
     <span class="c1">// 当たり判定用矩形
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><p>プレイヤーの当たり判定 <br>
 <img src="playercollider.jpg" alt="playercollider.jpg"></p>
 <h2 id="敵">敵</h2>
@@ -165,14 +165,14 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span> <span class="nx">speed</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">});</span>
     <span class="c1">// フレームアニメーション指定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;enemy&#39;</span><span class="p">);</span>
     <span class="c1">// 当たり判定用矩形
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><p>敵の当たり判定 <br>
 <img src="enemycollider.jpg" alt="enemycollider.jpg"></p>
 <h2 id="プレイヤーの弾">プレイヤーの弾</h2>
@@ -184,16 +184,16 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 継
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
     <span class="c1">// スピード
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="c1">// 当たり判定用のコライダー
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><p>プレイヤーの弾の当たり判定 <br>
 <img src="shotcollider.jpg" alt="shotcollider.jpg"></p>
 <h2 id="敵の弾">敵の弾</h2>
@@ -205,17 +205,17 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 継承
 </span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
   <span class="c1">// 初期化
-</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;bullet&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setFrameIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="c1">// スピード
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="c1">// 当たり判定用のコライダー
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">collider</span> <span class="o">=</span> <span class="nx">Collider</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><p>敵の弾の当たり判定 <br>
 <img src="bulletcollider.jpg" alt="bulletcollider.jpg"></p>
 <h2 id="当たり判定">当たり判定</h2>
@@ -226,32 +226,32 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
 <li>オブジェクトをグループ毎に管理することで、当たり判定処理を切り分けて行うことができます。このグループに、<strong>Unity</strong>のレイヤーの役割をさせます。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 当たり判定
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hitTestBulletToPlayer</span><span class="p">();</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">hitTestEnemyToP</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
   <span class="c1">// 敵の弾とプレイヤーの当たり判定
-</span><span class="c1"></span>  <span class="nx">hitTestBulletToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">hitTestBulletToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
     <span class="nx">enemyBulletGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bullet</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">playerGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// 当たり判定用の矩形
-</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
       <span class="c1">// ヒットなら
-</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">))</span> <span class="p">{</span>
         <span class="c1">// 弾削除
-</span><span class="c1"></span>        <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
         <span class="c1">// 爆発表示
-</span><span class="c1"></span>        <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="nx">Explosion</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
         <span class="c1">// プレイヤー削除
-</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
       <span class="p">}</span>
-      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
 </code></pre></div><ul>
 <li>当たり判定はコライダー同士でおこないます。</li>
 <li>コライダーの<strong>getAbsoluteRect</strong>関数で絶対座標値の矩形が返ってきますので、<strong>Collision.testRectRect</strong>メソッドで矩形の当たり判定を行います。</li>
@@ -269,82 +269,82 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
     <span class="c1">// フレームアニメーションをアタッチ
-</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div><h2 id="ここまでのサンプル">ここまでのサンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/8b70e935">実行サンプル(runstant)</a></p>
 <h2 id="爆発アニメーション終了後にオブジェクトを削除する">爆発アニメーション終了後にオブジェクトを削除する</h2>
 <p>上のサンプルでは、爆発アニメーション後にそのまま最後のコマが残ってしまっています。
 これを解決するために、フレームアニメーションの終了を検知して、自身を消去する処理をクラスの<strong>Update</strong>に追加します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// フレームアニメーションが終了したら自身を削除
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">finished</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
 </code></pre></div><h2 id="敵と弾が画面外に出たら削除する">敵と弾が画面外に出たら削除する</h2>
 <p>現状だと、敵と敵やプレイヤーの弾は画面外に出てもそのまま存在し続けます。放っておくと処理に負荷がかかる可能性があるので、画面外に出たら削除するようにします。
 今回は、座標関係情報だけを持った画面の矩形を作って判定する方法にします。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 定数
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">SCREEN_RECT</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 画面の矩形
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">SCREEN_RECT</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">960</span><span class="p">);</span> <span class="c1">// 画面の矩形
 </span></code></pre></div><p>画面外の判定処理は、それぞれのクラスの<strong>Update</strong>に追加します。以下は、敵の例です。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 毎フレーム更新処理
-</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 機体の移動
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">Vector2</span><span class="p">.</span><span class="nx">DOWN</span><span class="p">);</span>
     <span class="c1">// 画面下に出たら削除
 </span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">&gt;</span> <span class="nx">SCREEN_RECT</span><span class="p">.</span><span class="nx">bottom</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
 </code></pre></div><p>上のように、数値でなくプロパティで判定できるので便利です。</p>
 <h2 id="プレイヤーと敵の当たり判定">プレイヤーと敵の当たり判定</h2>
 <p>プレイヤーと敵の弾の場合と同じように関数を用意して、判定を行います。</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// 敵とプレイヤーの当たり判定
-</span><span class="c1"></span>  <span class="nx">hitTestEnemyToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">hitTestEnemyToPlayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">enemyGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">enemy</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">playerGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 当たり判定用の矩形
-</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
         <span class="c1">// ヒットなら
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">))</span> <span class="p">{</span>
           <span class="c1">// 爆発表示
-</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
           <span class="c1">// プレイヤー削除
-</span><span class="c1"></span>          <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>          <span class="nx">player</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
         <span class="p">}</span>
-      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
 </code></pre></div><h2 id="プレイヤーの弾と敵の当たり判定">プレイヤーの弾と敵の当たり判定</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="c1">// プレイヤーの弾と敵の当たり判定
-</span><span class="c1"></span>  <span class="nx">hitTestBulletToEnemy</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="nx">hitTestBulletToEnemy</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
     <span class="nx">playerBulletGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">bullet</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">self</span><span class="p">.</span><span class="nx">enemyGroup</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">enemy</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 当たり判定用の矩形
-</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">collider</span><span class="p">.</span><span class="nx">getAbsoluteRect</span><span class="p">();</span>
         <span class="c1">// ヒットなら
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">Collision</span><span class="p">.</span><span class="nx">testRectRect</span><span class="p">(</span><span class="nx">r1</span><span class="p">,</span> <span class="nx">r2</span><span class="p">))</span> <span class="p">{</span>
           <span class="c1">// 弾削除
-</span><span class="c1"></span>          <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>          <span class="nx">bullet</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
           <span class="c1">// 爆発表示
-</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>          <span class="nx">Explosion</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
           <span class="c1">// 敵削除
-</span><span class="c1"></span>          <span class="nx">enemy</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>          <span class="nx">enemy</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
         <span class="p">}</span>
-      <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span> 
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span> 
 </code></pre></div><h2 id="ここまでのサンプル-1">ここまでのサンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/3387cbcd">実行サンプル(runstant)</a></p>
 <h2 id="コライダーを非表示にする">コライダーを非表示にする</h2>
@@ -358,15 +358,15 @@ Colliderクラスを作成する Unityでは、コライダーという当たり
   <span class="c1">// 初期化
 </span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 親クラス初期化
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
       <span class="nx">width</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
       <span class="nx">height</span><span class="o">:</span> <span class="nx">param</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
       <span class="nx">fill</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
       <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">});</span>
     <span class="c1">// 非表示
-</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span><span class="p">,</span>
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+  <span class="p">},</span>
 </code></pre></div><h2 id="サンプル">サンプル</h2>
 <p><a href="https://runstant.com/alkn203/projects/14f69fd8">実行サンプル(runstant)</a></p>
 
