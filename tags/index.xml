@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 03 Jan 2020 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>game</title>
+      <link>https://alkn203.github.io/blog/tags/game/</link>
+      <pubDate>Sun, 08 Mar 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/tags/game/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>phina.js</title>
+      <link>https://alkn203.github.io/blog/tags/phina.js/</link>
+      <pubDate>Sun, 08 Mar 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/tags/phina.js/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>extension</title>
@@ -147,15 +165,6 @@
     </item>
     
     <item>
-      <title>phina.js</title>
-      <link>https://alkn203.github.io/blog/tags/phina.js/</link>
-      <pubDate>Sat, 29 Jun 2019 20:55:06 +0900</pubDate>
-      
-      <guid>https://alkn203.github.io/blog/tags/phina.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>runstant</title>
       <link>https://alkn203.github.io/blog/tags/runstant/</link>
       <pubDate>Sat, 29 Jun 2019 20:55:06 +0900</pubDate>
@@ -188,15 +197,6 @@
       <pubDate>Sat, 15 Jun 2019 20:55:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/tags/scroll/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>game</title>
-      <link>https://alkn203.github.io/blog/tags/game/</link>
-      <pubDate>Wed, 12 Jun 2019 20:55:06 +0900</pubDate>
-      
-      <guid>https://alkn203.github.io/blog/tags/game/</guid>
       <description></description>
     </item>
     

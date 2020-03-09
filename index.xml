@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>【phina.js】倉庫番風ゲームのプロトタイプを作ってみた</title>
+      <link>https://alkn203.github.io/blog/2020/03/08/sokoban/</link>
+      <pubDate>Sun, 08 Mar 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/03/08/sokoban/</guid>
+      <description>はじめに phina.jsで倉庫番風ゲームのプロトタイプを作ってみました。
+runstantで表示
+作成にあたってのポイント  自作Mapクラスの機能を活用してます。 ステージデータはオブジェクト型の配列にしていますので、拡張すれば複数ステージ制にすることも可能かと思います。 プレイヤーと荷物の移動は、Tweenerを使うことで座標の移動に伴う座標のズレが発生しないようにしています。  GitHubリポジトリ https://github.com/alkn203/phina-games/tree/master/sokoban</description>
+    </item>
+    
+    <item>
       <title>【phina.js】塗りつぶしアルゴリズムとtweenerを組み合わせた表現</title>
       <link>https://alkn203.github.io/blog/2020/02/25/phina-fill/</link>
       <pubDate>Tue, 25 Feb 2020 20:55:06 +0900</pubDate>
