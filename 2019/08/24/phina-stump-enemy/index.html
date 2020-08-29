@@ -14,7 +14,7 @@
   <meta name="og:title" content="【phina.js】マリオのような敵を踏みつぶすエフェクト" />
   <meta name="og:description" content="はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
 サンプルコード(runstant)
-オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを**(0.5, 1.0)**に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y &#43;= bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。" />
+オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは(0.5, 0.5)でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを(0.5, 1.0)に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y &#43;= bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。" />
   <meta name="og:image" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/stump.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -105,7 +105,7 @@
 <ul>
 <li>今回の目的を実現するためには、オブジェクトの<strong>origin</strong>の変更を行う必要があります。</li>
 <li><strong>phina.js</strong>のオブジェクトには<strong>origin</strong>というプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。</li>
-<li><strong>Vector2</strong>クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。</li>
+<li><strong>Vector2</strong>クラス形式となっており、デフォルトは(0.5, 0.5)でオブジェクトの中心になっています。</li>
 </ul>
 <p><img src="origin.gif" alt="origin.gif"></p>
 <h2 id="敵が潰れるエフェクト">敵が潰れるエフェクト</h2>
@@ -121,7 +121,7 @@
 </ul>
 <h2 id="originの変更と位置の調整">originの変更と位置の調整</h2>
 <ul>
-<li>下に縮小するようにするためには、<strong>origin</strong>を**(0.5, 1.0)**に変更します。</li>
+<li>下に縮小するようにするためには、<strong>origin</strong>を(0.5, 1.0)に変更します。</li>
 <li>変更した<strong>origin</strong>がオブジェクトの位置の基準となるため、変更した<strong>origin</strong>の分だけ上にずらして位置調整します。</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// origin変更

@@ -16,8 +16,8 @@
 WaveとEmitter UnityのチュートリアルにあるWave型とEmitterという仕組み自体は、phina.jsにはありませんので、似せた処理を作ります。
 Wave機能の実現 UnityのWave型を参考にして、以下の仕様にします。
  敵をフォーメーションで出現させる。 敵が全て倒されるか、画面外に出たら1に戻る。  クラスにしても良いのですが、親子関係の複雑化を避けるために、今回は関数を作ります。
-createWave関数 // Wave作成 createWave: function() {// 敵3機フォーメーション [[0, -2], [-2, -4], [2, -4]].each(function(arr) {var enemy = Enemy().addChildTo(this.waveGroup);enemy.setPosition(this.gridX.center(arr[0]), this.gridY.span(arr[1]));}, this);}, これまで敵はenemyGroupに追加してきましたが、新たにwaveGroupに追加します。 敵のフォーメーション情報を配列に入れて、ループでアクセスして敵を配置しています。  checkWave関数 // Waveの状態チェック checkWave: function() {// 敵がいなくなったら出現させる if (this.waveGroup.children.length === 0) {this.createWave();}}, updateでこの関数を呼び出し、敵の状態をチェックします。 全ての敵が画面外に出るか、プレイヤーに倒されたらcreateWaveを呼び出して敵を出現させます。  敵が画面外で弾を撃たないようにする 敵の波状攻撃は実装できましたが、このままだと画面外にいる時から弾を発射できてしまいますので、画面に現れてから弾の発射を開始するように調整します。
-// 一定間隔で弾を発射 this.tweener.clear().call(function() {this." />
+createWave関数 // Wave作成  createWave: function() { // 敵3機フォーメーション  [[0, -2], [-2, -4], [2, -4]].each(function(arr) { var enemy = Enemy().addChildTo(this.waveGroup); enemy.setPosition(this.gridX.center(arr[0]), this.gridY.span(arr[1])); }, this); },  これまで敵はenemyGroupに追加してきましたが、新たにwaveGroupに追加します。 敵のフォーメーション情報を配列に入れて、ループでアクセスして敵を配置しています。  checkWave関数 // Waveの状態チェック  checkWave: function() { // 敵がいなくなったら出現させる  if (this.waveGroup.children.length === 0) { this.createWave(); } },  updateでこの関数を呼び出し、敵の状態をチェックします。 全ての敵が画面外に出るか、プレイヤーに倒されたらcreateWaveを呼び出して敵を出現させます。  敵が画面外で弾を撃たないようにする 敵の波状攻撃は実装できましたが、このままだと画面外にいる時から弾を発射できてしまいますので、画面に現れてから弾の発射を開始するように調整します。
+// 一定間隔で弾を発射  this.tweener.clear() .call(function() { this." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/26/phina-shooting-08/08-wave.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/26/phina-shooting-08/" />
   <meta name="twitter:site" content="@alkn203" />

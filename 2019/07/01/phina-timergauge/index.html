@@ -14,7 +14,7 @@
   <meta name="og:title" content="【phina.js】タイマーゲージを作ってみた" />
   <meta name="og:description" content="はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
 実行サンプル  runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
-// タイマーゲージ var gauge = phina.ui.TimerGauge({limitTime: 30,}).addChildTo(this);gauge.setPosition(this.gridX.center(), this.gridY.center());プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina." />
+// タイマーゲージ  var gauge = phina.ui.TimerGauge({ limitTime: 30, }).addChildTo(this); gauge.setPosition(this.gridX.center(), this.gridY.center()); プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2019/07/01/phina-timergauge/timergauge.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/07/01/phina-timergauge/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -172,8 +172,8 @@
 </blockquote>
 <h2 id="使用方法">使用方法</h2>
 <p><strong>html</strong>ファイルで以下のように読み込みます。</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/phi-jp/phina.js@v0.2.3/build/phina.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/alkn203/phina-extensions@master/ui/timergauge.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/phi-jp/phina.js@v0.2.3/build/phina.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/alkn203/phina-extensions@master/ui/timergauge.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
 </code></pre></div><h2 id="ソースコード">ソースコード</h2>
 <p><a href="https://github.com/alkn203/phina-extensions/blob/master/ui/timergauge.js">Timer Gauge</a></p>
 

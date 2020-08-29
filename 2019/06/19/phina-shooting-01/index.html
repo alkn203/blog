@@ -14,7 +14,7 @@
   <meta name="og:title" content="【phina.js】2Dシューティングチュートリアル =第1回 プログラミングの準備=" />
   <meta name="og:description" content="プログラミングの準備 今回のチュートリアルでは、phina.jsの公式オンラインエディタの位置付けであるRunstantを使用します。
 ひな形 私が普段使っている以下のひな形から作成します。
-// グローバルに展開phina.globalize();/** メインシーン*/phina.define(&#34;MainScene&#34;, {// 継承 superClass: &#39;DisplayScene&#39;,// 初期化 init: function() {// 親クラス初期化 this.superInit();// 背景色 this.backgroundColor = &#39;black&#39;;// 以下にコードを書いていく },// 毎フレーム更新処理 update: function() {// 以下にコードを書いていく  },});/** メイン処理*/phina.main(function() {// アプリケーションを生成 var app = GameApp({// MainScene から開始 startLabel: &#39;main&#39;,});// fps表示 //app." />
+// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // 以下にコードを書いていく  }, // 毎フレーム更新処理  update: function() { // 以下にコードを書いていく  }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &#39;main&#39;, }); // fps表示  //app." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2019/06/19/phina-shooting-01/runstant.jpeg" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/06/19/phina-shooting-01/" />
   <meta name="twitter:site" content="@alkn203" />

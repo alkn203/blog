@@ -78,7 +78,7 @@ Vecter2クラスのreflectメソッド  phina.jsのVector2クラスには、反�
       <guid>https://alkn203.github.io/blog/2019/08/24/phina-stump-enemy/</guid>
       <description>はじめに マリオシリーズが代表するように、敵を上から踏みつけた時に敵が潰れるエフェクトはアクションゲームではもはや定番になっています。 今回は、敵が潰れるエフェクトをphina.jsで表現してみます。
 サンプルコード(runstant)
-オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは**(0.5, 0.5）**でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを**(0.5, 1.0)**に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y += bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</description>
+オブジェクトのoriginを理解する  今回の目的を実現するためには、オブジェクトのoriginの変更を行う必要があります。 phina.jsのオブジェクトにはoriginというプロパティがあり、位置指定、回転、拡大縮小の時の基準となっています。 Vector2クラス形式となっており、デフォルトは(0.5, 0.5)でオブジェクトの中心になっています。  敵が潰れるエフェクト  敵が潰れるアニメーションは、tweenerを用います。 ScaleYの値を変化させて縦に縮小させます。  // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200);  期待する結果としては下方向に潰れて欲しいところですが、今のままだと中心に向かって縮小され、思い通りの結果になりません。 これはoriginがオブジェクトの中心になっているのが原因です。  originの変更と位置の調整  下に縮小するようにするためには、originを(0.5, 1.0)に変更します。 変更したoriginがオブジェクトの位置の基準となるため、変更したoriginの分だけ上にずらして位置調整します。  // origin変更 bugbow.setOrigin(0.5, 1.0); // 位置調整 bugbow.y += bugbow.height / 2; // 縦方向に縮小 bugbow.tweener.clear().to({scaleY: 0.1}, 200); おわりに 実際には、敵が潰れたコマ画像を用意してフレームを切り替えた方が効率的かもしれません。今回の内容は、あくまでも１つのアプローチと考えてもらえればと思います。</description>
     </item>
     
     <item>
@@ -118,8 +118,8 @@ hitTestElementを使う  phina.app.Object2dを継承したクラスであれば�
       <description>はじめに phina.jsのTweenerはキャラクターの動きをコントロールする場合などに使えるとても勉強な機能です。今回は、Tweenerとupdateを併用したTipsを紹介します。
 Shapeの色変化アニメーション Shapeの色を一定時間で変化させるアニメーションを作ります。方法は以下のとおりです。
  Shapeにrgbの3つのプロパティを追加する。 Shapeのtweenerでプロパティの値を変化させる。 Shapeのupdateでプロパティの値を使って色を変化させる。  プロパティを追加する javascriptは、後から好きな時にプロパティを追加できる柔軟さを持ってますので、これを利用します。
-// shapevar shape = StarShape().addChildTo(this);shape.setPosition(this.gridX.center(), this.gridY.center());shape.radius = 128;// プロパティ追加shape.r = 0;shape.g = 0;shape.b = 0;プロパティ値を変化させる 追加したプロパティ値をtweenerで変化させます。
-// プロパティ値変化shape.tweener.to({r: 10, g: 100, b: 200}, 2000).to({r: 200, g: 200, b: 10}, 2000).setLoop(true).play();色を変化させる  updateでShapeの塗りつぶし色であるfillにプロパティ値を代入します。 rgbは文字列指定する必要があるため、formatメソッドの引数から渡しています。  // 毎フレーム処理shape.update = function() {// 色指定 shape.fill = &amp;#39;rgb({0}, {1}, {2})&amp;#39;.</description>
+// shape var shape = StarShape().addChildTo(this); shape.setPosition(this.gridX.center(), this.gridY.center()); shape.radius = 128; // プロパティ追加 shape.r = 0; shape.g = 0; shape.b = 0; プロパティ値を変化させる 追加したプロパティ値をtweenerで変化させます。
+// プロパティ値変化 shape.tweener.to({r: 10, g: 100, b: 200}, 2000) .to({r: 200, g: 200, b: 10}, 2000) .setLoop(true).play(); 色を変化させる  updateでShapeの塗りつぶし色であるfillにプロパティ値を代入します。 rgbは文字列指定する必要があるため、formatメソッドの引数から渡しています。  // 毎フレーム処理 shape.update = function() { // 色指定  shape.fill = &amp;#39;rgb({0}, {1}, {2})&amp;#39;.</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@ Shapeの色変化アニメーション Shapeの色を一定時間で変化させ
       <guid>https://alkn203.github.io/blog/2019/07/01/phina-timergauge/</guid>
       <description>はじめに phina.jsには、体力ゲージの実装に使えるGaugeという便利なクラスが用意されています。今回、これをベースにゲームの制限時間表示によく見られるタイマーゲージを作ってみました。
 実行サンプル  runボタンを押すとゲージが経過時間で減っていきます。 pauseボタンで一時停止。recoverボタンで全回復します。  TimerGaugeクラスの仕様 以下のように、シーンに追加します。
-// タイマーゲージ var gauge = phina.ui.TimerGauge({limitTime: 30,}).addChildTo(this);gauge.setPosition(this.gridX.center(), this.gridY.center());プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina.</description>
+// タイマーゲージ  var gauge = phina.ui.TimerGauge({ limitTime: 30, }).addChildTo(this); gauge.setPosition(this.gridX.center(), this.gridY.center()); プロパティ・メソッド・イベント    プロパティ 説明     limitTime 制限時間(秒） デフォルト値60       メソッド 説明     run タイマー作動   pause 一時停止   recover ゲージを満タンにする       イベント 説明     onfull ゲージが満タンになった時   onempty ゲージが空になった時     その他のプロパティは、継承元のphina.</description>
     </item>
     
     <item>
@@ -143,10 +143,10 @@ Shapeの色変化アニメーション Shapeの色を一定時間で変化させ
 プレイヤー固定スクロール まずは以下のサンプルを確認してみて下さい。 プレイヤーの位置は画面の中心固定で画面がスクロールします。画面タッチでプレイヤーがジャンプして、障害物に当たると反転移動します。 中心には分かりやすいようにラインを表示しています。
 runstantで確認
 このパターンのスクロールは、特に難しい実装はないかと思います。 プレイヤーは動かさずに固定して、プレイヤー以外のオブジェクトをプレイヤーの移動方向と逆向きに動かすことで、プレイヤーが移動しているように見えます。
-// 画面スクロールmoveX: function() {var self = this;this.objectGroup.children.each(function(obj) {obj.x += -self.player.vx; });},変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
+// 画面スクロール moveX: function() { var self = this; this.objectGroup.children.each(function(obj) { obj.x += -self.player.vx; }); }, 変則スクロール 始めは固定スクロールと同じようにスクロールしますが、ステージの端に行くとスクロールが止まります。 そして、画面中央を超えると再びスクロールします。
 runstantで確認
 このパターンのスクロールのポイントは、プレイヤー以外のオブジェクトの移動とプレイヤーのみの移動の切り替えです。 プレイヤーの横方向の状態をチェックする関数を用意して、その中で切り替えを行います。
-// 横方向の状態チェック checkHorizontalState: function() {var player = this.player;var state = this.player.horizontalState;// 左端のオブジェクト var first = this.objectGroup.children.first;// 右端のオブジェクト var last = this.objectGroup.children.last;// プレイヤーの状態で分ける switch (state) {// 左移動中 case &amp;#39;MOVING_LEFT&amp;#39;:// ヒットしたら反転 if (this.</description>
+// 横方向の状態チェック  checkHorizontalState: function() { var player = this.player; var state = this.player.horizontalState; // 左端のオブジェクト  var first = this.objectGroup.children.first; // 右端のオブジェクト  var last = this.objectGroup.children.last; // プレイヤーの状態で分ける  switch (state) { // 左移動中  case &amp;#39;MOVING_LEFT&amp;#39;: // ヒットしたら反転  if (this.</description>
     </item>
     
     <item>
@@ -170,7 +170,7 @@ runstantで確認
       <description>上方向だけすり抜ける床  ジャンプゲームなどでは、上方向にすり抜け下方向にはすり抜けない床がよくあります。 今回は基本的なジャンプ処理とともに、phina.jsを使って自分なりに実装してみました。  動作サンプル まずは以下のサンプルを確認して下さい。 画面タッチでキャラがジャンプしますが、上方向にはブロックをすり抜けて、その後に下のブロックに着地します。
 runstantで確認
 プレイヤーとブロックの作成 プレイヤーとブロックは、それぞれSpriteクラスを継承して作成しました。
-// プレイヤークラスphina.define(&amp;#39;Player&amp;#39;, {superClass: &amp;#39;Sprite&amp;#39;,// コンストラクタ init: function() {// 親クラス初期化 this.superInit(&amp;#39;tomapiko&amp;#39;, SPRITE_SIZE, SPRITE_SIZE);// フレームアニメーションをアタッチ this.anim = FrameAnimation(&amp;#39;tomapiko_ss&amp;#39;).attachTo(this);// スプライトシートのサイズにフィットさせない this.anim.fit = false;// 縦移動速度 this.vy = 0;// サイズ変更 this.setSize(CHARA_SIZE, CHARA_SIZE);},  デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラスphina.define(&amp;#39;Block&amp;#39;, {superClass: &amp;#39;Sprite&amp;#39;,// コンストラクタ init: function() {// 親クラス初期化 this.</description>
+// プレイヤークラス phina.define(&amp;#39;Player&amp;#39;, { superClass: &amp;#39;Sprite&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(&amp;#39;tomapiko&amp;#39;, SPRITE_SIZE, SPRITE_SIZE); // フレームアニメーションをアタッチ  this.anim = FrameAnimation(&amp;#39;tomapiko_ss&amp;#39;).attachTo(this); // スプライトシートのサイズにフィットさせない  this.anim.fit = false; // 縦移動速度  this.vy = 0; // サイズ変更  this.setSize(CHARA_SIZE, CHARA_SIZE); },  デフォルトのスプライトサイズから半分のサイズにしています。 FrameAnimationクラスのプロパティfitをfalseにしないと、スプライトシートに書いている切り出しサイズが適用されるので注意して下さい。  // ブロッククラス phina.define(&amp;#39;Block&amp;#39;, { superClass: &amp;#39;Sprite&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.</description>
     </item>
     
   </channel>

@@ -15,9 +15,9 @@
   <meta name="og:description" content="はじめに 前回は、ゲームのタイトルを作って、ゲーム開始と終了を実装しました。今回は、ゲームを面白くする要素として「敵のヒットポイント」と「弾の攻撃力」そして「敵ががダメージを受けた時のエフェクト」と「プレイヤーの無敵エフェクト」を実装します。
 実行サンプル(runstant)
 敵のHPとプレイヤーの攻撃力の実装 Enemyクラスに敵のHPを実装します。
-/** 敵クラス*/phina.define(&#34;Enemy&#34;, {// 継承 superClass: &#39;SpaceShip&#39;,// 初期化 init: function(param) {// 親クラス初期化 this.superInit({ speed: 3 });// フレームアニメーション指定 this.anim.gotoAndPlay(&#39;enemy&#39;);// 当たり判定用矩形 this.collider = Collider({width: 40,height: 40,}).addChildTo(this);// ヒットポイント this.hp = (param &amp;&amp; param.hp !== undefined) ? param.hp : 1;敵のHPはコンストラクタからパラメータで指定できるようにします。
+/* * 敵クラス */ phina.define(&#34;Enemy&#34;, { // 継承  superClass: &#39;SpaceShip&#39;, // 初期化  init: function(param) { // 親クラス初期化  this.superInit({ speed: 3 }); // フレームアニメーション指定  this.anim.gotoAndPlay(&#39;enemy&#39;); // 当たり判定用矩形  this.collider = Collider({ width: 40, height: 40, }).addChildTo(this); // ヒットポイント  this.hp = (param &amp;&amp; param.hp !== undefined) ? param.hp : 1; 敵のHPはコンストラクタからパラメータで指定できるようにします。
 次に、PlayerBulletクラスに弾の攻撃力を実装します。
-phina.define(&#34;PlayerBullet&#34;, {// 継 superClass: &#39;Sprite&#39;,// 初期化 init: function() {// 親クラス初期化 this." />
+phina.define(&#34;PlayerBullet&#34;, { // 継  superClass: &#39;Sprite&#39;, // 初期化  init: function() { // 親クラス初期化  this." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2019/07/03/phina-shooting-12/playerblink.gif" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2019/07/03/phina-shooting-12/" />
   <meta name="twitter:site" content="@alkn203" />
