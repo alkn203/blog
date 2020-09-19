@@ -254,4 +254,5 @@ nav.pagination-single a {
 .chroma {
   width: 320px;
   padding: 15px;
+  overflow-x: scroll;
 }
