@@ -1,5 +1,4 @@
 body {
-  width: 1000px;
   background-color: #fff;
   font-family: sans-serif;
   font-size: 14px;
@@ -335,6 +334,6 @@ nav.pagination-single a {
 /* Code Block */
 .chroma {
   padding: 15px;
-  width: 800px;
+  width: 100%;
   overflow-x: scroll;
 }

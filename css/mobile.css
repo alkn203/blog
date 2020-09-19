@@ -1,5 +1,4 @@
 body {
-  width: 100%;
   background-color: #fff;
   font-family: sans-serif;
   font-size: 14px;
@@ -254,4 +253,5 @@ nav.pagination-single a {
 /* Code Block */
 .chroma {
   padding: 15px;
+  width: 100%;
 }
