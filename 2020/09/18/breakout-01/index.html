@@ -13,6 +13,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="og:title" content="【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第1回 ブロックの配置=" />
   <meta name="og:description" content="目的 このチュートリアルでは、ゲームプログラミングの手軽な題材として有名なブロック崩しをphina.jsで作っていきます。第1回目は、以下のようにブロックを配置します。
+runstantで確認
 定数とBlockクラスを定義する ゲーム内で使用する定数は通常のvarで、Blockクラスはphina.defineを使って定義します。コードは以下のとおりです。
 phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; /* * メインシーン */ phina.define(&#39;MainScene&#39;, { superClass: &#39;DisplayScene&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; }, }); /* * ブロッククラス */ phina.define(&#39;Block&#39;, { // 親クラス指定  superClass: &#39;RectangleShape&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit({ width: BLOCK_WIDTH, height: BLOCK_HEIGHT, }); }, }); /* * メイン処理 */ phina." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2020/09/18/breakout-01/breakout01.png" />
@@ -103,6 +104,7 @@ phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 6
       <h2 id="目的">目的</h2>
 <p>このチュートリアルでは、ゲームプログラミングの手軽な題材として有名なブロック崩しを<strong>phina.js</strong>で作っていきます。第1回目は、以下のように<strong>ブロック</strong>を配置します。</p>
 <p><img src="breakout01.png" alt="breakout01.png"></p>
+<p><a href="http://runstant.com/alkn203/projects/8308f430">runstantで確認</a></p>
 <h2 id="定数とblockクラスを定義する">定数とBlockクラスを定義する</h2>
 <p>ゲーム内で使用する定数は通常の<strong>var</strong>で、<strong>Block</strong>クラスは<strong>phina.define</strong>を使って定義します。コードは以下のとおりです。</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
@@ -237,8 +239,7 @@ phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 6
   <span class="c1">// 実行
 </span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
 <span class="p">});</span>
-</code></pre></div><p><!-- raw HTML omitted -->[runstantで確認]<!-- raw HTML omitted --></p>
-<h2 id="ブロックグループの作成">ブロックグループの作成</h2>
+</code></pre></div><h2 id="ブロックグループの作成">ブロックグループの作成</h2>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">blockGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>作成するブロックは<strong>GameScene</strong>に直接追加しても良いのですが、利便性を考えて、ブロック管理用のグループを作成します。</li>
