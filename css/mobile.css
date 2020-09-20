@@ -121,9 +121,9 @@ th {
 .tocbar {
   display: none;
 }
-/* Pagenator Sction */
+/* Pagenator Section */
 .page {
-  grid-column: 1 / 13;
+  grid-column: 2 / 12;
   grid-row: 3 / 4;
 }
 
