@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Breakout on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tutorials/breakout/</link>
+    <description>Recent content in Breakout on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 18 Sep 2020 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tutorials/breakout/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第1回 ブロックの配置=</title>
+      <link>https://alkn203.github.io/blog/2020/09/18/breakout-01/</link>
+      <pubDate>Fri, 18 Sep 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/09/18/breakout-01/</guid>
+      <description>目的 このチュートリアルでは、ゲームプログラミングの手軽な題材として有名なブロック崩しをphina.jsで作っていきます。第1回目は、以下のようにブロックを配置します。
+定数とBlockクラスを定義する ゲーム内で使用する定数は通常のvarで、Blockクラスはphina.defineを使って定義します。コードは以下のとおりです。
+phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; /* * メインシーン */ phina.define(&amp;#39;MainScene&amp;#39;, { superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; }, }); /* * ブロッククラス */ phina.define(&amp;#39;Block&amp;#39;, { // 親クラス指定  superClass: &amp;#39;RectangleShape&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit({ width: BLOCK_WIDTH, height: BLOCK_HEIGHT, }); }, }); /* * メイン処理 */ phina.</description>
+    </item>
+    
+  </channel>
+</rss>
