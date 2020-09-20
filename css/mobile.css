@@ -23,22 +23,21 @@ body a:hover {
 
 /* Normal h1 */
 h1 {
-  font-size: 16px;
+  font-size: 19px;
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0.2em;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
   border-left: solid 5px #29abe2;
-  border-bottom: solid 1px #29abe2;
 }
 
 h2 {
-  font-size: 14px;
+  font-size: 17px;
 }
 
 h3, h4, h5, h6 {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 h2, h3, h4, h5, h6 {
@@ -46,96 +45,85 @@ h2, h3, h4, h5, h6 {
   border-left: solid 5px #29abe2;
 }
 
-/* Grid Layout */
+table {
+  border-collapse: collapse;
+  /* margin: 0 auto; */
 }
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+th {
+  background: #EFEFEF;
+}
+
+/* Grid Layout */
 .container {
   display: grid;
-  grid-template-rows: 120px 1fr 40px 40px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 80px 1fr 40px 40px;
   grid-gap: 20px;
 }
 
 /* Header Section */
 .header {
-  grid-row: 1 / 2;
   text-align: center;
+  grid-column: 1 / 13;
+  grid-row: 1 / 2;
 }
-
 /* Site title h1 */
 .header-title h1 {
   border-left-style: none;
   border-bottom-style: none;
 }
 
-.header-subtitle {}
-
 .header-menu {
-  font-size: 12px;
-  padding-top: 10px;
-}
-
-.header-menu ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.header-menu ul li {
-  display: inline;
-  padding-left: 10px;
+  display: none;
 }
 
 .header-profile {
   display: none;
 }
-
-.header-profile-image {
-  display: none;
-}
-
-.header-profile-author {
-  display: none;
-}
-
 /* Sidebar Section */
 .sidebar {
   display: none;
 }
-
 /* Main Section */
 .main {
+  grid-column: 2 / 12;
   grid-row: 2 / 3;
 }
-
 /* Single Section */
 .single-container {
   display: grid;
-  grid-template-rows: 30px 20px 1fr;
-  grid-gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 40px 1fr;
+  grid-gap: 30px;
 }
 
 .single-title {
+  grid-column: 1 / 13;
   grid-row: 1 / 2;
 }
 
 .single-modified {
-  grid-row: 2 / 3;
-}
-
-.single-modified:before {
-  content: "Last Modified: "
+  display: none;
 }
 
 .single-content {
-  grid-row: 3 / 4;
+  grid-column: 1 / 13;
+  grid-row: 2 / 3;
   line-height: 1.6em;
 }
-
 
 .tocbar {
   display: none;
 }
-
 /* Pagenator Sction */
 .page {
+  grid-column: 1 / 13;
   grid-row: 3 / 4;
 }
 
@@ -218,9 +206,16 @@ nav.pagination-single a {
 }
 
 .footer {
+  grid-column: 1 / 13;
   grid-row: 4 / 5;
-  text-align: center;
+  /* Footer Sub Grid */
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+}
 
+.copyright {
+  grid-column: 7 / 8;
 }
 
 .summary-container {
