@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 18 Sep 2020 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2020 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第2回 パドルの作成=</title>
+      <link>https://alkn203.github.io/blog/2020/09/19/breakout-02/</link>
+      <pubDate>Sat, 19 Sep 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/09/19/breakout-02/</guid>
+      <description>はじめに 前回は、画面上部にブロックを配置しました。今回は、プレイヤーが操作するパドルを作成します。
+runstantで確認
+定数とPaddleクラスを定義する パドル用の定数を追加して、Paddleクラスをphina.defineで定義します。コードは以下のとおりです。
+// グローバルに展開 phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; var PADDLE_WIDTH = BLOCK_WIDTH * 1.5; var PADDLE_HEIGHT = BLOCK_HEIGHT; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // ブロックグループ  this.blockGroup = DisplayElement().addChildTo(this); var self = this; // Gridを利用してブロック設置  Array.</description>
+    </item>
     
     <item>
       <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第1回 ブロックの配置=</title>

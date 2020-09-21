@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第2回 パドルの作成= | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第2回 パドルの作成=" />
+  <meta name="og:description" content="はじめに 前回は、画面上部にブロックを配置しました。今回は、プレイヤーが操作するパドルを作成します。
+runstantで確認
+定数とPaddleクラスを定義する パドル用の定数を追加して、Paddleクラスをphina.defineで定義します。コードは以下のとおりです。
+// グローバルに展開 phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; var PADDLE_WIDTH = BLOCK_WIDTH * 1.5; var PADDLE_HEIGHT = BLOCK_HEIGHT; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // ブロックグループ  this.blockGroup = DisplayElement().addChildTo(this); var self = this; // Gridを利用してブロック設置  Array." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2020/09/19/breakout-02/breakout01.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2020/09/19/breakout-02/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2020/09/19/breakout-02/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips(Qiita)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+<div class="header-profile">
+  <div class="header-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+  <div class="header-profile-author">
+    <a href="https://twitter.com/alkn203">alkn203</a>
+  </div>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/">Tutorials</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tutorials/breakout/">Breakout</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tutorials/2dshooting/">Shooting</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/others/">Others</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/works/">Works</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-container">
+    <div class="single-title">
+      <h1>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第2回 パドルの作成=</h1>
+    </div>
+    <div class="single-modified">
+      2020-9-19  
+    </div>
+    <div class="single-content">
+      
+      <h2 id="はじめに">はじめに</h2>
+<p>前回は、画面上部にブロックを配置しました。今回は、プレイヤーが操作する<strong>パドル</strong>を作成します。</p>
+<p><img src="breakout02.png" alt="breakout02.png"></p>
+<p><a href="http://runstant.com/alkn203/projects/305fd254">runstantで確認</a></p>
+<h2 id="定数とpaddleクラスを定義する">定数とPaddleクラスを定義する</h2>
+<p>パドル用の定数を追加して、<strong>Paddle</strong>クラスを<strong>phina.define</strong>で定義します。コードは以下のとおりです。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+<span class="cm">/*
+</span><span class="cm"> * 定数
+</span><span class="cm"> */</span>
+<span class="kd">var</span> <span class="nx">BLOCK_WIDTH</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">BLOCK_HEIGHT</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">PADDLE_WIDTH</span> <span class="o">=</span> <span class="nx">BLOCK_WIDTH</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">PADDLE_HEIGHT</span> <span class="o">=</span> <span class="nx">BLOCK_HEIGHT</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+    <span class="c1">// ブロックグループ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">blockGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="c1">// Gridを利用してブロック設置
+</span><span class="c1"></span>    <span class="nb">Array</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">spanX</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Array</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">spanY</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Block</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">blockGroup</span><span class="p">)</span>
+               <span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">spanX</span><span class="p">),</span> <span class="nx">self</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">spanY</span><span class="p">));</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+    <span class="c1">// パドル移動ライン
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddleY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mf">14.5</span><span class="p">);</span>
+    <span class="c1">// パドル設置
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddle</span> <span class="o">=</span> <span class="nx">Paddle</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+                         <span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">paddleY</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * ブロッククラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Block&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 親クラス指定
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">BLOCK_WIDTH</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">BLOCK_HEIGHT</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * パドルクラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Paddle&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 親クラス指定
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">PADDLE_WIDTH</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">PADDLE_HEIGHT</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;silver&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Break Out&#39;</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div><h2 id="定数">定数</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">PADDLE_WIDTH</span> <span class="o">=</span> <span class="nx">BLOCK_WIDTH</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">PADDLE_HEIGHT</span> <span class="o">=</span> <span class="nx">BLOCK_HEIGHT</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>パドルの横幅はブロックの横幅の1.5倍、縦幅はブロックの縦幅と同じにします。</li>
+</ul>
+<h2 id="パドルクラス">パドルクラス</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Paddle&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 親クラス指定
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">PADDLE_WIDTH</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">PADDLE_HEIGHT</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;silver&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><strong>phina.define</strong>で<strong>Paddle</strong>クラスを定義しています。</li>
+<li><strong>Block</strong>クラスと同様に<strong>RectangleShape</strong>クラスを継承し、<strong>superInit</strong>で親クラスへパラメータを渡しています。</li>
+<li>パラメータの<strong>fill</strong>は塗りつぶしの色です。 <strong>phina.js</strong>では、他に<strong>rgb</strong>や<strong>hsl</strong>形式でも色を指定できます。</li>
+</ul>
+<h2 id="パドルの配置">パドルの配置</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js">    <span class="c1">// パドル移動ライン
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddleY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mf">14.5</span><span class="p">);</span>
+    <span class="c1">// パドル設置
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddle</span> <span class="o">=</span> <span class="nx">Paddle</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+                         <span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">paddleY</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><strong>paddleY</strong>は、パドルが移動するラインのy座標です。</li>
+<li>パドルを作成して<strong>MainScene</strong>に追加しています。</li>
+<li>初期位置は、画面の中央下としています。**this.gridX.center()**で、画面中央のx座標を得ることができます。</li>
+</ul>
+<h2 id="パドルの移動処理">パドルの移動処理</h2>
+<p>このままではハドルが画面に表示されただけですので、移動処理を追加します。
+コードは以下のとおりです。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+<span class="cm">/*
+</span><span class="cm"> * 定数
+</span><span class="cm"> */</span>
+<span class="kd">var</span> <span class="nx">BLOCK_WIDTH</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">BLOCK_HEIGHT</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">PADDLE_WIDTH</span> <span class="o">=</span> <span class="nx">BLOCK_WIDTH</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">PADDLE_HEIGHT</span> <span class="o">=</span> <span class="nx">BLOCK_HEIGHT</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+    <span class="c1">// ブロックグループ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">blockGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="c1">// 位置判定用のRect
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">screenRect</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">960</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="c1">// Gridを利用してブロック設置
+</span><span class="c1"></span>    <span class="nb">Array</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">spanX</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Array</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">spanY</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Block</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">blockGroup</span><span class="p">)</span>
+               <span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">spanX</span><span class="p">),</span> <span class="nx">self</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="nx">spanY</span><span class="p">));</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+    <span class="c1">// パドル移動ライン
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddleY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gridY</span><span class="p">.</span><span class="nx">span</span><span class="p">(</span><span class="mf">14.5</span><span class="p">);</span>
+    <span class="c1">// パドル設置
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">paddle</span> <span class="o">=</span> <span class="nx">Paddle</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+                         <span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">gridX</span><span class="p">.</span><span class="nx">center</span><span class="p">(),</span> <span class="nx">paddleY</span><span class="p">);</span>
+    <span class="c1">// 画面上でのタッチ移動時
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointmove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// タッチ位置に移動
+</span><span class="c1"></span>      <span class="nx">paddle</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span> <span class="o">|</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">paddleY</span><span class="p">);</span>
+      <span class="c1">// 画面はみ出し防止
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">left</span> <span class="o">&lt;</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="p">{</span> <span class="nx">paddle</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span> <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">right</span> <span class="o">&gt;</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span> <span class="p">{</span> <span class="nx">paddle</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * ブロッククラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Block&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 親クラス指定
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">BLOCK_WIDTH</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">BLOCK_HEIGHT</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * パドルクラス
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;Paddle&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 親クラス指定
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;RectangleShape&#39;</span><span class="p">,</span>
+  <span class="c1">// コンストラクタ
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">({</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="nx">PADDLE_WIDTH</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="nx">PADDLE_HEIGHT</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;silver&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Break Out&#39;</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div><p><!-- raw HTML omitted -->[runstantで確認]<!-- raw HTML omitted --></p>
+<h2 id="画面の矩形">画面の矩形</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">screenRect</span> <span class="o">=</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">960</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>画面端との位置判定用に、画面と同じサイズの<strong>Rect</strong>オブジェクトを作成します。<strong>Rect</strong>クラスは、実体は無く、矩形の位置やサイズ情報だけを持ったものと理解して下さい。</li>
+</ul>
+<h2 id="移動処理">移動処理</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js">    <span class="c1">// 画面上でのタッチ移動時
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointmove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// タッチ位置に移動
+</span><span class="c1"></span>      <span class="nx">paddle</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span> <span class="o">|</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">paddleY</span><span class="p">);</span>
+      <span class="c1">// 画面はみ出し防止
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">left</span> <span class="o">&lt;</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="p">{</span> <span class="nx">paddle</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span> <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">paddle</span><span class="p">.</span><span class="nx">right</span> <span class="o">&gt;</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span> <span class="p">{</span> <span class="nx">paddle</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">screenRect</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">};</span>
+</code></pre></div><ul>
+<li>パドルの移動処理です。</li>
+<li>画面上でタッチが移動した時に<strong>onpointmove</strong>イベントが発生しますので、それを拾って関数に処理を書きます。</li>
+<li>引数の<strong>e</strong>にポイント関係の情報が入ってきますので、<strong>e.pointer.x</strong>でタッチされているx座標だけを取得します。</li>
+<li><strong>setPosition</strong>で、パドルをタッチされている位置に移動させます。この時、Y座標は固定したままにします。</li>
+<li>次の<strong>if</strong>文は、パドルが画面からはみ出さないように調整しています。</li>
+<li><strong>Shape</strong>などは、<strong>left、right、top、bottom</strong>プロパティを持っているので、それを活用して上記のような位置合わせを簡単に行うことができます。</li>
+</ul>
+<h2 id="今回はここまで">今回はここまで</h2>
+<p>ここまでで、パドルを動かせるようになり、少しずつブロック崩しらしくなってきました。
+次回は、ボールを追加したいと思います。</p>
+
+    </div>
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  <div class="prevnext-container">
+  
+    <div class="prev-arrow"></div>
+    <div class="prev-text"><a href="https://alkn203.github.io/blog/2020/09/18/breakout-01/">【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第1回 ブロックの配置=</a></div>
+  
+  
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#定数とpaddleクラスを定義する">定数とPaddleクラスを定義する</a></li>
+    <li><a href="#定数">定数</a></li>
+    <li><a href="#パドルクラス">パドルクラス</a></li>
+    <li><a href="#パドルの配置">パドルの配置</a></li>
+    <li><a href="#パドルの移動処理">パドルの移動処理</a></li>
+    <li><a href="#画面の矩形">画面の矩形</a></li>
+    <li><a href="#移動処理">移動処理</a></li>
+    <li><a href="#今回はここまで">今回はここまで</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
