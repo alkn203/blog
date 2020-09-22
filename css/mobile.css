@@ -70,7 +70,7 @@ th {
 /* Header Section */
 .header {
   text-align: center;
-  grid-column: 1 / 13;
+  grid-column: 2 / 12;
   grid-row: 1 / 2;
 }
 /* Site title h1 */
@@ -206,7 +206,7 @@ nav.pagination-single a {
 }
 
 .footer {
-  grid-column: 1 / 13;
+  grid-column: 2 / 12;
   grid-row: 4 / 5;
   /* Footer Sub Grid */
   display: grid;
