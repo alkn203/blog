@@ -63,7 +63,7 @@ th {
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 80px 1fr 1fr 1fr;
+  grid-template-rows: 80px 1fr 20px 20px;
   grid-gap: 20px;
 }
 
@@ -99,7 +99,7 @@ th {
 .single-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 40px 1fr;
+  grid-template-rows: 40px 20px 1fr;
   grid-gap: 30px;
 }
 
@@ -109,12 +109,17 @@ th {
 }
 
 .single-modified {
-  display: none;
+  grid-column: 1 / 13;
+  grid-row: 2 / 3;
+}
+
+.single-modified:before {
+  content: "Last Modified: "
 }
 
 .single-content {
   grid-column: 1 / 13;
-  grid-row: 2 / 3;
+  grid-row: 3 / 4;
   line-height: 1.6em;
 }
 
