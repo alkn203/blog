@@ -82,10 +82,6 @@ th {
 .header-menu {
   display: none;
 }
-
-.header-profile {
-  display: none;
-}
 /* Sidebar Section */
 .sidebar {
   display: none;
@@ -154,16 +150,9 @@ th {
 }
 
 .footer {
+  text-align: center;
   grid-column: 2 / 12;
   grid-row: 4 / 5;
-  /* Footer Sub Grid */
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 10px;
-}
-
-.copyright {
-  grid-column: 7 / 8;
 }
 
 .summary-container {
