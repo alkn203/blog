@@ -143,36 +143,14 @@ th {
   padding-left: 10px;
 }
 /* Single Pasination */
-.prevnext-container {
-  display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-gap: 10px;
+.prevnext ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.prev-arrow {
-  grid-column: 1 / 2;
-  text-align: right;
-}
-
-.prev-arrow:before {
-  content: "<<";
-}
-
-.prev-text {
-  grid-column: 2 / 3;
-}
-
-.next-text {
-  grid-column: 3 / 4;
-  text-align: right;
-}
-
-.next-arrow {
-  grid-column: 4 / 5;
-}
-
-.next-arrow:after {
-  content: ">>";
+.prevnext ul li {
+  display: inline;
+  padding-left: 10px;
 }
 
 .footer {
