@@ -218,6 +218,11 @@ th {
   grid-row: 4 / 5;
 }
 
+.footer-profile-image img {
+  width: 32px;
+  height: 32px;
+}
+
 .summary-container {
   display: grid;
   grid-template-columns: 64px 1fr;
