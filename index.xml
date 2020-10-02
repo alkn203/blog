@@ -6,10 +6,22 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 19 Sep 2020 20:55:06 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 20:55:06 +0900</lastBuildDate>
     
 	<atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第3回 ボールの作成=</title>
+      <link>https://alkn203.github.io/blog/2020/09/20/breakout-03/</link>
+      <pubDate>Sun, 20 Sep 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/09/20/breakout-03/</guid>
+      <description>はじめに 前回は、プレイヤーが操作するパドルを作成しました。今回は、ブロック崩しの肝とも言えるボールを作成したいと思います。
+runstantで確認
+コードは以下のとおりです。
+// グローバルに展開 phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; var PADDLE_WIDTH = BLOCK_WIDTH * 1.5; var PADDLE_HEIGHT = BLOCK_HEIGHT; var BALL_RADIUS = BLOCK_WIDTH / 8; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // ブロックグループ  this.blockGroup = DisplayElement().</description>
+    </item>
     
     <item>
       <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第2回 パドルの作成=</title>
