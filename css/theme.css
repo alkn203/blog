@@ -136,38 +136,14 @@ th {
   grid-column: 3 / 11;
   grid-row: 2 / 3;
 }
-
 /* Single Section */
-.single-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 30px 20px 1fr;
-  grid-gap: 10px;
-}
-
-.single-title {
-  grid-column: 1 / 13;
-  grid-row: 1 / 2;
-}
-
-.single-modified {
-  grid-column: 10 / 13;
-  grid-row: 2 / 3;
-}
-
-.single-modified:before {
-  content: "Last Modified: "
-}
-
 .single-content {
-  grid-column: 1 / 13;
-  grid-row: 3 / 4;
   line-height: 1.6em;
 }
 
 .tocbar {
   grid-column: 11 / 13;
-  /*  grid-row: 2 / 4; */
+  grid-row: 2 / 4;
   height: 400px;
   position: -webkit-sticky;
   position: sticky;

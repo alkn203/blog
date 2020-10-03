@@ -92,30 +92,7 @@ th {
   grid-row: 2 / 3;
 }
 /* Single Section */
-.single-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 40px 20px 1fr;
-  grid-gap: 30px;
-}
-
-.single-title {
-  grid-column: 1 / 13;
-  grid-row: 1 / 2;
-}
-
-.single-modified {
-  grid-column: 1 / 13;
-  grid-row: 2 / 3;
-}
-
-.single-modified:before {
-  content: "Last Modified: "
-}
-
 .single-content {
-  grid-column: 1 / 13;
-  grid-row: 3 / 4;
   line-height: 1.6em;
 }
 
