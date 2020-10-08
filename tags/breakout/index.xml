@@ -6,7 +6,19 @@
     <description>Recent content in breakout on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 04 Oct 2020 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/breakout/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Oct 2020 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/breakout/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=最終回 ゲームオーバーとクリア=</title>
+      <link>https://alkn203.github.io/blog/2020/10/08/breakout-06/</link>
+      <pubDate>Thu, 08 Oct 2020 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/10/08/breakout-06/</guid>
+      <description>はじめに 前回は、Tweenerを使ったアニメーション処理を追加しました。今回は最終回として、ゲームオーバーとクリア処理を追加したいと思います。
+runstantで確認
+ゲームオーバー処理 ボールが画面下に落下したら、GAME OVERという文字を表示してタイトル画面に戻るようにします。 コードは以下のとおりです。
+// グローバルに展開 phina.globalize(); /* * 定数 */ var BLOCK_WIDTH = 40 * 2; var BLOCK_HEIGHT = 60 / 2; var PADDLE_WIDTH = BLOCK_WIDTH * 1.5; var PADDLE_HEIGHT = BLOCK_HEIGHT; var BALL_RADIUS = BLOCK_WIDTH / 8; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // ブロックグループ  this.</description>
+    </item>
+    
     <item>
       <title>【phina.js】ゲーム作成チュートリアル（ブロック崩し）=第5回 Tweenerアニメーション=</title>
       <link>https://alkn203.github.io/blog/2020/10/04/breakout-05/</link>
