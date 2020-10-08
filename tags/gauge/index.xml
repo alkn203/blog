@@ -6,11 +6,7 @@
     <description>Recent content in gauge on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Jul 2019 20:55:06 +0900</lastBuildDate>
-    
-	<atom:link href="https://alkn203.github.io/blog/tags/gauge/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 01 Jul 2019 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/gauge/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【phina.js】タイマーゲージを作ってみた</title>
       <link>https://alkn203.github.io/blog/2019/07/01/phina-timergauge/</link>

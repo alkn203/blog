@@ -6,11 +6,7 @@
     <description>Recent content in extension on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 03 Jan 2020 20:55:06 +0900</lastBuildDate>
-    
-	<atom:link href="https://alkn203.github.io/blog/tags/extension/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 03 Jan 2020 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/extension/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【phina.js】Mapクラスを作ってみた</title>
       <link>https://alkn203.github.io/blog/2020/01/03/phina-map-class/</link>
