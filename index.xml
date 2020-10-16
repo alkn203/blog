@@ -6,7 +6,18 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 16 Oct 2020 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Oct 2020 20:56:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【phina.js】ゲーム作成チュートリアル（マインスイーパー）=第４回 パネルを連鎖で開く=</title>
+      <link>https://alkn203.github.io/blog/2020/10/16/minesweeper-04/</link>
+      <pubDate>Fri, 16 Oct 2020 20:56:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/10/16/minesweeper-04/</guid>
+      <description>今回の目標 前回はパネルを開くと周りにある爆弾の数が表示されるようにしました。今回は、周りに爆弾がない場合にパネルを連鎖で開くようにします。
+openPanel関数 // パネルを開く処理 openPanel: function(panel) { (略) // パネルに数を表示  panel.num = bombs === 0 ? &amp;#39;&amp;#39; : bombs; Label({ text: panel.num, fill: &amp;#39;white&amp;#39;, }).addChildTo(panel); panel.fill = &amp;#39;gray&amp;#39;; // 周りに爆弾がなければ再帰的に調べる  if (bombs === 0) { indexs.each(function(i) { indexs.each(function(j) { var pos = Vector2(panel.x + i * GRID_SIZE, panel.y + j * GRID_SIZE); var target = self.getPanel(pos); target &amp;amp;&amp;amp; self.openPanel(target); }); }); } }, 周りに爆弾がない場合、現在のパネルを起点にしてgetPanelを再帰呼び出しします。 今回の変更点はこれだけです。
+今回はここまで ここまでで、パネルを連鎖で開くことができるようになりました。 段々と形になってきたと思いますが、爆弾も開けたりと全然ゲームになっていません。 次回は、ゲームオーバーとクリア処理を追加します。</description>
+    </item>
+    
     <item>
       <title>【phina.js】ゲーム作成チュートリアル（マインスイーパー）=第3回 パネルを開く=</title>
       <link>https://alkn203.github.io/blog/2020/10/16/minesweeper-03/</link>
