@@ -8,6 +8,17 @@
     <language>ja</language>
     <lastBuildDate>Sat, 17 Oct 2020 20:56:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/minesweeper/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>【phina.js】ゲーム作成チュートリアル（マインスイーパー）=最終回 マーク機能の追加=</title>
+      <link>https://alkn203.github.io/blog/2020/10/17/minesweeper-06/</link>
+      <pubDate>Sat, 17 Oct 2020 20:56:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2020/10/17/minesweeper-06/</guid>
+      <description>今回の目標 前回ではゲームオーバーとクリア処理を追加しました。今回は最終回で、マーク機能を追加します。マーク機能とは、自分で爆弾と判断したパネルをマークして開けないようにする機能です。
+runstantで確認
+マーク機能の追加 MainSceneの変更点 // メインシーン  phina.define(&amp;#39;MainScene&amp;#39;, { superClass: &amp;#39;DisplayScene&amp;#39;, // コンストラクタ  init: function() { // 親クラス初期化  （略） // ピース配置  PANEL_NUM_XY.times(function(spanX) { PANEL_NUM_XY.times(function(spanY) { // パネル作成  （略） // パネルタッチ時  panel.onpointstart = function() { // マークモードなら  if (self.mode === &amp;#39;mark&amp;#39;) { if (!panel.isOpen &amp;amp;&amp;amp; !panel.isMark) { // マーク追加  if (self.markCount &amp;lt; BOMB_NUM) { Mark().addChildTo(panel); panel.isMark = true; self.markCount++; } } else { if (self.</description>
+    </item>
+    
+    <item>
       <title>【phina.js】ゲーム作成チュートリアル（マインスイーパー）=第５回 ゲームオーバーとクリア処理=</title>
       <link>https://alkn203.github.io/blog/2020/10/17/minesweeper-05/</link>
       <pubDate>Sat, 17 Oct 2020 20:56:06 +0900</pubDate>
