@@ -6,7 +6,11 @@
     <description>Recent content in shooting on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 03 Jul 2019 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/shooting/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Jul 2019 20:55:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://alkn203.github.io/blog/tags/shooting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>【phina.js】2Dシューティングチュートリアル =第12回 エネミーのHP設定など=</title>
       <link>https://alkn203.github.io/blog/2019/07/03/phina-shooting-12/</link>

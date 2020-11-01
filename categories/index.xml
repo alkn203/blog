@@ -5,6 +5,10 @@
     <link>https://alkn203.github.io/blog/categories/</link>
     <description>Recent content in Categories on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language><atom:link href="https://alkn203.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language>
+    
+	<atom:link href="https://alkn203.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

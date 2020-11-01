@@ -12,8 +12,7 @@
   
   <meta name="twitter:card" content="summary" />
   <meta name="og:title" content="【phina.js】ある座標からタッチした座標に向けてオブジェクトを移動させる" />
-  <meta name="og:description" content="はじめに  ゲームでは、指定した方向にオブジェクトを移動させるという処理をしたい場合が結構あると思います。 今回は、画面の中央点からタッチした点に向けてオブジェクトを移動させる処理について、現時点で自分なりにスッキリ書けていると思っているコードを紹介します。  移動方向を方向ベクトルで求める  数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、AからBへの方向ベクトルを求めます。 方向ベクトルは、点Bと点Aの(x、y)座標のそれぞれの差になります。 A(3,4) B(5,6)の場合、AからBへの方向ベクトルはB-Aですので、V(2,2)となります。  phina.geom.Vector2クラスを活用する  phina.jsには、phina.geom.Vector2というベクトルを扱う便利なクラスがあらかじめ用意されています。 今回はVector2.subというベクトルの差を求めるメソッドを使います。   ソース参照： https://github.com/phinajs/phina.js/blob/develop/src/geom/vector2.js#L515
- コード実装 // 画面がタッチされた時  onpointstart: function(e) { // 画面中心座標の位置ベクトル  var center = Vector2(320, 480); // 弾  var bullet = CircleShape({ radius: 8, }).addChildTo(this.bulletGroup); // 位置ベクトルを代入  bullet.position = center; // タッチされた座標の位置ベクトル  var to = Vector2(e.pointer.x, e.pointer.y); // 方向ベクトル計算  var vec = Vector2.sub(to, center); // 正規化して速度を一定にする  var v = vec." />
+  <meta name="og:description" content="はじめに  ゲームでは、指定した方向にオブジェクトを移動させるという処理をしたい場合が結構あると思います。 今回は、画面の中央点からタッチした点に向けてオブジェクトを移動させる処理について、現時点で自分なりにスッキリ書けていると思っているコードを紹介します。  移動方向を方向ベクトルで求める  数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、AからBへの方向ベクトル を求めます。 方向ベクトルは、点Bと点Aの(x、y)座標のそれぞれの差になります。 A(3,4) B(5,6)の場合、AからBへの方向ベクトルはB-Aですので、V(2,2)となります。  phina.geom.Vector2クラスを活用する  phina.js には、phina.geom.Vector2 というベクトルを扱う便利なクラスがあらかじめ用意されています。 今回は Vector2.sub というベクトルの差を求めるメソッドを使います。  コード実装 // 画面がタッチされた時  onpointstart: function(e) { // 画面中心座標の位置ベクトル  var center = Vector2(320, 480); // 弾  var bullet = CircleShape({ radius: 8, }).addChildTo(this.bulletGroup); // 位置ベクトルを代入  bullet.position = center; // タッチされた座標の位置ベクトル  var to = Vector2(e.pointer.x, e.pointer.y); // 方向ベクトル計算  var vec = Vector2.sub(to, center); // 正規化して速度を一定にする  var v = vec." />
   <meta name="og:image" content="https://alkn203.github.io/blog/2020/10/23/phina-movedirection/movedirection.png" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2020/10/23/phina-movedirection/" />
   <meta name="twitter:site" content="@alkn203" />
@@ -87,7 +86,7 @@
       
   <div class="single-title">
     <h1>【phina.js】ある座標からタッチした座標に向けてオブジェクトを移動させる</h1>
-    <p>Last Modified:2020-10-23</p>  
+    <p>Last Modified:2020-10-31</p>  
   </div>
   <div class="single-content">
     
@@ -99,18 +98,15 @@
 <p><img src="movedirection.png" alt="movedirection.png"></p>
 <h2 id="移動方向を方向ベクトルで求める">移動方向を方向ベクトルで求める</h2>
 <ul>
-<li>数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、<strong>AからBへの方向ベクトル</strong>を求めます。</li>
+<li>数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、<strong>AからBへの方向ベクトル</strong> を求めます。</li>
 <li>方向ベクトルは、点Bと点Aの(x、y)座標のそれぞれの差になります。</li>
 <li>A(3,4) B(5,6)の場合、AからBへの方向ベクトルはB-Aですので、V(2,2)となります。</li>
 </ul>
 <h2 id="phinageomvector2クラスを活用する">phina.geom.Vector2クラスを活用する</h2>
 <ul>
-<li><strong>phina.js</strong>には、<strong>phina.geom.Vector2</strong>というベクトルを扱う便利なクラスがあらかじめ用意されています。</li>
-<li>今回は<strong>Vector2.sub</strong>というベクトルの差を求めるメソッドを使います。</li>
+<li><strong>phina.js</strong> には、<strong>phina.geom.Vector2</strong> というベクトルを扱う便利なクラスがあらかじめ用意されています。</li>
+<li>今回は <strong>Vector2.sub</strong> というベクトルの差を求めるメソッドを使います。</li>
 </ul>
-<blockquote>
-<p>ソース参照： <a href="https://github.com/phinajs/phina.js/blob/develop/src/geom/vector2.js#L515">https://github.com/phinajs/phina.js/blob/develop/src/geom/vector2.js#L515</a></p>
-</blockquote>
 <h2 id="コード実装">コード実装</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 画面がタッチされた時
 </span><span class="c1"></span>  <span class="nx">onpointstart</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -134,10 +130,10 @@
 
 </code></pre></div><ul>
 <li>ベクトルを扱うためには、座標値を<strong>Vector2</strong>クラスのオブジェクトにする必要があります。</li>
-<li><em>Shape</em>クラスなどの<strong>position</strong>プロパティは<strong>Vector2</strong>型なので、そのまま代入できます。</li>
-<li>タッチされた座標を同じく<strong>Vector2</strong>にして、<strong>sub</strong>メソッドで方向ベクトルを計算しています。</li>
-<li>そのままだと速度にバラツキが生じるので、<strong>normalize</strong>メソッドでベクトルを正規化してから<strong>mul</strong>メソッドで速度を乗じています。</li>
-<li>最後に、移動ベクトルを<strong>Physical</strong>クラスの<strong>velocity</strong>プロパティに代入することで、オブジェクトを移動させています。</li>
+<li><strong>Shape</strong> クラスなどの <strong>position</strong> プロパティは <strong>Vector2</strong> 型なので、そのまま代入できます。</li>
+<li>タッチされた座標を同じく <strong>Vector2</strong> にして、<strong>sub</strong> メソッドで方向ベクトルを計算しています。</li>
+<li>そのままだと速度にバラツキが生じるので、<strong>normalize</strong> メソッドでベクトルを正規化してから <strong>mul</strong> メソッドで速度を乗じています。</li>
+<li>最後に、移動ベクトルを <strong>Physical</strong> クラスの <strong>velocity</strong> プロパティに代入することで、オブジェクトを移動させています。</li>
 </ul>
 <h2 id="ソースコード全体">ソースコード全体</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// グローバルに展開
@@ -206,7 +202,7 @@
 </span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div><h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/6b5734ab">https://runstant.com/alkn203/projects/6b5734ab</a></p>
+<p><a href="https://runstant.com/alkn203/projects/6b5734ab">タッチした方向にオブジェクトを移動させる</a></p>
 
   </div>
 

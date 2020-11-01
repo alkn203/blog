@@ -5,15 +5,18 @@
     <link>https://alkn203.github.io/blog/tips/</link>
     <description>Recent content in Tips on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language>
+    
+	<atom:link href="https://alkn203.github.io/blog/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>【phina.js】ある座標からタッチした座標に向けてオブジェクトを移動させる</title>
       <link>https://alkn203.github.io/blog/2020/10/23/phina-movedirection/</link>
       <pubDate>Fri, 23 Oct 2020 20:55:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/2020/10/23/phina-movedirection/</guid>
-      <description>はじめに  ゲームでは、指定した方向にオブジェクトを移動させるという処理をしたい場合が結構あると思います。 今回は、画面の中央点からタッチした点に向けてオブジェクトを移動させる処理について、現時点で自分なりにスッキリ書けていると思っているコードを紹介します。  移動方向を方向ベクトルで求める  数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、AからBへの方向ベクトルを求めます。 方向ベクトルは、点Bと点Aの(x、y)座標のそれぞれの差になります。 A(3,4) B(5,6)の場合、AからBへの方向ベクトルはB-Aですので、V(2,2)となります。  phina.geom.Vector2クラスを活用する  phina.jsには、phina.geom.Vector2というベクトルを扱う便利なクラスがあらかじめ用意されています。 今回はVector2.subというベクトルの差を求めるメソッドを使います。   ソース参照： https://github.com/phinajs/phina.js/blob/develop/src/geom/vector2.js#L515
- コード実装 // 画面がタッチされた時  onpointstart: function(e) { // 画面中心座標の位置ベクトル  var center = Vector2(320, 480); // 弾  var bullet = CircleShape({ radius: 8, }).addChildTo(this.bulletGroup); // 位置ベクトルを代入  bullet.position = center; // タッチされた座標の位置ベクトル  var to = Vector2(e.pointer.x, e.pointer.y); // 方向ベクトル計算  var vec = Vector2.sub(to, center); // 正規化して速度を一定にする  var v = vec.</description>
+      <description>はじめに  ゲームでは、指定した方向にオブジェクトを移動させるという処理をしたい場合が結構あると思います。 今回は、画面の中央点からタッチした点に向けてオブジェクトを移動させる処理について、現時点で自分なりにスッキリ書けていると思っているコードを紹介します。  移動方向を方向ベクトルで求める  数学の話にはなりますが、例えば、点Aから点Bへ向かってオブジェクトを移動させたい場合は、AからBへの方向ベクトル を求めます。 方向ベクトルは、点Bと点Aの(x、y)座標のそれぞれの差になります。 A(3,4) B(5,6)の場合、AからBへの方向ベクトルはB-Aですので、V(2,2)となります。  phina.geom.Vector2クラスを活用する  phina.js には、phina.geom.Vector2 というベクトルを扱う便利なクラスがあらかじめ用意されています。 今回は Vector2.sub というベクトルの差を求めるメソッドを使います。  コード実装 // 画面がタッチされた時  onpointstart: function(e) { // 画面中心座標の位置ベクトル  var center = Vector2(320, 480); // 弾  var bullet = CircleShape({ radius: 8, }).addChildTo(this.bulletGroup); // 位置ベクトルを代入  bullet.position = center; // タッチされた座標の位置ベクトル  var to = Vector2(e.pointer.x, e.pointer.y); // 方向ベクトル計算  var vec = Vector2.sub(to, center); // 正規化して速度を一定にする  var v = vec.</description>
     </item>
     
     <item>
