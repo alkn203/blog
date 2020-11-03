@@ -141,6 +141,10 @@ th {
   line-height: 1.6em;
 }
 
+.single-content a {
+  color: #29abe2;
+}
+
 .tocbar {
   grid-column: 11 / 13;
   grid-row: 2 / 4;
