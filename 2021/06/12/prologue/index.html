@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    はじめに | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="はじめに" />
+  <meta name="og:description" content="phina.jsについて 自分なりにphina.jsについて書いたエントリーです。 https://zenn.dev/alkn203/articles/phina-start-guide
+phina.jsの開発環境を構築する  このTips集では、Webブラウザ上でコーディング・実行が可能なrunstantを使用してますので、基本的に開発環境として必要なものはWebブラウザだけです。 自分の好きなエディタを使ってローカルで開発することも可能ですが、クライアントサイドで実行されるjavascriptは、セキュリティ上の理由からローカルファイルへのアクセスが制限されています。 対応策としては、Visual Studio Codeなどのエディタの拡張機能にあるローカルサーバーを使う方法があります。  phina.jsを読み込む runstantのView(html) タブのコードは以下のようになっています。
+&lt;!doctype html&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&#34;utf-8&#34; /&gt; &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, user-scalable=no&#34; /&gt; &lt;meta name=&#34;apple-mobile-web-app-capable&#34; content=&#34;yes&#34; /&gt; &lt;title&gt;${title}&lt;/title&gt; &lt;meta name=&#34;description&#34; content=&#34;${description}&#34; /&gt; &lt;style&gt;${style}&lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;&gt;&lt;/script&gt; &lt;script&gt;${script}&lt;/script&gt; &lt;/body&gt; &lt;/html&gt;  script タグで上記のように読み込みます。rawgit はサービスが終了したので、CDN として jsdeliver を使用しています。 phina.jsのバージョンは現在0.2.3が最新ですので、特段の事情がない限りは最新版を使用することを強くおすすめします。  " />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/12/prologue/" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/12/prologue/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/12/prologue/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips(Qiita)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>はじめに</h1>
+    <p>Last Modified:2021-6-12</p>  
+  </div>
+  <div class="single-content">
+    
+      <h2 id="phinajsについて">phina.jsについて</h2>
+<p>自分なりに<strong>phina.js</strong>について書いたエントリーです。
+<a href="https://zenn.dev/alkn203/articles/phina-start-guide">https://zenn.dev/alkn203/articles/phina-start-guide</a></p>
+<h2 id="phinajsの開発環境を構築する">phina.jsの開発環境を構築する</h2>
+<ul>
+<li>このTips集では、Webブラウザ上でコーディング・実行が可能な<a href="https://runstant.com">runstant</a>を使用してますので、基本的に開発環境として必要なものはWebブラウザだけです。</li>
+<li>自分の好きなエディタを使ってローカルで開発することも可能ですが、クライアントサイドで実行されるjavascriptは、セキュリティ上の理由からローカルファイルへのアクセスが制限されています。</li>
+<li>対応策としては、Visual Studio Codeなどのエディタの拡張機能にあるローカルサーバーを使う方法があります。</li>
+</ul>
+<h2 id="phinajsを読み込む">phina.jsを読み込む</h2>
+<p><strong>runstantのView(html)</strong> タブのコードは以下のようになっています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;!</span><span class="nx">doctype</span> <span class="nx">html</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;viewport&#34;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&#34;width=device-width, user-scalable=no&#34;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;apple-mobile-web-app-capable&#34;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&#34;yes&#34;</span> <span class="o">/&gt;</span>
+
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;description&#34;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&#34;${description}&#34;</span> <span class="o">/&gt;</span>
+
+    <span class="o">&lt;</span><span class="nx">style</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">{</span><span class="nx">style</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/style&gt;</span>
+  <span class="o">&lt;</span><span class="err">/head&gt;</span>
+  <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+    <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">{</span><span class="nx">script</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+  <span class="o">&lt;</span><span class="err">/body&gt;</span>
+<span class="o">&lt;</span><span class="err">/html&gt;</span>
+</code></pre></div><ul>
+<li><strong>script</strong> タグで上記のように読み込みます。<strong>rawgit</strong> はサービスが終了したので、<strong>CDN</strong> として <strong>jsdeliver</strong> を使用しています。</li>
+<li><strong>phina.js</strong>のバージョンは現在<strong>0.2.3</strong>が最新ですので、特段の事情がない限りは最新版を使用することを強くおすすめします。</li>
+</ul>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/11/start-guide/">前の記事</a></li>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#phinajsについて">phina.jsについて</a></li>
+    <li><a href="#phinajsの開発環境を構築する">phina.jsの開発環境を構築する</a></li>
+    <li><a href="#phinajsを読み込む">phina.jsを読み込む</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2020&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

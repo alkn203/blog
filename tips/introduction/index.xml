@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introduction on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/introduction/</link>
+    <description>Recent content in Introduction on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 12 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/introduction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>はじめに</title>
+      <link>https://alkn203.github.io/blog/2021/06/12/prologue/</link>
+      <pubDate>Sat, 12 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/12/prologue/</guid>
+      <description>phina.jsについて 自分なりにphina.jsについて書いたエントリーです。 https://zenn.dev/alkn203/articles/phina-start-guide
+phina.jsの開発環境を構築する  このTips集では、Webブラウザ上でコーディング・実行が可能なrunstantを使用してますので、基本的に開発環境として必要なものはWebブラウザだけです。 自分の好きなエディタを使ってローカルで開発することも可能ですが、クライアントサイドで実行されるjavascriptは、セキュリティ上の理由からローカルファイルへのアクセスが制限されています。 対応策としては、Visual Studio Codeなどのエディタの拡張機能にあるローカルサーバーを使う方法があります。  phina.jsを読み込む runstantのView(html) タブのコードは以下のようになっています。
+&amp;lt;!doctype html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;utf-8&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, user-scalable=no&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;apple-mobile-web-app-capable&amp;#34; content=&amp;#34;yes&amp;#34; /&amp;gt; &amp;lt;title&amp;gt;${title}&amp;lt;/title&amp;gt; &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;${description}&amp;#34; /&amp;gt; &amp;lt;style&amp;gt;${style}&amp;lt;/style&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;script src=&amp;#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt;${script}&amp;lt;/script&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  script タグで上記のように読み込みます。rawgit はサービスが終了したので、CDN として jsdeliver を使用しています。 phina.jsのバージョンは現在0.2.3が最新ですので、特段の事情がない限りは最新版を使用することを強くおすすめします。  </description>
+    </item>
+    
+    <item>
+      <title>phina.js事始め【改】</title>
+      <link>https://alkn203.github.io/blog/2021/06/11/start-guide/</link>
+      <pubDate>Fri, 11 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/11/start-guide/</guid>
+      <description>ロゴはphinajs.comから借用
+はじめに これまでphina.jsに関するいくつかの記事を投稿していますが、phina.js自体について書いていなかったので、ここで簡単に紹介したいと思います。
+phina.jsについて 趣味でプログラミングをしている私が日々楽しんで使っている国産のjavascriptゲームライブラリです。以前からjavascriptでゲーム開発をしている方は知っているかもしれませんが、tmlib.js の後継ライブラリになります。とりあえずどのようなものか知りたい方には、以下の紹介記事が参考になるかと思います。
+ 本日 JavaScript ゲームライブラリ『phina.js』をリリースしました! by phi さん phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ by simiraaaa さん はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！ by 株式会社LIG さん  phina.jsで作ることができるゲーム 端的に言うと、現時点では2Dゲーム ならジャンル問わず（やる気さえあれば）大抵のものを作ることが出来ると思います。実際に作られたゲームを見てみたいという方は、以下のサイトがおすすめです。
+  かちゃコム by utyo さん phina.jsで作られた様々なミニゲームがあります。どれも良く出来ていて熱中してしまいます。
+  Quest for the Tanelorn by minimo さん スーパーファミコン時代を彷彿させる2Dアクションゲームです。作り込みのレベルが高いです。
+  気に入っているところ 以下は個人の主観ですが、他のユーザーも少なからず感じているのではないかと思います。
+同じ処理でも少ないコード量でコーディングできる 全てのゲームライブラリと比較したわけではありませんが、phina.js で書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。
+ソースが読みやすい phina.jsのソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。
+実行確認までのステップが短い Web上でコーディングできるrunstantを使うことで、簡単に自分のプログラムの実行結果が確認できます。
+配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している これまでzennで書いた記事でも触れていますが、コーディングする上で細かな配慮がされた仕様になっています。
+とにかく使ってみたい方へ   Githubのリポジトリに導入方法が記載されていますが、開発者向けの内容に近いので、その辺り不慣れな方には少し敷居が高く感じられるかもしれません。
+  一番簡単な方法は、runstant へのユーザー登録が必要ですが、runstantに用意されたテンプレートをForkすることです。
+  javascriptで作られていますので、Webブラウザと自分の好きなエディタさえあれば、複雑な環境構築の必要もなくゲーム開発を始めることができます。</description>
+    </item>
+    
+  </channel>
+</rss>
