@@ -8,12 +8,23 @@
     <language>ja</language>
     <lastBuildDate>Sat, 12 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Shapeをシーンに表示する</title>
+      <link>https://alkn203.github.io/blog/2021/06/12/add-shape/</link>
+      <pubDate>Sat, 12 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/12/add-shape/</guid>
+      <description>Shapeをシーンに表示する phina.jsのオブジェクトの基本形であるShapeを画面に表示します。
+var shape = Shape().addChildTo(this);  Shapeクラスのコンストラクタで生成します。コンストラクタの前にnewをつける必要はありません。 addChildTo(this) で現在の Scene に追加します。this は MainScene を指しています。 位置が指定されていない時は、画面左上(0,0)に表示されます。 変数に代入しなくても表示されますが、後にプロパティを操作することが多いので、とりあえずは変数に代入しておいた方が良いでしょう。 使用頻度は低いですがthis.addChild(shape)と書くこともできます。  サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加  var shape = Shape().addChildTo(this); }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &amp;#39;main&amp;#39;, }); // fps表示  //app.</description>
+    </item>
+    
+    <item>
       <title>はじめに</title>
       <link>https://alkn203.github.io/blog/2021/06/12/prologue/</link>
       <pubDate>Sat, 12 Jun 2021 20:55:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/2021/06/12/prologue/</guid>
-      <description>phina.jsについて 自分なりにphina.jsについて書いたエントリーです。 https://zenn.dev/alkn203/articles/phina-start-guide
+      <description>phina.jsについて 自分なりにphina.jsについて書いたエントリーです。
+phina.js事始め【改】
 phina.jsの開発環境を構築する  このTips集では、Webブラウザ上でコーディング・実行が可能なrunstantを使用してますので、基本的に開発環境として必要なものはWebブラウザだけです。 自分の好きなエディタを使ってローカルで開発することも可能ですが、クライアントサイドで実行されるjavascriptは、セキュリティ上の理由からローカルファイルへのアクセスが制限されています。 対応策としては、Visual Studio Codeなどのエディタの拡張機能にあるローカルサーバーを使う方法があります。  phina.jsを読み込む runstantのView(html) タブのコードは以下のようになっています。
 &amp;lt;!doctype html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;utf-8&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, user-scalable=no&amp;#34; /&amp;gt; &amp;lt;meta name=&amp;#34;apple-mobile-web-app-capable&amp;#34; content=&amp;#34;yes&amp;#34; /&amp;gt; &amp;lt;title&amp;gt;${title}&amp;lt;/title&amp;gt; &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;${description}&amp;#34; /&amp;gt; &amp;lt;style&amp;gt;${style}&amp;lt;/style&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;script src=&amp;#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt;${script}&amp;lt;/script&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  script タグで上記のように読み込みます。rawgit はサービスが終了したので、CDN として jsdeliver を使用しています。 phina.jsのバージョンは現在0.2.3が最新ですので、特段の事情がない限りは最新版を使用することを強くおすすめします。  </description>
     </item>
