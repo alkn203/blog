@@ -5,8 +5,20 @@
     <link>https://alkn203.github.io/blog/tips/shape/</link>
     <description>Recent content in Shape on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
-    <lastBuildDate>Sat, 12 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/shape/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/shape/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shapeの位置を指定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/13/locate-shape/</link>
+      <pubDate>Sun, 13 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/13/locate-shape/</guid>
+      <description>Shapeの位置指定 Shapeの位置指定には複数の方法があります。
+x,yプロパティに直接指定 // Shapeを作成してシーンに追加 var shape = Shape().addChildTo(this); // 位置指定 shape.x = 320; shape.y = 480; setPosition関数で一括指定 setPosition 関数を使えば、 x, y の値を一括で指定することができ、生成から一気にチェインメソッドで繋げて書くこともできるので便利です。
+var shape = Shape().addChildTo(this).setPosition(320, 480); Shapeのコンストラクタで指定 var shape = Shape({ x: 320, y: 480 }).addChildTo(this) 移動量で指定 moveBy関数を使えば、x, yの移動量で位置を変更することができます。
+shape.setPosition(320, 480).moveBy(100, 200); ベクトル値の加算で指定 Vector2クラスを使ってベクトル値の加算で位置指定する方法もあります。
+var v = Vector2(100, 200); shape.position.add(v); サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
     <item>
       <title>Shapeをシーンに表示する</title>
       <link>https://alkn203.github.io/blog/2021/06/12/add-shape/</link>
