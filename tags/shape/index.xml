@@ -6,7 +6,21 @@
     <description>Recent content in shape on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 13 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/shape/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Jun 2021 21:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/shape/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shapeのサイズを指定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/13/resize-shape/</link>
+      <pubDate>Sun, 13 Jun 2021 21:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/13/resize-shape/</guid>
+      <description>Shapeのサイズ指定 Shapeのサイズ指定には複数の方法があります。
+幅指定 幅はwidthプロパティで指定します。
+shape.width = 128; 高さ指定 高さはheightプロパティで指定します。
+shape.height = 128; 幅・高さを一括指定 setSize関数を使えば、幅と高さを一括で指定できます。
+shape.setSize(128, 256); コンストラクタ内で指定 位置指定と同じくコンストラクタ内で幅・高さを指定することも可能です。
+var shape = Shape({ // 位置・幅・高さ指定  x: 320, y: 480, width: 128, height: 256, }).addChildTo(this); サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 幅  var shape = Shape().</description>
+    </item>
+    
     <item>
       <title>Shapeの位置を指定する</title>
       <link>https://alkn203.github.io/blog/2021/06/13/locate-shape/</link>
