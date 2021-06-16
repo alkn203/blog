@@ -7,6 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/shape/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Shapeを回転させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/15/rotate-shape/</link>
+      <pubDate>Tue, 15 Jun 2021 21:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/15/rotate-shape/</guid>
+      <description>Shapeの回転 Shapeの回転角度指定には複数の方法があります。どちらの場合も 度=degreeで指定します。
+rotaitionプロパティに直接指定 // Shapeを作成してシーンに追加 var shape = Shape().addChildTo(this).setPosition(320, 480); // 回転指定 shape.rotation = 45; setRotation関数で指定 setRotation関数を使うと、生成から一気にチェインメソッドで繋げて書くことができます。
+var shape = Shape().addChildTo(this).setPosition(320, 600).setRotation(15); Shapeのコンストラクタで指定 位置などと一緒にコンストラクタでも指定できます。
+var shape = Shape({ x: 320, y: 720, rotation: 60 }).addChildTo(this); 回転アニメーション Shapeのupdate関数でプロパティrotationの値を変更することで、回転アニメーションをさせることができます。
+// スプライト回転 shape.update = function() { shape.rotation++; }; サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
+    <item>
       <title>Shapeのサイズを指定する</title>
       <link>https://alkn203.github.io/blog/2021/06/13/resize-shape/</link>
       <pubDate>Sun, 13 Jun 2021 21:55:06 +0900</pubDate>
