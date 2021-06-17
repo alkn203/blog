@@ -6,7 +6,19 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 16 Jun 2021 19:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shapeを透明・非表示にする</title>
+      <link>https://alkn203.github.io/blog/2021/06/16/alpha-shape/</link>
+      <pubDate>Wed, 16 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/16/alpha-shape/</guid>
+      <description>Shapeの透明度指定 alphaプロパティ Shapeの透明度はalphaプロパティで指定します。デフォルトが1.0で、小さくなるほど透明度が増し、 0で完全に透明になります。
+var shape = Shape().addChildTo(this).setPosition(320, 480); shape.alpha = 0.25; Shapeの非表示 hideメソッド hideメソッドでShapeを非表示にすることができます。
+var shape = Shape().addChildTo(this).setPosition(320, 480); shape.hide(); 透明の場合は、処理上も描画の対象で当たり判定があるのに対し、非表示の場合は、そもそも描画の対象とはならないという違いがあります。
+サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 透明度  var shape3 = Shape().addChildTo(this).setPosition(320, 600); shape3.alpha = 0.25; // 非表示  var shape4 = Shape().</description>
+    </item>
+    
     <item>
       <title>Shapeの背景色を指定する</title>
       <link>https://alkn203.github.io/blog/2021/06/16/color-shape/</link>
@@ -14,7 +26,7 @@
       
       <guid>https://alkn203.github.io/blog/2021/06/16/color-shape/</guid>
       <description>Shapeの背景色指定 Shapeの背景色はbackgroundColorプロパティで指定します。 CSSと同じ感覚で指定できます。
-文字列で指定 shape.backgroundColor = &amp;#39;red&amp;#39;; 16進数で指定 shape.backgroundColor = &amp;#39;#ffff00&amp;#39;; RGB値で指定 shape.backgroundColor = `rgb(0, 255, 255)`; hsl値で指定 shape.backgroundColor = `hsl(300, 75%, 50%)`; サンプルコード /// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 背景色（文字列）  var shape = Shape().addChildTo(this).setPosition(320, 480); shape.backgroundColor = &amp;#39;red&amp;#39;; // 背景色（RGB値）  var shape1 = Shape().</description>
+文字列で指定 shape.backgroundColor = &amp;#39;red&amp;#39;; 16進数で指定 shape.backgroundColor = &amp;#39;#ffff00&amp;#39;; RGB値で指定 shape.backgroundColor = `rgb(0, 255, 255)`; hsl値で指定 shape.backgroundColor = `hsl(300, 75%, 50%)`; サンプルコード  コードを見る /// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 背景色（文字列）  var shape = Shape().addChildTo(this).setPosition(320, 480); shape.backgroundColor = &amp;#39;red&amp;#39;; // 背景色（RGB値）  var shape1 = Shape().</description>
     </item>
     
     <item>
