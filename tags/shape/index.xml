@@ -6,7 +6,43 @@
     <description>Recent content in shape on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 16 Jun 2021 20:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/shape/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jun 2021 21:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/shape/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shapeの種類について知る</title>
+      <link>https://alkn203.github.io/blog/2021/06/18/sort-of-shape/</link>
+      <pubDate>Fri, 18 Jun 2021 21:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/18/sort-of-shape/</guid>
+      <description>Shapeの種類 phina.jsには、以下の種類のShapeが予め用意されています。
+RectangleShape 矩形のShapeです。
+   プロパティ 説明     fill 塗りつぶし色   stroke 縁取り線色   strokeWidth 縁取り線の太さ   cornerRadius 角丸め値    // RectangleShape RectangleShape({ width: 128, height: 128, fill: &amp;#39;red&amp;#39;, stroke: &amp;#39;lime&amp;#39;, strokeWidth: 16, cornerRadius: 16 }).addChildTo(this).setPosition(320, 200); CircleShape 円形のShapeです。
+   プロパティ 説明     fill 塗りつぶし色   stroke 縁取り線色   strokeWidth 縁取り線の太さ   radius 半径    // CircleShape CircleShape({ fill: &amp;#39;green&amp;#39;, stroke: &amp;#39;white&amp;#39;, strokeWidth: 16, radius: 64 }).</description>
+    </item>
+    
+    <item>
+      <title>Shapeを移動させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/18/move-shape/</link>
+      <pubDate>Fri, 18 Jun 2021 21:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/18/move-shape/</guid>
+      <description>Shapeの移動 Shape を始めとしたオブジェクトの移動は、オブジェクトのupdate関数で位置を変更させるのが一般的です。
+update関数で位置を変更する update 関数は毎フレーム呼ばれるので、関数内で以下のように記述することで Shape を移動させることができます。
+// 移動 shape.update = function() { shape.x += 2; shape.y += 2; }; moveBy関数を使った移動 オブジェクトに用意されているmoveBy関数を使って移動させることもできます。
+// 移動 shape.update = function() { shape.moveBy(-2, -2); }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加  var shape = Shape().</description>
+    </item>
+    
+    <item>
+      <title>Shapeの原点を変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/18/change-shape-origin/</link>
+      <pubDate>Fri, 18 Jun 2021 20:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/18/change-shape-origin/</guid>
+      <description>Shapeの原点 phina.jsでは、Shapeを始めとしたオブジェクトの原点はオブジェクトの中心となっており、配置や回転処理などではこの原点が基準となります。 この原点は変更することができます。
+原点の位置と変更 オブジェクトの原点はsetOriginで指定でき、位置関係は以下のようになっています。
+   指定値 位置     (0.5, 0.5) 中心（デフォルト）   (0, 0) 左上   (0, 1) 左下   (1, 0) 右上   (1, 1) 右下    例えばShapeの原点を左上にしたい場合、以下のようにします。
+shape.setOrigin(0, 0); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.</description>
+    </item>
+    
     <item>
       <title>Shapeを透明・非表示にする</title>
       <link>https://alkn203.github.io/blog/2021/06/16/alpha-shape/</link>

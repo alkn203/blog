@@ -5,21 +5,23 @@
   
   <meta charset="UTF-8">
   <title>
-    Shapeの背景色を指定する | Keep On Coding
+    Shapeの原点を変更する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="Shapeの背景色を指定する" />
-  <meta name="og:description" content="Shapeの背景色指定 Shapeの背景色はbackgroundColorプロパティで指定します。 CSSと同じ感覚で指定できます。
-文字列で指定 shape.backgroundColor = &#39;red&#39;; 16進数で指定 shape.backgroundColor = &#39;#ffff00&#39;; RGB値で指定 shape.backgroundColor = `rgb(0, 255, 255)`; hsl値で指定 shape.backgroundColor = `hsl(300, 75%, 50%)`; サンプルコード  コードを見る /// グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // 背景色（文字列）  var shape = Shape().addChildTo(this).setPosition(320, 480); shape.backgroundColor = &#39;red&#39;; // 背景色（RGB値）  var shape1 = Shape()." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/16/color-shape/color-shape.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/16/color-shape/" />
+  <meta name="og:title" content="Shapeの原点を変更する" />
+  <meta name="og:description" content="Shapeの原点 phina.jsでは、Shapeを始めとしたオブジェクトの原点はオブジェクトの中心となっており、配置や回転処理などではこの原点が基準となります。 この原点は変更することができます。
+原点の位置と変更 オブジェクトの原点はsetOriginで指定でき、位置関係は以下のようになっています。
+   指定値 位置     (0.5, 0.5) 中心（デフォルト）   (0, 0) 左上   (0, 1) 左下   (1, 0) 右上   (1, 1) 右下    例えばShapeの原点を左上にしたい場合、以下のようにします。
+shape.setOrigin(0, 0); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/18/change-shape-origin/change-shape-origin.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/18/change-shape-origin/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/16/color-shape/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/18/change-shape-origin/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -70,26 +72,53 @@
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>Shapeの背景色を指定する</h1>
+    <h1>Shapeの原点を変更する</h1>
     <p>Last Modified:2021-6-18</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="color-shape.png" alt="color-shape"></p>
-<h2 id="shapeの背景色指定">Shapeの背景色指定</h2>
-<p><strong>Shape</strong>の背景色は<strong>backgroundColor</strong>プロパティで指定します。 <strong>CSS</strong>と同じ感覚で指定できます。</p>
-<h4 id="文字列で指定">文字列で指定</h4>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
-</code></pre></div><h4 id="16進数で指定">16進数で指定</h4>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#ffff00&#39;</span><span class="p">;</span>
-</code></pre></div><h4 id="rgb値で指定">RGB値で指定</h4>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="sb">`rgb(0, 255, 255)`</span><span class="p">;</span>
-</code></pre></div><h4 id="hsl値で指定">hsl値で指定</h4>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="sb">`hsl(300, 75%, 50%)`</span><span class="p">;</span>
+      <p><img src="change-shape-origin.gif" alt="change-shape-origin"></p>
+<h2 id="shapeの原点">Shapeの原点</h2>
+<p><strong>phina.js</strong>では、<strong>Shape</strong>を始めとしたオブジェクトの原点はオブジェクトの中心となっており、配置や回転処理などではこの原点が基準となります。
+この原点は変更することができます。</p>
+<h2 id="原点の位置と変更">原点の位置と変更</h2>
+<p>オブジェクトの原点は<strong>setOrigin</strong>で指定でき、位置関係は以下のようになっています。</p>
+<table>
+<thead>
+<tr>
+<th>指定値</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0.5, 0.5)</td>
+<td>中心（デフォルト）</td>
+</tr>
+<tr>
+<td>(0, 0)</td>
+<td>左上</td>
+</tr>
+<tr>
+<td>(0, 1)</td>
+<td>左下</td>
+</tr>
+<tr>
+<td>(1, 0)</td>
+<td>右上</td>
+</tr>
+<tr>
+<td>(1, 1)</td>
+<td>右下</td>
+</tr>
+</tbody>
+</table>
+<p>例えば<strong>Shape</strong>の原点を左上にしたい場合、以下のようにします。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">/// グローバルに展開
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
 </span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
 <span class="cm">/*
 </span><span class="cm"> * メインシーン
@@ -103,15 +132,24 @@
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// 背景色
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
-    <span class="c1">// 背景色（文字列）
+    <span class="c1">// Shapeを作成してシーンに追加
 </span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
-    <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
-    <span class="c1">// 背景色（RGB値）
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape1</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
-    <span class="nx">shape1</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#ffff00&#39;</span><span class="p">;</span>
-    <span class="c1">// 背景色（hsl値）
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape2</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
-    <span class="nx">shape2</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;hsl(300, 75%, 50%)&#39;</span><span class="p">;</span>
+    <span class="c1">// 回転
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">shape</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>  
+    <span class="p">};</span>
+    <span class="c1">// 左上を原点に
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape2</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">240</span><span class="p">).</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="c1">// 回転
+</span><span class="c1"></span>    <span class="nx">shape2</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">shape2</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>  
+    <span class="p">};</span>
+    <span class="c1">// 右下を原点に
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">shape3</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">720</span><span class="p">).</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// 回転
+</span><span class="c1"></span>    <span class="nx">shape3</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">shape3</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>  
+    <span class="p">};</span>
   <span class="p">},</span>
 <span class="p">});</span>
 <span class="cm">/*
@@ -130,7 +168,7 @@
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/017932f4">https://runstant.com/alkn203/projects/017932f4</a></p>
+<p><a href="https://runstant.com/alkn203/projects/20a758db">https://runstant.com/alkn203/projects/20a758db</a></p>
 
   </div>
 
@@ -143,10 +181,10 @@
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/15/scale-shape/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/16/alpha-shape/">前の記事</a></li>
   
   
-    <li><a href="https://alkn203.github.io/blog/2021/06/16/alpha-shape/">次の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/18/move-shape/">次の記事</a></li>
     <li>>></li>
   
   </ul>
@@ -161,11 +199,8 @@
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#shapeの背景色指定">Shapeの背景色指定</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#shapeの原点">Shapeの原点</a></li>
+    <li><a href="#原点の位置と変更">原点の位置と変更</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>
