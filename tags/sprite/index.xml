@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sprite on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/sprite/</link>
+    <description>Recent content in sprite on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 19 Jun 2021 09:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spriteのサイズを指定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/resize_sprite/</link>
+      <pubDate>Sat, 19 Jun 2021 09:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/resize_sprite/</guid>
+      <description>Sprite は、Shape と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。
+Spriteのサイズ指定 // サイズ指定 var sp1 = Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 340); sp1.width = 128; // 一括指定 Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 480).setSize(128, 128); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;skyblue&amp;#39;; // サイズ指定  var sp1 = Sprite(&amp;#39;tomapiko&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>Spriteを表示して位置を指定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/18/locate_sprite/</link>
+      <pubDate>Fri, 18 Jun 2021 23:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/18/locate_sprite/</guid>
+      <description>Spriteをシーンに表示する ゲーム作りで定番のスプライト画像を画面に表示します。
+アセットの定義 スプライトを表示するためには、アセットとして読み込む画像等を以下のように定義する必要があります。
+// アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, };  imageはアセットの種類です。 連想配列の左側にキー名、右側に使用するアセットの場所を書きます。  アセットの読み込み 読み込むためには、main 関数のGameAppのコンストラクタのプロパティassetsに定義したアセットを引き渡します。
+phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &amp;#39;main&amp;#39;, // アセット読み込み  assets: ASSETS, }); // fps表示  //app.enableStats();  // 実行  app.run(); }); Spriteの位置指定 Shapeの位置指定と同様に行うことができます。
+// Sprite  Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 480); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.</description>
+    </item>
+    
+  </channel>
+</rss>
