@@ -6,7 +6,27 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 19 Jun 2021 09:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jun 2021 11:55:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spriteを拡大・縮小させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/scale_sprite/</link>
+      <pubDate>Sat, 19 Jun 2021 11:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/scale_sprite/</guid>
+      <description>Sprite は、Shape と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。
+Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(200, 800); sp4.scaleY = 1.5; // setScale Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(440, 800).setScale(0.5, 0.5); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;skyblue&amp;#39;; // 拡大・縮小  var sp4 = Sprite(&amp;#39;tomapiko&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>Spriteを回転させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/rotate_sprite/</link>
+      <pubDate>Sat, 19 Jun 2021 10:55:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/rotate_sprite/</guid>
+      <description>Sprite は、Shape と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。
+Spriteの回転 // 回転 var sp2 = Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 600); sp2.rotation = 45; // setRotation Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 700).setRotation(15); // 回転アニメーション sp3 = Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 800); sp3.update = function() { sp3.rotation++; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
     <item>
       <title>Spriteのサイズを指定する</title>
       <link>https://alkn203.github.io/blog/2021/06/19/resize_sprite/</link>
