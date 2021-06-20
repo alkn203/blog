@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    フレームアニメーションを設定する | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="フレームアニメーションを設定する" />
+  <meta name="og:description" content="Sprite画像でフレームアニメーションを設定します。
+スプライトシート画像を用意する スプライトシート画像とは、以下のようにアニメーション用のコマをシートの様に並べた画像です。
+ 上の画像だと、横6x縦3の計18コマから成り立っています。 ゲーム作成ではコマのことをフレームと呼ぶことが多いです。  スプライトシート画像を読み込む 通常の画像と同じようにASSETSとして読み込みます。
+// アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;, }, }; フレームアニメーション情報を読み込む  フレームアニメーション情報が定義されたjson形式のファイルを読み込む方法が一般的ですが、今回はファイルからではなくASEETSとして、コード内に定義しています。 コード内に記述して十分に動作確認した後に、外部jsonファイルに保存してアセットとして読み込む方が、開発する上では効率的です。  // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;, }, // スプライトシート  spritesheet: { &#34;tomapiko_ss&#34;: { // フレーム情報  &#34;frame&#34;: { &#34;width&#34;: 64, // 1フレームの画像サイズ（横）  &#34;height&#34;: 64, // 1フレームの画像サイズ（縦）  &#34;cols&#34;: 6, // フレーム数（横）  &#34;rows&#34;: 3, // フレーム数（縦）  }, // アニメーション情報  &#34;animations&#34; : { &#34;walk&#34;: { // アニメーション名  &#34;frames&#34;: [12,13,14], // フレーム番号範囲  &#34;next&#34;: &#34;walk&#34;, // 次のアニメーション  &#34;frequency&#34;: 6, // アニメーション間隔  }, } }, } };  framesにアニメーションに使いたいフレーム番号の範囲を書きます。 0から始まることに注意してください。 nextに次のアニメーションを指定します。同じ名前にするとループします。 frequencyでアニメーションの間隔を指定します。小さくすれば速くなり、大きくすれば遅くなります。  スプライトシート画像の作成 スプライトシート画像は、通常の画像と同じくSpriteクラスを使って作成しますが、アセット名の次の引数で１フレームの画像サイズを指定します。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/frameamimation/frameanimation.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/frameamimation/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/frameamimation/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>フレームアニメーションを設定する</h1>
+    <p>Last Modified:2021-6-19</p>  
+  </div>
+  <div class="single-content">
+    
+      <p><img src="frameanimation.gif" alt="frameanimation"></p>
+<p><strong>Sprite</strong>画像でフレームアニメーションを設定します。</p>
+<h2 id="スプライトシート画像を用意する">スプライトシート画像を用意する</h2>
+<p>スプライトシート画像とは、以下のようにアニメーション用のコマをシートの様に並べた画像です。</p>
+<p><img src="https://storage.googleapis.com/zenn-user-upload/0apyqr2u79w8e2n0yuim6uqlwgp2" alt=""></p>
+<ul>
+<li>上の画像だと、横6x縦3の計18コマから成り立っています。</li>
+<li>ゲーム作成ではコマのことを<strong>フレーム</strong>と呼ぶことが多いです。</li>
+</ul>
+<h2 id="スプライトシート画像を読み込む">スプライトシート画像を読み込む</h2>
+<p>通常の画像と同じように<strong>ASSETS</strong>として読み込みます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 画像
+</span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;tomapiko&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div><h2 id="フレームアニメーション情報を読み込む">フレームアニメーション情報を読み込む</h2>
+<ul>
+<li>フレームアニメーション情報が定義された<strong>json</strong>形式のファイルを読み込む方法が一般的ですが、今回はファイルからではなく<strong>ASEETS</strong>として、コード内に定義しています。</li>
+<li>コード内に記述して十分に動作確認した後に、外部<strong>json</strong>ファイルに保存してアセットとして読み込む方が、開発する上では効率的です。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 画像
+</span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;tomapiko&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="c1">// スプライトシート
+</span><span class="c1"></span>  <span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&#34;tomapiko_ss&#34;</span><span class="o">:</span>
+    <span class="p">{</span>
+      <span class="c1">// フレーム情報
+</span><span class="c1"></span>      <span class="s2">&#34;frame&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="c1">// 1フレームの画像サイズ（横）
+</span><span class="c1"></span>        <span class="s2">&#34;height&#34;</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="c1">// 1フレームの画像サイズ（縦）
+</span><span class="c1"></span>        <span class="s2">&#34;cols&#34;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="c1">// フレーム数（横）
+</span><span class="c1"></span>        <span class="s2">&#34;rows&#34;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1">// フレーム数（縦）
+</span><span class="c1"></span>      <span class="p">},</span>
+      <span class="c1">// アニメーション情報
+</span><span class="c1"></span>      <span class="s2">&#34;animations&#34;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;walk&#34;</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// アニメーション名
+</span><span class="c1"></span>          <span class="s2">&#34;frames&#34;</span><span class="o">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">],</span> <span class="c1">// フレーム番号範囲
+</span><span class="c1"></span>          <span class="s2">&#34;next&#34;</span><span class="o">:</span> <span class="s2">&#34;walk&#34;</span><span class="p">,</span> <span class="c1">// 次のアニメーション
+</span><span class="c1"></span>          <span class="s2">&#34;frequency&#34;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="c1">// アニメーション間隔
+</span><span class="c1"></span>        <span class="p">},</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div><ul>
+<li><strong>frames</strong>にアニメーションに使いたいフレーム番号の範囲を書きます。 <strong>0</strong>から始まることに注意してください。</li>
+<li><strong>next</strong>に次のアニメーションを指定します。同じ名前にするとループします。</li>
+<li><strong>frequency</strong>でアニメーションの間隔を指定します。小さくすれば速くなり、大きくすれば遅くなります。</li>
+</ul>
+<h2 id="スプライトシート画像の作成">スプライトシート画像の作成</h2>
+<p>スプライトシート画像は、通常の画像と同じく<strong>Sprite</strong>クラスを使って作成しますが、アセット名の次の引数で<strong>１フレームの画像サイズ</strong>を指定します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// スプライト画像作成
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</code></pre></div><h2 id="フレームアニメーションの設定">フレームアニメーションの設定</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// スプライトにフレームアニメーションをアタッチ
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;tomapiko_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
+<span class="c1">// アニメーションを指定する
+</span><span class="c1"></span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;walk&#39;</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><strong>FrameAnimation</strong>クラスのコンストラクタにスプライトシートのアセット名を指定して、スプライトにアタッチします。</li>
+<li><strong>gotoAndPlay</strong>関数にアニメーション名を指定すると、そのアニメーションが自動で再生されます。</li>
+</ul>
+<h2 id="サンプルコード">サンプルコード</h2>
+<details>
+<summary>コードを見る</summary>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+<span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 画像
+</span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;tomapiko&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="c1">// スプライトシート
+</span><span class="c1"></span>  <span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&#34;tomapiko_ss&#34;</span><span class="o">:</span>
+    <span class="p">{</span>
+      <span class="c1">// フレーム情報
+</span><span class="c1"></span>      <span class="s2">&#34;frame&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="c1">// 1フレームの画像サイズ（横）
+</span><span class="c1"></span>        <span class="s2">&#34;height&#34;</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="c1">// 1フレームの画像サイズ（縦）
+</span><span class="c1"></span>        <span class="s2">&#34;cols&#34;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="c1">// フレーム数（横）
+</span><span class="c1"></span>        <span class="s2">&#34;rows&#34;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1">// フレーム数（縦）
+</span><span class="c1"></span>      <span class="p">},</span>
+      <span class="c1">// アニメーション情報
+</span><span class="c1"></span>      <span class="s2">&#34;animations&#34;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;walk&#34;</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// アニメーション名
+</span><span class="c1"></span>          <span class="s2">&#34;frames&#34;</span><span class="o">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">],</span> <span class="c1">// フレーム番号範囲
+</span><span class="c1"></span>          <span class="s2">&#34;next&#34;</span><span class="o">:</span> <span class="s2">&#34;walk&#34;</span><span class="p">,</span> <span class="c1">// 次のアニメーション
+</span><span class="c1"></span>          <span class="s2">&#34;frequency&#34;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="c1">// アニメーション間隔
+</span><span class="c1"></span>        <span class="p">},</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">;</span>
+    <span class="c1">// スプライト画像作成
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="nx">sprite</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+    <span class="c1">// スプライトにフレームアニメーションをアタッチ
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;tomapiko_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
+    <span class="c1">// アニメーションを指定する
+</span><span class="c1"></span>    <span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;walk&#39;</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="c1">// MainScene から開始
+</span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+    <span class="c1">// アセット読み込み
+</span><span class="c1"></span>    <span class="nx">assets</span><span class="o">:</span> <span class="nx">ASSETS</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// fps表示
+</span><span class="c1"></span>  <span class="c1">//app.enableStats();
+</span><span class="c1"></span>  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></details>
+<h2 id="runstantプロジェクト">runstantプロジェクト</h2>
+<p><a href="https://runstant.com/alkn203/projects/2764859c">https://runstant.com/alkn203/projects/2764859c</a></p>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/reverse_sprite/">前の記事</a></li>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#スプライトシート画像を用意する">スプライトシート画像を用意する</a></li>
+    <li><a href="#スプライトシート画像を読み込む">スプライトシート画像を読み込む</a></li>
+    <li><a href="#フレームアニメーション情報を読み込む">フレームアニメーション情報を読み込む</a></li>
+    <li><a href="#スプライトシート画像の作成">スプライトシート画像の作成</a></li>
+    <li><a href="#フレームアニメーションの設定">フレームアニメーションの設定</a></li>
+    <li><a href="#サンプルコード">サンプルコード</a></li>
+    <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

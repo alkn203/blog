@@ -5,21 +5,22 @@
   
   <meta charset="UTF-8">
   <title>
-    Spriteを拡大・縮小させる | Keep On Coding
+    Spriteの向きを反転させる | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="Spriteを拡大・縮小させる" />
-  <meta name="og:description" content="Sprite は、Shape と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。
-Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).addChildTo(this).setPosition(200, 800); sp4.scaleY = 1.5; // setScale Sprite(&#39;tomapiko&#39;).addChildTo(this).setPosition(440, 800).setScale(0.5, 0.5); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;skyblue&#39;; // 拡大・縮小  var sp4 = Sprite(&#39;tomapiko&#39;)." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/scale_sprite/scale-sprite.gif" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/scale_sprite/" />
+  <meta name="og:title" content="Spriteの向きを反転させる" />
+  <meta name="og:description" content="Spriteの向きは、専用の画像を使用せずに反転することができます。
+Spriteの向き反転  横方向に反転したい場合は、プロパティscaleXに-1を乗じます。 縦方向に反転したい場合は、プロパティscaleYに-1を乗じます。  以下のコードは、画面タッチでスプライトを反転表示させる例です。
+// 画面タッチ時処理 this.onpointstart = function() { // 横向き反転  sprite.scaleX *= -1; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;skyblue&#39;; // スプライト画像作成  var sprite = Sprite(&#39;tomapiko&#39;, 64, 64)." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/reverse_sprite/reverse-sprite.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/reverse_sprite/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/scale_sprite/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/reverse_sprite/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -73,19 +74,24 @@ Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).ad
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>Spriteを拡大・縮小させる</h1>
-    <p>Last Modified:2021-6-20</p>  
+    <h1>Spriteの向きを反転させる</h1>
+    <p>Last Modified:2021-6-19</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="scale-sprite.gif" alt="scale-sprite"></p>
-<p><strong>Sprite</strong> は、<strong>Shape</strong> と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。</p>
-<h2 id="spriteの拡大縮小">Spriteの拡大縮小</h2>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 拡大・縮小
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">sp4</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
-<span class="nx">sp4</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
-<span class="c1">// setScale
-</span><span class="c1"></span><span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">440</span><span class="p">,</span> <span class="mi">800</span><span class="p">).</span><span class="nx">setScale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+      <p><img src="reverse-sprite.gif" alt="reverse-sprite"></p>
+<p><strong>Sprite</strong>の向きは、専用の画像を使用せずに反転することができます。</p>
+<h2 id="spriteの向き反転">Spriteの向き反転</h2>
+<ul>
+<li>横方向に反転したい場合は、プロパティ<strong>scaleX</strong>に-1を乗じます。</li>
+<li>縦方向に反転したい場合は、プロパティ<strong>scaleY</strong>に-1を乗じます。</li>
+</ul>
+<p>以下のコードは、画面タッチでスプライトを反転表示させる例です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 画面タッチ時処理
+</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">onpointstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 横向き反転
+</span><span class="c1"></span>  <span class="nx">sprite</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
@@ -110,10 +116,14 @@ Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).ad
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
     <span class="c1">// 背景色
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">;</span>
-    <span class="c1">// 拡大・縮小
-</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">sp4</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">);</span>
-    <span class="nx">sp4</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
-    <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">440</span><span class="p">,</span> <span class="mi">800</span><span class="p">).</span><span class="nx">setScale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+    <span class="c1">// スプライト画像作成
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">Sprite</span><span class="p">(</span><span class="s1">&#39;tomapiko&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="nx">sprite</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+    <span class="c1">// 画面タッチ時処理
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 横向き反転
+</span><span class="c1"></span>      <span class="nx">sprite</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">};</span>
   <span class="p">},</span>
 <span class="p">});</span>
 <span class="cm">/*
@@ -134,7 +144,7 @@ Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).ad
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/25819771">https://runstant.com/alkn203/projects/25819771</a></p>
+<p><a href="https://runstant.com/alkn203/projects/04522bf7">https://runstant.com/alkn203/projects/04522bf7</a></p>
 
   </div>
 
@@ -147,10 +157,10 @@ Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).ad
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/19/rotate_sprite/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/alpha_sprite/">前の記事</a></li>
   
   
-    <li><a href="https://alkn203.github.io/blog/2021/06/19/alpha_sprite/">次の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/frameamimation/">次の記事</a></li>
     <li>>></li>
   
   </ul>
@@ -165,7 +175,7 @@ Spriteの拡大縮小 // 拡大・縮小 var sp4 = Sprite(&#39;tomapiko&#39;).ad
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#spriteの拡大縮小">Spriteの拡大縮小</a></li>
+    <li><a href="#spriteの向き反転">Spriteの向き反転</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>

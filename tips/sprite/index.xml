@@ -7,6 +7,40 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/sprite/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>フレームアニメーションを設定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/frameamimation/</link>
+      <pubDate>Sat, 19 Jun 2021 11:58:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/frameamimation/</guid>
+      <description>Sprite画像でフレームアニメーションを設定します。
+スプライトシート画像を用意する スプライトシート画像とは、以下のようにアニメーション用のコマをシートの様に並べた画像です。
+ 上の画像だと、横6x縦3の計18コマから成り立っています。 ゲーム作成ではコマのことをフレームと呼ぶことが多いです。  スプライトシート画像を読み込む 通常の画像と同じようにASSETSとして読み込みます。
+// アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&amp;#39;, }, }; フレームアニメーション情報を読み込む  フレームアニメーション情報が定義されたjson形式のファイルを読み込む方法が一般的ですが、今回はファイルからではなくASEETSとして、コード内に定義しています。 コード内に記述して十分に動作確認した後に、外部jsonファイルに保存してアセットとして読み込む方が、開発する上では効率的です。  // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&amp;#39;, }, // スプライトシート  spritesheet: { &amp;#34;tomapiko_ss&amp;#34;: { // フレーム情報  &amp;#34;frame&amp;#34;: { &amp;#34;width&amp;#34;: 64, // 1フレームの画像サイズ（横）  &amp;#34;height&amp;#34;: 64, // 1フレームの画像サイズ（縦）  &amp;#34;cols&amp;#34;: 6, // フレーム数（横）  &amp;#34;rows&amp;#34;: 3, // フレーム数（縦）  }, // アニメーション情報  &amp;#34;animations&amp;#34; : { &amp;#34;walk&amp;#34;: { // アニメーション名  &amp;#34;frames&amp;#34;: [12,13,14], // フレーム番号範囲  &amp;#34;next&amp;#34;: &amp;#34;walk&amp;#34;, // 次のアニメーション  &amp;#34;frequency&amp;#34;: 6, // アニメーション間隔  }, } }, } };  framesにアニメーションに使いたいフレーム番号の範囲を書きます。 0から始まることに注意してください。 nextに次のアニメーションを指定します。同じ名前にするとループします。 frequencyでアニメーションの間隔を指定します。小さくすれば速くなり、大きくすれば遅くなります。  スプライトシート画像の作成 スプライトシート画像は、通常の画像と同じくSpriteクラスを使って作成しますが、アセット名の次の引数で１フレームの画像サイズを指定します。</description>
+    </item>
+    
+    <item>
+      <title>Spriteの向きを反転させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/reverse_sprite/</link>
+      <pubDate>Sat, 19 Jun 2021 11:57:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/reverse_sprite/</guid>
+      <description>Spriteの向きは、専用の画像を使用せずに反転することができます。
+Spriteの向き反転  横方向に反転したい場合は、プロパティscaleXに-1を乗じます。 縦方向に反転したい場合は、プロパティscaleYに-1を乗じます。  以下のコードは、画面タッチでスプライトを反転表示させる例です。
+// 画面タッチ時処理 this.onpointstart = function() { // 横向き反転  sprite.scaleX *= -1; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;skyblue&amp;#39;; // スプライト画像作成  var sprite = Sprite(&amp;#39;tomapiko&amp;#39;, 64, 64).</description>
+    </item>
+    
+    <item>
+      <title>Spriteを透明にする</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/alpha_sprite/</link>
+      <pubDate>Sat, 19 Jun 2021 11:56:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/alpha_sprite/</guid>
+      <description>Sprite は、Shape と同じ基底クラスを継承していますので、共通のプロパティやメソッドを使用することができます。
+Spriteの透明度 Shapeと同じくalphaプロパティに指定します。 以下は、スプライトを徐々に透明する処理です。
+// 透明度変化アニメーション sp = Sprite(&amp;#39;tomapiko&amp;#39;).addChildTo(this).setPosition(320, 480); sp.update = function() { // 徐々に透明にする  sp.alpha -= 0.01; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko.png&amp;#39;, }, }; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;skyblue&amp;#39;; // 透明度変化アニメーション  sp = Sprite(&amp;#39;tomapiko&amp;#39;).</description>
+    </item>
+    
+    <item>
       <title>Spriteを拡大・縮小させる</title>
       <link>https://alkn203.github.io/blog/2021/06/19/scale_sprite/</link>
       <pubDate>Sat, 19 Jun 2021 11:55:06 +0900</pubDate>
