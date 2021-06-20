@@ -5,21 +5,20 @@
   
   <meta charset="UTF-8">
   <title>
-    スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする | Keep On Coding
+    フレームアニメーションの終了を検知する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする" />
-  <meta name="og:description" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする フレームアニメーションを使うためには、SpriteSheet を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれたwidthとheightに戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。
-// スプライトシート spritesheet: { &#39;explosion_ss&#39;: { &#34;frame&#34;: { &#34;width&#34;: 20, // ←この値にフィットされる  &#34;height&#34;: 20,// ←この値にフィットされる  &#34;cols&#34;: 16, &#34;rows&#34;: 1, }, } }  回避するためには、FrameAnimation クラスのプロパティfitをfalseにします。 これで実際に変更したサイズで正しく表示されるようになります。 サンプルでは20X20で切り出した画像を5倍で表示しています。  // 親クラスの初期化 this.superInit(&#39;explosion&#39;, 20, 20); // ←実際の画像の切り取りサイズ // SpriteSheetをスプライトにアタッチ var anim = FrameAnimation(&#39;explosion_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない anim.fit = false; // ←ここ //アニメーションを再生する anim.gotoAndPlay(&#39;start&#39;); // サイズ変更 this.setSize(20*5, 20*5); // ←サイズ変更 サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;explosion&#39;: &#39;https://cdn." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/no-fit-ss-size.gif" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/" />
+  <meta name="og:title" content="フレームアニメーションの終了を検知する" />
+  <meta name="og:description" content="フレームアニメーションの終了を検知する  ゲーム作成において、フレームアニメーションが終了した後に何か処理をしたい時があるかと思いまます。 この場合、FrameAnimation クラスのfinishedプロパティの値がtrueかどうかを調べると便利です。 サンプルでは爆発アニメーションが終了したら、自身を消去するようにしています。（consoleに結果表示）  // 毎フレーム処理 update: function() { // アニメーションが終わったら自身を消去  if (this.anim.finished) { // ←ここで判定  this.remove(); console.log(&#39;removed&#39;); } }, サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;explosion&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/explosion.png&#39;, }, // スプライトシート  spritesheet: { &#39;explosion_ss&#39;: { &#34;frame&#34;: { &#34;width&#34;: 20, &#34;height&#34;: 20, &#34;cols&#34;: 16, &#34;rows&#34;: 1, }, // アニメーション  &#34;animations&#34; : { &#34;start&#34;: { &#34;frames&#34;: Array." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/frameamimation-end/frameanimation-end.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/frameamimation-end/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/frameamimation-end/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -73,42 +72,27 @@
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</h1>
-    <p>Last Modified:2021-6-20</p>  
+    <h1>フレームアニメーションの終了を検知する</h1>
+    <p>Last Modified:2021-6-19</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="no-fit-ss-size.gif" alt="no-fit-ss-size"></p>
-<h2 id="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする">スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</h2>
-<p>フレームアニメーションを使うためには、<strong>SpriteSheet</strong> を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれた<strong>width</strong>と<strong>height</strong>に戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// スプライトシート
-</span><span class="c1"></span><span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
-  <span class="s1">&#39;explosion_ss&#39;</span><span class="o">:</span>
-  <span class="p">{</span>
-    <span class="s2">&#34;frame&#34;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="c1">// ←この値にフィットされる
-</span><span class="c1"></span>      <span class="s2">&#34;height&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span><span class="c1">// ←この値にフィットされる
-</span><span class="c1"></span>      <span class="s2">&#34;cols&#34;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
-      <span class="s2">&#34;rows&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="p">},</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li>回避するためには、<strong>FrameAnimation</strong> クラスのプロパティ<strong>fit</strong>を<strong>false</strong>にします。</li>
-<li>これで実際に変更したサイズで正しく表示されるようになります。</li>
-<li>サンプルでは<strong>20X20</strong>で切り出した画像を<strong>5倍</strong>で表示しています。</li>
+      <p><img src="frameanimation-end.gif" alt="frameanimation-end"></p>
+<h2 id="フレームアニメーションの終了を検知する">フレームアニメーションの終了を検知する</h2>
+<ul>
+<li>ゲーム作成において、フレームアニメーションが終了した後に何か処理をしたい時があるかと思いまます。</li>
+<li>この場合、<strong>FrameAnimation</strong> クラスの<strong>finished</strong>プロパティの値が<strong>true</strong>かどうかを調べると便利です。</li>
+<li>サンプルでは爆発アニメーションが終了したら、自身を消去するようにしています。（consoleに結果表示）</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 親クラスの初期化
-</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">// ←実際の画像の切り取りサイズ
-</span><span class="c1">// SpriteSheetをスプライトにアタッチ
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="c1">// スプライトシートのサイズにフィットさせない
-</span><span class="c1"></span><span class="nx">anim</span><span class="p">.</span><span class="nx">fit</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// ←ここ
-</span><span class="c1">//アニメーションを再生する
-</span><span class="c1"></span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">);</span>
-<span class="c1">// サイズ変更
-</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// ←サイズ変更
-</span></code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 毎フレーム処理
+</span><span class="c1"></span><span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アニメーションが終わったら自身を消去
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">finished</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// ←ここで判定
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;removed&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+</code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
@@ -183,6 +167,14 @@
     <span class="c1">// 参照用
 </span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">;</span>
   <span class="p">},</span>
+  <span class="c1">// 毎フレーム処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// アニメーションが終わったら自身を消去
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anim</span><span class="p">.</span><span class="nx">finished</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;removed&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
 <span class="p">});</span>
 <span class="c1">// メイン処理
 </span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -196,7 +188,7 @@
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/6c71743a">https://runstant.com/alkn203/projects/6c71743a</a></p>
+<p><a href="https://runstant.com/alkn203/projects/4256f208">https://runstant.com/alkn203/projects/4256f208</a></p>
 
   </div>
 
@@ -209,10 +201,10 @@
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/19/change-amimation-speed/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/">前の記事</a></li>
   
   
-    <li><a href="https://alkn203.github.io/blog/2021/06/19/frameamimation-end/">次の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/asset-loader/">次の記事</a></li>
     <li>>></li>
   
   </ul>
@@ -227,7 +219,7 @@
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする">スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</a></li>
+    <li><a href="#フレームアニメーションの終了を検知する">フレームアニメーションの終了を検知する</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>
