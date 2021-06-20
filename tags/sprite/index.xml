@@ -6,7 +6,17 @@
     <description>Recent content in sprite on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 19 Jun 2021 11:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jun 2021 12:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/</link>
+      <pubDate>Sat, 19 Jun 2021 12:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/</guid>
+      <description>スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする フレームアニメーションを使うためには、SpriteSheet を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれたwidthとheightに戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。
+// スプライトシート spritesheet: { &amp;#39;explosion_ss&amp;#39;: { &amp;#34;frame&amp;#34;: { &amp;#34;width&amp;#34;: 20, // ←この値にフィットされる  &amp;#34;height&amp;#34;: 20,// ←この値にフィットされる  &amp;#34;cols&amp;#34;: 16, &amp;#34;rows&amp;#34;: 1, }, } }  回避するためには、FrameAnimation クラスのプロパティfitをfalseにします。 これで実際に変更したサイズで正しく表示されるようになります。 サンプルでは20X20で切り出した画像を5倍で表示しています。  // 親クラスの初期化 this.superInit(&amp;#39;explosion&amp;#39;, 20, 20); // ←実際の画像の切り取りサイズ // SpriteSheetをスプライトにアタッチ var anim = FrameAnimation(&amp;#39;explosion_ss&amp;#39;).attachTo(this); // スプライトシートのサイズにフィットさせない anim.fit = false; // ←ここ //アニメーションを再生する anim.gotoAndPlay(&amp;#39;start&amp;#39;); // サイズ変更 this.setSize(20*5, 20*5); // ←サイズ変更 サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;explosion&amp;#39;: &amp;#39;https://cdn.</description>
+    </item>
+    
     <item>
       <title>フレームアニメーションの速度を動的に変更する</title>
       <link>https://alkn203.github.io/blog/2021/06/19/change-amimation-speed/</link>

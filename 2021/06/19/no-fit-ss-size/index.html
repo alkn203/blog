@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする" />
+  <meta name="og:description" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする フレームアニメーションを使うためには、SpriteSheet を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれたwidthとheightに戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。
+// スプライトシート spritesheet: { &#39;explosion_ss&#39;: { &#34;frame&#34;: { &#34;width&#34;: 20, // ←この値にフィットされる  &#34;height&#34;: 20,// ←この値にフィットされる  &#34;cols&#34;: 16, &#34;rows&#34;: 1, }, } }  回避するためには、FrameAnimation クラスのプロパティfitをfalseにします。 これで実際に変更したサイズで正しく表示されるようになります。 サンプルでは20X20で切り出した画像を5倍で表示しています。  // 親クラスの初期化 this.superInit(&#39;explosion&#39;, 20, 20); // ←実際の画像の切り取りサイズ // SpriteSheetをスプライトにアタッチ var anim = FrameAnimation(&#39;explosion_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない anim.fit = false; // ←ここ //アニメーションを再生する anim.gotoAndPlay(&#39;start&#39;); // サイズ変更 this.setSize(20*5, 20*5); // ←サイズ変更 サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;explosion&#39;: &#39;https://cdn." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/no-fit-ss-size.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</h1>
+    <p>Last Modified:2021-6-19</p>  
+  </div>
+  <div class="single-content">
+    
+      <p><img src="no-fit-ss-size.gif" alt="no-fit-ss-size"></p>
+<h2 id="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする">スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</h2>
+<p>フレームアニメーションを使うためには、<strong>SpriteSheet</strong> を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれた<strong>width</strong>と<strong>height</strong>に戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// スプライトシート
+</span><span class="c1"></span><span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s1">&#39;explosion_ss&#39;</span><span class="o">:</span>
+  <span class="p">{</span>
+    <span class="s2">&#34;frame&#34;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="c1">// ←この値にフィットされる
+</span><span class="c1"></span>      <span class="s2">&#34;height&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span><span class="c1">// ←この値にフィットされる
+</span><span class="c1"></span>      <span class="s2">&#34;cols&#34;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s2">&#34;rows&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>回避するためには、<strong>FrameAnimation</strong> クラスのプロパティ<strong>fit</strong>を<strong>false</strong>にします。</li>
+<li>これで実際に変更したサイズで正しく表示されるようになります。</li>
+<li>サンプルでは<strong>20X20</strong>で切り出した画像を<strong>5倍</strong>で表示しています。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 親クラスの初期化
+</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">// ←実際の画像の切り取りサイズ
+</span><span class="c1">// SpriteSheetをスプライトにアタッチ
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="c1">// スプライトシートのサイズにフィットさせない
+</span><span class="c1"></span><span class="nx">anim</span><span class="p">.</span><span class="nx">fit</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// ←ここ
+</span><span class="c1">//アニメーションを再生する
+</span><span class="c1"></span><span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">);</span>
+<span class="c1">// サイズ変更
+</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// ←サイズ変更
+</span></code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
+<details>
+<summary>コードを見る</summary>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+<span class="c1">// アセット
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ASSETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 画像
+</span><span class="c1"></span>  <span class="nx">image</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;explosion&#39;</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/explosion.png&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="c1">// スプライトシート
+</span><span class="c1"></span>  <span class="nx">spritesheet</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;explosion_ss&#39;</span><span class="o">:</span>
+    <span class="p">{</span>
+      <span class="s2">&#34;frame&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&#34;height&#34;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&#34;cols&#34;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&#34;rows&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="c1">// アニメーション
+</span><span class="c1"></span>      <span class="s2">&#34;animations&#34;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;start&#34;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&#34;frames&#34;</span><span class="o">:</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+          <span class="s2">&#34;next&#34;</span><span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;frequency&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="c1">// メインシーン
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="sb">`MainScene`</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// DisplaySceneを継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+    <span class="c1">// グループ
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">explosionGroup</span> <span class="o">=</span> <span class="nx">DisplayElement</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="c1">// 毎フレーム処理
+</span><span class="c1"></span>  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">frame</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 爆発
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">explosion</span> <span class="o">=</span> <span class="nx">Explosion</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">explosionGroup</span><span class="p">);</span>
+      <span class="nx">explosion</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">Random</span><span class="p">.</span><span class="nx">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span>
+      <span class="nx">explosion</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">Random</span><span class="p">.</span><span class="nx">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">960</span><span class="p">);</span>
+      <span class="nx">explosion</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="s1">&#39;lighter&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="c1">// 爆発クラス
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="sb">`Explosion`</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// Spriteを継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;Sprite&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラスの初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">(</span><span class="s1">&#39;explosion&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="c1">// SpriteSheetをスプライトにアタッチ
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">FrameAnimation</span><span class="p">(</span><span class="s1">&#39;explosion_ss&#39;</span><span class="p">).</span><span class="nx">attachTo</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="c1">// スプライトシートのサイズにフィットさせない
+</span><span class="c1"></span>    <span class="nx">anim</span><span class="p">.</span><span class="nx">fit</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">//アニメーションを再生する
+</span><span class="c1"></span>    <span class="nx">anim</span><span class="p">.</span><span class="nx">gotoAndPlay</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">);</span>
+    <span class="c1">// サイズ変更
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="mi">5</span><span class="p">);</span>
+    <span class="c1">// 参照用
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">anim</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="c1">// メイン処理
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="nx">assets</span><span class="o">:</span> <span class="nx">ASSETS</span><span class="p">,</span>
+    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></details>
+<h2 id="runstantプロジェクト">runstantプロジェクト</h2>
+<p><a href="https://runstant.com/alkn203/projects/6c71743a">https://runstant.com/alkn203/projects/6c71743a</a></p>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/19/change-amimation-speed/">前の記事</a></li>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする">スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする</a></li>
+    <li><a href="#サンプルコード">サンプルコード</a></li>
+    <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
