@@ -6,7 +6,30 @@
     <description>Recent content in sprite on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 19 Jun 2021 11:58:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jun 2021 11:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>フレームアニメーションの速度を動的に変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/change-amimation-speed/</link>
+      <pubDate>Sat, 19 Jun 2021 11:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/change-amimation-speed/</guid>
+      <description>フレームアニメーション設定の変更 外部ファイルとして読み込まれたフレームアニメーション設定を後から変更する方法について説明します。例として、フレームアニメーションの速度を変更します。
+フレームアニメーション設定を外部ファイルに定義 フレームアニメーション設定は外部ファイルとして定義して、アセットとして読み込むことができます。
+// アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&amp;#39;, }, // フレームアニメーション情報  spritesheet: { &amp;#39;tomapiko_ss&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/tmss/tomapiko.tmss&amp;#39;, }, }; アニメーションのfreaquencyプロパティ  anim を FrameAnimation クラスのインスタンスとした場合、ss で SpriteSheet を参照することができます。 getAnimationで指定したアニメーションを参照することができるので、そのプロパティfreaquencyの値を変更します。  // アニメーション速度変更 anim.ss.getAnimation(&amp;#39;left&amp;#39;).frequency += 1; 以下のサンプルでは、画面をタッチするとフレームアニメーションの速度が遅くなっていきます。
+サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&amp;#39;, }, // フレームアニメーション情報  spritesheet: { &amp;#39;tomapiko_ss&amp;#39;: &amp;#39;https://cdn.</description>
+    </item>
+    
+    <item>
+      <title>フレームアニメーションしながら移動させる</title>
+      <link>https://alkn203.github.io/blog/2021/06/19/frameamimation-move/</link>
+      <pubDate>Sat, 19 Jun 2021 11:58:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/19/frameamimation-move/</guid>
+      <description>Sprite画像をフレームアニメーションしたまま移動させます。
+update関数に移動処理を記述する フレームアニメーションは自動で管理されていますので、単にupdate関数内に移動処理を書くだけで移動させることができます。
+// スプライト画像作成 var sprite = Sprite(&amp;#39;tomapiko&amp;#39;, 64, 64).addChildTo(this); sprite.setPosition(600, 480); // スプライトにフレームアニメーションをアタッチ var anim = FrameAnimation(&amp;#39;tomapiko_ss&amp;#39;).attachTo(sprite); // アニメーションを指定する anim.gotoAndPlay(&amp;#39;walk&amp;#39;); // 更新 sprite.update = function() { // 移動処理  sprite.x -= 2; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &amp;#39;tomapiko&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&amp;#39;, }, // スプライトシート  spritesheet: { &amp;#34;tomapiko_ss&amp;#34;: { // フレーム情報  &amp;#34;frame&amp;#34;: { &amp;#34;width&amp;#34;: 64, // 1フレームの画像サイズ（横）  &amp;#34;height&amp;#34;: 64, // 1フレームの画像サイズ（縦）  &amp;#34;cols&amp;#34;: 6, // フレーム数（横）  &amp;#34;rows&amp;#34;: 3, // フレーム数（縦）  }, // アニメーション情報  &amp;#34;animations&amp;#34; : { &amp;#34;walk&amp;#34;: { // アニメーション名  &amp;#34;frames&amp;#34;: [12,13,14], // フレーム番号範囲  &amp;#34;next&amp;#34;: &amp;#34;walk&amp;#34;, // 次のアニメーション  &amp;#34;frequency&amp;#34;: 6, // アニメーション間隔  }, } }, } }; /* * メインシーン */ phina.</description>
+    </item>
+    
     <item>
       <title>フレームアニメーションを設定する</title>
       <link>https://alkn203.github.io/blog/2021/06/19/frameamimation/</link>
