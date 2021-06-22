@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>label on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/label/</link>
+    <description>Recent content in label on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 22 Jun 2021 11:00:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/label/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Labelの文字を変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/change-label-text/</link>
+      <pubDate>Tue, 22 Jun 2021 11:00:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/change-label-text/</guid>
+      <description>ラベルの文字を変更する ラベルの文字は、text プロパティで後から変更可能です。 以下のサンプルでは、画面がタッチされたらラベルの文字を変更しています。
+// ラベル表示 var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(this.gridX.center(), this.gridY.center()); // ラベル文字変更 this.onpointstart = function() { label.text = &amp;#39;Money is time&amp;#39;; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(this.gridX.center(), this.gridY.center()); // ラベル文字変更  this.</description>
+    </item>
+    
+    <item>
+      <title>Label(文字)を表示する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/add-label/</link>
+      <pubDate>Tue, 22 Jun 2021 10:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/add-label/</guid>
+      <description>Labelクラスを使ってラベル（文字）を表示する 文字を表示するためのラベルは、ゲーム作成には欠かせない存在です。以下は、ラベルを画面の中心に表示するコード例です。
+// ラベル表示 var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(this.gridX.center(), this.gridY.center());  Labelクラスのコンストラクタの引数に表示したい文字列を指定します。 単純に文字を表示したい場合に一番簡単な方法です。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(this.gridX.center(), this.gridY.center()); }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &amp;#39;main&amp;#39;, }); // fps表示  //app.</description>
+    </item>
+    
+  </channel>
+</rss>
