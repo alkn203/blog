@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.js事始め【改】 | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.js事始め【改】" />
+  <meta name="og:description" content="ロゴはphinajs.comから借用
+はじめに これまでphina.jsに関するいくつかの記事を投稿していますが、phina.js自体について書いていなかったので、ここで簡単に紹介したいと思います。
+phina.jsについて 趣味でプログラミングをしている私が日々楽しんで使っている国産のjavascriptゲームライブラリです。以前からjavascriptでゲーム開発をしている方は知っているかもしれませんが、tmlib.js の後継ライブラリになります。とりあえずどのようなものか知りたい方には、以下の紹介記事が参考になるかと思います。
+ 本日 JavaScript ゲームライブラリ『phina.js』をリリースしました! by phi さん phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ by simiraaaa さん はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！ by 株式会社LIG さん  phina.jsで作ることができるゲーム 端的に言うと、現時点では2Dゲーム ならジャンル問わず（やる気さえあれば）大抵のものを作ることが出来ると思います。実際に作られたゲームを見てみたいという方は、以下のサイトがおすすめです。
+  かちゃコム by utyo さん phina.jsで作られた様々なミニゲームがあります。どれも良く出来ていて熱中してしまいます。
+  Quest for the Tanelorn by minimo さん スーパーファミコン時代を彷彿させる2Dアクションゲームです。作り込みのレベルが高いです。
+  気に入っているところ 以下は個人の主観ですが、他のユーザーも少なからず感じているのではないかと思います。
+同じ処理でも少ないコード量でコーディングできる 全てのゲームライブラリと比較したわけではありませんが、phina.js で書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。
+ソースが読みやすい phina.jsのソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。
+実行確認までのステップが短い Web上でコーディングできるrunstantを使うことで、簡単に自分のプログラムの実行結果が確認できます。
+配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している これまでzennで書いた記事でも触れていますが、コーディングする上で細かな配慮がされた仕様になっています。
+とにかく使ってみたい方へ   Githubのリポジトリに導入方法が記載されていますが、開発者向けの内容に近いので、その辺り不慣れな方には少し敷居が高く感じられるかもしれません。
+  一番簡単な方法は、runstant へのユーザー登録が必要ですが、runstantに用意されたテンプレートをForkすることです。
+  javascriptで作られていますので、Webブラウザと自分の好きなエディタさえあれば、複雑な環境構築の必要もなくゲーム開発を始めることができます。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/01/start-guide/logo.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/01/start-guide/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/01/start-guide/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>phina.js事始め【改】</h1>
+    <p>Last Modified:2021-6-14</p>  
+  </div>
+  <div class="single-content">
+    
+      <p><img src="logo.png" alt="logo.png"></p>
+<p>ロゴはphinajs.comから借用</p>
+<h2 id="はじめに">はじめに</h2>
+<p>これまで<a href="https://phinajs.com">phina.js</a>に関するいくつかの記事を投稿していますが、<strong>phina.js</strong>自体について書いていなかったので、ここで簡単に紹介したいと思います。</p>
+<h2 id="phinajsについて">phina.jsについて</h2>
+<p>趣味でプログラミングをしている私が日々楽しんで使っている<strong>国産</strong>の<strong>javascript</strong>ゲームライブラリです。以前から<strong>javascript</strong>でゲーム開発をしている方は知っているかもしれませんが、<strong>tmlib.js</strong> の後継ライブラリになります。とりあえずどのようなものか知りたい方には、以下の紹介記事が参考になるかと思います。</p>
+<ul>
+<li><a href="http://phiary.me/phinajs-release/">本日 JavaScript ゲームライブラリ『phina.js』をリリースしました!</a> by <a href="https://twitter.com/phi_jp">phi</a> さん</li>
+<li><a href="http://qiita.com/simiraaaa/items/7431734994c9e94dacfd">phina.js - JavaScriptで楽しく簡単にゲームが作れるライブラリ</a> by <a href="https://twitter.com/simiraaaa">simiraaaa</a> さん</li>
+<li><a href="https://liginc.co.jp/306739">はじめてのphina.js – JavaScriptゲームライブラリを使ってみた！</a> by <a href="https://liginc.co.jp/">株式会社LIG</a> さん</li>
+</ul>
+<h2 id="phinajsで作ることができるゲーム">phina.jsで作ることができるゲーム</h2>
+<p>端的に言うと、現時点では<strong>2Dゲーム</strong> ならジャンル問わず（やる気さえあれば）大抵のものを作ることが出来ると思います。実際に作られたゲームを見てみたいという方は、以下のサイトがおすすめです。</p>
+<ul>
+<li>
+<p><a href="https://cachacacha.com/">かちゃコム</a> by <a href="https://twitter.com/utyo">utyo</a> さん
+<strong>phina.js</strong>で作られた様々なミニゲームがあります。どれも良く出来ていて熱中してしまいます。</p>
+</li>
+<li>
+<p><a href="https://minimo.github.io/QuestForTanelorn/">Quest for the Tanelorn</a> by <a href="https://twitter.com/minimo">minimo</a> さん
+スーパーファミコン時代を彷彿させる2Dアクションゲームです。作り込みのレベルが高いです。</p>
+</li>
+</ul>
+<h2 id="気に入っているところ">気に入っているところ</h2>
+<p>以下は個人の主観ですが、他のユーザーも少なからず感じているのではないかと思います。</p>
+<h4 id="同じ処理でも少ないコード量でコーディングできる">同じ処理でも少ないコード量でコーディングできる</h4>
+<p>全てのゲームライブラリと比較したわけではありませんが、<strong>phina.js</strong> で書き慣れると、個人的には同様の処理を行う他のライブラリのコードが冗長に感じるようになりました。</p>
+<h4 id="ソースが読みやすい">ソースが読みやすい</h4>
+<p><strong>phina.js</strong>のソースの書き方を真似ることで、結果的に自分のコードも読みやすくなりました。</p>
+<h4 id="実行確認までのステップが短い">実行確認までのステップが短い</h4>
+<p>Web上でコーディングできる<a href="https://runstant.com/">runstant</a>を使うことで、簡単に自分のプログラムの実行結果が確認できます。</p>
+<h4 id="配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している">配列やベクトルなどのコーディングする上でベースとなるクラスの機能拡張が充実している</h4>
+<p>これまで<strong>zenn</strong>で書いた記事でも触れていますが、コーディングする上で細かな配慮がされた仕様になっています。</p>
+<h2 id="とにかく使ってみたい方へ">とにかく使ってみたい方へ</h2>
+<ul>
+<li>
+<p><a href="https://github.com/phinajs/phina.js">Githubのリポジトリ</a>に導入方法が記載されていますが、開発者向けの内容に近いので、その辺り不慣れな方には少し敷居が高く感じられるかもしれません。</p>
+</li>
+<li>
+<p>一番簡単な方法は、<strong>runstant</strong> へのユーザー登録が必要ですが、<a href="https://runstant.com/phi/projects/phinajs_template">runstantに用意されたテンプレート</a>をForkすることです。</p>
+</li>
+<li>
+<p><strong>javascript</strong>で作られていますので、Webブラウザと自分の好きなエディタさえあれば、複雑な環境構築の必要もなくゲーム開発を始めることができます。</p>
+</li>
+</ul>
+<h2 id="オープンソースという魅力">オープンソースという魅力</h2>
+<ul>
+<li><strong>phina.js</strong>はオープンソースプロジェクトであり、これまで有志により改良が重ねられてきています。個人的には、ゲーム開発に必要な基本機能は現バージョンでもひと通り揃っていると思っています。</li>
+<li>近年は、事情により開発が進んでいない状態でしたが、今後開発を再開する予定であることが最近アナウンスされています。</li>
+<li>その開発については広く門戸が開かれており、誰でもオープンソースプロジェクトに貢献できる可能性があるというのが大きな魅力の１つと言えます。</li>
+</ul>
+<h2 id="質問など">質問など</h2>
+<ul>
+<li>個人的に<strong>phina.js</strong>がオススメな理由の一つに、親切なサポート体制があります。</li>
+<li><strong>Twitter</strong>で <strong>#phina_js</strong> タグをつけて質問したり、<a href="https://phinajs-slackin.herokuapp.com/">slack</a>に参加して、使い方など疑問に思ったとを質問すれば、開発者の <a href="https//twitter.com/phi-jp">phi</a>さんを始め、他のユーザーが優しく真剣に答えてくれます。</li>
+</ul>
+<h2 id="tipsなど">Tipsなど</h2>
+<p>まずどんなものか少しでも知ってもらうために、手前味噌ながら<a href="https://qiita.com/alkn203/items/bca3222f6b409382fe20">phina.js Tips集</a>というものを書いていますので、こちらもよろしければご覧ください。</p>
+<h2 id="おわりに">おわりに</h2>
+<ul>
+<li>ゲームライブラリは実際に使ってみないとその良し悪しはわかりませんが、その中でも<strong>phina.js</strong>は、比較的簡単にトライすることができるライブラリです。</li>
+<li><strong>javascript</strong>でのゲーム開発に興味がある方は、是非一度触ってみて色々と試して頂ければと思います。</li>
+</ul>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+  
+    <li><a href="https://alkn203.github.io/blog/2021/06/02/prologue/">次の記事</a></li>
+    <li>>></li>
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#phinajsについて">phina.jsについて</a></li>
+    <li><a href="#phinajsで作ることができるゲーム">phina.jsで作ることができるゲーム</a></li>
+    <li><a href="#気に入っているところ">気に入っているところ</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#とにかく使ってみたい方へ">とにかく使ってみたい方へ</a></li>
+    <li><a href="#オープンソースという魅力">オープンソースという魅力</a></li>
+    <li><a href="#質問など">質問など</a></li>
+    <li><a href="#tipsなど">Tipsなど</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

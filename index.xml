@@ -330,11 +330,20 @@ var shape = Shape().addChildTo(this);  Shapeクラスのコンストラクタで
     </item>
     
     <item>
-      <title>はじめに</title>
-      <link>https://alkn203.github.io/blog/2021/06/12/prologue/</link>
-      <pubDate>Sat, 12 Jun 2021 20:55:06 +0900</pubDate>
+      <title>phina.jsのテンプレート</title>
+      <link>https://alkn203.github.io/blog/2021/06/02/template/</link>
+      <pubDate>Wed, 02 Jun 2021 20:57:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/2021/06/12/prologue/</guid>
+      <guid>https://alkn203.github.io/blog/2021/06/02/template/</guid>
+      <description>phina.jsのテンプレート  phina.jsのプログラムの基本形は以下のとおりです。実行結果は黒い画面が表示されるだけです。 今後の説明で、コードはrunstantの Script(javascript) タブへの入力を前提とします。  サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // 以下にコードを書いていく  }, // 毎フレーム更新処理  update: function() { // 以下にコードを書いていく  }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &amp;#39;main&amp;#39;, }); // fps表示  //app.</description>
+    </item>
+    
+    <item>
+      <title>はじめに</title>
+      <link>https://alkn203.github.io/blog/2021/06/02/prologue/</link>
+      <pubDate>Wed, 02 Jun 2021 20:56:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/02/prologue/</guid>
       <description>phina.jsについて 自分なりにphina.jsについて書いたエントリーです。
 phina.js事始め【改】
 phina.jsの開発環境を構築する  このTips集では、Webブラウザ上でコーディング・実行が可能なrunstantを使用してますので、基本的に開発環境として必要なものはWebブラウザだけです。 自分の好きなエディタを使ってローカルで開発することも可能ですが、クライアントサイドで実行されるjavascriptは、セキュリティ上の理由からローカルファイルへのアクセスが制限されています。 対応策としては、Visual Studio Codeなどのエディタの拡張機能にあるローカルサーバーを使う方法があります。  phina.jsを読み込む runstantのView(html) タブのコードは以下のようになっています。
@@ -343,10 +352,10 @@ phina.jsの開発環境を構築する  このTips集では、Webブラウザ上
     
     <item>
       <title>phina.js事始め【改】</title>
-      <link>https://alkn203.github.io/blog/2021/06/11/start-guide/</link>
-      <pubDate>Fri, 11 Jun 2021 20:55:06 +0900</pubDate>
+      <link>https://alkn203.github.io/blog/2021/06/01/start-guide/</link>
+      <pubDate>Tue, 01 Jun 2021 20:55:06 +0900</pubDate>
       
-      <guid>https://alkn203.github.io/blog/2021/06/11/start-guide/</guid>
+      <guid>https://alkn203.github.io/blog/2021/06/01/start-guide/</guid>
       <description>ロゴはphinajs.comから借用
 はじめに これまでphina.jsに関するいくつかの記事を投稿していますが、phina.js自体について書いていなかったので、ここで簡単に紹介したいと思います。
 phina.jsについて 趣味でプログラミングをしている私が日々楽しんで使っている国産のjavascriptゲームライブラリです。以前からjavascriptでゲーム開発をしている方は知っているかもしれませんが、tmlib.js の後継ライブラリになります。とりあえずどのようなものか知りたい方には、以下の紹介記事が参考になるかと思います。
