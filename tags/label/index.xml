@@ -6,7 +6,59 @@
     <description>Recent content in label on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 22 Jun 2021 11:00:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/label/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Jun 2021 11:04:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/label/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Labelの幅と高さを調べる</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/label-width-height/</link>
+      <pubDate>Tue, 22 Jun 2021 11:04:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/label-width-height/</guid>
+      <description>ラベルの幅と高さを調べる LabelクラスはShapeクラスを継承しているので、デフォルトでは64X64のサイズが設定されています。そこで、実際のLabelの幅と高さを調べる方法について説明します。
+calcCanvasHeight関数 ラベルの実際の高さを求めます。
+var height = label.calcCanvasHeight(); calcCanvasWidth関数 ラベルの実際の幅を求めます。
+var width = label.calcCanvasWidth(); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(this.gridX.center(), this.gridY.center()); // 実際のサイズを算出  label.width = label.calcCanvasWidth(); label.height = label.calcCanvasHeight(); // 枠を表示  RectangleShape({ width: label.</description>
+    </item>
+    
+    <item>
+      <title>Labelのフォントを変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/change-label-font/</link>
+      <pubDate>Tue, 22 Jun 2021 11:03:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/change-label-font/</guid>
+      <description>ラベルのフォントを変更する ラベルのフォントは、fontFamily プロパティで変更可能です。
+var label2 = Label(&amp;#39;フォント１&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontFamily = &amp;#34;&amp;#39;sans-serif&amp;#39;&amp;#34;; label2.fontSize = 48; label2.fill = &amp;#39;red&amp;#39;; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(320, 480); var label2 = Label(&amp;#39;フォント１&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontFamily = &amp;#34;&amp;#39;sans-serif&amp;#39;&amp;#34;; label2.</description>
+    </item>
+    
+    <item>
+      <title>Labelの枠の色を変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/change-label-frame/</link>
+      <pubDate>Tue, 22 Jun 2021 11:03:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/change-label-frame/</guid>
+      <description>ラベルの枠の色を変更する ラベルの枠は、strokeWidth で太さを設定し、色はstrokeプロパティで変更可能です。
+var label2 = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontSize = 48; label2.fill = &amp;#39;red&amp;#39;; label2.strokeWidth = 4; label2.stroke = &amp;#39;white&amp;#39;; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(320, 480); var label2 = Label(&amp;#39;Time is money&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>Labelの文字色を変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/change-label-color/</link>
+      <pubDate>Tue, 22 Jun 2021 11:02:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/change-label-color/</guid>
+      <description>ラベルの文字色を変更する ラベルの文字色は、fill プロパティで後から変更可能です。
+var label2 = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontSize = 48; label2.fill = &amp;#39;red&amp;#39;; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(320, 480); var label2 = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontSize = 48; label2.</description>
+    </item>
+    
+    <item>
+      <title>Labelの文字サイズを変更する</title>
+      <link>https://alkn203.github.io/blog/2021/06/22/change-label-size/</link>
+      <pubDate>Tue, 22 Jun 2021 11:01:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/22/change-label-size/</guid>
+      <description>ラベルの文字サイズを変更する ラベルの文字は、fontSize プロパティで後から変更可能です。
+var label2 = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label2.setPosition(320, 600); label2.fontSize = 48; var label3 = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label3.setPosition(320, 720); label3.fontSize = 60; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;silver&amp;#39;; // ラベル表示  var label = Label(&amp;#39;Time is money&amp;#39;).addChildTo(this); label.setPosition(320, 480); var label2 = Label(&amp;#39;Time is money&amp;#39;).</description>
+    </item>
+    
     <item>
       <title>Labelの文字を変更する</title>
       <link>https://alkn203.github.io/blog/2021/06/22/change-label-text/</link>
