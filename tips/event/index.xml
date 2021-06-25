@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/event/</link>
+    <description>Recent content in Event on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 24 Jun 2021 12:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/event/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>タッチされた座標を調べる</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/touch-point/</link>
+      <pubDate>Thu, 24 Jun 2021 12:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/touch-point/</guid>
+      <description>タッチされた座標を調べる  タッチされた座標を調べるためには、イベント関数の引数を利用します。 pointerプロパティにタッチに関する情報が入っていますので、それを利用します。  // シーンにタッチイベント登録 this.onpointstart = function(e) { // タッチされた座標を調べる  var tx = e.pointer.x; var ty = e.pointer.y; // タッチされた座標にShapeを移動  shape.setPosition(tx, ty); }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加  var shape = Shape().addChildTo(this).setPosition(320, 480); // シーンにタッチイベント登録  this.</description>
+    </item>
+    
+    <item>
+      <title>タッチイベントを設定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/touch/</link>
+      <pubDate>Thu, 24 Jun 2021 11:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/touch/</guid>
+      <description>タッチイベント（onpointstart）  タッチイベントを登録するためには、オブジェクトのonpointstart関数を実装します。 タッチを有効にするためには、setInteractive(true) としてタッチ自体を有効にする必要があります。  // タッチ可能にする shape.setInteractive(true); // タッチイベント登録 shape.onpointstart = function() { alert(&amp;#39;タッチされました&amp;#39;); }; タッチイベント登録（on + pointstart） onとenterframeの組み合わせの時と同様に複数のメソッドを登録可能で、その内容が登録順に実行されます。
+// タッチイベント登録 shape2.on(&amp;#39;pointstart&amp;#39;, function() { alert(&amp;#39;タッチされました&amp;#39;); }); // タッチイベント登録 shape2.on(&amp;#39;pointstart&amp;#39;, function() { shape2.backgroundColor = &amp;#39;blue&amp;#39;; }); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加  var shape = Shape().</description>
+    </item>
+    
+    <item>
+      <title>更新イベントを設定する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/update/</link>
+      <pubDate>Thu, 24 Jun 2021 10:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/update/</guid>
+      <description>更新イベント処理（update）  更新処理を行うためには、オブジェクトにupdate関数を実装します。 update関数が実装されていれば、その内容が毎フレーム実行されます。  // Shapeを作成してシーンに追加 var shape = Shape().addChildTo(this).setPosition(320, 480); // 更新処理 shape.update = function() { shape.moveBy(2, 2); }; 更新イベント処理（on + enterframe） update では1つの処理しか登録できません。一方、on とenterframeを組み合わせると複数のメソッドを登録可能で、その内容が並行して実行されます。
+// 毎フレーム更新処理 shape2.on(&amp;#39;enterframe&amp;#39;, function() { // 移動  shape2.moveBy(-2, -2); }); // 毎フレーム更新処理 shape2.on(&amp;#39;enterframe&amp;#39;, function() { // 回転  shape2.rotation += 2; }); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
+  </channel>
+</rss>
