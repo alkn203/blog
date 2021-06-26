@@ -12,7 +12,8 @@
   
   <meta name="twitter:card" content="summary" />
   <meta name="og:title" content="タッチイベントの種類を理解する" />
-  <meta name="og:description" content="onpointstart タッチされたタイミングで発動します。
+  <meta name="og:description" content="phina.jsには、以下のタッチイベントが用意されています。
+onpointstart タッチされたタイミングで発動します。
 onpointend タッチが離れたタイミングで発動します。
 onpointmove タッチされたまま動いている時に発動します。
 onpointstay  タッチされたまま動かない時に発動します。 現在の仕様では、タッチ移動時にも発動します。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); var LABEL_COLOR = &#39;yellow&#39;; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; var label1 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 480); var label2 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 600); var label3 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, })." />
@@ -92,11 +93,12 @@ onpointstay  タッチされたまま動かない時に発動します。 現在
       
   <div class="single-title">
     <h1>タッチイベントの種類を理解する</h1>
-    <p>Last Modified:2021-6-24</p>  
+    <p>Last Modified:2021-6-27</p>  
   </div>
   <div class="single-content">
     
       <p><img src="touch-type.gif" alt="touch-type"></p>
+<p><strong>phina.js</strong>には、以下のタッチイベントが用意されています。</p>
 <h2 id="onpointstart">onpointstart</h2>
 <p>タッチされたタイミングで発動します。</p>
 <h2 id="onpointend">onpointend</h2>

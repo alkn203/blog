@@ -12,7 +12,8 @@
       <pubDate>Thu, 24 Jun 2021 13:59:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/2021/06/24/touch-type/</guid>
-      <description>onpointstart タッチされたタイミングで発動します。
+      <description>phina.jsには、以下のタッチイベントが用意されています。
+onpointstart タッチされたタイミングで発動します。
 onpointend タッチが離れたタイミングで発動します。
 onpointmove タッチされたまま動いている時に発動します。
 onpointstay  タッチされたまま動かない時に発動します。 現在の仕様では、タッチ移動時にも発動します。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); var LABEL_COLOR = &amp;#39;yellow&amp;#39;; /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; var label1 = Label({ text: &amp;#39;&amp;#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 480); var label2 = Label({ text: &amp;#39;&amp;#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 600); var label3 = Label({ text: &amp;#39;&amp;#39;, fill: LABEL_COLOR, }).</description>
