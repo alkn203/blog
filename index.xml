@@ -13,7 +13,7 @@
       <pubDate>Thu, 24 Jun 2021 13:59:06 +0900</pubDate>
       
       <guid>https://alkn203.github.io/blog/2021/06/24/touch-type/</guid>
-      <description>phina.jsには、以下のタッチイベントが用意されています。
+      <description>タッチイベントの種類 phina.jsには、以下のタッチイベントが用意されています。
 onpointstart タッチされたタイミングで発動します。
 onpointend タッチが離れたタイミングで発動します。
 onpointmove タッチされたまま動いている時に発動します。
