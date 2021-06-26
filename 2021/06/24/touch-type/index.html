@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    タッチイベントの種類を理解する | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="タッチイベントの種類を理解する" />
+  <meta name="og:description" content="onpointstart タッチされたタイミングで発動します。
+onpointend タッチが離れたタイミングで発動します。
+onpointmove タッチされたまま動いている時に発動します。
+onpointstay  タッチされたまま動かない時に発動します。 現在の仕様では、タッチ移動時にも発動します。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); var LABEL_COLOR = &#39;yellow&#39;; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; var label1 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 480); var label2 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, }).addChildTo(this).setPosition(320, 600); var label3 = Label({ text: &#39;&#39;, fill: LABEL_COLOR, })." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/touch-type/touch-type.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/touch-type/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/touch-type/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Event</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>タッチイベントの種類を理解する</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <p><img src="touch-type.gif" alt="touch-type"></p>
+<h2 id="onpointstart">onpointstart</h2>
+<p>タッチされたタイミングで発動します。</p>
+<h2 id="onpointend">onpointend</h2>
+<p>タッチが離れたタイミングで発動します。</p>
+<h2 id="onpointmove">onpointmove</h2>
+<p>タッチされたまま動いている時に発動します。</p>
+<h2 id="onpointstay">onpointstay</h2>
+<ul>
+<li>タッチされたまま動かない時に発動します。</li>
+<li>現在の仕様では、タッチ移動時にも発動します。</li>
+</ul>
+<h2 id="サンプルコード">サンプルコード</h2>
+<details>
+<summary>コードを見る</summary>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">LABEL_COLOR</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">label1</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">label2</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">label3</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">720</span><span class="p">);</span>
+    
+    <span class="kd">var</span> <span class="nx">label4</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">840</span><span class="p">);</span>
+    
+    <span class="kd">var</span> <span class="nx">cnt1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">cnt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">cnt3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">cnt4</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// タッチ開始
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">cnt1</span><span class="o">++</span><span class="p">;</span>
+      <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;pointstart: &#39;</span> <span class="o">+</span> <span class="nx">cnt1</span><span class="p">;</span> 
+    <span class="p">};</span>
+    <span class="c1">// タッチ終了
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">cnt2</span><span class="o">++</span><span class="p">;</span>
+      <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;pointend: &#39;</span> <span class="o">+</span> <span class="nx">cnt2</span><span class="p">;</span> 
+    <span class="p">};</span>
+    <span class="c1">// タッチしながら移動
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointmove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">cnt3</span><span class="o">++</span><span class="p">;</span>
+      <span class="nx">label3</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;pointmove: &#39;</span> <span class="o">+</span> <span class="nx">cnt3</span><span class="p">;</span> 
+    <span class="p">};</span>
+    <span class="c1">// タッチしながら停止
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onpointstay</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">cnt4</span><span class="o">++</span><span class="p">;</span>
+      <span class="nx">label4</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;pointstay: &#39;</span> <span class="o">+</span> <span class="nx">cnt4</span><span class="p">;</span> 
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="c1">// MainScene から開始
+</span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// fps表示
+</span><span class="c1"></span>  <span class="c1">//app.enableStats();
+</span><span class="c1"></span>  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></details>
+<h2 id="runstantプロジェクト">runstantプロジェクト</h2>
+<p><a href="https://runstant.com/alkn203/projects/eac67790">https://runstant.com/alkn203/projects/eac67790</a></p>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/touch-point/">前の記事</a></li>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#onpointstart">onpointstart</a></li>
+    <li><a href="#onpointend">onpointend</a></li>
+    <li><a href="#onpointmove">onpointmove</a></li>
+    <li><a href="#onpointstay">onpointstay</a></li>
+    <li><a href="#サンプルコード">サンプルコード</a></li>
+    <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
