@@ -6,7 +6,18 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 24 Jun 2021 13:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 14:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>独自のイベントを登録・発行する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/original-event/</link>
+      <pubDate>Thu, 24 Jun 2021 14:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/original-event/</guid>
+      <description>独自イベントの登録 Shapeに対して独自のイベントを登録・発行する方法についてします。
+on + イベント名  オブジェクトに独自イベントを登録するためには、on + イベント名 の関数をオブジェクトに実装します。 今回はイベント名をhitとしたいのでonhitとしました。  // hitイベント登録 shape.onhit = function() { alert(&amp;#39;Hit!&amp;#39;); }; 独自イベント発行 イベントの発行は、flare(イベント名)で行います。
+// タッチイベント登録 shape.onpointstart = function() { // hitイベント発行  shape.flare(&amp;#39;hit&amp;#39;); }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().</description>
+    </item>
+    
     <item>
       <title>タッチイベントの種類を理解する</title>
       <link>https://alkn203.github.io/blog/2021/06/24/touch-type/</link>
