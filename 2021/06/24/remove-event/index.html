@@ -5,22 +5,21 @@
   
   <meta charset="UTF-8">
   <title>
-    独自のイベントを登録・発行する | Keep On Coding
+    登録したイベントを削除する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="独自のイベントを登録・発行する" />
-  <meta name="og:description" content="独自イベントの登録 Shapeに対して独自のイベントを登録・発行する方法についてします。
-on &#43; イベント名  オブジェクトに独自イベントを登録するためには、on &#43; イベント名 の関数をオブジェクトに実装します。 今回はイベント名をhitとしたいのでonhitとしました。  // hitイベント登録 shape.onhit = function() { alert(&#39;Hit!&#39;); }; 独自イベント発行 イベントの発行は、flare(イベント名)で行います。
-// タッチイベント登録 shape.onpointstart = function() { // hitイベント発行  shape.flare(&#39;hit&#39;); }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape()." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/original-event/original-event.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/original-event/" />
+  <meta name="og:title" content="登録したイベントを削除する" />
+  <meta name="og:description" content="イベントの削除 イベントを削除するためには、off メソッドを使います。
+// タッチ関数 var touchFunc = function() { alert(&#34;タッチされました&#34;); // 2度と呼ばないよう解除する  shape.off(&#34;pointstart&#34;, touchFunc); }; // タッチ開始時に呼ばれる関数を登録 shape.on(&#39;pointstart&#39;, touchFunc); };  offでは第2引数に関数を指定する必要があるため、 touchFuncとして別に定義しています。 実行すると、タッチイベントが1回だけしか発生しないのが分かります。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/remove-event/remove-event.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/original-event/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -90,31 +89,28 @@ on &#43; イベント名  オブジェクトに独自イベントを登録する
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>独自のイベントを登録・発行する</h1>
-    <p>Last Modified:2021-6-27</p>  
+    <h1>登録したイベントを削除する</h1>
+    <p>Last Modified:2021-6-24</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="original-event.png" alt="original-event"></p>
-<h2 id="独自イベントの登録">独自イベントの登録</h2>
-<p>Shapeに対して独自のイベントを登録・発行する方法についてします。</p>
-<h2 id="on--イベント名">on + イベント名</h2>
-<ul>
-<li>オブジェクトに独自イベントを登録するためには、<strong>on + イベント名</strong> の関数をオブジェクトに実装します。</li>
-<li>今回はイベント名を<strong>hit</strong>としたいので<strong>onhit</strong>としました。</li>
+      <p><img src="remove-event.png" alt="remove-event"></p>
+<h2 id="イベントの削除">イベントの削除</h2>
+<p>イベントを削除するためには、<strong>off</strong> メソッドを使います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチ関数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
+    <span class="c1">// 2度と呼ばないよう解除する
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// タッチ開始時に呼ばれる関数を登録
+</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div><ul>
+<li><strong>off</strong>では第2引数に関数を指定する必要があるため、 <strong>touchFunc</strong>として別に定義しています。</li>
+<li>実行すると、タッチイベントが1回だけしか発生しないのが分かります。</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// hitイベント登録
-</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">onhit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Hit!&#39;</span><span class="p">);</span>  
-<span class="p">};</span>
-</code></pre></div><h3 id="独自イベント発行">独自イベント発行</h3>
-<p>イベントの発行は、flare(イベント名)で行います。</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチイベント登録
-</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">onpointstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// hitイベント発行
-</span><span class="c1"></span>  <span class="nx">shape</span><span class="p">.</span><span class="nx">flare</span><span class="p">(</span><span class="s1">&#39;hit&#39;</span><span class="p">);</span>
-<span class="p">};</span>
-</code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
+<h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
@@ -137,15 +133,14 @@ on &#43; イベント名  オブジェクトに独自イベントを登録する
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
     <span class="c1">// タッチ可能にする
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-    <span class="c1">// タッチイベント登録
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">onpointstart</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// hitイベント発行
-</span><span class="c1"></span>      <span class="nx">shape</span><span class="p">.</span><span class="nx">flare</span><span class="p">(</span><span class="s1">&#39;hit&#39;</span><span class="p">);</span>
-    <span class="p">};</span>
-    <span class="c1">// hitイベント登録
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">onhit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Hit!&#39;</span><span class="p">);</span>  
-    <span class="p">};</span>
+    <span class="c1">// タッチ関数
+</span><span class="c1"></span>  	<span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  	    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
+  	    <span class="c1">// 2度と呼ばないよう解除する
+</span><span class="c1"></span>  	    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
+  	<span class="p">};</span>
+  	<span class="c1">// タッチ開始時に呼ばれる関数を登録
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
   <span class="p">},</span>
 <span class="p">});</span>
 <span class="cm">/*
@@ -164,7 +159,7 @@ on &#43; イベント名  オブジェクトに独自イベントを登録する
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/c57dbef8">https://runstant.com/alkn203/projects/c57dbef8</a></p>
+<p><a href="https://runstant.com/alkn203/projects/8ce700ac">https://runstant.com/alkn203/projects/8ce700ac</a></p>
 
   </div>
 
@@ -177,11 +172,8 @@ on &#43; イベント名  オブジェクトに独自イベントを登録する
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/touch-type/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/original-event/">前の記事</a></li>
   
-  
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/remove-event/">次の記事</a></li>
-    <li>>></li>
   
   </ul>
 </div>
@@ -195,12 +187,7 @@ on &#43; イベント名  オブジェクトに独自イベントを登録する
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#独自イベントの登録">独自イベントの登録</a></li>
-    <li><a href="#on--イベント名">on + イベント名</a>
-      <ul>
-        <li><a href="#独自イベント発行">独自イベント発行</a></li>
-      </ul>
-    </li>
+    <li><a href="#イベントの削除">イベントの削除</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>
