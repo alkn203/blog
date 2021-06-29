@@ -5,21 +5,22 @@
   
   <meta charset="UTF-8">
   <title>
-    登録したイベントを削除する | Keep On Coding
+    一度だけ発行されるイベントを登録する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="登録したイベントを削除する" />
-  <meta name="og:description" content="イベントの削除 イベントを削除するためには、off メソッドを使います。
-// タッチ関数 var touchFunc = function() { alert(&#34;タッチされました&#34;); // 2度と呼ばないよう解除する  shape.off(&#34;pointstart&#34;, touchFunc); }; // タッチ開始時に呼ばれる関数を登録 shape.on(&#39;pointstart&#39;, touchFunc); };  offでは第2引数に関数を指定する必要があるため、 touchFuncとして別に定義しています。 実行すると、タッチイベントが1回だけしか発生しないのが分かります。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/remove-event/remove-event.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
+  <meta name="og:title" content="一度だけ発行されるイベントを登録する" />
+  <meta name="og:description" content="one メソッド １回だけ発行するイベントは、oneを使って登録すると便利です。
+// タッチ関数（一度のみ実行） shape.one(&#39;pointstart&#39;, function() { alert(&#34;タッチされました&#34;); }); 実行すると、タッチイベントが1回だけしか発生しないのが分かります。
+サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape.backgroundColor = &#39;red&#39;; // タッチ可能にする  shape.setInteractive(true); // タッチ関数（一度のみ実行）  shape.one(&#39;pointstart&#39;, function() { alert(&#34;タッチされました&#34;); }); }, }); /* * メイン処理 */ phina." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/only-once-event/only-once-event.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/only-once-event/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/only-once-event/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -89,27 +90,19 @@
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>登録したイベントを削除する</h1>
-    <p>Last Modified:2021-6-28</p>  
+    <h1>一度だけ発行されるイベントを登録する</h1>
+    <p>Last Modified:2021-6-24</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="remove-event.png" alt="remove-event"></p>
-<h2 id="イベントの削除">イベントの削除</h2>
-<p>イベントを削除するためには、<strong>off</strong> メソッドを使います。</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチ関数
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <p><img src="only-once-event.png" alt="only-once-event"></p>
+<h2 id="one-メソッド">one メソッド</h2>
+<p>１回だけ発行するイベントは、<strong>one</strong>を使って登録すると便利です。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチ関数（一度のみ実行）
+</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
-    <span class="c1">// 2度と呼ばないよう解除する
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-<span class="p">};</span>
-<span class="c1">// タッチ開始時に呼ばれる関数を登録
-</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-<span class="p">};</span>
-</code></pre></div><ul>
-<li><strong>off</strong>では第2引数に関数を指定する必要があるため、 <strong>touchFunc</strong>として別に定義しています。</li>
-<li>実行すると、タッチイベントが1回だけしか発生しないのが分かります。</li>
-</ul>
+<span class="p">});</span>
+</code></pre></div><p>実行すると、タッチイベントが1回だけしか発生しないのが分かります。</p>
 <h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
@@ -133,14 +126,10 @@
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
     <span class="c1">// タッチ可能にする
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-    <span class="c1">// タッチ関数
-</span><span class="c1"></span>  	<span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  	    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
-  	    <span class="c1">// 2度と呼ばないよう解除する
-</span><span class="c1"></span>  	    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-  	<span class="p">};</span>
-  	<span class="c1">// タッチ開始時に呼ばれる関数を登録
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
+    <span class="c1">// タッチ関数（一度のみ実行）
+</span><span class="c1"></span>  	<span class="nx">shape</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
+  	<span class="p">});</span>
   <span class="p">},</span>
 <span class="p">});</span>
 <span class="cm">/*
@@ -159,7 +148,7 @@
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/8ce700ac">https://runstant.com/alkn203/projects/8ce700ac</a></p>
+<p><a href="https://runstant.com/alkn203/projects/551c7449">https://runstant.com/alkn203/projects/551c7449</a></p>
 
   </div>
 
@@ -172,10 +161,10 @@
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/original-event/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/remove-event/">前の記事</a></li>
   
   
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/only-once-event/">次の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/remove-event-all/">次の記事</a></li>
     <li>>></li>
   
   </ul>
@@ -190,7 +179,7 @@
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#イベントの削除">イベントの削除</a></li>
+    <li><a href="#one-メソッド">one メソッド</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>

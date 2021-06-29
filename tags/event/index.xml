@@ -6,7 +6,29 @@
     <description>Recent content in event on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 24 Jun 2021 15:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/event/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 17:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/event/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>特定の種類のイベントを全て削除する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/remove-event-all/</link>
+      <pubDate>Thu, 24 Jun 2021 17:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/remove-event-all/</guid>
+      <description>clear メソッド 特定のイベントの登録を全て削除するには、以下のようにclearを使います。
+shape.clear(&amp;#39;enterframe&amp;#39;); }); 以下の例では、enterframe イベントを2つ登録しており、タッチするとそれが削除されるようにしています。結果として、shape のサイズ拡大が止まります。
+// 更新イベント登録 shape.on(&amp;#39;enterframe&amp;#39;, function() { shape.width++; }); // 更新イベント更新登録 shape.on(&amp;#39;enterframe&amp;#39;, function() { shape.height++; }); // タッチイベント登録 shape.on(&amp;#39;pointstart&amp;#39;, function() { // 特定の種類のイベント登録を全て削除する  shape.clear(&amp;#39;enterframe&amp;#39;); }); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().</description>
+    </item>
+    
+    <item>
+      <title>一度だけ発行されるイベントを登録する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/only-once-event/</link>
+      <pubDate>Thu, 24 Jun 2021 16:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/only-once-event/</guid>
+      <description>one メソッド １回だけ発行するイベントは、oneを使って登録すると便利です。
+// タッチ関数（一度のみ実行） shape.one(&amp;#39;pointstart&amp;#39;, function() { alert(&amp;#34;タッチされました&amp;#34;); }); 実行すると、タッチイベントが1回だけしか発生しないのが分かります。
+サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &amp;#39;black&amp;#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape.backgroundColor = &amp;#39;red&amp;#39;; // タッチ可能にする  shape.setInteractive(true); // タッチ関数（一度のみ実行）  shape.one(&amp;#39;pointstart&amp;#39;, function() { alert(&amp;#34;タッチされました&amp;#34;); }); }, }); /* * メイン処理 */ phina.</description>
+    </item>
+    
     <item>
       <title>登録したイベントを削除する</title>
       <link>https://alkn203.github.io/blog/2021/06/24/remove-event/</link>

@@ -5,21 +5,22 @@
   
   <meta charset="UTF-8">
   <title>
-    登録したイベントを削除する | Keep On Coding
+    特定の種類のイベントを全て削除する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="登録したイベントを削除する" />
-  <meta name="og:description" content="イベントの削除 イベントを削除するためには、off メソッドを使います。
-// タッチ関数 var touchFunc = function() { alert(&#34;タッチされました&#34;); // 2度と呼ばないよう解除する  shape.off(&#34;pointstart&#34;, touchFunc); }; // タッチ開始時に呼ばれる関数を登録 shape.on(&#39;pointstart&#39;, touchFunc); };  offでは第2引数に関数を指定する必要があるため、 touchFuncとして別に定義しています。 実行すると、タッチイベントが1回だけしか発生しないのが分かります。  サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/remove-event/remove-event.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
+  <meta name="og:title" content="特定の種類のイベントを全て削除する" />
+  <meta name="og:description" content="clear メソッド 特定のイベントの登録を全て削除するには、以下のようにclearを使います。
+shape.clear(&#39;enterframe&#39;); }); 以下の例では、enterframe イベントを2つ登録しており、タッチするとそれが削除されるようにしています。結果として、shape のサイズ拡大が止まります。
+// 更新イベント登録 shape.on(&#39;enterframe&#39;, function() { shape.width&#43;&#43;; }); // 更新イベント更新登録 shape.on(&#39;enterframe&#39;, function() { shape.height&#43;&#43;; }); // タッチイベント登録 shape.on(&#39;pointstart&#39;, function() { // 特定の種類のイベント登録を全て削除する  shape.clear(&#39;enterframe&#39;); }); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape()." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/remove-event-all/remove-event-all.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/remove-event-all/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/remove-event/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/remove-event-all/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -89,28 +90,31 @@
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>登録したイベントを削除する</h1>
-    <p>Last Modified:2021-6-28</p>  
+    <h1>特定の種類のイベントを全て削除する</h1>
+    <p>Last Modified:2021-6-24</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="remove-event.png" alt="remove-event"></p>
-<h2 id="イベントの削除">イベントの削除</h2>
-<p>イベントを削除するためには、<strong>off</strong> メソッドを使います。</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチ関数
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
-    <span class="c1">// 2度と呼ばないよう解除する
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-<span class="p">};</span>
-<span class="c1">// タッチ開始時に呼ばれる関数を登録
-</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-<span class="p">};</span>
-</code></pre></div><ul>
-<li><strong>off</strong>では第2引数に関数を指定する必要があるため、 <strong>touchFunc</strong>として別に定義しています。</li>
-<li>実行すると、タッチイベントが1回だけしか発生しないのが分かります。</li>
-</ul>
-<h2 id="サンプルコード">サンプルコード</h2>
+      <p><img src="remove-event-all.gif" alt="remove-event-all"></p>
+<h2 id="clear-メソッド">clear メソッド</h2>
+<p>特定のイベントの登録を全て削除するには、以下のように<strong>clear</strong>を使います。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">shape</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><p>以下の例では、<strong>enterframe</strong> イベントを2つ登録しており、タッチするとそれが削除されるようにしています。結果として、<strong>shape</strong> のサイズ拡大が止まります。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 更新イベント登録
+</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span><span class="o">++</span><span class="p">;</span>  
+<span class="p">});</span>
+<span class="c1">// 更新イベント更新登録
+</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="o">++</span><span class="p">;</span>  
+<span class="p">});</span>
+<span class="c1">// タッチイベント登録
+</span><span class="c1"></span><span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 特定の種類のイベント登録を全て削除する
+</span><span class="c1"></span>  <span class="nx">shape</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
 <details>
 <summary>コードを見る</summary>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
@@ -133,14 +137,19 @@
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
     <span class="c1">// タッチ可能にする
 </span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-    <span class="c1">// タッチ関数
-</span><span class="c1"></span>  	<span class="kd">var</span> <span class="nx">touchFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  	    <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;タッチされました&#34;</span><span class="p">);</span>
-  	    <span class="c1">// 2度と呼ばないよう解除する
-</span><span class="c1"></span>  	    <span class="nx">shape</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&#34;pointstart&#34;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
-  	<span class="p">};</span>
-  	<span class="c1">// タッチ開始時に呼ばれる関数を登録
-</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="nx">touchFunc</span><span class="p">);</span>
+    <span class="c1">// 更新イベント登録
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">shape</span><span class="p">.</span><span class="nx">width</span><span class="o">++</span><span class="p">;</span>  
+    <span class="p">});</span>
+    <span class="c1">// 更新イベント更新登録
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">shape</span><span class="p">.</span><span class="nx">height</span><span class="o">++</span><span class="p">;</span>  
+    <span class="p">});</span>
+    <span class="c1">// タッチイベント登録
+</span><span class="c1"></span>    <span class="nx">shape</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// 特定の種類のイベント登録を全て削除する
+</span><span class="c1"></span>      <span class="nx">shape</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="s1">&#39;enterframe&#39;</span><span class="p">);</span>
+    <span class="p">});</span>
   <span class="p">},</span>
 <span class="p">});</span>
 <span class="cm">/*
@@ -159,7 +168,7 @@
 <span class="p">});</span>
 </code></pre></div></details>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/8ce700ac">https://runstant.com/alkn203/projects/8ce700ac</a></p>
+<p><a href="https://runstant.com/alkn203/projects/d6d50d82">https://runstant.com/alkn203/projects/d6d50d82</a></p>
 
   </div>
 
@@ -172,11 +181,8 @@
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/original-event/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/only-once-event/">前の記事</a></li>
   
-  
-    <li><a href="https://alkn203.github.io/blog/2021/06/24/only-once-event/">次の記事</a></li>
-    <li>>></li>
   
   </ul>
 </div>
@@ -190,7 +196,7 @@
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#イベントの削除">イベントの削除</a></li>
+    <li><a href="#clear-メソッド">clear メソッド</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
   </ul>
