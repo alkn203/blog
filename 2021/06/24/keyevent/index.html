@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    キーイベントの種類を理解する | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="キーイベントの種類を理解する" />
+  <meta name="og:description" content="phina.jsにはあらかじめ用意されたkeyイベントがあります。
+getKey 特定のキーが押されているかを調べます。
+getKeyDown 特定のキーが押されたかを調べます。
+getKeyUp 特定のキーが離されたかを調べます。
+使用例 これらのメソッドは、通常updateの中でapp.keybordを参照して使用します。
+// 毎フレーム処理 this.update = function(app) { var key = app.keyboard; // 移動  if (key.getKey(&#39;left&#39;)) { shape.x -= SPEED; } // キーダウン  if (key.getKeyDown(&#39;right&#39;)) { label1.text = &#39;getKeyDown: right&#39;; } // キーアップ  } if (key.getKeyUp(&#39;up&#39;)) { label2.text = &#39;getKeyUp: up&#39;; } }; on&#43;キーイベント名 on&#43;キーイベント名でイベントドリブンな検出を行うことができます。
+以下の例では、onkeyup イベント発火時に入力されたキーコードとキーコードに対応した文字をラベルに表示しています。
+// キーアップイベント this.onkeyup = function(e) { label3.text = &#39;onkeyup: &#39; &#43; e.keyCode &#43; &#39;:&#39; &#43; String." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/keyevent/keyevent.gif" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/keyevent/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/keyevent/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/keyboard/">Event</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Keyboard</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>キーイベントの種類を理解する</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <p><img src="keyevent.gif" alt="keyevent"></p>
+<p><strong>phina.js</strong>にはあらかじめ用意された<strong>keyイベント</strong>があります。</p>
+<h2 id="getkey">getKey</h2>
+<p>特定のキーが押されているかを調べます。</p>
+<h2 id="getkeydown">getKeyDown</h2>
+<p>特定のキーが押されたかを調べます。</p>
+<h2 id="getkeyup">getKeyUp</h2>
+<p>特定のキーが離されたかを調べます。</p>
+<h2 id="使用例">使用例</h2>
+<p>これらのメソッドは、通常<strong>update</strong>の中で<strong>app.keybord</strong>を参照して使用します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 毎フレーム処理
+</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">;</span>
+  <span class="c1">// 移動
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">shape</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="nx">SPEED</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// キーダウン
+</span><span class="c1"></span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyDown: right&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// キーアップ
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyUp</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyUp: up&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div><h2 id="onキーイベント名">on+キーイベント名</h2>
+<p><strong>on+キーイベント名</strong>でイベントドリブンな検出を行うことができます。</p>
+<p>以下の例では、<strong>onkeyup</strong> イベント発火時に入力されたキーコードとキーコードに対応した文字をラベルに表示しています。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// キーアップイベント
+</span><span class="c1"></span><span class="k">this</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">label3</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;onkeyup: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div><h2 id="getkeyangle">getKeyAngle</h2>
+<p>キーの方向を <strong>angle(degree)</strong> で取得します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// キーの方向をangleで取得
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">getKeyAngle</span><span class="p">();</span>
+<span class="nx">label4</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;angle:&#39;</span> <span class="o">+</span> <span class="nx">angle</span><span class="p">;</span> <span class="c1">// left &gt;&gt; 180
+</span></code></pre></div><h2 id="getkeydirection">getKeyDirection</h2>
+<p>キーの方向を正規化した値(連想配列)で取得します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// キーの方向を正規化した値eで取得
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">();</span>
+<span class="nx">label5</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;direction:&#39;</span> <span class="o">+</span> <span class="nx">direction</span><span class="p">;</span> <span class="c1">// left &gt;&gt; {x:-1, y:0}
+</span></code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
+<details>
+<summary>コードを見る</summary>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// グローバルに展開
+</span><span class="c1"></span><span class="nx">phina</span><span class="p">.</span><span class="nx">globalize</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">LABEL_COLOR</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">SPEED</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * メインシーン
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&#34;MainScene&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 継承
+</span><span class="c1"></span>  <span class="nx">superClass</span><span class="o">:</span> <span class="s1">&#39;DisplayScene&#39;</span><span class="p">,</span>
+  <span class="c1">// 初期化
+</span><span class="c1"></span>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 親クラス初期化
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">superInit</span><span class="p">();</span>
+    <span class="c1">// 背景色
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">label1</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">label2</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">220</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">label3</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">340</span><span class="p">);</span>
+    
+    <span class="kd">var</span> <span class="nx">label4</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">label5</span> <span class="o">=</span> <span class="nx">Label</span><span class="p">({</span>
+      <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="nx">fill</span><span class="o">:</span> <span class="nx">LABEL_COLOR</span><span class="p">,</span>
+    <span class="p">}).</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">720</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">CircleShape</span><span class="p">().</span><span class="nx">addChildTo</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">setPosition</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+    <span class="c1">// 毎フレーム処理
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">;</span>
+      <span class="c1">// 上下左右移動
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="nx">SPEED</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="nx">SPEED</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">y</span> <span class="o">-=</span> <span class="nx">SPEED</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="nx">SPEED</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// キーダウン
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyDown: left&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyDown: right&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyDown: up&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDown</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label1</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyDown: down&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// キーアップ
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyUp</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyUp: left&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyUp</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyUp: right&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyUp</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyUp: up&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">getKeyUp</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">label2</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;getKeyUp: down&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// キーの方向をangleで取得
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">getKeyAngle</span><span class="p">();</span>
+      <span class="nx">label4</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;angle:&#39;</span> <span class="o">+</span> <span class="nx">angle</span><span class="p">;</span>
+      <span class="c1">// キーの方向を正規化した値eで取得
+</span><span class="c1"></span>      <span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">getKeyDirection</span><span class="p">();</span>
+      <span class="nx">label5</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;direction:&#39;</span> <span class="o">+</span> <span class="nx">direction</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="c1">// キーアップイベント
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">label3</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;onkeyup: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+<span class="cm">/*
+</span><span class="cm"> * メイン処理
+</span><span class="cm"> */</span>
+<span class="nx">phina</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// アプリケーションを生成
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">GameApp</span><span class="p">({</span>
+    <span class="c1">// MainScene から開始
+</span><span class="c1"></span>    <span class="nx">startLabel</span><span class="o">:</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="c1">// fps表示
+</span><span class="c1"></span>  <span class="c1">//app.enableStats();
+</span><span class="c1"></span>  <span class="c1">// 実行
+</span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></details>
+<h2 id="runstantプロジェクト">runstantプロジェクト</h2>
+<p><a href="https://runstant.com/alkn203/projects/bcb3d544">https://runstant.com/alkn203/projects/bcb3d544</a></p>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#getkey">getKey</a></li>
+    <li><a href="#getkeydown">getKeyDown</a></li>
+    <li><a href="#getkeyup">getKeyUp</a></li>
+    <li><a href="#使用例">使用例</a></li>
+    <li><a href="#onキーイベント名">on+キーイベント名</a></li>
+    <li><a href="#getkeyangle">getKeyAngle</a></li>
+    <li><a href="#getkeydirection">getKeyDirection</a></li>
+    <li><a href="#サンプルコード">サンプルコード</a></li>
+    <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

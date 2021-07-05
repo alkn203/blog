@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/keyboard/</link>
+    <description>Recent content in Event on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 24 Jun 2021 17:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/keyboard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>キーイベントの種類を理解する</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/keyevent/</link>
+      <pubDate>Thu, 24 Jun 2021 17:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/keyevent/</guid>
+      <description>phina.jsにはあらかじめ用意されたkeyイベントがあります。
+getKey 特定のキーが押されているかを調べます。
+getKeyDown 特定のキーが押されたかを調べます。
+getKeyUp 特定のキーが離されたかを調べます。
+使用例 これらのメソッドは、通常updateの中でapp.keybordを参照して使用します。
+// 毎フレーム処理 this.update = function(app) { var key = app.keyboard; // 移動  if (key.getKey(&amp;#39;left&amp;#39;)) { shape.x -= SPEED; } // キーダウン  if (key.getKeyDown(&amp;#39;right&amp;#39;)) { label1.text = &amp;#39;getKeyDown: right&amp;#39;; } // キーアップ  } if (key.getKeyUp(&amp;#39;up&amp;#39;)) { label2.text = &amp;#39;getKeyUp: up&amp;#39;; } }; on+キーイベント名 on+キーイベント名でイベントドリブンな検出を行うことができます。
+以下の例では、onkeyup イベント発火時に入力されたキーコードとキーコードに対応した文字をラベルに表示しています。
+// キーアップイベント this.onkeyup = function(e) { label3.text = &amp;#39;onkeyup: &amp;#39; + e.keyCode + &amp;#39;:&amp;#39; + String.</description>
+    </item>
+    
+  </channel>
+</rss>
