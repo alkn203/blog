@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>group on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/group/</link>
+    <description>Recent content in group on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 24 Jun 2021 19:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/group/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>オブジェクトをグループ化して動かす</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/move-group/</link>
+      <pubDate>Thu, 24 Jun 2021 19:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/move-group/</guid>
+      <description>オブジェクトをグループ化する phina.jsでオブジェクトのグループ化を行うときは、 以下のようにDisplayElementの子要素として追加する方法が一般的です。
+// グループ var group = DisplayElement().addChildTo(this); // グループの中心座標 group.setPosition(320, 480); // RectangleShape RectangleShape({ width: 128, height: 128, fill: &amp;#39;red&amp;#39;, stroke: &amp;#39;white&amp;#39;, strokeWidth: 16, cornerRadius: 16 }).addChildTo(group).setPosition(0, -140); // 相対座標  絶対座標をグループに対して設定します。 追加したオブジェクトの座標は相対座標とする必要があります。  グループを動かす グループの座標を変更すると、子要素がまとまって移動します。
+this.onpointmove = function(e) { group.x = e.pointer.x; group.y = e.pointer.y; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&amp;#34;MainScene&amp;#34;, { // 継承  superClass: &amp;#39;DisplayScene&amp;#39;, // 初期化  init: function() { // 親クラス初期化  this.</description>
+    </item>
+    
+  </channel>
+</rss>
