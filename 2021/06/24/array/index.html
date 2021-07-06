@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.jsの拡張クラスを使ってみよう　ーArray編ー | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.jsの拡張クラスを使ってみよう　ーArray編ー" />
+  <meta name="og:description" content="はじめに phina.jsは、国産の javascript ゲームライブラリです。 ゲーム製作向けのライブラリですので、ゲーム製作を前提とした機能が充実していますが、javascript でのコーディングをより快適にするための細かな配慮がされているライブラリでもあります。その例として、今回は、javascript の基本クラスである Array の拡張メソッドを紹介したいと思います。
+拡張Arrayクラス phina.js では、元々の javascript のArrayクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いだろうと思われるメソッドを紹介します。
+first 配列の最初の要素を返します。
+last 配列の最後の要素を返します。
+var arr = [1,2,3]; arr.first; // =&gt; 1 arr.last; // =&gt; 3  これらは、メソッドというよりもプロパティです。　 インデックス番号を意識しなくて良いので、参照エラーなどを回避することができます。  contains 指定された要素が配列に含まれているかどうかを調べます。
+var arr = [1,2,3]; arr.contains(1); // =&gt; true swap 指定されたインデックスの要素を入れ替えます。
+var arr = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]; arr.swap(0,1); // =&gt; arr = [&#39;b&#39;,&#39;a&#39;,&#39;c&#39;]  前後の要素を入れ替える時などに便利です。  eraseIf 引数で与えられた関数の条件に一致する最初の要素を削除します。
+var arr = [1,2,3]; arr.eraseIf(function(elem) { if (elem &gt; 1) { return true; } }); //=&gt; arr = [1,3]  関数の中に任意の条件を設定できるので、用途の幅が広がります。  eraseIfAll 引数で与えられた関数の条件に一致する要素を全て削除します。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/array/" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/array/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/array/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Event</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/keyboard/">Keyboard</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/group/">Group</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/core/">Core</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>phina.jsの拡張クラスを使ってみよう　ーArray編ー</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <h2 id="はじめに">はじめに</h2>
+<p><a href="https://phinajs.com/">phina.js</a>は、国産の <strong>javascript</strong> ゲームライブラリです。
+ゲーム製作向けのライブラリですので、ゲーム製作を前提とした機能が充実していますが、<strong>javascript</strong> でのコーディングをより快適にするための細かな配慮がされているライブラリでもあります。その例として、今回は、<strong>javascript</strong> の基本クラスである <strong>Array</strong> の拡張メソッドを紹介したいと思います。</p>
+<h2 id="拡張arrayクラス">拡張Arrayクラス</h2>
+<p><strong>phina.js</strong> では、元々の <strong>javascript</strong> の<strong>Array</strong>クラスに様々な拡張メソッドが追加されています。
+以下に、使う機会が多いだろうと思われるメソッドを紹介します。</p>
+<h3 id="first">first</h3>
+<p>配列の最初の要素を返します。</p>
+<h3 id="last">last</h3>
+<p>配列の最後の要素を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span> <span class="c1">// =&gt; 1
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">last</span><span class="p">;</span> <span class="c1">// =&gt; 3
+</span></code></pre></div><ul>
+<li>これらは、メソッドというよりもプロパティです。　　</li>
+<li>インデックス番号を意識しなくて良いので、参照エラーなどを回避することができます。</li>
+</ul>
+<h3 id="contains">contains</h3>
+<p>指定された要素が配列に含まれているかどうかを調べます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// =&gt; true
+</span></code></pre></div><h3 id="swap">swap</h3>
+<p>指定されたインデックスの要素を入れ替えます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// =&gt; arr = [&#39;b&#39;,&#39;a&#39;,&#39;c&#39;]
+</span></code></pre></div><ul>
+<li>前後の要素を入れ替える時などに便利です。</li>
+</ul>
+<h3 id="eraseif">eraseIf</h3>
+<p>引数で与えられた関数の条件に一致する最初の要素を削除します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">eraseIf</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">elem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">elem</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span> 
+<span class="p">});</span> <span class="c1">//=&gt; arr = [1,3]
+</span></code></pre></div><ul>
+<li>関数の中に任意の条件を設定できるので、用途の幅が広がります。</li>
+</ul>
+<h3 id="eraseifall">eraseIfAll</h3>
+<p>引数で与えられた関数の条件に一致する要素を全て削除します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">eraseIfAll</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">elem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">elem</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span> <span class="c1">// =&gt; arr = [1]
+</span></code></pre></div><ul>
+<li>通常このような処理をするためには、配列の要素を逆順でループで回す必要がありますが、条件だけを気にすれば良いので楽です。</li>
+</ul>
+<h3 id="random">random</h3>
+<p>配列からランダムな要素を１つ返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span> <span class="c1">// =&gt; random value in 1,2,3
+</span></code></pre></div><ul>
+<li>ランダム要素を加えるために、ゲーム開発で多用される処理に使えます。</li>
+</ul>
+<h3 id="uniq">uniq</h3>
+<p>配列から重複した値を除いた新しい配列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">uniq</span><span class="p">();</span> <span class="c1">// =&gt; [1,2,3,4,5]
+</span></code></pre></div><h3 id="clear">clear</h3>
+<p>配列の要素を全て削除します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span> <span class="c1">// =&gt; arr = []
+</span></code></pre></div><h3 id="fill">fill</h3>
+<p>要素を指定した値で埋めます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// =&gt; arr = [0,0,0]
+</span></code></pre></div><h3 id="range">range</h3>
+<p>一定間隔の整数の列としての配列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// =&gt; arr = [0,1,2,3]
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// =&gt; arr = [2,3,4]
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// =&gt; arr = [2,4,6,8]
+</span></code></pre></div><h3 id="shuffle">shuffle</h3>
+<p>配列の要素をシャッフルします。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span> <span class="c1">// =&gt; [2,3,5,4,1] など
+</span></code></pre></div><p>他にも、例えば以下のようなメソッドが用意されています。
+詳しく見たいという方は、以下をご確認下さい。</p>
+<blockquote>
+<p>Arrayクラスのソース
+<a href="https://github.com/phinajs/phina.js/blob/develop/src/core/array.js">https://github.com/phinajs/phina.js/blob/develop/src/core/array.js</a></p>
+</blockquote>
+<h3 id="equals">equals</h3>
+<p>配列が等しいかどうかをチェックします。</p>
+<h3 id="at">at</h3>
+<p>指定したインデックスの要素を返します。</p>
+<h3 id="erase">erase</h3>
+<p>指定したオブジェクトと一致した最初の要素を削除します。</p>
+<h3 id="clone">clone</h3>
+<p>自身のコピーを生成して返します。</p>
+<h3 id="sum">sum</h3>
+<p>要素の合計値を返します。</p>
+<h3 id="average">average</h3>
+<p>要素の平均値を返します。</p>
+<h2 id="使い方">使い方</h2>
+<p>htmlファイルで <strong>phina.js</strong> を以下のように読み込みます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/830fd098">https://runstant.com/alkn203/projects/830fd098</a></p>
+<h2 id="さいごに">さいごに</h2>
+<ul>
+<li>配列操作は、ゲームプログラミングに限らず、かなり使用頻度が高い処理です。それ故に、今回紹介したような機能を活用して、可能な限りコーディングを快適にしたいものです。</li>
+<li><strong>phina.js</strong> では、他にも <strong>Number</strong> や <strong>String</strong> といったコアなクラスに拡張がされていますので、次はその辺りを紹介したいと思います。</li>
+</ul>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#拡張arrayクラス">拡張Arrayクラス</a>
+      <ul>
+        <li><a href="#first">first</a></li>
+        <li><a href="#last">last</a></li>
+        <li><a href="#contains">contains</a></li>
+        <li><a href="#swap">swap</a></li>
+        <li><a href="#eraseif">eraseIf</a></li>
+        <li><a href="#eraseifall">eraseIfAll</a></li>
+        <li><a href="#random">random</a></li>
+        <li><a href="#uniq">uniq</a></li>
+        <li><a href="#clear">clear</a></li>
+        <li><a href="#fill">fill</a></li>
+        <li><a href="#range">range</a></li>
+        <li><a href="#shuffle">shuffle</a></li>
+        <li><a href="#equals">equals</a></li>
+        <li><a href="#at">at</a></li>
+        <li><a href="#erase">erase</a></li>
+        <li><a href="#clone">clone</a></li>
+        <li><a href="#sum">sum</a></li>
+        <li><a href="#average">average</a></li>
+      </ul>
+    </li>
+    <li><a href="#使い方">使い方</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
