@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>math on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tags/math/</link>
+    <description>Recent content in math on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 24 Jun 2021 23:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>phina.jsの拡張クラスを使ってみよう　ーMath編ー</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/math/</link>
+      <pubDate>Thu, 24 Jun 2021 23:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/math/</guid>
+      <description>はじめに 今回は、Math の拡張クラスを紹介したいと思います。
+拡張Mathクラス phina.js では、元々の javascript のMathクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+degToRad 度をラジアンに変換します。
+Math.degToRad(180); // =&amp;gt; 3.141592653589793  sinなどの三角関数ではラジアンを使うので、角度をラジアンに変換するこのメソッドは使用頻度が高いです。  radToDeg ラジアンを度に変換します。
+Math.radToDeg(Math.PI/4); // =&amp;gt; 45  Sprite などの回転を表すプロパティである rotation は度で指定するので、このメソッドが活躍します。  clamp 指定した値を指定した範囲に収めた結果を返します。
+Math.clamp(120, 0, 640); // =&amp;gt; 120 Math.clamp(980, 0, 640); // =&amp;gt; 640 Math.clamp(-80, 0, 640); // =&amp;gt; 0  前に紹介した拡張Numberクラスにも同様のメソッドがあります。  inside 指定した値が指定した値の範囲にあるかどうかを返します。
+Math.inside(980, 0, 640); // =&amp;gt; false Math.inside(120, 0, 640); // =&amp;gt; true randint 指定された範囲内でランダムな整数値を生成します。
+Math.randint(-4, 4); // =&amp;gt; -4、0、3、4 など  ゲームを面白くするために、ランダム要素は必須と言えるので使用頻度が高いです。  randfloat 指定された範囲内でランダムな数値を生成します。</description>
+    </item>
+    
+  </channel>
+</rss>

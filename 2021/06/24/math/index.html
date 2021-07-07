@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.jsの拡張クラスを使ってみよう　ーMath編ー | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.jsの拡張クラスを使ってみよう　ーMath編ー" />
+  <meta name="og:description" content="はじめに 今回は、Math の拡張クラスを紹介したいと思います。
+拡張Mathクラス phina.js では、元々の javascript のMathクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+degToRad 度をラジアンに変換します。
+Math.degToRad(180); // =&gt; 3.141592653589793  sinなどの三角関数ではラジアンを使うので、角度をラジアンに変換するこのメソッドは使用頻度が高いです。  radToDeg ラジアンを度に変換します。
+Math.radToDeg(Math.PI/4); // =&gt; 45  Sprite などの回転を表すプロパティである rotation は度で指定するので、このメソッドが活躍します。  clamp 指定した値を指定した範囲に収めた結果を返します。
+Math.clamp(120, 0, 640); // =&gt; 120 Math.clamp(980, 0, 640); // =&gt; 640 Math.clamp(-80, 0, 640); // =&gt; 0  前に紹介した拡張Numberクラスにも同様のメソッドがあります。  inside 指定した値が指定した値の範囲にあるかどうかを返します。
+Math.inside(980, 0, 640); // =&gt; false Math.inside(120, 0, 640); // =&gt; true randint 指定された範囲内でランダムな整数値を生成します。
+Math.randint(-4, 4); // =&gt; -4、0、3、4 など  ゲームを面白くするために、ランダム要素は必須と言えるので使用頻度が高いです。  randfloat 指定された範囲内でランダムな数値を生成します。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/math/" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/math/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/math/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Event</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/keyboard/">Keyboard</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/group/">Group</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/core/">Core</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>phina.jsの拡張クラスを使ってみよう　ーMath編ー</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <h2 id="はじめに">はじめに</h2>
+<p>今回は、<strong>Math</strong> の拡張クラスを紹介したいと思います。</p>
+<h2 id="拡張mathクラス">拡張Mathクラス</h2>
+<p><strong>phina.js</strong> では、元々の <strong>javascript</strong> の<strong>Math</strong>クラスに様々な拡張メソッドが追加されています。
+以下に、使う機会が多いと思われるメソッドを紹介します。</p>
+<h3 id="degtorad">degToRad</h3>
+<p>度をラジアンに変換します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">degToRad</span><span class="p">(</span><span class="mi">180</span><span class="p">);</span> <span class="c1">// =&gt; 3.141592653589793
+</span></code></pre></div><ul>
+<li>sinなどの三角関数ではラジアンを使うので、角度をラジアンに変換するこのメソッドは使用頻度が高いです。</li>
+</ul>
+<h3 id="radtodeg">radToDeg</h3>
+<p>ラジアンを度に変換します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">radToDeg</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// =&gt; 45
+</span></code></pre></div><ul>
+<li><strong>Sprite</strong> などの回転を表すプロパティである <strong>rotation</strong> は度で指定するので、このメソッドが活躍します。</li>
+</ul>
+<h3 id="clamp">clamp</h3>
+<p>指定した値を指定した範囲に収めた結果を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">clamp</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 120
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">clamp</span><span class="p">(</span><span class="mi">980</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 640
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">clamp</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 0
+</span></code></pre></div><ul>
+<li>前に紹介した拡張<strong>Number</strong>クラスにも同様のメソッドがあります。</li>
+</ul>
+<h3 id="inside">inside</h3>
+<p>指定した値が指定した値の範囲にあるかどうかを返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">inside</span><span class="p">(</span><span class="mi">980</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; false
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">inside</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; true
+</span></code></pre></div><h3 id="randint">randint</h3>
+<p>指定された範囲内でランダムな整数値を生成します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// =&gt; -4、0、3、4 など
+</span></code></pre></div><ul>
+<li>ゲームを面白くするために、ランダム要素は必須と言えるので使用頻度が高いです。</li>
+</ul>
+<h3 id="randfloat">randfloat</h3>
+<p>指定された範囲内でランダムな数値を生成します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">randfloat</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// =&gt; -2.7489193824000937 など
+</span></code></pre></div><ul>
+<li>少数バージョンです。</li>
+</ul>
+<h3 id="randbool">randbool</h3>
+<p>ランダムに真偽値を生成します。引数で百分率を指定する事もできます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">randbool</span><span class="p">();</span>   <span class="c1">// =&gt; true または false
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">randbool</span><span class="p">(</span><span class="mi">80</span><span class="p">);</span> <span class="c1">// =&gt; 80% の確率で true
+</span></code></pre></div><h2 id="使い方">使い方</h2>
+<p>htmlファイルで <strong>phina.js</strong> を以下のように読み込みます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/37136936">https://runstant.com/alkn203/projects/37136936</a></p>
+<h2 id="さいごに">さいごに</h2>
+<p>コアクラスの中でも<strong>Math</strong>クラスは、ゲーム開発に関連する実用的なメソッドが多いと言えるでしょう。</p>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/string/">前の記事</a></li>
+  
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#拡張mathクラス">拡張Mathクラス</a>
+      <ul>
+        <li><a href="#degtorad">degToRad</a></li>
+        <li><a href="#radtodeg">radToDeg</a></li>
+        <li><a href="#clamp">clamp</a></li>
+        <li><a href="#inside">inside</a></li>
+        <li><a href="#randint">randint</a></li>
+        <li><a href="#randfloat">randfloat</a></li>
+        <li><a href="#randbool">randbool</a></li>
+      </ul>
+    </li>
+    <li><a href="#使い方">使い方</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

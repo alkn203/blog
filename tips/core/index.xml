@@ -5,8 +5,55 @@
     <link>https://alkn203.github.io/blog/tips/core/</link>
     <description>Recent content in Core on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
-    <lastBuildDate>Thu, 24 Jun 2021 20:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/core/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/core/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>phina.jsの拡張クラスを使ってみよう　ーMath編ー</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/math/</link>
+      <pubDate>Thu, 24 Jun 2021 23:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/math/</guid>
+      <description>はじめに 今回は、Math の拡張クラスを紹介したいと思います。
+拡張Mathクラス phina.js では、元々の javascript のMathクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+degToRad 度をラジアンに変換します。
+Math.degToRad(180); // =&amp;gt; 3.141592653589793  sinなどの三角関数ではラジアンを使うので、角度をラジアンに変換するこのメソッドは使用頻度が高いです。  radToDeg ラジアンを度に変換します。
+Math.radToDeg(Math.PI/4); // =&amp;gt; 45  Sprite などの回転を表すプロパティである rotation は度で指定するので、このメソッドが活躍します。  clamp 指定した値を指定した範囲に収めた結果を返します。
+Math.clamp(120, 0, 640); // =&amp;gt; 120 Math.clamp(980, 0, 640); // =&amp;gt; 640 Math.clamp(-80, 0, 640); // =&amp;gt; 0  前に紹介した拡張Numberクラスにも同様のメソッドがあります。  inside 指定した値が指定した値の範囲にあるかどうかを返します。
+Math.inside(980, 0, 640); // =&amp;gt; false Math.inside(120, 0, 640); // =&amp;gt; true randint 指定された範囲内でランダムな整数値を生成します。
+Math.randint(-4, 4); // =&amp;gt; -4、0、3、4 など  ゲームを面白くするために、ランダム要素は必須と言えるので使用頻度が高いです。  randfloat 指定された範囲内でランダムな数値を生成します。</description>
+    </item>
+    
+    <item>
+      <title>phina.jsの拡張クラスを使ってみよう　ーString編ー</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/string/</link>
+      <pubDate>Thu, 24 Jun 2021 22:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/string/</guid>
+      <description>はじめに 今回は、String の拡張クラスを紹介したいと思います。
+拡張Stringクラス phina.js では、元々の javascript のStringクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+format 定義したフォーマットに引数を適用した文字列を返します。
+// 引数がオブジェクトの場合 var obj = {r: 128, g: 0, b: 255}; &amp;#34;color: rgb({r}, {g}, {b});&amp;#34;.format(obj); // =&amp;gt; &amp;#34;color: rgb(128, 0, 255);&amp;#34; // 引数がオブジェクトでない場合 var count = 100; &amp;#34;time: {0} / {1}&amp;#34;.format(count, 1000); // =&amp;gt; &amp;#34;time: 100 / 1000&amp;#34;  文字列の連結（+）を使用しなくても良いので、より直感的に書くことができます。 引数がオブジェクトでない場合、引数の数に応じて、{0}、{1}、{2}・・・のように定義した文字列内で参照することができます。  trim 文字列両サイドの空白文字を全て取り除いた文字列を返します。
+&amp;#34; Hello, world! &amp;#34;.trim(); // =&amp;gt; &amp;#34;Hello, world!&amp;#34; capitalize すべての単語の先頭を大文字にした文字列を返します。単語の先頭以外は小文字化されます。
+&amp;#34;i aM a pen.&amp;#34;.capitalize(); // =&amp;gt; &amp;#34;I Am A Pen.</description>
+    </item>
+    
+    <item>
+      <title>phina.jsの拡張クラスを使ってみよう　ーNumber編ー</title>
+      <link>https://alkn203.github.io/blog/2021/06/24/number/</link>
+      <pubDate>Thu, 24 Jun 2021 21:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/24/number/</guid>
+      <description>はじめに 今回は、Number の拡張クラスを紹介したいと思います。
+拡張Numberクラス phina.js では、元々の javascript のNumberクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+padding 指定した桁になるように左側に文字を埋めます。
+(999).padding(5); // =&amp;gt; &amp;#34;00999&amp;#34; ゲームのスコア表示などに使えます。返り値は文字列です。
+times カウンタをインクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).times(function(i) { arr.push(i); }); // =&amp;gt; arr = [0,1,2,3,4] 通常の for の代わりに使用できます。添字を意識しなくて良いのがポイントです。
+upto 自分自身の数から指定した数まで、カウンタをインクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).upto(10, function(i) { arr.push(i); }); // =&amp;gt; arr = [5,6,7,8,9,10] for を途中からカウントアップするイメージです。
+downto 自分自身の数から指定した数まで、カウンタをデクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).downto(1, function(i) { arr.push(i); }); // =&amp;gt; arr = [5,4,3,2,1] for を途中からカウントダウンするイメージです。</description>
+    </item>
+    
     <item>
       <title>phina.jsの拡張クラスを使ってみよう　ーArray編ー</title>
       <link>https://alkn203.github.io/blog/2021/06/24/array/</link>

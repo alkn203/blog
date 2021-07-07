@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.jsの拡張クラスを使ってみよう　ーNumber編ー | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.jsの拡張クラスを使ってみよう　ーNumber編ー" />
+  <meta name="og:description" content="はじめに 今回は、Number の拡張クラスを紹介したいと思います。
+拡張Numberクラス phina.js では、元々の javascript のNumberクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+padding 指定した桁になるように左側に文字を埋めます。
+(999).padding(5); // =&gt; &#34;00999&#34; ゲームのスコア表示などに使えます。返り値は文字列です。
+times カウンタをインクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).times(function(i) { arr.push(i); }); // =&gt; arr = [0,1,2,3,4] 通常の for の代わりに使用できます。添字を意識しなくて良いのがポイントです。
+upto 自分自身の数から指定した数まで、カウンタをインクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).upto(10, function(i) { arr.push(i); }); // =&gt; arr = [5,6,7,8,9,10] for を途中からカウントアップするイメージです。
+downto 自分自身の数から指定した数まで、カウンタをデクリメントしながら関数を繰り返し実行します。
+var arr = []; (5).downto(1, function(i) { arr.push(i); }); // =&gt; arr = [5,4,3,2,1] for を途中からカウントダウンするイメージです。" />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/number/" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/number/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/number/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Event</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/keyboard/">Keyboard</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/group/">Group</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/core/">Core</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>phina.jsの拡張クラスを使ってみよう　ーNumber編ー</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <h2 id="はじめに">はじめに</h2>
+<p>今回は、<strong>Number</strong> の拡張クラスを紹介したいと思います。</p>
+<h2 id="拡張numberクラス">拡張Numberクラス</h2>
+<p><strong>phina.js</strong> では、元々の <strong>javascript</strong> の<strong>Number</strong>クラスに様々な拡張メソッドが追加されています。
+以下に、使う機会が多いと思われるメソッドを紹介します。</p>
+<h3 id="padding">padding</h3>
+<p>指定した桁になるように左側に文字を埋めます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mi">999</span><span class="p">).</span><span class="nx">padding</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// =&gt; &#34;00999&#34;
+</span></code></pre></div><p>ゲームのスコア表示などに使えます。返り値は文字列です。</p>
+<h3 id="times">times</h3>
+<p>カウンタをインクリメントしながら関数を繰り返し実行します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">times</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; arr = [0,1,2,3,4]
+</span></code></pre></div><p>通常の <strong>for</strong> の代わりに使用できます。添字を意識しなくて良いのがポイントです。</p>
+<h3 id="upto">upto</h3>
+<p>自分自身の数から指定した数まで、カウンタをインクリメントしながら関数を繰り返し実行します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">upto</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; arr = [5,6,7,8,9,10]
+</span></code></pre></div><p><strong>for</strong> を途中からカウントアップするイメージです。</p>
+<h3 id="downto">downto</h3>
+<p>自分自身の数から指定した数まで、カウンタをデクリメントしながら関数を繰り返し実行します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">downto</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; arr = [5,4,3,2,1]
+</span></code></pre></div><p><strong>for</strong> を途中からカウントダウンするイメージです。</p>
+<h3 id="step">step</h3>
+<p>自分自身の値から指定した数まで、指定された差分でカウントアップさせながら関数を繰り返し実行します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">step</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="p">});</span> <span class="c1">// =&gt; [2,4,6,8]
+</span></code></pre></div><p>オブジェクトを並べる際に、一定間隔で間を空けたいときなどに使えます。</p>
+<h3 id="map">map</h3>
+<p>カウンタをインクリメントさせながらコールバック関数を繰り返し実行し、その返り値を要素とする配列を生成します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>  
+<span class="p">});</span> <span class="c1">// =&gt; [0,10,20,30,40]
+</span></code></pre></div><p><strong>step</strong> にも似ていますが、配列が返ってくるところが違いです。</p>
+<h3 id="max">max</h3>
+<p>自分自身と引数の値を比べ、大きい方の値を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">max</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// =&gt; 10
+</span></code></pre></div><p>実際には、変数と比べることになると思います。</p>
+<h3 id="clamp">clamp</h3>
+<p>指定した範囲に収めた値を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">).</span><span class="nx">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 0
+</span><span class="c1"></span><span class="p">(</span><span class="mi">320</span><span class="p">).</span><span class="nx">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 320
+</span><span class="c1"></span><span class="p">(</span><span class="mi">780</span><span class="p">).</span><span class="nx">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">);</span> <span class="c1">// =&gt; 640
+</span></code></pre></div><p>キャラクターの移動を画面の範囲内に制限したいときなどに使えます。</p>
+<p>他にも、例えば以下のようなメソッドが用意されています。
+詳しく見たいという方は、以下をご確認下さい。</p>
+<blockquote>
+<p>Numberクラスのソース
+<a href="https://github.com/phinajs/phina.js/blob/develop/src/core/number.js">https://github.com/phinajs/phina.js/blob/develop/src/core/number.js</a></p>
+</blockquote>
+<h3 id="round">round</h3>
+<p>指定した小数の位を四捨五入した値を返します。</p>
+<h3 id="tohex">toHex</h3>
+<p>数値を16進数表記にした文字列を返します。</p>
+<h3 id="abs">abs</h3>
+<p>絶対値を返します。</p>
+<h3 id="cos">cos</h3>
+<p>コサイン（ラジアン単位）を返します。</p>
+<h3 id="sqrt">sqrt</h3>
+<p>平方根を返します。</p>
+<h3 id="todegree">toDegree</h3>
+<p>ラジアンを度に変換します。</p>
+<h3 id="toradian">toRadian</h3>
+<p>度をラジアンに変換します。</p>
+<h2 id="使い方">使い方</h2>
+<p>htmlファイルで <strong>phina.js</strong> を以下のように読み込みます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/52837800">https://runstant.com/alkn203/projects/52837800</a></p>
+<h2 id="さいごに">さいごに</h2>
+<ul>
+<li>数字もオブジェクトとして扱えるという点で、直感的な操作ができるので便利です。</li>
+<li>次回は、<strong>String</strong> クラスを紹介したいと思います。</li>
+</ul>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/array/">前の記事</a></li>
+  
+  
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/string/">次の記事</a></li>
+    <li>>></li>
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#拡張numberクラス">拡張Numberクラス</a>
+      <ul>
+        <li><a href="#padding">padding</a></li>
+        <li><a href="#times">times</a></li>
+        <li><a href="#upto">upto</a></li>
+        <li><a href="#downto">downto</a></li>
+        <li><a href="#step">step</a></li>
+        <li><a href="#map">map</a></li>
+        <li><a href="#max">max</a></li>
+        <li><a href="#clamp">clamp</a></li>
+        <li><a href="#round">round</a></li>
+        <li><a href="#tohex">toHex</a></li>
+        <li><a href="#abs">abs</a></li>
+        <li><a href="#cos">cos</a></li>
+        <li><a href="#sqrt">sqrt</a></li>
+        <li><a href="#todegree">toDegree</a></li>
+        <li><a href="#toradian">toRadian</a></li>
+      </ul>
+    </li>
+    <li><a href="#使い方">使い方</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

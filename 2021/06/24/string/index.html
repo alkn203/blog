@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <title>
+    phina.jsの拡張クラスを使ってみよう　ーString編ー | Keep On Coding
+  </title>
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="og:title" content="phina.jsの拡張クラスを使ってみよう　ーString編ー" />
+  <meta name="og:description" content="はじめに 今回は、String の拡張クラスを紹介したいと思います。
+拡張Stringクラス phina.js では、元々の javascript のStringクラスに様々な拡張メソッドが追加されています。 以下に、使う機会が多いと思われるメソッドを紹介します。
+format 定義したフォーマットに引数を適用した文字列を返します。
+// 引数がオブジェクトの場合 var obj = {r: 128, g: 0, b: 255}; &#34;color: rgb({r}, {g}, {b});&#34;.format(obj); // =&gt; &#34;color: rgb(128, 0, 255);&#34; // 引数がオブジェクトでない場合 var count = 100; &#34;time: {0} / {1}&#34;.format(count, 1000); // =&gt; &#34;time: 100 / 1000&#34;  文字列の連結（&#43;）を使用しなくても良いので、より直感的に書くことができます。 引数がオブジェクトでない場合、引数の数に応じて、{0}、{1}、{2}・・・のように定義した文字列内で参照することができます。  trim 文字列両サイドの空白文字を全て取り除いた文字列を返します。
+&#34; Hello, world! &#34;.trim(); // =&gt; &#34;Hello, world!&#34; capitalize すべての単語の先頭を大文字にした文字列を返します。単語の先頭以外は小文字化されます。
+&#34;i aM a pen.&#34;.capitalize(); // =&gt; &#34;I Am A Pen." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/string/" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/string/" />
+  <meta name="twitter:site" content="@alkn203" />
+  <meta name="twitter:creator" content="@alkn203" />
+  
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/24/string/" />
+  
+  
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/theme.css" media="screen and (min-width: 750px)">
+  <link rel="stylesheet" href="https://alkn203.github.io/blog/css/syntax.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <header role="banner" class="header">
+      <div class="header-title">
+  <h1><a href="https://alkn203.github.io/blog/">Keep On Coding</a></h1>
+</div>
+<div class="header-subtitle">
+  Tips and tutorials about phina.js
+</div>
+<div class="header-menu">
+  <ul>
+    <li><a href="https://phinajs.com/">phina.js(Offcial)</a></li>
+    <li><a href="https://github.com/phinajs/phina.js">phina.js(GitHub)</a></li>
+    <li><a href="#">About this site</a></li>
+  </ul>
+</div>
+    </header>
+    
+    <nav class="sidebar">
+      <h1>Sections</h1>
+
+
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/">Tips</a>
+  <ul>
+      <li><a href="https://alkn203.github.io/blog/tips/introduction/">Introduction</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/shape/">Shape</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/sprite/">Sprite</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/frameanimation/">Frameanimation</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/asset/">Asset</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/label/">Label</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/event/">Event</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/keyboard/">Keyboard</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/group/">Group</a>
+  <ul>
+  </ul>
+      </li>
+      <li><a href="https://alkn203.github.io/blog/tips/core/">Core</a>
+  <ul>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+    
+    <main role="main" class="main">
+      
+  <div class="single-title">
+    <h1>phina.jsの拡張クラスを使ってみよう　ーString編ー</h1>
+    <p>Last Modified:2021-6-24</p>  
+  </div>
+  <div class="single-content">
+    
+      <h2 id="はじめに">はじめに</h2>
+<p>今回は、<strong>String</strong> の拡張クラスを紹介したいと思います。</p>
+<h2 id="拡張stringクラス">拡張Stringクラス</h2>
+<p><strong>phina.js</strong> では、元々の <strong>javascript</strong> の<strong>String</strong>クラスに様々な拡張メソッドが追加されています。
+以下に、使う機会が多いと思われるメソッドを紹介します。</p>
+<h3 id="format">format</h3>
+<p>定義したフォーマットに引数を適用した文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 引数がオブジェクトの場合
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">r</span><span class="o">:</span> <span class="mi">128</span><span class="p">,</span> <span class="nx">g</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">255</span><span class="p">};</span>
+<span class="s2">&#34;color: rgb({r}, {g}, {b});&#34;</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// =&gt; &#34;color: rgb(128, 0, 255);&#34;
+</span><span class="c1">// 引数がオブジェクトでない場合
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="s2">&#34;time: {0} / {1}&#34;</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">// =&gt; &#34;time: 100 / 1000&#34;
+</span></code></pre></div><ul>
+<li>文字列の連結（+）を使用しなくても良いので、より直感的に書くことができます。</li>
+<li>引数がオブジェクトでない場合、引数の数に応じて、{0}、{1}、{2}・・・のように定義した文字列内で参照することができます。</li>
+</ul>
+<h3 id="trim">trim</h3>
+<p>文字列両サイドの空白文字を全て取り除いた文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;  Hello, world!  &#34;</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span> <span class="c1">// =&gt; &#34;Hello, world!&#34;
+</span></code></pre></div><h3 id="capitalize">capitalize</h3>
+<p>すべての単語の先頭を大文字にした文字列を返します。単語の先頭以外は小文字化されます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;i aM a pen.&#34;</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">();</span> <span class="c1">// =&gt; &#34;I Am A Pen.&#34;
+</span></code></pre></div><h3 id="capitalizefirstletter">capitalizeFirstLetter</h3>
+<p>先頭の文字を大文字にして、それ以外を小文字にした文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;i aM a pen.&#34;</span><span class="p">.</span><span class="nx">capitalizeFirstLetter</span><span class="p">();</span> <span class="c1">// =&gt; &#34;I am a pen.&#34;
+</span></code></pre></div><ul>
+<li>上の３つはノベルゲームなどで使えるかもしれません。</li>
+</ul>
+<h3 id="padding">padding</h3>
+<p>左に文字を埋めて指定した桁にした文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;1234&#34;</span><span class="p">.</span><span class="nx">padding</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>      <span class="c1">// =&gt; &#34;      1234&#34;
+</span><span class="c1"></span><span class="s2">&#34;1234&#34;</span><span class="p">.</span><span class="nx">padding</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">);</span> <span class="c1">// =&gt; &#34;0000001234&#34;
+</span></code></pre></div><p>拡張<strong>Number</strong>クラスにもある<strong>padding</strong>と同等の処理を行います。</p>
+<h3 id="paddingright">paddingRight</h3>
+<p>右に文字を埋めて指定した桁にした文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;1234&#34;</span><span class="p">.</span><span class="nx">paddingRight</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>      <span class="c1">// =&gt; &#34;1234      &#34;
+</span><span class="c1"></span><span class="s2">&#34;1234&#34;</span><span class="p">.</span><span class="nx">paddingRight</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">);</span> <span class="c1">// =&gt; &#34;1234000000&#34;
+</span></code></pre></div><p><strong>paddding</strong>の逆パターンで、右に文字を詰めます。</p>
+<h3 id="repeat">repeat</h3>
+<p>自分自身を指定した回数だけ繰り返した文字列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;Abc&#34;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// =&gt; &#34;AbcAbcAbcAbc&#34;
+</span></code></pre></div><h3 id="count">count</h3>
+<p>指定した文字列が何個入っているかをカウントして返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;This is a string. Isn&#39;t it?&#34;</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="s2">&#34;is&#34;</span><span class="p">);</span> <span class="c1">// =&gt; 2
+</span></code></pre></div><h3 id="include">include</h3>
+<p>指定した文字列が含まれているかどうかを返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;This is a string.&#34;</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s2">&#34;is&#34;</span><span class="p">);</span> <span class="c1">// =&gt; true
+</span><span class="c1"></span><span class="s2">&#34;This is a string.&#34;</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s2">&#34;was&#34;</span><span class="p">);</span> <span class="c1">// =&gt; false
+</span></code></pre></div><h3 id="each">each</h3>
+<p>各文字を順番に渡しながら関数を繰り返し実行します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span><span class="p">;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ch</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// =&gt; &#39;a&#39;
+</span><span class="c1">//    &#39;b&#39;
+</span><span class="c1">//    &#39;c&#39;
+</span></code></pre></div><h3 id="toarray">toArray</h3>
+<p>1文字ずつ分解した配列を返します。</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;12345&#34;</span><span class="p">.</span><span class="nx">toArray</span><span class="p">();</span> <span class="c1">// =&gt; [&#34;1&#34;, &#34;2&#34;, &#34;3&#34;, &#34;4&#34;, &#34;5&#34;]
+</span><span class="c1"></span><span class="s2">&#34;あいうえお&#34;</span><span class="p">.</span><span class="nx">toArray</span><span class="p">();</span> <span class="c1">// =&gt; &#34;あ&#34;, &#34;い&#34;, &#34;う&#34;, &#34;え&#34;, &#34;お&#34;]
+</span></code></pre></div><p>他にも詳しく見たいという方は、以下をご確認下さい。</p>
+<blockquote>
+<p>Stringクラスのソース
+<a href="https://github.com/phinajs/phina.js/blob/develop/src/core/string.js">https://github.com/phinajs/phina.js/blob/develop/src/core/string.js</a></p>
+</blockquote>
+<h2 id="使い方">使い方</h2>
+<p>htmlファイルで <strong>phina.js</strong> を以下のように読み込みます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><h2 id="実行サンプル">実行サンプル</h2>
+<p><a href="https://runstant.com/alkn203/projects/8cde885d">https://runstant.com/alkn203/projects/8cde885d</a></p>
+<h2 id="さいごに">さいごに</h2>
+<ul>
+<li>文字列操作もコーディングにおいては欠かせないものですので、これらのメソッドが活躍できる場面があるかと思います。</li>
+<li>次回は、<strong>Math</strong> クラスを紹介したいと思います。</li>
+</ul>
+
+  </div>
+
+    </main>
+    
+    <nav class="page">
+      
+  
+<div class="prevnext">
+  <ul>
+  
+    <li>&lt;&lt;</li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/number/">前の記事</a></li>
+  
+  
+    <li><a href="https://alkn203.github.io/blog/2021/06/24/math/">次の記事</a></li>
+    <li>>></li>
+  
+  </ul>
+</div>
+
+    </nav>
+    
+    <nav class="tocbar">
+      
+  
+  
+    <h1>Table of contents</h1>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#拡張stringクラス">拡張Stringクラス</a>
+      <ul>
+        <li><a href="#format">format</a></li>
+        <li><a href="#trim">trim</a></li>
+        <li><a href="#capitalize">capitalize</a></li>
+        <li><a href="#capitalizefirstletter">capitalizeFirstLetter</a></li>
+        <li><a href="#padding">padding</a></li>
+        <li><a href="#paddingright">paddingRight</a></li>
+        <li><a href="#repeat">repeat</a></li>
+        <li><a href="#count">count</a></li>
+        <li><a href="#include">include</a></li>
+        <li><a href="#each">each</a></li>
+        <li><a href="#toarray">toArray</a></li>
+      </ul>
+    </li>
+    <li><a href="#使い方">使い方</a></li>
+    <li><a href="#実行サンプル">実行サンプル</a></li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav>
+  
+
+    </nav>
+    
+    <footer role="contentinfo" class="footer">
+      <div class="copyright">
+  ©&nbsp2021&nbsp<a href="https://twitter.com/alkn203">alkn203</a>
+  <div class="footer-profile-image">
+    
+    <img src="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2">
+  </div>
+</div>
+    </footer>
+  </div>
+  
+  
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145323973-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
