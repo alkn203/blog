@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sound on Keep On Coding</title>
+    <link>https://alkn203.github.io/blog/tips/sound/</link>
+    <description>Recent content in Sound on Keep On Coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 25 Jun 2021 09:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/tips/sound/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>音を再生する</title>
+      <link>https://alkn203.github.io/blog/2021/06/25/play-sound/</link>
+      <pubDate>Fri, 25 Jun 2021 09:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/25/play-sound/</guid>
+      <description>音を再生する方法 phina.jsで音を再生するには、音源をアセットとして読み込みそれを再生します。
+アセットの読み込み assetsとしてサウンドファイルを読み込みます。
+// アセット var ASSETS = { // サウンド  sound: { &amp;#39;se1&amp;#39;: &amp;#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&amp;#39;, }, }; 音の再生 // 一回限りタッチイベント shape.one(&amp;#39;pointend&amp;#39;, function() { // 音再生  SoundManager.play(&amp;#39;se1&amp;#39;); });  音を再生するにはSoundManagerクラスのplayメソッドを使います。 playメソッドの場合は、1回限り再生されます。  サンプルコード コードを見る ```js // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // サウンド sound: { &#39;se1&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承 superClass: &#39;DisplayScene&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.</description>
+    </item>
+    
+  </channel>
+</rss>
