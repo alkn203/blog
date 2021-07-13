@@ -6,7 +6,17 @@
     <description>Recent content on Keep On Coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 25 Jun 2021 09:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Jun 2021 10:59:06 +0900</lastBuildDate><atom:link href="https://alkn203.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>音の再生を停止する</title>
+      <link>https://alkn203.github.io/blog/2021/06/25/stop-sound/</link>
+      <pubDate>Fri, 25 Jun 2021 10:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/25/stop-sound/</guid>
+      <description>音の再生を停止する方法 phina.jsで音の再生を停止するには、 stopMusicメソッドを使います。。
+playMusicメソッド // タッチイベント playBtn.onpointend = function() { // 音再生  SoundManager.playMusic(&amp;#39;bgm&amp;#39;); };  音楽を再生します。 デフォルトで音楽はループします。  stopMusicメソッド // タッチイベント stopBtn.onpointend = function() { // 音停止  SoundManager.stopMusic(); }; サンプルコード コードを見る ```js // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承 superClass: &#39;DisplayScene&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(); // 背景 this.</description>
+    </item>
+    
     <item>
       <title>音を再生する</title>
       <link>https://alkn203.github.io/blog/2021/06/25/play-sound/</link>
