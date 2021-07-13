@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language><atom:link href="https://alkn203.github.io/blog/tips/sound/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>音の再生を中断・再開する</title>
+      <link>https://alkn203.github.io/blog/2021/06/25/resume-sound/</link>
+      <pubDate>Fri, 25 Jun 2021 12:59:06 +0900</pubDate>
+      
+      <guid>https://alkn203.github.io/blog/2021/06/25/resume-sound/</guid>
+      <description>音の再生を中断・再開する方法 phina.jsで音の再生を中断・再開するには、 pauseMusicメソッドとresumeMusicを使います。。
+pauseMusicメソッド // タッチイベント pauseBtn.onpointend = function() { // 一時停止  SoundManager.pauseMusic(); };  音現在再生されている音楽を中断します。  resumeMusicメソッド // タッチイベント resumeBtn.onpointend = function() { // 再開  SoundManager.resumeMusic(); };  中断されている音楽を再開します。  サンプルコード コードを見る ```js // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承 superClass: &#39;DisplayScene&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.</description>
+    </item>
+    
+    <item>
       <title>音の再生を停止する</title>
       <link>https://alkn203.github.io/blog/2021/06/25/stop-sound/</link>
       <pubDate>Fri, 25 Jun 2021 10:59:06 +0900</pubDate>

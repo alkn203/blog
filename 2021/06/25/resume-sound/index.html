@@ -5,21 +5,21 @@
   
   <meta charset="UTF-8">
   <title>
-    音の再生を停止する | Keep On Coding
+    音の再生を中断・再開する | Keep On Coding
   </title>
   
   <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
   
   <meta name="twitter:card" content="summary" />
-  <meta name="og:title" content="音の再生を停止する" />
-  <meta name="og:description" content="音の再生を停止する方法 phina.jsで音の再生を停止するには、 stopMusicメソッドを使います。。
-playMusicメソッド // タッチイベント playBtn.onpointend = function() { // 音再生  SoundManager.playMusic(&#39;bgm&#39;); };  音楽を再生します。 デフォルトで音楽はループします。  stopMusicメソッド // タッチイベント stopBtn.onpointend = function() { // 音停止  SoundManager.stopMusic(); }; サンプルコード コードを見る ```js // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承 superClass: &#39;DisplayScene&#39;, // コンストラクタ init: function() { // 親クラス初期化 this.superInit(); // 背景 this." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/25/stop-sound/stop-sound.png" />
-  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/25/stop-sound/" />
+  <meta name="og:title" content="音の再生を中断・再開する" />
+  <meta name="og:description" content="音の再生を中断・再開する方法 phina.jsで音の再生を中断・再開するには、 pauseMusicメソッドとresumeMusicを使います。。
+pauseMusicメソッド // タッチイベント pauseBtn.onpointend = function() { // 一時停止  SoundManager.pauseMusic(); };  音現在再生されている音楽を中断します。  resumeMusicメソッド // タッチイベント resumeBtn.onpointend = function() { // 再開  SoundManager.resumeMusic(); };  中断されている音楽を再開します。  サンプルコード コードを見る ```js // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // サウンド sound: { &#39;bgm&#39;: &#39;https://cdn.jsdelivr.net/gh/alkn203/assets_etc@master/maou-fantasy-01.mp3&#39;, }, }; /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承 superClass: &#39;DisplayScene&#39;, // コンストラクタ init: function() { // 親クラス初期化 this." />
+  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/25/resume-sound/resume-sound.png" />
+  <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/25/resume-sound/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
   
-  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/25/stop-sound/" />
+  <link rel="canonical" href="https://alkn203.github.io/blog/2021/06/25/resume-sound/" />
   
   
   <link rel="stylesheet" href="https://alkn203.github.io/blog/css/mobile.css" media="screen and (max-width: 750px)">
@@ -105,31 +105,33 @@ playMusicメソッド // タッチイベント playBtn.onpointend = function() {
     <main role="main" class="main">
       
   <div class="single-title">
-    <h1>音の再生を停止する</h1>
-    <p>Last Modified:2021-7-13</p>  
+    <h1>音の再生を中断・再開する</h1>
+    <p>Last Modified:2021-6-25</p>  
   </div>
   <div class="single-content">
     
-      <p><img src="stop-sound.png" alt="stop-sound"></p>
-<h2 id="音の再生を停止する方法">音の再生を停止する方法</h2>
-<p><strong>phina.js</strong>で音の再生を停止するには、 <strong>stopMusic</strong>メソッドを使います。。</p>
-<h2 id="playmusicメソッド">playMusicメソッド</h2>
+      <p><img src="resume-sound.png" alt="resume-sound"></p>
+<h2 id="音の再生を中断再開する方法">音の再生を中断・再開する方法</h2>
+<p><strong>phina.js</strong>で音の再生を中断・再開するには、 <strong>pauseMusic</strong>メソッドと<strong>resumeMusic</strong>を使います。。</p>
+<h2 id="pausemusicメソッド">pauseMusicメソッド</h2>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチイベント
-</span><span class="c1"></span><span class="nx">playBtn</span><span class="p">.</span><span class="nx">onpointend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// 音再生
-</span><span class="c1"></span>  <span class="nx">SoundManager</span><span class="p">.</span><span class="nx">playMusic</span><span class="p">(</span><span class="s1">&#39;bgm&#39;</span><span class="p">);</span>
+</span><span class="c1"></span><span class="nx">pauseBtn</span><span class="p">.</span><span class="nx">onpointend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 一時停止
+</span><span class="c1"></span>  <span class="nx">SoundManager</span><span class="p">.</span><span class="nx">pauseMusic</span><span class="p">();</span>
 <span class="p">};</span>
 </code></pre></div><ul>
-<li>音楽を再生します。</li>
-<li>デフォルトで音楽はループします。</li>
+<li>音現在再生されている音楽を中断します。</li>
 </ul>
-<h2 id="stopmusicメソッド">stopMusicメソッド</h2>
+<h2 id="resumemusicメソッド">resumeMusicメソッド</h2>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// タッチイベント
-</span><span class="c1"></span><span class="nx">stopBtn</span><span class="p">.</span><span class="nx">onpointend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// 音停止
-</span><span class="c1"></span>  <span class="nx">SoundManager</span><span class="p">.</span><span class="nx">stopMusic</span><span class="p">();</span>
+</span><span class="c1"></span><span class="nx">resumeBtn</span><span class="p">.</span><span class="nx">onpointend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 再開
+</span><span class="c1"></span>  <span class="nx">SoundManager</span><span class="p">.</span><span class="nx">resumeMusic</span><span class="p">();</span>
 <span class="p">};</span>
-</code></pre></div><h2 id="サンプルコード">サンプルコード</h2>
+</code></pre></div><ul>
+<li>中断されている音楽を再開します。</li>
+</ul>
+<h2 id="サンプルコード">サンプルコード</h2>
 <details><summary>コードを見る</summary>
 ```js
 // グローバルに展開
@@ -156,7 +158,7 @@ phina.define("MainScene", {
     // 再生ボタン作成
     var playBtn = Shape({
       backgroundColor: 'red',
-      x: this.gridX.center(-2),
+      x: this.gridX.center(-4),
       y: this.gridY.center(),
     }).addChildTo(this);
     // タッチを有効に
@@ -166,18 +168,31 @@ phina.define("MainScene", {
       // 音再生
       SoundManager.playMusic('bgm');
     };
-    // 停止ボタン作成
-    var stopBtn = Shape({
+    // 中断ボタン作成
+    var pauseBtn = Shape({
       backgroundColor: 'blue',
-      x: this.gridX.center(2),
+      x: this.gridX.center(),
       y: this.gridY.center(),
     }).addChildTo(this);
     // タッチを有効に
-    stopBtn.setInteractive(true);
+    pauseBtn.setInteractive(true);
     // タッチイベント
-    stopBtn.onpointend = function() {
-      // 音停止
-      SoundManager.stopMusic();
+    pauseBtn.onpointend = function() {
+      // 一時停止
+      SoundManager.pauseMusic();
+    };
+    // 再開ボタン作成
+    var resumeBtn = Shape({
+      backgroundColor: 'green',
+      x: this.gridX.center(4),
+      y: this.gridY.center(),
+    }).addChildTo(this);
+    // タッチを有効に
+    resumeBtn.setInteractive(true);
+    // タッチイベント
+    resumeBtn.onpointend = function() {
+      // 再開
+      SoundManager.resumeMusic();
     };
   },
 });
@@ -202,10 +217,11 @@ phina.main(function() {
 <h2 id="使用素材について">使用素材について</h2>
 <p>音楽：魔王魂</p>
 <h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<a href=https://runstant.com/alkn203/projects/8ba7cc91 target="_blank" rel="noopener">音の再生を停止する</a>
+<a href=https://runstant.com/alkn203/projects/73dfa22f target="_blank" rel="noopener">音の再生を中断・再開する</a>
 <ul>
 <li>赤い矩形タッチで音楽再生</li>
-<li>青い矩形タッチで音楽再生停止</li>
+<li>青い矩形タッチで音楽中断</li>
+<li>緑の矩形タッチで再開</li>
 </ul>
 
   </div>
@@ -219,11 +235,8 @@ phina.main(function() {
   <ul>
   
     <li>&lt;&lt;</li>
-    <li><a href="https://alkn203.github.io/blog/2021/06/25/play-sound/">前の記事</a></li>
+    <li><a href="https://alkn203.github.io/blog/2021/06/25/stop-sound/">前の記事</a></li>
   
-  
-    <li><a href="https://alkn203.github.io/blog/2021/06/25/resume-sound/">次の記事</a></li>
-    <li>>></li>
   
   </ul>
 </div>
@@ -237,9 +250,9 @@ phina.main(function() {
     <h1>Table of contents</h1>
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#音の再生を停止する方法">音の再生を停止する方法</a></li>
-    <li><a href="#playmusicメソッド">playMusicメソッド</a></li>
-    <li><a href="#stopmusicメソッド">stopMusicメソッド</a></li>
+    <li><a href="#音の再生を中断再開する方法">音の再生を中断・再開する方法</a></li>
+    <li><a href="#pausemusicメソッド">pauseMusicメソッド</a></li>
+    <li><a href="#resumemusicメソッド">resumeMusicメソッド</a></li>
     <li><a href="#サンプルコード">サンプルコード</a></li>
     <li><a href="#使用素材について">使用素材について</a></li>
     <li><a href="#runstantプロジェクト">runstantプロジェクト</a></li>
