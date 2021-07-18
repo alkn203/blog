@@ -15,7 +15,7 @@
   <meta name="og:description" content="任意のタイミングでアセットを読み込む  これまでは、ローディングシーンを利用してアセットを読み込んでいました。 ここでは、任意のタイミングでアセットを読み込む方法について説明します。  AssetLoader デフォルトでは、ゲーム開始直後のLoadingSceneでアセットの読み込みが行われますが、今回は、AssetLoader クラスを使って、ボタンが押された後に追加のアセットが読み込まれるようにします。
 // アセット var ASSETS_PREV = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/assets/images/tomapiko.png&#39;, }, }; var ASSETS_AFTER = { // 画像  image: { &#39;nasupiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/assets/images/character/nasupiyo.png&#39;, }, }; 開始時に読み込まれるアセットと追加で読み込むアセットを分けて定義します。
 loadメソッドとロード後処理 // アセットローダー var loader = phina.asset.AssetLoader(); // ボタン Button({text: &#39;PUSH&#39;}) .addChildTo(this) .setPosition(this.gridX.center(), this.gridY.center(4)) .on(&#39;push&#39;, function() { // アセット追加読み込み  loader.load(ASSETS_AFTER); }); var self = this; // ロード後処理 loader.on(&#39;load&#39;, function() { Sprite(&#39;nasupiko&#39;, 64, 64) ." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/asset-loader/asset-loader.gif" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/asset-loader/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />

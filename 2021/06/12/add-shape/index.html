@@ -14,7 +14,7 @@
   <meta name="og:title" content="Shapeをシーンに表示する" />
   <meta name="og:description" content="Shapeをシーンに表示する phina.jsのオブジェクトの基本形であるShapeを画面に表示します。
 var shape = Shape().addChildTo(this);  Shapeクラスのコンストラクタで生成します。コンストラクタの前にnewをつける必要はありません。 addChildTo(this) で現在の Scene に追加します。this は MainScene を指しています。 位置が指定されていない時は、画面左上(0,0)に表示されます。 変数に代入しなくても表示されますが、後にプロパティを操作することが多いので、とりあえずは変数に代入しておいた方が良いでしょう。 使用頻度は低いですがthis.addChild(shape)と書くこともできます。  サンプルコード // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加  var shape = Shape().addChildTo(this); }, }); /* * メイン処理 */ phina.main(function() { // アプリケーションを生成  var app = GameApp({ // MainScene から開始  startLabel: &#39;main&#39;, }); // fps表示  //app." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/12/add-shape/add-shape.png" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/12/add-shape/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
@@ -159,7 +159,7 @@ var shape = Shape().addChildTo(this);  Shapeクラスのコンストラクタで
 </span><span class="c1"></span>  <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div><h2 id="runstantプロジェクト">runstantプロジェクト</h2>
-<p><a href="https://runstant.com/alkn203/projects/348609e4">https://runstant.com/alkn203/projects/348609e4</a></p>
+<a href=https://runstant.com/alkn203/projects/348609e4 target="_blank" rel="noopener">Shapeをシーンに表示する</a>
 
   </div>
 

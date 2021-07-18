@@ -14,7 +14,7 @@
   <meta name="og:title" content="更新イベントを設定する" />
   <meta name="og:description" content="更新イベント処理（update）  更新処理を行うためには、オブジェクトにupdate関数を実装します。 update関数が実装されていれば、その内容が毎フレーム実行されます。  // Shapeを作成してシーンに追加 var shape = Shape().addChildTo(this).setPosition(320, 480); // 更新処理 shape.update = function() { shape.moveBy(2, 2); }; 更新イベント処理（on &#43; enterframe） update では1つの処理しか登録できません。一方、on とenterframeを組み合わせると複数のメソッドを登録可能で、その内容が並行して実行されます。
 // 毎フレーム更新処理 shape2.on(&#39;enterframe&#39;, function() { // 移動  shape2.moveBy(-2, -2); }); // 毎フレーム更新処理 shape2.on(&#39;enterframe&#39;, function() { // 回転  shape2.rotation &#43;= 2; }); サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/update/event-update.gif" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/update/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />

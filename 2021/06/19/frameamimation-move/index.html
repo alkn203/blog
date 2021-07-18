@@ -15,7 +15,7 @@
   <meta name="og:description" content="Sprite画像をフレームアニメーションしたまま移動させます。
 update関数に移動処理を記述する フレームアニメーションは自動で管理されていますので、単にupdate関数内に移動処理を書くだけで移動させることができます。
 // スプライト画像作成 var sprite = Sprite(&#39;tomapiko&#39;, 64, 64).addChildTo(this); sprite.setPosition(600, 480); // スプライトにフレームアニメーションをアタッチ var anim = FrameAnimation(&#39;tomapiko_ss&#39;).attachTo(sprite); // アニメーションを指定する anim.gotoAndPlay(&#39;walk&#39;); // 更新 sprite.update = function() { // 移動処理  sprite.x -= 2; }; サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;, }, // スプライトシート  spritesheet: { &#34;tomapiko_ss&#34;: { // フレーム情報  &#34;frame&#34;: { &#34;width&#34;: 64, // 1フレームの画像サイズ（横）  &#34;height&#34;: 64, // 1フレームの画像サイズ（縦）  &#34;cols&#34;: 6, // フレーム数（横）  &#34;rows&#34;: 3, // フレーム数（縦）  }, // アニメーション情報  &#34;animations&#34; : { &#34;walk&#34;: { // アニメーション名  &#34;frames&#34;: [12,13,14], // フレーム番号範囲  &#34;next&#34;: &#34;walk&#34;, // 次のアニメーション  &#34;frequency&#34;: 6, // アニメーション間隔  }, } }, } }; /* * メインシーン */ phina." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/frameamimation-move/frameanimation-move.gif" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/frameamimation-move/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />

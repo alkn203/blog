@@ -14,7 +14,7 @@
   <meta name="og:title" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする" />
   <meta name="og:description" content="スプライトのサイズがスプライトシートに定義されたサイズにフィットしないようにする フレームアニメーションを使うためには、SpriteSheet を定義する必要がありますが、デフォルトだと実際のコード中でスプライトのサイズを変えてもスプライトシート(json)に書かれたwidthとheightに戻ってしまい、スプライトを拡大して表示したい時に意図した結果になりません。
 // スプライトシート spritesheet: { &#39;explosion_ss&#39;: { &#34;frame&#34;: { &#34;width&#34;: 20, // ←この値にフィットされる  &#34;height&#34;: 20,// ←この値にフィットされる  &#34;cols&#34;: 16, &#34;rows&#34;: 1, }, } }  回避するためには、FrameAnimation クラスのプロパティfitをfalseにします。 これで実際に変更したサイズで正しく表示されるようになります。 サンプルでは20X20で切り出した画像を5倍で表示しています。  // 親クラスの初期化 this.superInit(&#39;explosion&#39;, 20, 20); // ←実際の画像の切り取りサイズ // SpriteSheetをスプライトにアタッチ var anim = FrameAnimation(&#39;explosion_ss&#39;).attachTo(this); // スプライトシートのサイズにフィットさせない anim.fit = false; // ←ここ //アニメーションを再生する anim.gotoAndPlay(&#39;start&#39;); // サイズ変更 this.setSize(20*5, 20*5); // ←サイズ変更 サンプルコード  コードを見る // グローバルに展開 phina.globalize(); // アセット var ASSETS = { // 画像  image: { &#39;explosion&#39;: &#39;https://cdn." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/no-fit-ss-size.gif" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/no-fit-ss-size/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />

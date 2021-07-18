@@ -15,7 +15,7 @@
   <meta name="og:description" content="one メソッド １回だけ発行するイベントは、oneを使って登録すると便利です。
 // タッチ関数（一度のみ実行） shape.one(&#39;pointstart&#39;, function() { alert(&#34;タッチされました&#34;); }); 実行すると、タッチイベントが1回だけしか発生しないのが分かります。
 サンプルコード  コードを見る // グローバルに展開 phina.globalize(); /* * メインシーン */ phina.define(&#34;MainScene&#34;, { // 継承  superClass: &#39;DisplayScene&#39;, // 初期化  init: function() { // 親クラス初期化  this.superInit(); // 背景色  this.backgroundColor = &#39;black&#39;; // Shapeを作成してシーンに追加・位置指定  var shape = Shape().addChildTo(this).setPosition(320, 480); // 背景色設定  shape.backgroundColor = &#39;red&#39;; // タッチ可能にする  shape.setInteractive(true); // タッチ関数（一度のみ実行）  shape.one(&#39;pointstart&#39;, function() { alert(&#34;タッチされました&#34;); }); }, }); /* * メイン処理 */ phina." />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/24/only-once-event/only-once-event.png" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/24/only-once-event/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />

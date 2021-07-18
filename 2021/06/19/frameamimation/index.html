@@ -16,7 +16,7 @@
 スプライトシート画像を用意する スプライトシート画像とは、以下のようにアニメーション用のコマをシートの様に並べた画像です。
  上の画像だと、横6x縦3の計18コマから成り立っています。 ゲーム作成ではコマのことをフレームと呼ぶことが多いです。  スプライトシート画像を読み込む 通常の画像と同じようにASSETSとして読み込みます。
 // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;, }, }; フレームアニメーション情報を読み込む  フレームアニメーション情報が定義されたjson形式のファイルを読み込む方法が一般的ですが、今回はファイルからではなくASEETSとして、コード内に定義しています。 コード内に記述して十分に動作確認した後に、外部jsonファイルに保存してアセットとして読み込む方が、開発する上では効率的です。  // アセット var ASSETS = { // 画像  image: { &#39;tomapiko&#39;: &#39;https://cdn.jsdelivr.net/gh/phinajs/phina.js@develop/assets/images/tomapiko_ss.png&#39;, }, // スプライトシート  spritesheet: { &#34;tomapiko_ss&#34;: { // フレーム情報  &#34;frame&#34;: { &#34;width&#34;: 64, // 1フレームの画像サイズ（横）  &#34;height&#34;: 64, // 1フレームの画像サイズ（縦）  &#34;cols&#34;: 6, // フレーム数（横）  &#34;rows&#34;: 3, // フレーム数（縦）  }, // アニメーション情報  &#34;animations&#34; : { &#34;walk&#34;: { // アニメーション名  &#34;frames&#34;: [12,13,14], // フレーム番号範囲  &#34;next&#34;: &#34;walk&#34;, // 次のアニメーション  &#34;frequency&#34;: 6, // アニメーション間隔  }, } }, } };  framesにアニメーションに使いたいフレーム番号の範囲を書きます。 0から始まることに注意してください。 nextに次のアニメーションを指定します。同じ名前にするとループします。 frequencyでアニメーションの間隔を指定します。小さくすれば速くなり、大きくすれば遅くなります。  スプライトシート画像の作成 スプライトシート画像は、通常の画像と同じくSpriteクラスを使って作成しますが、アセット名の次の引数で１フレームの画像サイズを指定します。" />
-  <meta name="og:image" content="https://alkn203.github.io/blog/2021/06/19/frameamimation/frameanimation.gif" />
+  <meta name="og:image" content="https://www.gravatar.com/avatar/ccebfc0792db78ae374d6557d3462ef2" />
   <meta name="twitter:url" content="https://alkn203.github.io/blog/2021/06/19/frameamimation/" />
   <meta name="twitter:site" content="@alkn203" />
   <meta name="twitter:creator" content="@alkn203" />
